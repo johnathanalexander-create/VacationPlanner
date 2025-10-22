@@ -26,3 +26,91 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Build Artifacts
+target/ # Maven build directory
+build/ # Gradle build directory
+*.jar
+*.war
+*.class
+
+# IDE-specific files and directories
+.idea/ # IntelliJ IDEA project files
+*.iml # IntelliJ IDEA module files
+.vscode/ # VS Code settings
+.classpath
+.project
+.settings/
+.apt_generated/
+.factorypath
+.sts4-cache/ # STS4 cache
+
+# Operating System Files
+.DS_Store # macOS specific
+Thumbs.db # Windows specific
+
+# Log files
+*.log
+logs/
+
+# Environment Variables and Configuration
+.env
+application*.properties # Consider ignoring specific sensitive property files
+application*.yml # Consider ignoring specific sensitive YAML files
+
+# Maven Wrapper
+.mvn/wrapper/maven-wrapper.jar
+mvnw
+mvnw.cmd
+
+# Gradle Wrapper
+.gradle/
+gradlew
+gradlew.bat
+
+# Temporary files
+*.tmp
+*~
+*.swp
+.#*
+
+# Dependency directories (if not managed by Maven/Gradle)
+node_modules/ # If using frontend frameworks like Angular/React
+bower_components/
+
+# Maven build output
+target/
+
+# Eclipse IDE files
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# NetBeans IDE files
+nbproject/
+*.form
+*.ser
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*~
+*.swp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Dependencies (if not managed by Maven)
+# This is generally not needed if Maven manages dependencies, but can be useful in specific cases.
+# For example, if you have a local lib folder with manually added jars.
+# lib/

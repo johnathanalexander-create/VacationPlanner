@@ -1,0 +1,20 @@
+<form (submit)="saveNewVacation()" [formGroup]="vacationFormGroup">
+	<h2 mat-dialog-title>Create New Vacation</h2>
+	<mat-dialog-content>
+		<div class="form-group">
+			<mat-form-field appearance="outline" class="form-field mt-2">
+				<mat-label>New Vacation Planner Name</mat-label>
+				<input matInput formControlName = "name" type="text" autocomplete = "off">
+			</mat-form-field>
+		</div>
+	</mat-dialog-content>
+	<mat-dialog-actions>
+		<button mat-button [mat-dialog-close]="false">Cancel</button>
+    	<button type="submit" mat-flat-button color="primary" [disabled]="vacationFormGroup.invalid">Save</button>
+	</mat-dialog-actions>
+</form>
+
+
+
+
+

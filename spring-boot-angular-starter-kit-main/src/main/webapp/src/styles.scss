@@ -1,0 +1,268 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use "@angular/material" as mat;
+
+@use "assets/scss/post-card" as *;
+
+@use "assets/scss/auth" as *;
+
+@use "assets/scss/posts-list" as *;
+
+@use "assets/scss/custom-colors" as *;
+
+@use "assets/scss/custom-table" as *;
+
+@import "material-icons/iconfont/material-icons.css";
+
+@import "@fontsource/roboto/300.css";
+/* Light weight */
+@import "@fontsource/roboto/400.css";
+/* Regular weight */
+@import "@fontsource/roboto/500.css";
+/* Medium weight */
+
+$custom-primary: mat.m2-define-palette(mat.$m2-blue-gray-palette);
+$custom-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$custom-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$custom-theme: mat.m2-define-light-theme(
+    (
+      color: (
+        primary: $custom-primary,
+        accent: $custom-accent,
+        warn: $custom-warn,
+      ),
+    )
+);
+
+@include mat.all-component-themes($custom-theme);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  padding: 0 1rem;
+}
+
+h2 {
+  padding: 1rem;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  padding-top: 0;
+  transition: width 0.3s ease;
+}
+
+@media screen and (min-width: 600px) {
+  mat-sidenav {
+    padding-top: 0;
+  }
+}
+
+.expanded {
+  width: 250px;
+}
+
+/*Start:=========Sidebar===========*/
+.mat-expansion-panel-sidebar .mat-expansion-panel-body {
+  padding: 0 10px;
+}
+
+.mat-expansion-panel-sidebar .mat-expansion-indicator::after {
+  color: inherit;
+}
+
+.hide-indicator .mat-expansion-indicator {
+  display: none;
+}
+
+/*End:====Sidebar=====*/
+
+.post-detail-mat-card-header .mat-mdc-card-header-text {
+  width: 100%;
+}
+
+/*Start:===========Field has error=============*/
+.has-error {
+  margin-bottom: 10px;
+}
+
+/*End:===========Field has error=============*/
+
+/*Start:===========snackbar styling=============*/
+.mat-mdc-snack-bar-container {
+  &.snackbar-error {
+    --mdc-snackbar-container-color: rgb(153, 50, 50);
+    --mat-mdc-snack-bar-button-color: lightgoldenrodyellow;
+    --mdc-snackbar-supporting-text-color: lightgoldenrodyellow;
+  }
+}
+
+.mat-mdc-snack-bar-container {
+  &.snackbar-success {
+    --mdc-snackbar-container-color: rgb(29, 102, 29);
+    --mat-mdc-snack-bar-button-color: lightgreen;
+    --mdc-snackbar-supporting-text-color: lightgreen;
+  }
+}
+
+.mat-mdc-snack-bar-container {
+  &.snackbar-info {
+    --mdc-snackbar-container-color: #2196f3;
+    --mat-mdc-snack-bar-button-color: white;
+    --mdc-snackbar-supporting-text-color: white;
+  }
+}
+
+.mat-mdc-snack-bar-container {
+  &.snackbar-warning {
+    --mdc-snackbar-container-color: #ff9800;
+    --mat-mdc-snack-bar-button-color: white;
+    --mdc-snackbar-supporting-text-color: white;
+  }
+}
+
+.mat-mdc-snack-bar-container {
+  &.snackbar-default {
+    --mdc-snackbar-container-color: #333;
+    --mat-mdc-snack-bar-button-color: white;
+    --mdc-snackbar-supporting-text-color: white;
+  }
+}
+
+/*End:===========snackbar styling=============*/
+
+
+/*Start:Flex Spinner*/
+.flex-spinner {
+  display: flex;
+  align-items: center;
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: var($custom-primary);
+}
+
+/*end:Flex Spinner*/
+
+.mr-1 {
+  margin-right: 5px;
+}
+
+// primary color
+.primary {
+  color: mat.m2-get-color-from-palette($custom-primary);
+}
+
+.m-0, .p-0 {
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-align-center {
+  align-items: flex-start;
+}
+
+.text-wrap {
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+// badge
+.custom-badge {
+  display: inline-block;
+  padding: 2px 4px;
+  margin-right: 2px;
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: 3px;
+  border: 1px solid;
+
+  &.badge-success {
+    background-color: $success-bg;
+    color: $success-color;
+    border-color: $success-color;
+  }
+
+  &.badge-error {
+    background-color: $error-bg;
+    color: $error-color;
+    border-color: $error-color;
+  }
+
+  &.badge-info {
+    background-color: $info-bg;
+    color: $info-color;
+    border-color: $info-color;
+  }
+
+  &.badge-warning {
+    background-color: $warning-bg;
+    color: $warning-color;
+    border-color: $warning-color;
+  }
+}
+
+// form field
+
+.form-field {
+  width: 100%;
+  --mat-form-field-container-height: 40px;
+  --mat-form-field-container-vertical-padding: 8px;
+}
+
+// button for item menu
+.mat-mdc-menu-item.btn-menu-warning, .mat-mdc-menu-item.btn-menu-warning .mat-icon-no-color {
+  color: $warning-color;
+}
+
+.mat-mdc-menu-item.btn-menu-danger, .mat-mdc-menu-item.btn-menu-danger .mat-icon-no-color {
+  color: $error-color;
+}
+
+.mat-mdc-menu-item.btn-menu-info, .mat-mdc-menu-item.btn-menu-info .mat-icon-no-color {
+  color: $info-color;
+}
+
+// input search
+.w-input-search {
+  width: 100%;
+}
+
+@media (min-width: 600px) and (max-width: 1020px) {
+  .w-input-search {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1021px) {
+  .w-input-search {
+    width: 20%;
+  }
+}
+
+// form group
+.form-group {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .form-group {
+    display: flex;
+    gap: .1em;
+  }
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Define the log file location -->
+    <property name="LOG_DIR" value="C:/POSTA/logs" />
+    <property name="LOG_FILE" value="spring-boot-angular-starter-kit" />
+
+    <!-- Console appender for logging to the console -->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <!-- %highlight adds ANSI colors based on log level -->
+                <pattern>
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{36}) - %msg%n
+                </pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <!-- Rolling file appender for daily log files -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Daily rollover with timestamped log filenames -->
+            <fileNamePattern>${LOG_DIR}/${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- Keep logs for 365 days -->
+            <maxHistory>365</maxHistory>
+
+            <!-- Set total size cap for archived logs -->
+            <totalSizeCap>5GB</totalSizeCap>
+
+            <!-- Ensure the log file is rotated immediately at midnight -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+
+        <!-- Flush logs immediately to the file -->
+        <immediateFlush>true</immediateFlush>
+    </appender>
+
+    <!-- Root logger level and appenders -->
+    <root level="INFO">
+        <appender-ref ref="Console" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>
+

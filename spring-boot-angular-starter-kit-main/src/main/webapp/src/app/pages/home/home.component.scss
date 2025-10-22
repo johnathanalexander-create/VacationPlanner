@@ -1,0 +1,17 @@
+#time_remaining_section{
+	text-align: center;
+	display: flex;
+	margin-left: auto;
+}
+.x_remaining{
+	border: 2px solid black;
+	text-align: center;
+	font-size: 42px;
+	margin-right: 25px;
+	display: inline-block;
+	padding: 10px;
+}
+.x_remaining_header{
+	border-bottom: 2px solid black;
+	font-weight: bold;
+}

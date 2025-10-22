@@ -1,0 +1,36 @@
+<ng-container>
+  <mat-toolbar class="post-list-mat-toolbar">
+    <mat-toolbar-row>
+      <p>Home</p>
+      <div>
+        <a mat-mini-fab aria-label="Add a post" color="primary" routerLink='/post-form'>
+          <mat-icon>add</mat-icon>
+        </a>
+      </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row>&sol;home</mat-toolbar-row>
+  </mat-toolbar>
+  <div class="card-container">
+
+    <ng-container>
+      @defer (when !loading()) {
+        @if ((posts() ?? []).length > 0) {
+          @for (post of posts(); track post.id) {
+            <app-post-card [post]="post"/>
+          }
+        } @else {
+          <app-no-posts-found/>
+        }
+      } @loading {
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <app-post-card-skeleton/>
+        }
+      } @placeholder {
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <app-post-card-skeleton/>
+        }
+      }
+    </ng-container>
+
+  </div>
+</ng-container>

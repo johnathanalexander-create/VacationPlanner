@@ -1,0 +1,15 @@
+.login-options-group {
+  display: flex;
+  justify-content: right;
+}
+
+.msg-error {
+  padding-bottom: 15px;
+
+  mat-error {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

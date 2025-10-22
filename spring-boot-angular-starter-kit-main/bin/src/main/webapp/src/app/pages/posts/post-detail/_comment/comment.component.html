@@ -1,0 +1,44 @@
+<h2>Comments ({{ numberOfComments() }})</h2>
+
+<form (submit)="save()" [formGroup]="commentFormGroup" class="form-post-comment">
+  <mat-form-field appearance="outline">
+    <mat-label>Add a comment</mat-label>
+    <textarea matInput formControlName="text" placeholder="Add a comment"></textarea>
+    @if (isFieldInvalid('text')) {
+      <mat-error>
+        @if (commentFormGroup.get('text')?.errors?.['required']) {
+          This field is required
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <button type="submit" mat-flat-button color="primary" [disabled]="commentFormGroup.invalid">
+    Send
+  </button>
+</form>
+
+<div class="comments">
+  @for (comment of comments(); track comment.id) {
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <p class="text-wrap">
+          {{ comment.text }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <p>
+          {{ comment.author.firstName }} {{ comment.author.lastName }} <br>
+          {{ comment.publishedOn | date: 'MMM dd, yyyy HH:mm' }}
+        </p>
+        <div>
+          <button mat-icon-button color="warn" type="button" (click)="deleteComment(comment.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" type="button" (click)="editComment(comment.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  }
+</div>

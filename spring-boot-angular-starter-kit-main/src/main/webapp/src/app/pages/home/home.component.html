@@ -1,0 +1,105 @@
+<ng-container>
+  <mat-toolbar class="post-list-mat-toolbar">
+    <mat-toolbar-row>
+      <p>Trip Dashboard</p>
+      <div>
+        <!-- <a mat-mini-fab aria-label="Add a post" color="primary" routerLink='/post-form'>
+          <mat-icon>add</mat-icon>
+        </a>--
+        
+        
+        <!-- <a mat-mini-fab aria-label="Create new vacation" color="primary" routerLink="/app-create-new-vacation">
+        	<mat-icon>add</mat-icon>
+        </a> -->
+        
+        <button (click)="attempt()">hello</button>
+      </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row>&sol;home</mat-toolbar-row>
+  </mat-toolbar>
+  <div class="card-container">
+  
+  
+
+
+    <!-- <ng-container>
+      @defer (when !loading()) {
+        @if ((posts() ?? []).length > 0) {
+          @for (post of posts(); track post.id) {
+            <app-post-card [post]="post"/>
+          }
+        } @else {
+          <app-no-posts-found/>
+        }
+      } @loading {
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <app-post-card-skeleton/>
+        }
+      } @placeholder {
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <app-post-card-skeleton/>
+        }
+      }
+    </ng-container>-->
+    <ng-container>
+      @defer (when !loading()) {
+        @if ((vacations() ?? []).length > 0) {
+        	<div id="time_remaining_section">
+	        	<div class="x_remaining" id="months_remaining">
+	        		<div class="x_remaining_header">
+	        			Months Remaining
+	        		</div>
+	        		<div class="x_remaining_body">
+	        			6.77
+	        		</div>
+	        	</div>
+	        	<div class="x_remaining" id="weeks_remaining">
+	        		<div class="x_remaining_header">
+	        			Weeks Remaining
+	        		</div>
+	        		<div class="x_remaining_body">
+	        			29.43
+	        		</div>
+	        	</div>
+	        	<div class="x_remaining" id="days_remaining">
+	        		<div class="x_remaining_header">
+	        			Days Remaining
+	        		</div>
+	        		<div class="x_remaining_body">
+	        			206
+	        		</div>
+	        	</div>
+	        </div>
+        
+
+        
+          <!-- @for (v of vacations(); track v.id) {
+            <p>ID: {{v.id}}</p>
+            <p>Name: {{v.name}}</p>
+            <p>State: {{v.state}}</p>
+            <p>Owner: {{v.owner}}</p>
+            <p>Vacation Config: {{v.config}}</p>
+            <p>VacationConfig ID: {{v.config.id}}</p>
+            
+            @for( ci of v.config.configItems; track ci.id){
+            	<p>{{ci.config_name}}</p>
+            	<p>{{ci.config_value}}</p>
+            }
+            
+          }-->
+        } @else {
+          <p>did not find vacations</p>
+        }
+      } @loading {
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <p>something3</p>
+        }
+      } @placeholder {
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <p>something4</p>
+        }
+      }
+    </ng-container>
+
+  </div>
+</ng-container>
