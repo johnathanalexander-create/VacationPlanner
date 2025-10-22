@@ -54,9 +54,6 @@ export class AuthService {
 
     return null;
   }
-  getUserID(): string | null {
-	return localStorage.getItem("userId");
-  }
   
   
   async isAdmin(): Promise<boolean>{

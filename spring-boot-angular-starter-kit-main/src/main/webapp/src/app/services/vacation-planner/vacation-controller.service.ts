@@ -5,6 +5,7 @@ import {HttpResponse, HttpErrorResponse} from "@angular/common/http";
 import Vacation from '../../models/vacation-planner/vacation.model';
 import {toObservable} from "@angular/core/rxjs-interop";
 import {tap} from "rxjs/operators";
+import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import {tap} from "rxjs/operators";
 export class VacationControllerService {
 	private loading = signal(false);
 
-  constructor(private http: WebApiService) {}
+  constructor(private http: WebApiService, private util: WebVacationUtilityService) {}
   
   saveVacation(vacation: Vacation): Observable<HttpResponse<Vacation> | null | undefined>{
 	return this.http.post('/api/v1/vacation', vacation);
@@ -20,7 +21,7 @@ export class VacationControllerService {
   getVacationsByUserId(): Observable<HttpResponse<Vacation[]>>{
 	this.loading.set(true);
 	
-	return this.http.get("/api/v1/vacation/1").pipe(
+	return this.http.get("/api/v1/vacation/" + this.util.getUserID()).pipe(
 		tap(() => this.loading.set(false))
 	);
 			/*.subscribe({
@@ -37,4 +38,5 @@ export class VacationControllerService {
 	loadingStatus(): Observable<boolean> {
 		return toObservable(this.loading);
 	}
+	
 }

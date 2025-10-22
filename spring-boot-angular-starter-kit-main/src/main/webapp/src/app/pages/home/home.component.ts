@@ -8,12 +8,15 @@ import {toSignal} from "@angular/core/rxjs-interop";
 import {map} from "rxjs/operators";
 import {VacationControllerService} from '../../services/vacation-planner/vacation-controller.service';
 import Vacation from '../../models/vacation-planner/vacation.model';
+import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 
 @Component({
     selector: 'app-home',
-    imports: [MatToolbarModule, MatIcon, MatButtonModule, RouterLink, CommonModule],
+    imports: [MatToolbarModule, MatIcon, MatTableModule, MatButtonModule, MatTabsModule, RouterLink, CommonModule, FormsModule],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
@@ -23,6 +26,8 @@ export class HomeComponent {
     map(response => response.body)), {initialValue: []});*/
 
   /*loading:Signal<boolean> = toSignal(this.postService.loadingStatus(), {initialValue:true});*/
+  
+  selectedVacation?: Vacation | null = null;
   
   vacations: Signal<Vacation[] | [] | null> = toSignal(this.vacationService.getVacationsByUserId().pipe(
 	map(response => response.body),
@@ -42,6 +47,4 @@ export class HomeComponent {
 		console.log(v[0].config)
 	}
   }
-  
-  
 }

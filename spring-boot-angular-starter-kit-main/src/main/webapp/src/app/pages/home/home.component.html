@@ -12,12 +12,35 @@
         	<mat-icon>add</mat-icon>
         </a> -->
         
+        <select [(ngModel)]="selectedVacation" name="vacationSelect">
+        	<option *ngFor="let option of vacations()" [ngValue] ="option">{{option.name}}</option>
+        </select>
+        
+        
         <button (click)="attempt()">hello</button>
       </div>
     </mat-toolbar-row>
     <mat-toolbar-row>&sol;home</mat-toolbar-row>
   </mat-toolbar>
   <div class="card-container">
+  
+  	@if(selectedVacation){
+  		<mat-tab-group>
+  			<mat-tab label="Trip Dashboard">a</mat-tab>
+  			<mat-tab label="Prepayments">b</mat-tab>
+  			<mat-tab label="Budget Dashboard">c</mat-tab>
+  			<mat-tab label="Research">d</mat-tab>
+  			<mat-tab label="Confirmations">e</mat-tab>
+  			<mat-tab label="Calendar">f</mat-tab>
+  			<mat-tab label="Spa">g</mat-tab>
+  			<mat-tab label="Packing">h</mat-tab>
+  			<mat-tab label="Tasks">i</mat-tab>
+  			<mat-tab label="Trip Analysis">j</mat-tab>
+  			<mat-tab label="Config">k</mat-tab>
+  		</mat-tab-group>
+  	}
+  	
+  	
   
   
 
@@ -41,7 +64,7 @@
         }
       }
     </ng-container>-->
-    <ng-container>
+    <!-- <ng-container>
       @defer (when !loading()) {
         @if ((vacations() ?? []).length > 0) {
         	<div id="time_remaining_section">
@@ -70,7 +93,7 @@
 	        		</div>
 	        	</div>
 	        </div>
-        
+        -->
 
         
           <!-- @for (v of vacations(); track v.id) {
@@ -87,7 +110,7 @@
             }
             
           }-->
-        } @else {
+        <!-- } @else {
           <p>did not find vacations</p>
         }
       } @loading {
@@ -99,7 +122,7 @@
           <p>something4</p>
         }
       }
-    </ng-container>
+    </ng-container>-->
 
   </div>
 </ng-container>
