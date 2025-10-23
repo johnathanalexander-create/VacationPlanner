@@ -10,7 +10,7 @@
 	 					<tbody>
 	 						<tr>
 	 							<th class="trip-overview-tr">Primary Hotel</th>
-	 							<td class="trip-overview-tr align-center">{{getValue("Primary Hotel", true)}}</td>
+	 							<td class="trip-overview-tr align-center">{{getValue("hotel_name_primary", true)}}</td>
 	 						</tr>
 	 						<tr>
 	 							<th class="trip-overview-tr">Estimated Trip Package Price</th>
@@ -18,15 +18,15 @@
 	 						</tr>
 	 						<tr>
 	 							<th class="trip-overview-tr">Primary Flight Carrier</th>
-	 							<td class="trip-overview-tr align-center">American Airlines</td>
+	 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true)}}</td>
 	 						</tr>
 	 						<tr>
 	 							<th class="trip-overview-tr">Primary Flight Class</th>
-	 							<td class="trip-overview-tr align-center">First</td>
+	 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true)}}</td>
 	 						</tr>
 	 						<tr>
 	 							<th class="trip-overview-tr">Trip Dates</th>
-	 							<td class="trip-overview-tr align-center">05/14/2026 - 05/24/2026</td>
+	 							<td class="trip-overview-tr align-center">{{getValue("trip_start_date", true)}} - {{getValue("trip_end_date", true)}}</td>
 	 						</tr>
 	 						<tr>
 	 							<th class="trip-overview-tr">Trip Status</th>
@@ -34,7 +34,7 @@
 	 						</tr>
 	 						<tr>
 	 							<th class="trip-overview-tr">Budget Buffering</th>
-	 							<td class="trip-overview-tr align-center">Enabled</td>
+	 							<td class="trip-overview-tr align-center">{{getValue("enable_budget_buffer", true)}}</td>
 	 						</tr>
 	 						
 	 					</tbody>

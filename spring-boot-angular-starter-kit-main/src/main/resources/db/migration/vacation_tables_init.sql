@@ -1,3 +1,4 @@
+drop table if exists prepayment;
 drop table if exists calculated_report_data_item;
 drop table if exists report_data_item;
 drop table if exists report_header;
@@ -88,3 +89,20 @@ create table default_config_item
 	required boolean default false,
 	active boolean default true
 );
+
+create table prepayment
+(
+	id BIGINT primary key AUTO_INCREMENT,
+	vacation_id BIGINT not null,
+	description varchar(100) not null,
+	type varchar(50),
+	vendor varchar(50),
+	is_refundable boolean,
+	is_refund_requested boolean,
+	is_refund_received boolean,
+	amount decimal(6,2),
+	payment_source varchar(50),
+	notes varchar(150),
+	foreign key (vacation_id)
+	references vacation(id) on delete cascade
+)

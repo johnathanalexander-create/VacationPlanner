@@ -39,7 +39,7 @@ export class WebVacationUtilityService {
 		
 		if(config_items && config_items.length > 0){
 			config_items.forEach(function(config_item){
-				if(config_item.config_label == search){
+				if(config_item.config_key == search){
 					ret = config_item.config_value;
 				}
 			});
