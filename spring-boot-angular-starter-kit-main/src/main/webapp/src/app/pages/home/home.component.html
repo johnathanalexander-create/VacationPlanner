@@ -1,32 +1,19 @@
 <ng-container>
   <mat-toolbar class="post-list-mat-toolbar">
     <mat-toolbar-row>
-      <p>Trip Dashboard</p>
-      <div>
-        <!-- <a mat-mini-fab aria-label="Add a post" color="primary" routerLink='/post-form'>
-          <mat-icon>add</mat-icon>
-        </a>--
-        
-        
-        <!-- <a mat-mini-fab aria-label="Create new vacation" color="primary" routerLink="/app-create-new-vacation">
-        	<mat-icon>add</mat-icon>
-        </a> -->
-        
-        <select [(ngModel)]="selectedVacation" name="vacationSelect">
-        	<option *ngFor="let option of vacations()" [ngValue] ="option">{{option.name}}</option>
-        </select>
-        
-        
-        <button (click)="attempt()">hello</button>
-      </div>
+        @defer( when !loading()){
+	        <select [(ngModel)]="selectedVacation" name="vacationSelect">
+	        	<option *ngFor="let option of vacations()" [ngValue] ="option">{{option.name}}</option>
+	        </select>
+        }
     </mat-toolbar-row>
-    <mat-toolbar-row>&sol;home</mat-toolbar-row>
+
   </mat-toolbar>
   <div class="card-container">
   
   	@if(selectedVacation){
-  		<mat-tab-group>
-  			<mat-tab label="Trip Dashboard">a</mat-tab>
+  		<mat-tab-group >
+  			<mat-tab label="Trip Dashboard"><app-trip-dashboard [selectedVacation] ="selectedVacation"></app-trip-dashboard></mat-tab>
   			<mat-tab label="Prepayments">b</mat-tab>
   			<mat-tab label="Budget Dashboard">c</mat-tab>
   			<mat-tab label="Research">d</mat-tab>

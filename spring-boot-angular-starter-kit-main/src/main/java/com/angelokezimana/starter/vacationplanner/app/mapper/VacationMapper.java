@@ -17,7 +17,7 @@ public class VacationMapper {
 			vacation.getName(),
 			vacation.getState(),
 			vacation.getOwner(),
-			VacationMapper.toVacationConfigDTO(vacation.getVacationConfig())
+			vacation.getVacationConfig() != null ? (VacationMapper.toVacationConfigDTO(vacation.getVacationConfig())) : null
 		);
 	}
 	
@@ -36,8 +36,9 @@ public class VacationMapper {
 	public static VacationConfigItemDto toVacationConfigItemDTO(VacationConfigItem configItem) {
 		return new VacationConfigItemDto(
 				configItem.getId(),
-				configItem.getConfig_name(),
-				configItem.getConfig_value(),
+				configItem.getConfigKey(),
+				configItem.getConfigLabel(),
+				configItem.getConfigValue(),
 				configItem.getConfig_notes(),
 				configItem.isPrimary_config(),
 				configItem.isRequired()

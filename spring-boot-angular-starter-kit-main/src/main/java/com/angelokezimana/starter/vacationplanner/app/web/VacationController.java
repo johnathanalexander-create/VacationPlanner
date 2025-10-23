@@ -37,6 +37,7 @@ public class VacationController {
 	
 	@PostMapping()
     private ResponseEntity<VacationDto> create(@RequestBody @Valid VacationRequestDto vacationRequestDTO, Principal principal) {
+		System.out.println("JWSA JWSA " + vacationRequestDTO.name());
         VacationDto vacationDTO = vacationService.createVacation(vacationRequestDTO, principal.getName());
         return ResponseEntity.ok(vacationDTO);
     }
@@ -57,7 +58,7 @@ public class VacationController {
 			//Set<VacationConfigItem> items = d.config().getVacationConfigItems();
 			Set<VacationConfigItemDto> items = d.config().configItems();
 			for(VacationConfigItemDto i : items) {
-				System.out.println(i.config_name());
+				System.out.println(i.config_label());
 			}
 		}
 		return ResponseEntity.ok(list);

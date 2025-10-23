@@ -1,0 +1,74 @@
+<div style="margin-top:15px"></div>
+<ng-container>
+	 <!-- @defer (when !loading()) {-->
+	 	<!-- @if ((vacations() ?? []).length > 0) {-->
+	 	@if (selectedVacation){
+	 		
+	 		<div id="trip-overview-section" class="inline" style="width: 40%">
+	 			<ng-container>
+	 				<table style="border: 1px solid black; width: 95%; padding: 10px">
+	 					<tbody>
+	 						<tr>
+	 							<th class="trip-overview-tr">Primary Hotel</th>
+	 							<td class="trip-overview-tr align-center">{{getValue("Primary Hotel", true)}}</td>
+	 						</tr>
+	 						<tr>
+	 							<th class="trip-overview-tr">Estimated Trip Package Price</th>
+	 							<td class="trip-overview-tr align-center">$1000.00</td>
+	 						</tr>
+	 						<tr>
+	 							<th class="trip-overview-tr">Primary Flight Carrier</th>
+	 							<td class="trip-overview-tr align-center">American Airlines</td>
+	 						</tr>
+	 						<tr>
+	 							<th class="trip-overview-tr">Primary Flight Class</th>
+	 							<td class="trip-overview-tr align-center">First</td>
+	 						</tr>
+	 						<tr>
+	 							<th class="trip-overview-tr">Trip Dates</th>
+	 							<td class="trip-overview-tr align-center">05/14/2026 - 05/24/2026</td>
+	 						</tr>
+	 						<tr>
+	 							<th class="trip-overview-tr">Trip Status</th>
+	 							<td class="trip-overview-tr align-center">In Planning</td>
+	 						</tr>
+	 						<tr>
+	 							<th class="trip-overview-tr">Budget Buffering</th>
+	 							<td class="trip-overview-tr align-center">Enabled</td>
+	 						</tr>
+	 						
+	 					</tbody>
+	 				</table>
+	 			</ng-container>
+	 		</div>
+	 		
+	 		
+		 	<div id="time_remaining_section" class="inline" style="width: 60%;">
+		        	<div class="x_remaining" id="months_remaining">
+		        		<div class="x_remaining_header">
+		        			Months Remaining
+		        		</div>
+		        		<div class="x_remaining_body">
+		        			6.77
+		        		</div>
+		        	</div>
+		        	<div class="x_remaining" id="weeks_remaining">
+		        		<div class="x_remaining_header">
+		        			Weeks Remaining
+		        		</div>
+		        		<div class="x_remaining_body">
+		        			29.43
+		        		</div>
+		        	</div>
+		        	<div class="x_remaining" id="days_remaining">
+		        		<div class="x_remaining_header">
+		        			Days Remaining
+		        		</div>
+		        		<div class="x_remaining_body">
+		        			206
+		        		</div>
+		        	</div>
+		        </div>
+	 	}
+	 <!-- }-->
+</ng-container>

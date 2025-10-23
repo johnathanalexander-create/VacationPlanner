@@ -27,9 +27,9 @@ public class Vacation {
 	
 	
 
-	@OneToOne(mappedBy="vacation", fetch=FetchType.LAZY)
+	@OneToOne(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JsonIgnore
-	private VacationConfig vacationConfigify;
+	private VacationConfig vacationConfigify;//
 
 	public VacationConfig getVacationConfig() {
 		return vacationConfigify;

@@ -1,4 +1,4 @@
-import {Component, Signal} from '@angular/core';
+import {Component, Signal, Input} from '@angular/core';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
@@ -11,12 +11,13 @@ import Vacation from '../../models/vacation-planner/vacation.model';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { TripDashboardComponent } from '../../components/vacation/trip-dashboard/trip-dashboard.component';
 
 
 
 @Component({
     selector: 'app-home',
-    imports: [MatToolbarModule, MatIcon, MatTableModule, MatButtonModule, MatTabsModule, RouterLink, CommonModule, FormsModule],
+    imports: [MatToolbarModule, MatIcon, MatTableModule, MatButtonModule, MatTabsModule, RouterLink, CommonModule, FormsModule, TripDashboardComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })

@@ -32,6 +32,7 @@ export class CreateNewVacationComponent {
 		const vacationData = {
 			...this.vacationFormGroup.value
 		};
+		console.log(vacationData);
 		
 		this.service.saveVacation(vacationData as Vacation)
 			.subscribe({
@@ -39,7 +40,7 @@ export class CreateNewVacationComponent {
 					alert("woo!");
 				},
 				error: (error: HttpErrorResponse) => {
-					console.log("error");
+					console.log("error: " + vacationData.name);
 				}
 			})
 	}

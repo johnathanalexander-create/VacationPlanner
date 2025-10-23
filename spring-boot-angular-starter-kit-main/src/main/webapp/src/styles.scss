@@ -37,6 +37,38 @@ $custom-theme: mat.m2-define-light-theme(
 
 @include mat.all-component-themes($custom-theme);
 
+
+/*Vacation Planner Globals*/
+
+.inline{
+	display: inline-block;
+}
+.align-center{
+	text-align: center;
+}
+.align-right{
+	text-align: right;
+}
+.align-middle{
+	vertical-align: middle;
+}
+.width-75{
+	width: 75%;
+}
+.width-25{
+	width: 25%;
+}
+
+
+
+
+
+
+
+/*End Vacation Planner Globals*/
+
+
+
 html,
 body {
   height: 100%;

@@ -45,9 +45,11 @@ public class VacationServiceImpl implements VacationService{
 	public VacationDto createVacation(VacationRequestDto vacationRequestDto, String user) {
 		
 		Vacation vacation = new Vacation();
-		//vacation.setName(vacationRequestDto.name());
-		//vacation.setState("Draft");
-		//vacation.setOwner(userRepository.findUserIDByEmail(user));
+		vacation.setName(vacationRequestDto.name());
+		vacation.setState("Draft");
+		vacation.setOwner(userRepository.findUserIDByEmail(user));
+		vacation.setVacationConfig(null);
+		
 				
 		Vacation savedVacation = vacationRepository.save(vacation);
 

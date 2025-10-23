@@ -15,8 +15,8 @@ AFTER INSERT ON vacation_config
 FOR EACH ROW
 BEGIN
     
-	INSERT INTO vacation_config_item(vacation_config_Id, config_name, config_value, config_notes, primary_config, required)
-	SELECT NEW.id, def.config_key, def.config_value, def.notes, def.primary_config, def.required
+	INSERT INTO vacation_config_item(vacation_config_Id, config_key, config_label, config_value, config_notes, primary_config, required)
+	SELECT NEW.id, def.config_key, def.config_label, def.config_value, def.notes, def.primary_config, def.required
 	FROM default_config_item def
 	WHERE def.active=true;
     

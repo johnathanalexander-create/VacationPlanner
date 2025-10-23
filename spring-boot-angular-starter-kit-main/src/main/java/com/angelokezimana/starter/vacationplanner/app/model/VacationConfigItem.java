@@ -11,11 +11,14 @@ public class VacationConfigItem {
 	private long id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="vacation_config_id", nullable=false)
+	@JoinColumn(name="vacation_config_id", nullable=true)
 	private VacationConfig vacationConfig;
 	
 	@Column(length = 50, nullable=false)
-	private String config_name;
+	private String config_key;
+	
+	@Column(length = 50, nullable=false)
+	private String config_label;
 	
 	@Column(length = 100)
 	private String config_value;
@@ -32,7 +35,7 @@ public class VacationConfigItem {
 	
 	@Override
 	public String toString() {
-		return "CONFIG ITEM: " + id + "/" + config_name + "/" + config_value + "/" + config_notes + "/" + primary_config + "/" + required;
+		return "CONFIG ITEM: " + id + "/" + config_label + "/" + config_value + "/" + config_notes + "/" + primary_config + "/" + required;
 	}
 	
 	
@@ -56,28 +59,38 @@ public class VacationConfigItem {
 	}
 
 
-	public String getConfig_name() {
-		return config_name;
+	public String getConfigLabel() {
+		return config_label;
 	}
 
 
-	public void setConfig_name(String config_name) {
-		this.config_name = config_name;
+	public void setConfigLabel(String config_name) {
+		this.config_label = config_name;
 	}
 
 
-	public String getConfig_value() {
+	public String getConfigValue() {
 		return config_value;
 	}
 
 
-	public void setConfig_value(String config_value) {
+	public void setConfigValue(String config_value) {
 		this.config_value = config_value;
 	}
 
 
 	public String getConfig_notes() {
 		return config_notes;
+	}
+
+
+	public String getConfigKey() {
+		return config_key;
+	}
+
+
+	public void setConfigKey(String config_key) {
+		this.config_key = config_key;
 	}
 
 

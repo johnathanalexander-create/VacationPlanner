@@ -15,19 +15,19 @@ public class VacationConfig {
 	private long id;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="vacation_id", referencedColumnName="id")
+	@JoinColumn(name="vacation_id", referencedColumnName="id", nullable=true)
 	private Vacation vacation;
 	
-	@OneToMany(mappedBy="vacationConfig", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="vacationConfig", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<VacationConfigItem> vacationConfigItems = new HashSet<>();
 
-	/*public Vacation getVacation() {
+	public Vacation getVacation() {
 		return vacation;
 	}
 
 	public void setVacation(Vacation vacation) {
 		this.vacation = vacation;
-	}*/
+	}
 
 	public Set<VacationConfigItem> getVacationConfigItems() {
 		return vacationConfigItems;

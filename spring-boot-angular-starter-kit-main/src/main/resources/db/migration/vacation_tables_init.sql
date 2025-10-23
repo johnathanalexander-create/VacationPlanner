@@ -26,7 +26,8 @@ create table vacation_config_item
 (
 	id BIGINT primary key AUTO_INCREMENT,
     vacation_config_id BIGINT not null,
-    config_name varchar(50) not null,
+    config_label varchar(50) not null,
+	config_key varchar(50) not null,
     config_value varchar(100),
     config_notes varchar(50),
     primary_config boolean default false,
@@ -80,6 +81,7 @@ create table calculated_report_data_item
 create table default_config_item
 (
 	config_key varchar(50) primary key,
+	config_label varchar(50) not null,
 	config_value varchar(100),
 	notes varchar(50),
 	primary_config boolean default false,
