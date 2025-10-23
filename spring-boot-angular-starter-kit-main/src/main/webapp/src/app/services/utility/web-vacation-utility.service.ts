@@ -14,9 +14,6 @@ export class WebVacationUtilityService {
   }
   
   getVacationValue(vacation: Vacation, search:string, isConfigItemSearch: boolean): string{
-	console.log("Vacation: ");
-	console.log(vacation);
-	console.log("search param: " + search);
 	
 	var ret: any = "";
 	

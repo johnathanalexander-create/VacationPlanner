@@ -1,5 +1,8 @@
 package com.angelokezimana.starter.vacationplanner.app.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.angelokezimana.starter.user.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,18 +21,23 @@ public class Vacation {
 	@Column(length = 25, name="state", nullable = false)
 	private String state;
 	
-	/*@JoinColumn(name="owner")
-	@ManyToOne
-	private User owner;*/
-	
 	@Column(name="owner")
 	private Long owner;
 	
-	
+	@OneToMany(mappedBy="vacation_id", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Set<Prepayment> prepayments = new HashSet<>();
+
+	public Set<Prepayment> getPrepayments() {
+		return prepayments;
+	}
+
+	public void setPrepayments(Set<Prepayment> prepayments) {
+		this.prepayments = prepayments;
+	}
 
 	@OneToOne(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JsonIgnore
-	private VacationConfig vacationConfigify;//
+	private VacationConfig vacationConfigify;
 
 	public VacationConfig getVacationConfig() {
 		return vacationConfigify;
@@ -74,25 +82,5 @@ public class Vacation {
 
 	public void setOwner(Long owner) {
 		this.owner = owner;
-	}
-
-	/*public User getOwner() {
-		return owner;
-	}
-
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}
-
-	/*public User getOwner() {
-		return owner;
-	}
-
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}*/
-	
-	
-	
-	
+	}	
 }

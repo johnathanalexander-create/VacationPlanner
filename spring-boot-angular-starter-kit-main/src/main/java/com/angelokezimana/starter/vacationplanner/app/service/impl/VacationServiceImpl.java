@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.angelokezimana.starter.user.repository.UserRepository;
+import com.angelokezimana.starter.vacationplanner.app.dto.PrepaymentDto;
 import com.angelokezimana.starter.vacationplanner.app.dto.VacationDto;
 import com.angelokezimana.starter.vacationplanner.app.dto.VacationRequestDto;
 import com.angelokezimana.starter.vacationplanner.app.mapper.VacationMapper;
@@ -55,5 +56,9 @@ public class VacationServiceImpl implements VacationService{
 
 		return VacationMapper.toVacationDto(savedVacation);
 	}
+	
+	/*public List<PrepaymentDto> getPrepaymentsByVacation(VacationRequestDto vacationRequestDto){
+		//Vacation
+	}*/
 	
 }

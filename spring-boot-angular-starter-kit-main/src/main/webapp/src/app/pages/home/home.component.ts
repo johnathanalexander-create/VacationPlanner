@@ -11,13 +11,16 @@ import Vacation from '../../models/vacation-planner/vacation.model';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 import { TripDashboardComponent } from '../../components/vacation/trip-dashboard/trip-dashboard.component';
+import { PrepaymentsComponent } from '../../components/vacation/prepayments/prepayments.component';
 
 
 
 @Component({
     selector: 'app-home',
-    imports: [MatToolbarModule, MatIcon, MatTableModule, MatButtonModule, MatTabsModule, RouterLink, CommonModule, FormsModule, TripDashboardComponent],
+    imports: [MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, 
+			 RouterLink, CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
@@ -45,7 +48,7 @@ export class HomeComponent {
   attempt(){
 	const v = this.vacations();
 	if(v){
-		console.log(v[0].config)
+		console.log(v[0].config);
 	}
   }
 }
