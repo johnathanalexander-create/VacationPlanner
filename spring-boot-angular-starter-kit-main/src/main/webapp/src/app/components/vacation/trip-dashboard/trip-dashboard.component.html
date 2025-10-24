@@ -51,7 +51,7 @@
 		        			Months Remaining
 		        		</div>
 		        		<div class="x_remaining_body">
-		        			6.77
+		        			{{selectedVacation.meta.monthsRemaining}}
 		        		</div>
 		        	</div>
 		        	<div class="x_remaining" id="weeks_remaining">
@@ -59,7 +59,7 @@
 		        			Weeks Remaining
 		        		</div>
 		        		<div class="x_remaining_body">
-		        			29.43
+		        			{{selectedVacation.meta.weeksRemaining}}
 		        		</div>
 		        	</div>
 		        	<div class="x_remaining" id="days_remaining">
@@ -67,13 +67,13 @@
 		        			Days Remaining
 		        		</div>
 		        		<div class="x_remaining_body">
-		        			206
+		        			{{selectedVacation.meta.daysRemaining}}
 		        		</div>
 		        	</div>
 		    </div>
 		    
-		    <div id="funding-comps-credits">
-		    	<table id = "fcc-table">
+		    <div id="funding-comps-credits" class="inline" style="width: 38%; margin-right: 15px;">
+		    	<table id = "fcc-table" style="width: 100%">
 		    		<thead id="fcc-header">
 		    			<tr class="fcc-row" id="fcc-header-row">
 		    				<th colspan="2">Funding, Comps, & Credits</th>
@@ -98,14 +98,82 @@
 
 			    	<tr class="fcc-row" *ngFor="let item of selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
 			    		<td class="fcc-table-cell">{{item.key}}</td>
-			    		<td *ngIf="!item.value['isEditing']" class="fcc-table-cell">{{item.value["value"]}}</td>
+			    		<td *ngIf="!item.value['isEditing']" class="fcc-table-cell"><span *ngIf="item.value['value']">$</span>{{item.value["value"]}}</td>
 			    		<td *ngIf="item.value['isEditing']"><input [(ngModel)] = "item.value['value']"/></td>
 			    		<td class="fcc-table-cell">				    		
 				    		<mat-icon *ngIf="!item.value['isEditing']" (click)="toggleEditModeForFCC(item)">mode_edit</mat-icon>
 				    		<mat-icon *ngIf="item.value['isEditing']" (click)="toggleEditModeForFCC(item)">done</mat-icon>
-				    		<mat-icon *ngIf="item.value['isEditing']" (click)="deleteElementFromFCC(item)">delete</mat-icon>
+				    		<mat-icon (click)="deleteElementFromFCC(item)">delete</mat-icon>
 			    		</td>
 			    	</tr>
+			    	
+			    	<tfoot>
+			    		<tr>
+			    			<td><span style="font-weight: bold; float: right; margin-right: 10px;">Total</span></td>
+			    			<td>${{ selectedVacation['meta'].totalFCC }}</td>
+			    		</tr>
+			    	</tfoot>
+		    	</table>
+		    </div>
+		    
+		    <div id = "funding-overview" class="inline" style="width: 30%;">
+		    	<table style="width: 100%">
+		    		<thead>
+		    			<tr>
+		    				<th colspan="2">Funding Overview</th>
+		    			</tr>
+		    		</thead>
+		    		<tbody>
+			    		<tr class="">
+			    			<th class="">Main Funding</th>
+			    			<td>$333.26</td>
+			    		</tr>
+			    		<tr class="">
+			    			<th class="">Prepayments</th>
+			    			<td>$333.26</td>
+			    		</tr>
+			    		<tr class="">
+			    			<th class="">Credit Card Funding</th>
+			    			<td>$333.26</td>
+			    		</tr>
+			    		<tr class="">
+			    			<th class="">Total Funding</th>
+			    			<td>$333.26</td>
+			    		</tr>
+			    		<tr class="">
+			    			<th class="">Estimated Cost</th>
+			    			<td>$333.26</td>
+			    		</tr>
+		    		</tbody>
+		    		
+		    	</table>
+		    </div>
+		    
+		    <div id="trip-status-monitor" class="inline">
+		    	<table style="width: 100%">
+		    		<thead>
+		    			<tr>
+		    				<th colspan="2">Trip Status Monitor</th>
+		    			</tr>
+		    		</thead>
+		    		<tbody>
+		    			<tr class="">
+		    				<th class="">Is Today Trip Day</th>
+		    				<td></td>
+		    			</tr>
+		    			<tr class="">
+		    				<th class="">Packing Status</th>
+		    				<td></td>
+		    			</tr>
+		    			<tr class="">
+		    				<th class="">Task Status</th>
+		    				<td></td>
+		    			</tr>
+		    			<tr class="">
+		    				<th class="">Past Due Tasks</th>
+		    				<td></td>
+		    			</tr>
+		    		</tbody>
 		    	</table>
 		    </div>
 		    

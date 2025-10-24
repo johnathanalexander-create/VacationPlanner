@@ -9,5 +9,11 @@ export default interface Vacation{
 	owner: number;
 	config: VacationConfig,
 	prepayments: Prepayment[],
-	funding_comps_credits:{}
+	funding_comps_credits:{},
+	meta:{
+		totalFCC: 0,
+		monthsRemaining: 0,
+		weeksRemaining: 0,
+		daysRemaining: 0
+	}
 }
