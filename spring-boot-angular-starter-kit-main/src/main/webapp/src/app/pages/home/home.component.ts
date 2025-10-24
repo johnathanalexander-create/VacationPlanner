@@ -41,6 +41,9 @@ export class HomeComponent {
 			if(fcc){
 				//and convert it into a JSON object for display in the table
 				vacation.funding_comps_credits = JSON.parse(fcc);
+				
+				vacation.funding_comps_credits["Main Funding"].value = "$200.00"
+				//vacation.funding_comps_credits["Main Funding"].isEditing = true;
 			}
 		}
 	}
