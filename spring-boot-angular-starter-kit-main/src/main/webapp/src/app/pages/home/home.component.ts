@@ -1,4 +1,4 @@
-import {Component, Signal, Input} from '@angular/core';
+import {Component, Signal, Input, effect} from '@angular/core';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
@@ -20,35 +20,45 @@ import { PrepaymentsComponent } from '../../components/vacation/prepayments/prep
 @Component({
     selector: 'app-home',
     imports: [MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, 
-			 RouterLink, CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent],
+			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
-  /*posts: Signal<Post[] | [] | null> = toSignal(this.postService.getPosts().pipe(
-    map(response => response.body)), {initialValue: []});*/
-
-  /*loading:Signal<boolean> = toSignal(this.postService.loadingStatus(), {initialValue:true});*/
   
   selectedVacation?: Vacation | null = null;
   
-  vacations: Signal<Vacation[] | [] | null> = toSignal(this.vacationService.getVacationsByUserId().pipe(
-	map(response => response.body),
+  processAllVacations(body: any){
+	//Process all vacations returned from the signal
 	
+	//For each vacation object
+	for(var index = 0; index < body.length; index++){
+		const vacation = body[index];
+		if(vacation){
+			//Retrieve the funding,comps, and credits string
+			var fcc = vacation.funding_comps_credits;
+			
+			if(fcc){
+				//and convert it into a JSON object for display in the table
+				vacation.funding_comps_credits = JSON.parse(fcc);
+			}
+		}
+	}
+	return body;
+  }
+  
+  vacations: Signal<Vacation[] | [] | null> = toSignal(this.vacationService.getVacationsByUserId().pipe(
+	map(response => this.processAllVacations(response.body))
+		
 	), {initialValue: []}
 
   );
+  
+  	
   
   loading:Signal<boolean> = toSignal(this.vacationService.loadingStatus(), {initialValue:true});
 
   constructor(private vacationService: VacationControllerService) {
 	this.vacationService.getVacationsByUserId();
-  }
-  attempt(){
-	const v = this.vacations();
-	if(v){
-		console.log(v[0].config);
-	}
   }
 }

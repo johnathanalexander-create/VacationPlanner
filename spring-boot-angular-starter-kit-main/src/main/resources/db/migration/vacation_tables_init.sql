@@ -12,7 +12,8 @@ create table vacation
 	id BIGINT primary key AUTO_INCREMENT,
     name varchar(250) not null,
     state varchar(25) default 'Draft',
-    `owner` BIGINT
+    `owner` BIGINT,
+	'funding_comps_credits' varchar(500)
 );
 
 create table vacation_config

@@ -20,7 +20,8 @@ public class VacationMapper {
 			vacation.getState(),
 			vacation.getOwner(),
 			vacation.getVacationConfig() != null ? (VacationMapper.toVacationConfigDTO(vacation.getVacationConfig())) : null,
-			vacation.getPrepayments() != null ? (VacationMapper.toPrepaymentListDTO(vacation.getPrepayments())) : null
+			vacation.getPrepayments() != null ? (VacationMapper.toPrepaymentListDTO(vacation.getPrepayments())) : null,
+			vacation.getFunding_comps_credits()
 		);
 	}
 	

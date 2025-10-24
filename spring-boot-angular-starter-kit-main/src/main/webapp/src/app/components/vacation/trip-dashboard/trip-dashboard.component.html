@@ -4,6 +4,7 @@
 	 	<!-- @if ((vacations() ?? []).length > 0) {-->
 	 	@if (selectedVacation){
 	 		
+	 		<!-- Trip Overview -->
 	 		<div id="trip-overview-section" class="inline" style="width: 40%">
 	 			<ng-container>
 	 				<table style="border: 1px solid black; width: 95%; padding: 10px">
@@ -30,7 +31,7 @@
 	 						</tr>
 	 						<tr>
 	 							<th class="trip-overview-tr">Trip Status</th>
-	 							<td class="trip-overview-tr align-center">In Planning</td>
+	 							<td class="trip-overview-tr align-center">{{getValue("state", false)}}</td>
 	 						</tr>
 	 						<tr>
 	 							<th class="trip-overview-tr">Budget Buffering</th>
@@ -42,6 +43,7 @@
 	 			</ng-container>
 	 		</div>
 	 		
+	 		<!-- Months, Weeks, Days Remaining From Trip -->
 	 		
 		 	<div id="time_remaining_section" class="inline" style="width: 60%;">
 		        	<div class="x_remaining" id="months_remaining">
@@ -68,7 +70,38 @@
 		        			206
 		        		</div>
 		        	</div>
-		        </div>
+		    </div>
+		    
+		    <div id="funding-comps-credits">
+		    	<table id = "fcc-table">
+		    		<thead id="fcc-header">
+		    			<tr class="fcc-row" id="fcc-header-row">
+		    				<th colspan="2">Funding, Comps, & Credits</th>
+		    			</tr>
+		    		</thead>
+		    		<tr class="fcc-row">
+		    			<th class="fcc-header">Description</th>
+		    			<th class="fcc-header">Amount</th>
+		    		</tr>
+		    		<!-- <tr class="fcc-row">
+		    			<td>Main Funding</td>
+		    			<td>$325.00</td>
+		    		</tr>-->
+		    		
+		    		<!-- @for(item of selectedVacation.funding_comps_credits | keyvalue; track item.key){
+		    			<tr class="fcc-row">
+		    				<td>{{item.key}}</td>
+		    				<td>{{item.value}}</td>
+		    			</tr>
+		    		}-->
+		    		<tr class="fcc-row" *ngFor="let item of selectedVacation.funding_comps_credits | keyvalue">
+		    			<td class="fcc-table-cell">{{item.key}}</td>
+		    			<td class="fcc-table-cell">{{item.value}}</td>
+		    		</tr>
+		    	</table>
+		    </div>
+		    
+		    
 	 	}
 	 <!-- }-->
 </ng-container>

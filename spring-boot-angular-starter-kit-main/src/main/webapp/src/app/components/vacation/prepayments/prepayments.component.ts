@@ -4,10 +4,6 @@ import Prepayment from '../../../models/vacation-planner/prepayment.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 
-var ELEMENT_DATA: Prepayment[] = [
-	{id: 4,description: 'test', vendor: 'test2', isRefundable: false, isRefundRequested: false, isRefundReceived: false, type: "", amount: 0, paymentSource: "", notes:""}
-];
-
 @Component({
   selector: 'app-prepayments',
   imports: [MatTableModule],
@@ -15,13 +11,17 @@ var ELEMENT_DATA: Prepayment[] = [
   styleUrl: './prepayments.component.scss'
 })
 export class PrepaymentsComponent {
-	@Input() selectedVacation?: Vacation | null = null;
+	
+	@Input()
+	set selectedVacation(value: Vacation){
+		this.dataSource = value.prepayments;
+	}
 	
 	displayedColumns:string[] = ["description", "type", "vendor", "isRefundable", 
 								 "isRefundRequested", "isRefundReceived", "amount", 
 								 "paymentSource", "notes"];
 	
-	dataSource = ELEMENT_DATA;//new MatTableDataSource<Prepayment>( ELEMENT_DATA );
+	dataSource:Prepayment[] = [];
 	
 	ngOnInit(){
 		this.fetchData();
@@ -31,10 +31,6 @@ export class PrepaymentsComponent {
 	fetchData(){
 		setTimeout(()=>{
 			this.dataSource = this.selectedVacation?.prepayments ?? [];
-			console.log("datasource");
-			console.log(this.dataSource);
-			//console.log(this.dataSource.data);
-			console.log(this.selectedVacation);
 		}, 1000);
 	}
 }

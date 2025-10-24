@@ -11,7 +11,8 @@ public record VacationDto(
 							String state,
 							Long owner,
 							VacationConfigDto config,
-							Set<PrepaymentDto> prepayments
+							Set<PrepaymentDto> prepayments,
+							String funding_comps_credits
 						 ) {
 	
 }

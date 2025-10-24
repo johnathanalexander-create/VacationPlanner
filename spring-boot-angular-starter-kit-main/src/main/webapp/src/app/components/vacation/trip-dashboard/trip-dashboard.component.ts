@@ -34,7 +34,7 @@ export class TripDashboardComponent {
 	  constructor(private util: WebVacationUtilityService){
 		
 	  }
-	  getValue(str: string, isConfigItemSearch: boolean){
+	  getValue(str: string, isConfigItemSearch: boolean){//console.log(this.selectedVacation);
 		return this.util.getVacationValue(this.selectedVacation as Vacation, str, isConfigItemSearch);
 	  }
 }

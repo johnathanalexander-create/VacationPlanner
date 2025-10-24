@@ -26,6 +26,17 @@ public class Vacation {
 	
 	@OneToMany(mappedBy="vacation_id", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<Prepayment> prepayments = new HashSet<>();
+	
+	@Column()
+	private String funding_comps_credits;
+
+	public String getFunding_comps_credits() {
+		return funding_comps_credits;
+	}
+
+	public void setFunding_comps_credits(String funding_comps_credits) {
+		this.funding_comps_credits = funding_comps_credits;
+	}
 
 	public Set<Prepayment> getPrepayments() {
 		return prepayments;
