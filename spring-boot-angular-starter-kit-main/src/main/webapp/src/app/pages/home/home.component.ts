@@ -1,8 +1,6 @@
 import {Component, Signal, Input, effect} from '@angular/core';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatIcon} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {map} from "rxjs/operators";
@@ -15,13 +13,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { TripDashboardComponent } from '../../components/vacation/trip-dashboard/trip-dashboard.component';
 import { PrepaymentsComponent } from '../../components/vacation/prepayments/prepayments.component';
 import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
-
+import { TripConfigComponent } from '../../components/vacation/trip-config/trip-config.component';
 
 
 @Component({
     selector: 'app-home',
     imports: [MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, 
-			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent],
+			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })

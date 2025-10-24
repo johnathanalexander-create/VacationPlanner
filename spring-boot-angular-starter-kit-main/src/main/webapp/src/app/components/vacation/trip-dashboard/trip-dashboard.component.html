@@ -102,7 +102,7 @@
 			    		<td *ngIf="item.value['isEditing']"><input [(ngModel)] = "item.value['value']"/></td>
 			    		<td class="fcc-table-cell">				    		
 				    		<mat-icon *ngIf="!item.value['isEditing']" (click)="toggleEditModeForFCC(item)">mode_edit</mat-icon>
-				    		<mat-icon *ngIf="item.value['isEditing']" (click)="toggleEditModeForFCC(item)">done</mat-icon>
+				    		<mat-icon *ngIf="item.value['isEditing']" (click)="toggleEditModeForFCC(item); saveFCCObject(item)">done</mat-icon>
 				    		<mat-icon (click)="deleteElementFromFCC(item)">delete</mat-icon>
 			    		</td>
 			    	</tr>
@@ -159,22 +159,26 @@
 		    		<tbody>
 		    			<tr class="">
 		    				<th class="">Is Today Trip Day</th>
-		    				<td></td>
+		    				<td>asdf</td>
 		    			</tr>
 		    			<tr class="">
 		    				<th class="">Packing Status</th>
-		    				<td></td>
+		    				<td>asdf</td>
 		    			</tr>
 		    			<tr class="">
 		    				<th class="">Task Status</th>
-		    				<td></td>
+		    				<td>asdf</td>
 		    			</tr>
 		    			<tr class="">
 		    				<th class="">Past Due Tasks</th>
-		    				<td></td>
+		    				<td>asdf</td>
 		    			</tr>
 		    		</tbody>
 		    	</table>
+		    </div>
+		    
+		    <div id="notes">
+		    	<p>Notes Section to be built</p>
 		    </div>
 		    
 		    

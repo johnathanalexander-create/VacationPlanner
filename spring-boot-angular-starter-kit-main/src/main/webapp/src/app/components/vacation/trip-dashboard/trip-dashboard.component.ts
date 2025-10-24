@@ -41,6 +41,9 @@ export class TripDashboardComponent {
 		  	item.value.isEditing = (!item.value.isEditing);
 		  }
 	  }
+	  saveFCCObject(item:any){
+		console.log(item);
+	  }
 	  
 	  // The FCC section is powered via JSON. This allows the user to remove a line item from the FCC section
 	  deleteElementFromFCC(item: any){
