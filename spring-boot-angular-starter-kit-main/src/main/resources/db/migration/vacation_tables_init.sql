@@ -1,3 +1,5 @@
+drop table if exists task;
+drop table if exists task_group;
 drop table if exists prepayment;
 drop table if exists calculated_report_data_item;
 drop table if exists report_data_item;
@@ -106,4 +108,40 @@ create table prepayment
 	notes varchar(150),
 	foreign key (vacation_id)
 	references vacation(id) on delete cascade
-)
+);
+create table task_group
+(
+	id bigint primary key AUTO_INCREMENT,
+	vacation_id bigint not null,
+	task_group_name varchar(40),
+	foreign key (vacation_id)
+	references vacation(id) on delete cascade
+);
+
+create table task
+(
+	id bigint primary key auto_increment,
+	task_group_id bigint not null,
+	task_description varchar(100) not null,
+	task_due_date varchar(10),
+	task_status varchar(10),
+	task_mandatory_level varchar(15)
+	foreign key (task_group_id)
+	references task_group(id) on delete cascade
+);
+
+create table task_group_template
+(
+	id bigint primary key auto_increment,
+	task_group_template_name varchar(40) not null,
+);
+
+create table task_template
+(
+	id bigint primary key AUTO_INCREMENT,
+	task_group_template_id bigint not null,
+	task_template_description varchar(100) not null,
+	task_template_days_out_due tinyint not null,
+	foreign key (task_group_template_id)
+	references task_group_template(id) on delete cascade
+);
