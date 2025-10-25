@@ -1,187 +1,187 @@
-<div style="margin-top:15px"></div>
-<ng-container>
-	 <!-- @defer (when !loading()) {-->
-	 	<!-- @if ((vacations() ?? []).length > 0) {-->
-	 	@if (selectedVacation){
-	 		
-	 		<!-- Trip Overview -->
-	 		<div id="trip-overview-section" class="inline" style="width: 40%">
-	 			<ng-container>
-	 				<table style="border: 1px solid black; width: 95%; padding: 10px">
-	 					<tbody>
-	 						<tr>
-	 							<th class="trip-overview-tr">Primary Hotel</th>
-	 							<td class="trip-overview-tr align-center">{{getValue("hotel_name_primary", true)}}</td>
-	 						</tr>
-	 						<tr>
-	 							<th class="trip-overview-tr">Estimated Trip Package Price</th>
-	 							<td class="trip-overview-tr align-center">NEEDS TO BE UPDATED</td>
-	 						</tr>
-	 						<tr>
-	 							<th class="trip-overview-tr">Primary Flight Carrier</th>
-	 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true)}}</td>
-	 						</tr>
-	 						<tr>
-	 							<th class="trip-overview-tr">Primary Flight Class</th>
-	 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true)}}</td>
-	 						</tr>
-	 						<tr>
-	 							<th class="trip-overview-tr">Trip Dates</th>
-	 							<td class="trip-overview-tr align-center">{{getValue("trip_start_date", true)}} - {{getValue("trip_end_date", true)}}</td>
-	 						</tr>
-	 						<tr>
-	 							<th class="trip-overview-tr">Trip Status</th>
-	 							<td class="trip-overview-tr align-center">{{getValue("state", false)}}</td>
-	 						</tr>
-	 						<tr>
-	 							<th class="trip-overview-tr">Budget Buffering</th>
-	 							<td class="trip-overview-tr align-center">{{getValue("enable_budget_buffer", true)}}</td>
-	 						</tr>
-	 						
-	 					</tbody>
-	 				</table>
-	 			</ng-container>
-	 		</div>
-	 		
-	 		<!-- Months, Weeks, Days Remaining From Trip -->
-	 		
-		 	<div id="time_remaining_section" class="inline" style="width: 60%;">
-		        	<div class="x_remaining" id="months_remaining">
-		        		<div class="x_remaining_header">
-		        			Months Remaining
-		        		</div>
-		        		<div class="x_remaining_body">
-		        			{{selectedVacation.meta.monthsRemaining}}
-		        		</div>
-		        	</div>
-		        	<div class="x_remaining" id="weeks_remaining">
-		        		<div class="x_remaining_header">
-		        			Weeks Remaining
-		        		</div>
-		        		<div class="x_remaining_body">
-		        			{{selectedVacation.meta.weeksRemaining}}
-		        		</div>
-		        	</div>
-		        	<div class="x_remaining" id="days_remaining">
-		        		<div class="x_remaining_header">
-		        			Days Remaining
-		        		</div>
-		        		<div class="x_remaining_body">
-		        			{{selectedVacation.meta.daysRemaining}}
-		        		</div>
-		        	</div>
-		    </div>
-		    
-		    <div id="funding-comps-credits" class="inline" style="width: 38%; margin-right: 15px;">
-		    	<table id = "fcc-table" style="width: 100%">
-		    		<thead id="fcc-header">
-		    			<tr class="fcc-row" id="fcc-header-row">
-		    				<th colspan="2">Funding, Comps, & Credits</th>
-		    			</tr>
-		    		</thead>
-		    		<tr class="fcc-row">
-		    			<th class="fcc-header">Description</th>
-		    			<th class="fcc-header">Amount</th>
-		    			<th class="fcc-header">Actions</th>
-		    		</tr>
-		    		<!-- <tr class="fcc-row">
-		    			<td>Main Funding</td>
-		    			<td>$325.00</td>
-		    		</tr>-->
-		    		
-		    		<!-- @for(item of selectedVacation.funding_comps_credits | keyvalue; track item.key){
-		    			<tr class="fcc-row">
-		    				<td>{{item.key}}</td>
-		    				<td>{{item.value}}</td>
-		    			</tr>
-		    		}-->
+<div class="margin-top-15"></div>
+	<ng-container>
+		 <!-- @defer (when !loading()) {-->
+		 	<!-- @if ((vacations() ?? []).length > 0) {-->
+		 	@if (selectedVacation){
 
-			    	<tr class="fcc-row" *ngFor="let item of selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
-			    		<td class="fcc-table-cell">{{item.key}}</td>
-			    		<td *ngIf="!item.value['isEditing']" class="fcc-table-cell"><span *ngIf="item.value['value']">$</span>{{item.value["value"]}}</td>
-			    		<td *ngIf="item.value['isEditing']"><input [(ngModel)] = "item.value['value']"/></td>
-			    		<td class="fcc-table-cell">				    		
-				    		<mat-icon *ngIf="!item.value['isEditing']" (click)="toggleEditModeForFCC(item)">mode_edit</mat-icon>
-				    		<mat-icon *ngIf="item.value['isEditing']" (click)="toggleEditModeForFCC(item); saveFCCObject(item)">done</mat-icon>
-				    		<mat-icon (click)="deleteElementFromFCC(item)">delete</mat-icon>
-			    		</td>
-			    	</tr>
-			    	
-			    	<tfoot>
-			    		<tr>
-			    			<td><span style="font-weight: bold; float: right; margin-right: 10px;">Total</span></td>
-			    			<td>${{ selectedVacation['meta'].totalFCC }}</td>
-			    		</tr>
-			    	</tfoot>
-		    	</table>
-		    </div>
-		    
-		    <div id = "funding-overview" class="inline" style="width: 30%;">
-		    	<table style="width: 100%">
-		    		<thead>
-		    			<tr>
-		    				<th colspan="2">Funding Overview</th>
-		    			</tr>
-		    		</thead>
-		    		<tbody>
-			    		<tr class="">
-			    			<th class="">Main Funding</th>
-			    			<td>$333.26</td>
-			    		</tr>
-			    		<tr class="">
-			    			<th class="">Prepayments</th>
-			    			<td>$333.26</td>
-			    		</tr>
-			    		<tr class="">
-			    			<th class="">Credit Card Funding</th>
-			    			<td>$333.26</td>
-			    		</tr>
-			    		<tr class="">
-			    			<th class="">Total Funding</th>
-			    			<td>$333.26</td>
-			    		</tr>
-			    		<tr class="">
-			    			<th class="">Estimated Cost</th>
-			    			<td>$333.26</td>
-			    		</tr>
-		    		</tbody>
-		    		
-		    	</table>
-		    </div>
-		    
-		    <div id="trip-status-monitor" class="inline">
-		    	<table style="width: 100%">
-		    		<thead>
-		    			<tr>
-		    				<th colspan="2">Trip Status Monitor</th>
-		    			</tr>
-		    		</thead>
-		    		<tbody>
-		    			<tr class="">
-		    				<th class="">Is Today Trip Day</th>
-		    				<td>asdf</td>
-		    			</tr>
-		    			<tr class="">
-		    				<th class="">Packing Status</th>
-		    				<td>asdf</td>
-		    			</tr>
-		    			<tr class="">
-		    				<th class="">Task Status</th>
-		    				<td>asdf</td>
-		    			</tr>
-		    			<tr class="">
-		    				<th class="">Past Due Tasks</th>
-		    				<td>asdf</td>
-		    			</tr>
-		    		</tbody>
-		    	</table>
-		    </div>
-		    
-		    <div id="notes">
-		    	<p>Notes Section to be built</p>
-		    </div>
-		    
-		    
-	 	}
-	 <!-- }-->
-</ng-container>
+		 		<div id="left-side" class="inline-grid">
+		 		<!-- Trip Overview -->
+			 		<div id="trip-overview-section">
+			 			<ng-container>
+			 				<table style="border: 2px solid black; width: 95%; padding: 15px">
+			 					<tbody>
+			 						<tr>
+			 							<th class="trip-overview-tr">Primary Hotel</th>
+			 							<td class="trip-overview-tr align-center">{{getValue("hotel_name_primary", true)}}</td>
+			 						</tr>
+			 						<tr>
+			 							<th class="trip-overview-tr">Estimated Trip Package Price</th>
+			 							<td class="trip-overview-tr align-center">NEEDS TO BE UPDATED</td>
+			 						</tr>
+			 						<tr>
+			 							<th class="trip-overview-tr">Primary Flight Carrier</th>
+			 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true)}}</td>
+			 						</tr>
+			 						<tr>
+			 							<th class="trip-overview-tr">Primary Flight Class</th>
+			 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true)}}</td>
+			 						</tr>
+			 						<tr>
+			 							<th class="trip-overview-tr">Trip Dates</th>
+			 							<td class="trip-overview-tr align-center">{{getValue("trip_start_date", true)}} - {{getValue("trip_end_date", true)}}</td>
+			 						</tr>
+			 						<tr>
+			 							<th class="trip-overview-tr">Trip Status</th>
+			 							<td class="trip-overview-tr align-center">{{getValue("state", false)}}</td>
+			 						</tr>
+			 						<tr>
+			 							<th class="trip-overview-tr">Budget Buffering</th>
+			 							<td class="trip-overview-tr align-center">{{getValue("enable_budget_buffer", true)}}</td>
+			 						</tr>
+			 						
+			 					</tbody>
+			 				</table>
+			 			</ng-container>
+			 		</div>
+			 		
+			 		<div id="funding-comps-credits" class="margin-top-15">
+				    	<table id = "fcc-table">
+				    		<thead id="fcc-header">
+				    			<tr class="fcc-row" id="fcc-header-row">
+				    				<th colspan="2">Funding, Comps, & Creditss</th>
+				    			</tr>
+				    		</thead>
+				    		<tr class="fcc-row">
+				    			<th class="fcc-header">Description</th>
+				    			<th class="fcc-header">Amount</th>
+				    			<th class="fcc-header">Actions</th>
+				    		</tr>
+		
+					    	<tr class="fcc-row" *ngFor="let item of selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
+					    		<td class="fcc-table-cell">{{item.key}}</td>
+					    		<td *ngIf="!item.value['isEditing']" class="fcc-table-cell"><span *ngIf="item.value['value']">$</span>{{item.value["value"]}}</td>
+					    		<td *ngIf="item.value['isEditing']"><input [(ngModel)] = "item.value['value']"/></td>
+					    		<td class="fcc-table-cell">				    		
+						    		<mat-icon *ngIf="!item.value['isEditing']" (click)="toggleEditModeForFCC(item)">mode_edit</mat-icon>
+						    		<mat-icon *ngIf="item.value['isEditing']" (click)="toggleEditModeForFCC(item); saveFCCObject(item)">done</mat-icon>
+						    		<mat-icon (click)="deleteElementFromFCC(item)">delete</mat-icon>
+					    		</td>
+					    	</tr>
+					    	
+					    	<tfoot>
+					    		<tr>
+					    			<td><span id="fcc_total_label">Total</span></td>
+					    			<td>${{ selectedVacation['meta'].totalFCC }}</td>
+					    		</tr>
+					    	</tfoot>
+				    	</table>
+				    </div>
+			    </div><!-- End Left Side -->
+			    
+			    <div id="right-side" class="inline-grid">
+			    
+				    <!-- Months, Weeks, Days Remaining From Trip -->
+				 	<div id="time_remaining_section" >
+				        	<div class="x_remaining" id="months_remaining">
+				        		<div class="x_remaining_header">
+				        			Months Remaining
+				        		</div>
+				        		<div class="x_remaining_body">
+				        			{{selectedVacation.meta.monthsRemaining}}
+				        		</div>
+				        	</div>
+				        	<div class="x_remaining" id="weeks_remaining">
+				        		<div class="x_remaining_header">
+				        			Weeks Remaining
+				        		</div>
+				        		<div class="x_remaining_body">
+				        			{{selectedVacation.meta.weeksRemaining}}
+				        		</div>
+				        	</div>
+				        	<div class="x_remaining" id="days_remaining">
+				        		<div class="x_remaining_header">
+				        			Days Remaining
+				        		</div>
+				        		<div class="x_remaining_body">
+				        			{{selectedVacation.meta.daysRemaining}}
+				        		</div>
+				        	</div>
+				    </div>
+				    
+					<div id="fo-tsm" class="inline-grid margin-top-15">
+						<div id = "funding-overview">
+					    	<table class="table-width-100">
+					    		<thead>
+					    			<tr>
+					    				<th colspan="2" class="general-overview-table-header">Funding Overview</th>
+					    			</tr>
+					    		</thead>
+					    		<tbody>
+						    		<tr class="">
+						    			<th class="general-overview-side-header">Main Funding</th>
+						    			<td>$333.26</td>
+						    		</tr>
+						    		<tr class="">
+						    			<th class="general-overview-side-header">Prepayments</th>
+						    			<td>$333.26</td>
+						    		</tr>
+						    		<tr class="">
+						    			<th class="general-overview-side-header">Credit Card Funding</th>
+						    			<td>$333.26</td>
+						    		</tr>
+						    		<tr class="">
+						    			<th class="general-overview-side-header">Total Funding</th>
+						    			<td>$333.26</td>
+						    		</tr>
+						    		<tr class="">
+						    			<th class="general-overview-side-header">Estimated Cost</th>
+						    			<td>$333.26</td>
+						    		</tr>
+					    		</tbody>
+					    		
+					    	</table>
+					    </div>
+					    
+					    <div id="trip-status-monitor" style="width: 100; border: 2px solid black;">
+					    	<table class="table-width-100">
+					    		<thead>
+					    			<tr>
+					    				<th colspan="2" class="general-overview-table-header">Trip Status Monitor</th>
+					    			</tr>
+					    		</thead>
+					    		<tbody>
+					    			<tr class="">
+					    				<th class="general-overview-side-header">Is Today Trip Day</th>
+					    				<td>asdf</td>
+					    			</tr>
+					    			<tr>
+					    				<th class="general-overview-side-header">Packing Status</th>
+					    				<td>asdf</td>
+					    			</tr>
+					    			<tr>
+					    				<th class="general-overview-side-header">Task Status</th>
+					    				<td>asdf</td>
+					    			</tr>
+					    			<tr>
+					    				<th class="general-overview-side-header">Past Due Tasks</th>
+					    				<td>asdf</td>
+					    			</tr>
+					    		</tbody>
+					    	</table>
+					    </div>
+					</div>
+				    
+				    
+			    
+			    </div><!-- End Right Side -->
+
+		 		
+			    
+			    <div id="notes">
+			    	<p>Notes Section to be built</p>
+			    </div>
+			    
+			    
+		 	}
+		 <!-- }-->
+	</ng-container>

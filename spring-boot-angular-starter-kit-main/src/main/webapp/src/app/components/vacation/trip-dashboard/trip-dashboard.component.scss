@@ -1,9 +1,3 @@
-#time_remaining_section{
-	text-align: center;
-	display: flex;
-	margin-left: auto;
-	float: right;
-}
 .x_remaining{
 	border: 2px solid black;
 	text-align: center;
@@ -11,6 +5,7 @@
 	margin-right: 25px;
 	display: inline-block;
 	padding: 10px;
+	width: 30%;
 }
 .x_remaining_header{
 	border-bottom: 2px solid black;
@@ -19,19 +14,67 @@
 .trip-overview-tr{
 	border-bottom: 1px solid black;
 }
+
+.fcc-row{
+	text-align: center;
+}
+
+.fcc-table-cell{
+	border-bottom: 1px solid black;
+}
+.general-overview-side-header{
+	font-size: 24px;
+}
+.general-overview-table-header{
+	font-size: 32px;
+}
+.inline-grid{
+	display: inline-grid;
+}
+.margin-top-15{
+	margin-top: 15px;
+}
+.table-width-100{
+	width: 100%;
+}
 #fcc-table, .fcc-header, .fcc-table-cell{
 	border-bottom: 1px solid black;
 }
 #fcc-table{
-	border: 1px solid black;
 	padding: 10px;
+	width: 100%;
 }
-.fcc-row{
+#time_remaining_section{
 	text-align: center;
+	display: flex;
+	width: 90%;
+}
+#fo-tsm{
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+}
+#left-side{
+	width: 40%;
 }
 #funding-comps-credits{
-	margin-top: 25px;
+	border: 2px solid black;
+	margin-right: 15px;
+	width: 95%;
 }
-.fcc-table-cell{
-	border-bottom: 1px solid black;
+#fcc_total_label{
+	font-weight: bold;
+	float: right;
+	margin-right: 10px;
+}
+
+#right-side{
+	width: 60%;
+}
+#funding-overview{
+	width: 100%;
+	border: 2px solid black;
+	margin-right: 15px;
+}
+#trip-status-monitor{
+	border: 2px solid black;
 }
