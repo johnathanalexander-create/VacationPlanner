@@ -134,6 +134,7 @@ create table task_group_template
 (
 	id bigint primary key auto_increment,
 	task_group_template_name varchar(40) not null,
+	active boolean default true
 );
 
 create table task_template
@@ -142,6 +143,8 @@ create table task_template
 	task_group_template_id bigint not null,
 	task_template_description varchar(100) not null,
 	task_template_days_out_due tinyint not null,
+	task_template_mandatory_level varchar(15),
+	active boolean default true,
 	foreign key (task_group_template_id)
 	references task_group_template(id) on delete cascade
 );
