@@ -10,9 +10,11 @@ public class VacationMapper {
 			vacation.getName(),
 			vacation.getState(),
 			vacation.getOwner(),
-			vacation.getNotes(),			vacation.getVacationConfig() != null ? (VacationConfigMapper.toVacationConfigDTO(vacation.getVacationConfig())) : null,
+			vacation.getNotes(),
+			vacation.getVacationConfig() != null ? (VacationConfigMapper.toVacationConfigDTO(vacation.getVacationConfig())) : null,
 			vacation.getPrepayments() != null ? (PrepaymentMapper.toPrepaymentListDTO(vacation.getPrepayments())) : null,
-			vacation.getFunding_comps_credits()
+			vacation.getFundingCompsCredits(),
+			vacation.getConfirmations() != null ? (ConfirmationMapper.toConfirmationDTOList(vacation.getConfirmations())) : null
 		);
 	}
 }

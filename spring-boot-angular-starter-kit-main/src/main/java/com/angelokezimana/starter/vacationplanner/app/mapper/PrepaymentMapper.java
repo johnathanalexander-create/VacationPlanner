@@ -18,9 +18,9 @@ public class PrepaymentMapper {
 				prepayment.getDescription(),
 				prepayment.getType(),
 				prepayment.getVendor(),
-				prepayment.isIs_refundable(),
-				prepayment.isIs_refund_requested(),
-				prepayment.isIs_refund_received(),
+				prepayment.isRefundable(),
+				prepayment.isRefundRequested(),
+				prepayment.isRefundReceived(),
 				prepayment.getAmount(),
 				prepayment.getPayment_source(),
 				prepayment.getNotes()

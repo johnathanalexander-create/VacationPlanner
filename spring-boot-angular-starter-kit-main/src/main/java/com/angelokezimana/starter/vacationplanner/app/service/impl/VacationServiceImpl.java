@@ -78,7 +78,7 @@ public class VacationServiceImpl implements VacationService{
 		updatedVacation.setState(vacationRequestDto.state());
 		updatedVacation.setOwner(vacationRequestDto.owner());
 		updatedVacation.setNotes(vacationRequestDto.notes());
-		updatedVacation.setFunding_comps_credits(vacationRequestDto.funding_comps_credits());
+		updatedVacation.setFundingCompsCredits(vacationRequestDto.funding_comps_credits());
 		//updatedVacation.setFunding_comps_credits(vacationRequestDto.funding_comps_credits().toString());
 		
 		Set<Prepayment> prepayments = new HashSet<>();
@@ -93,9 +93,9 @@ public class VacationServiceImpl implements VacationService{
 			newPrepayment.setDescription(prepaymentDto.description());
 			newPrepayment.setType(prepaymentDto.type());
 			newPrepayment.setVendor(prepaymentDto.vendor());
-			newPrepayment.setIs_refundable(prepaymentDto.isRefundable());
-			newPrepayment.setIs_refund_requested(prepaymentDto.isRefundRequested());
-			newPrepayment.setIs_refund_received(prepaymentDto.isRefundReceived());
+			newPrepayment.setIsRefundable(prepaymentDto.isRefundable());
+			newPrepayment.setIsRefundRequested(prepaymentDto.isRefundRequested());
+			newPrepayment.setIsRefundReceived(prepaymentDto.isRefundReceived());
 			newPrepayment.setAmount(prepaymentDto.amount());
 			newPrepayment.setPayment_source(prepaymentDto.paymentSource());
 			newPrepayment.setNotes(prepaymentDto.notes());

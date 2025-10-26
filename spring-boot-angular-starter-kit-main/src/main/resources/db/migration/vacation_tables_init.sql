@@ -1,3 +1,4 @@
+drop table if exists confirmation;
 drop table if exists task;
 drop table if exists task_group;
 drop table if exists prepayment;
@@ -110,6 +111,31 @@ create table prepayment
 	foreign key (vacation_id)
 	references vacation(id) on delete cascade
 );
+
+create table confirmation(
+	id bigint primary key AUTO_INCREMENT,
+	vacation_id bigint not null,
+	description varchar(100) not null,
+	type varchar(30),
+	confirmation_code varchar(50),
+	date varchar(10),
+	time varchar(10),
+	notes varchar(100),
+	foreign key (vacation_id)
+	references vacation(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
 create table task_group
 (
 	id bigint primary key AUTO_INCREMENT,

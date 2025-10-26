@@ -33,45 +33,24 @@ public class Vacation {
 	@Column
 	private String notes;
 
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-	public String getFunding_comps_credits() {
-		return funding_comps_credits;
-	}
-
-	public void setFunding_comps_credits(String funding_comps_credits) {
-		this.funding_comps_credits = funding_comps_credits;
-	}
-
-	public Set<Prepayment> getPrepayments() {
-		return prepayments;
-	}
-
-	public void setPrepayments(Set<Prepayment> prepayments) {
-		this.prepayments = prepayments;
-	}
-
 	@OneToOne(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JsonIgnore
-	private VacationConfig vacationConfigify;
+	private VacationConfig vacationConfig;
+	
+	@OneToMany(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Set<Confirmation> confirmations = new HashSet<>();
 
 	public VacationConfig getVacationConfig() {
-		return vacationConfigify;
+		return vacationConfig;
 	}
 
 	public void setVacationConfig(VacationConfig vacationConfig) {
-		this.vacationConfigify = vacationConfig;
+		this.vacationConfig = vacationConfig;
 	}
 	
 	@Override
 	public String toString() {
-		return id + "/" + name + "/" + funding_comps_credits + "/" + notes + "/" + state + "/" + owner + "/" + this.vacationConfigify.toString();
+		return id + "/" + name + "/" + funding_comps_credits + "/" + notes + "/" + state + "/" + owner + "/" + this.vacationConfig.toString();
 	}
 
 	public long getId() {
@@ -104,5 +83,37 @@ public class Vacation {
 
 	public void setOwner(Long owner) {
 		this.owner = owner;
-	}	
+	}
+	
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	public String getFundingCompsCredits() {
+		return funding_comps_credits;
+	}
+
+	public void setFundingCompsCredits(String funding_comps_credits) {
+		this.funding_comps_credits = funding_comps_credits;
+	}
+
+	public Set<Prepayment> getPrepayments() {
+		return prepayments;
+	}
+
+	public void setPrepayments(Set<Prepayment> prepayments) {
+		this.prepayments = prepayments;
+	}
+	
+	public Set<Confirmation> getConfirmations() {
+		return confirmations;
+	}
+
+	public void setConfirmations(Set<Confirmation> confirmations) {
+		this.confirmations = confirmations;
+	}
 }

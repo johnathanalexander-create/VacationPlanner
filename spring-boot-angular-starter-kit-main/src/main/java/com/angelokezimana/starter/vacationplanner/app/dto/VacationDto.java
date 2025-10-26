@@ -3,6 +3,7 @@ package com.angelokezimana.starter.vacationplanner.app.dto;
 import java.util.Set;
 
 import com.angelokezimana.starter.user.model.User;
+import com.angelokezimana.starter.vacationplanner.app.model.Confirmation;
 import com.angelokezimana.starter.vacationplanner.app.model.VacationConfig;
 
 public record VacationDto(
@@ -13,7 +14,8 @@ public record VacationDto(
 							String notes,
 							VacationConfigDto config,
 							Set<PrepaymentDto> prepayments,
-							String funding_comps_credits
+							String funding_comps_credits,
+							Set<ConfirmationDto> confirmations
 						 ) {
 	
 }

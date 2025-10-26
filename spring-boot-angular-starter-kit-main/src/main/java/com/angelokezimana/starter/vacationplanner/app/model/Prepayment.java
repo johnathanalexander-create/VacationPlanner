@@ -82,27 +82,27 @@ public class Prepayment {
 		this.vendor = vendor;
 	}
 
-	public boolean isIs_refundable() {
+	public boolean isRefundable() {
 		return is_refundable;
 	}
 
-	public void setIs_refundable(boolean is_refundable) {
+	public void setIsRefundable(boolean is_refundable) {
 		this.is_refundable = is_refundable;
 	}
 
-	public boolean isIs_refund_requested() {
+	public boolean isRefundRequested() {
 		return is_refund_requested;
 	}
 
-	public void setIs_refund_requested(boolean is_refund_requested) {
+	public void setIsRefundRequested(boolean is_refund_requested) {
 		this.is_refund_requested = is_refund_requested;
 	}
 
-	public boolean isIs_refund_received() {
+	public boolean isRefundReceived() {
 		return is_refund_received;
 	}
 
-	public void setIs_refund_received(boolean is_refund_received) {
+	public void setIsRefundReceived(boolean is_refund_received) {
 		this.is_refund_received = is_refund_received;
 	}
 
