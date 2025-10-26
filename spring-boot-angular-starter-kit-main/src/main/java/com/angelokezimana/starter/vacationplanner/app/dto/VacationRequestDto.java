@@ -17,5 +17,4 @@ public record VacationRequestDto(
 									Set<PrepaymentDto> prepayments,
 									String funding_comps_credits
 								) {
-
 }

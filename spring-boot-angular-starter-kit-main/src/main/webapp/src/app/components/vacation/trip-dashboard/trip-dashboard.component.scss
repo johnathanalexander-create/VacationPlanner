@@ -47,7 +47,7 @@
 #time_remaining_section{
 	text-align: center;
 	display: flex;
-	width: 90%;
+	width: 100%;
 }
 #fo-tsm{
 	grid-template-columns: 1fr 1fr;
@@ -77,6 +77,7 @@
 }
 #trip-status-monitor{
 	border: 2px solid black;
+	width: 93%;
 }
 #trip-planner-notes{
 	width: 1361px !important;

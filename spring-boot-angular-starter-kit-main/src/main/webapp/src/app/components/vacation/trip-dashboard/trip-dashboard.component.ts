@@ -65,17 +65,20 @@ export class TripDashboardComponent {
 	  }
 	  
 	  readyToSaveVacation(vacation:Vacation, messageOnError: string) {
-		//if(this.vacationService.vacationUpdater.vacation){
 		if(vacation){
-			
-			//const vacation: Vacation = this.vacationService.vacationUpdater.vacation;
-			
-			vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
-			console.log(vacation);
+			//vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
 			
 			this.vacationService.updateVacation(vacation).subscribe({
 				next:(resp) => {
-					
+					if(resp && resp.body){
+						console.log("type: " + typeof(resp.body) + " / " + typeof(resp.body.funding_comps_credits));
+						console.log(resp.body.funding_comps_credits);
+						//resp.body.funding_comps_credits.replaceAll("\\", "");
+						//resp.body.funding_comps_credits.replaceAll('\\', "");
+						//resp.body.funding_comps_credits = JSON.parse(this.selectedVacation.funding_comps_credits);
+						//this.selectedVacation = resp.body as Vacation;
+						console.log(resp.body); //this.selectedVacation.funding_comps_credits = JSON.parse(this.selectedVacation.funding_comps_credits);
+					}
 				},
 				error: (err: any) => {
 					this.snackbar.showMessage(messageOnError, 'error');

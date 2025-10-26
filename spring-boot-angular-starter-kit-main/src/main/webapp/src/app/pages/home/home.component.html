@@ -1,11 +1,13 @@
 
 
 <mat-form-field>
-	        	<mat-label>Select Vacation Planner</mat-label>
-	        	<mat-select [(value)]="selectedVacation">
-	        		<mat-option *ngFor="let option of vacations()" [value]="option">{{option.name}}</mat-option>
-	        	</mat-select>
-	        </mat-form-field>
+	<mat-label>Select Vacation Planner</mat-label>
+	<mat-select [(value)]="selectedVacation">
+		<mat-option *ngFor="let option of vacations()" [value]="option">{{option.name}}</mat-option>
+	</mat-select>
+</mat-form-field>
+
+<button (click)="delete(selectedVacation)" *ngIf="this.selectedVacation" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">Delete</button>
 
 <ng-container>
   <!-- <mat-toolbar class="post-list-mat-toolbar">

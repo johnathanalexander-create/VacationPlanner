@@ -60,8 +60,8 @@ public class VacationController {
 	
 	@PutMapping()
 	private ResponseEntity<VacationDto> updateVacation(@RequestBody VacationRequestDto vacation){
-		vacationService.updateVacation(vacation);
+		VacationDto dto = vacationService.updateVacation(vacation);
 		
-		return ResponseEntity.ok(null);
+		return ResponseEntity.ok(dto);
 	}
 }

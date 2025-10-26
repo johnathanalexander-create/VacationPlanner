@@ -1,6 +1,6 @@
 import {Component, Signal, Input, effect} from '@angular/core';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatButtonModule} from "@angular/material/button";
+import {MatButtonModule, MatButton} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {map} from "rxjs/operators";
@@ -19,7 +19,7 @@ import { TripConfigComponent } from '../../components/vacation/trip-config/trip-
 @Component({
     selector: 'app-home',
     imports: [MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, 
-			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent],
+			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
@@ -75,6 +75,7 @@ export class HomeComponent {
 			
 		}
 	}
+	console.log(body);
 	return body;
   }
   
@@ -84,6 +85,9 @@ export class HomeComponent {
 	), {initialValue: []}
 
   );
+  delete(vacation: Vacation){
+	
+  }
   
   	
   

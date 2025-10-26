@@ -48,7 +48,7 @@
 				    	<table id = "fcc-table">
 				    		<thead id="fcc-header">
 				    			<tr class="fcc-row" id="fcc-header-row">
-				    				<th colspan="2">Funding, Comps, & Creditss</th>
+				    				<th colspan="2">Funding, Comps, & Credits</th>
 				    			</tr>
 				    		</thead>
 				    		<tr class="fcc-row">
@@ -57,7 +57,7 @@
 				    			<th class="fcc-header">Actions</th>
 				    		</tr>
 		
-					    	<tr class="fcc-row" *ngFor="let item of selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
+					    	<tr class="fcc-row" *ngFor="let item of this.selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
 					    		<td class="fcc-table-cell">{{item.key}}</td>
 					    		<td *ngIf="!item.value['isEditing']" class="fcc-table-cell"><span *ngIf="item.value['value']">$</span>{{item.value["value"]}}</td>
 					    		<td *ngIf="item.value['isEditing']"><input [(ngModel)] = "item.value['value']"/></td>
@@ -84,7 +84,7 @@
 				 	<div id="time_remaining_section" >
 				        	<div class="x_remaining" id="months_remaining">
 				        		<div class="x_remaining_header">
-				        			Months Remaining
+				        			Months<br>Remaining
 				        		</div>
 				        		<div class="x_remaining_body">
 				        			{{selectedVacation.meta.monthsRemaining}}
@@ -92,7 +92,7 @@
 				        	</div>
 				        	<div class="x_remaining" id="weeks_remaining">
 				        		<div class="x_remaining_header">
-				        			Weeks Remaining
+				        			Weeks<br>Remaining
 				        		</div>
 				        		<div class="x_remaining_body">
 				        			{{selectedVacation.meta.weeksRemaining}}
@@ -100,7 +100,7 @@
 				        	</div>
 				        	<div class="x_remaining" id="days_remaining">
 				        		<div class="x_remaining_header">
-				        			Days Remaining
+				        			Days<br>Remaining
 				        		</div>
 				        		<div class="x_remaining_body">
 				        			{{selectedVacation.meta.daysRemaining}}
@@ -142,7 +142,7 @@
 					    	</table>
 					    </div>
 					    
-					    <div id="trip-status-monitor" style="width: 100; border: 2px solid black;">
+					    <div id="trip-status-monitor" style="width: 100;">
 					    	<table class="width-100">
 					    		<thead>
 					    			<tr>

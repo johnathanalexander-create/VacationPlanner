@@ -79,6 +79,7 @@ public class VacationServiceImpl implements VacationService{
 		updatedVacation.setOwner(vacationRequestDto.owner());
 		updatedVacation.setNotes(vacationRequestDto.notes());
 		updatedVacation.setFunding_comps_credits(vacationRequestDto.funding_comps_credits());
+		//updatedVacation.setFunding_comps_credits(vacationRequestDto.funding_comps_credits().toString());
 		
 		Set<Prepayment> prepayments = new HashSet<>();
 		List<PrepaymentDto> prepaymentDtoList = new ArrayList<>(vacationRequestDto.prepayments());
