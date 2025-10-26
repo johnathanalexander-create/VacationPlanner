@@ -11,4 +11,5 @@ import com.angelokezimana.starter.vacationplanner.app.dto.VacationRequestDto;
 public interface VacationService {
 	List<VacationDto> getAllVacationsByOwner(Long owner_id);
 	VacationDto createVacation(VacationRequestDto vacationRequestDto, String name);
+	VacationDto updateVacation(VacationRequestDto vacationRequestDto);
 }

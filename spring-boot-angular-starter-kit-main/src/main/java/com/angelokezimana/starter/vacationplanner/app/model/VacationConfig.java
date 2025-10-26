@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 @Table(name="vacation_config")
 public class VacationConfig {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -45,7 +45,7 @@ public class VacationConfig {
 		this.id = id;
 	}
 	
-	/*@Override
+	@Override
 	public String toString() {
 		String ret = "";
 		
@@ -59,6 +59,6 @@ public class VacationConfig {
 		return ret;
 		
 		
-	}*/
+	}
 	
 }

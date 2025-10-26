@@ -10,7 +10,7 @@ public class VacationMapper {
 			vacation.getName(),
 			vacation.getState(),
 			vacation.getOwner(),
-			vacation.getVacationConfig() != null ? (VacationConfigMapper.toVacationConfigDTO(vacation.getVacationConfig())) : null,
+			vacation.getNotes(),			vacation.getVacationConfig() != null ? (VacationConfigMapper.toVacationConfigDTO(vacation.getVacationConfig())) : null,
 			vacation.getPrepayments() != null ? (PrepaymentMapper.toPrepaymentListDTO(vacation.getPrepayments())) : null,
 			vacation.getFunding_comps_credits()
 		);

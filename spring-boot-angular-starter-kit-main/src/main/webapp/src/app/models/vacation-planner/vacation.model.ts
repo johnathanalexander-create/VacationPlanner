@@ -7,6 +7,7 @@ export default interface Vacation{
 	name: string;
 	state: string;
 	owner: number;
+	notes: string;
 	config: VacationConfig,
 	prepayments: Prepayment[],
 	funding_comps_credits:{},

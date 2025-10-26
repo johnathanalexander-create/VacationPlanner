@@ -110,7 +110,7 @@
 				    
 					<div id="fo-tsm" class="inline-grid margin-top-15">
 						<div id = "funding-overview">
-					    	<table class="table-width-100">
+					    	<table class="width-100">
 					    		<thead>
 					    			<tr>
 					    				<th colspan="2" class="general-overview-table-header">Funding Overview</th>
@@ -143,7 +143,7 @@
 					    </div>
 					    
 					    <div id="trip-status-monitor" style="width: 100; border: 2px solid black;">
-					    	<table class="table-width-100">
+					    	<table class="width-100">
 					    		<thead>
 					    			<tr>
 					    				<th colspan="2" class="general-overview-table-header">Trip Status Monitor</th>
@@ -175,11 +175,16 @@
 			    
 			    </div><!-- End Right Side -->
 
-		 		
+		 		<div id="bottom">
+			 		<div id="notes" class="margin-top-15">
+				    	<mat-form-field id="trip-planner-notes" appearance="fill">
+				    		<mat-label>Trip Planner Notes</mat-label>
+				    		<textarea [(ngModel)]="selectedVacation.notes" (keyup) = "updateVacation(selectedVacation, true, 'doneTyping', 'Unable to update trip planner notes')" cdkTextareaAutosize style="resize: none" matInput>{{selectedVacation.notes}}</textarea>
+				    	</mat-form-field>
+				    </div>
+		 		</div>
 			    
-			    <div id="notes">
-			    	<p>Notes Section to be built</p>
-			    </div>
+			    
 			    
 			    
 		 	}

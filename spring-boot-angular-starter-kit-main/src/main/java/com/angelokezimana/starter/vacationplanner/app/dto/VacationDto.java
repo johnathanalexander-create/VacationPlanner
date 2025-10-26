@@ -10,6 +10,7 @@ public record VacationDto(
 							String name,
 							String state,
 							Long owner,
+							String notes,
 							VacationConfigDto config,
 							Set<PrepaymentDto> prepayments,
 							String funding_comps_credits

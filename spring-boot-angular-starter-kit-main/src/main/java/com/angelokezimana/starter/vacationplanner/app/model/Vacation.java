@@ -12,7 +12,7 @@ import jakarta.persistence.*;
 @Table(name="vacation")
 public class Vacation {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(length = 250, name="name", nullable = false)
@@ -29,6 +29,17 @@ public class Vacation {
 	
 	@Column()
 	private String funding_comps_credits;
+	
+	@Column
+	private String notes;
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
 
 	public String getFunding_comps_credits() {
 		return funding_comps_credits;
@@ -60,7 +71,7 @@ public class Vacation {
 	
 	@Override
 	public String toString() {
-		return id + "/" + name + "/" + state + "/" + owner + "/" + this.vacationConfigify.toString();
+		return id + "/" + name + "/" + funding_comps_credits + "/" + notes + "/" + state + "/" + owner + "/" + this.vacationConfigify.toString();
 	}
 
 	public long getId() {

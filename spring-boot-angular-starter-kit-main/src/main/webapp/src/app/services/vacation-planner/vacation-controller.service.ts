@@ -3,6 +3,7 @@ import { WebApiService } from '../../services/web-api/web-api.service';
 import {Observable} from "rxjs";
 import {HttpResponse, HttpErrorResponse} from "@angular/common/http";
 import Vacation from '../../models/vacation-planner/vacation.model';
+//import VacationUpdater from '../../models/vacation-planner/vacation_updater.model';
 import {toObservable} from "@angular/core/rxjs-interop";
 import {tap} from "rxjs/operators";
 import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
@@ -12,11 +13,15 @@ import {WebVacationUtilityService} from '../../services/utility/web-vacation-uti
 })
 export class VacationControllerService {
 	private loading = signal(false);
+	//public vacationUpdater: VacationUpdater = new VacationUpdater();
 
   constructor(private http: WebApiService, private util: WebVacationUtilityService) {}
   
   saveVacation(vacation: Vacation): Observable<HttpResponse<Vacation> | null | undefined>{
 	return this.http.post('/api/v1/vacation', vacation);
+  }
+  updateVacation(vacation: Vacation):Observable<HttpResponse<Vacation> | null | undefined>{
+	return this.http.put('/api/v1/vacation', vacation);
   }
   getVacationsByUserId(): Observable<HttpResponse<Vacation[]>>{
 	this.loading.set(true);

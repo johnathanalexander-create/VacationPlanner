@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,16 +38,9 @@ public class VacationController {
 	
 	@PostMapping()
     private ResponseEntity<VacationDto> create(@RequestBody @Valid VacationRequestDto vacationRequestDTO, Principal principal) {
-		System.out.println("JWSA JWSA " + vacationRequestDTO.name());
         VacationDto vacationDTO = vacationService.createVacation(vacationRequestDTO, principal.getName());
         return ResponseEntity.ok(vacationDTO);
     }
-	
-	/*@GetMapping
-	private ResponseEntity<List<VacationDto>> findAllVacationsByOwner(Principal principal){
-		List<VacationDto> list = vacationService.getAllVacationsByOwner(principal.getName());
-		return ResponseEntity.ok(list);
-	}*/
 	
 	@GetMapping("/{id}")
 	private ResponseEntity<List<VacationDto>> findAll(@PathVariable("id") Long id){
@@ -62,5 +56,12 @@ public class VacationController {
 			}
 		}
 		return ResponseEntity.ok(list);
+	}
+	
+	@PutMapping()
+	private ResponseEntity<VacationDto> updateVacation(@RequestBody VacationRequestDto vacation){
+		vacationService.updateVacation(vacation);
+		
+		return ResponseEntity.ok(null);
 	}
 }
