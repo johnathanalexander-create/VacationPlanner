@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <packaging>war</packaging>
-    <groupId>com.angelokezimana</groupId>
+    <groupId>com.johnathanalexander.vacationplanner</groupId>
     <artifactId>spring-boot-angular-starter-kit</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-boot-angular-starter-kit</name>
