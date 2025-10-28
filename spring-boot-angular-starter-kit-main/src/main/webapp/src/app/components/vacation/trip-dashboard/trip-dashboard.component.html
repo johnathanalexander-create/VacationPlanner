@@ -63,8 +63,8 @@
 					    		<td *ngIf="item.value['isEditing']"><input [(ngModel)] = "item.value['value']"/></td>
 					    		<td class="fcc-table-cell">				    		
 						    		<mat-icon *ngIf="!item.value['isEditing']" (click)="toggleEditModeForFCC(item)">mode_edit</mat-icon>
-						    		<mat-icon *ngIf="item.value['isEditing']" (click)="toggleEditModeForFCC(item); saveFCCObject(item)">done</mat-icon>
-						    		<mat-icon (click)="deleteElementFromFCC(item)">delete</mat-icon>
+						    		<mat-icon *ngIf="item.value['isEditing']" (click)="toggleEditModeForFCC(item); updateVacation(selectedVacation, false, 'Unable to update Funding, Comps, & Credits')">done</mat-icon>
+						    		<mat-icon (click)="deleteElementFromFCC(item); updateVacation(selectedVacation, false, 'Unable to update Funding, Comps, & Credits')">delete</mat-icon>
 					    		</td>
 					    	</tr>
 					    	
@@ -179,7 +179,7 @@
 			 		<div id="notes" class="margin-top-15">
 				    	<mat-form-field id="trip-planner-notes" appearance="fill">
 				    		<mat-label>Trip Planner Notes</mat-label>
-				    		<textarea [(ngModel)]="selectedVacation.notes" (keyup) = "updateVacation(selectedVacation, true, 'doneTyping', 'Unable to update trip planner notes')" cdkTextareaAutosize style="resize: none" matInput>{{selectedVacation.notes}}</textarea>
+				    		<textarea [(ngModel)]="selectedVacation.notes" (keyup) = "updateVacation(selectedVacation, true, 'Unable to update trip planner notes')" cdkTextareaAutosize style="resize: none" matInput>{{selectedVacation.notes}}</textarea>
 				    	</mat-form-field>
 				    </div>
 		 		</div>

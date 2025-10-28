@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import Vacation from '../../models/vacation-planner/vacation.model';
 import VacationConfig from '../../models/vacation-planner/vacation_config.model';
 import VacationConfigItem from '../../models/vacation-planner/vacation_config_item.model';
-import FCC from '../../models/vacation-planner/fcc.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +10,52 @@ export class WebVacationUtilityService {
 
   constructor() {
 
+   }
+   
+   processSingleVacation(vacation: any){
+		if(vacation){
+			vacation.meta = {};
+			
+		}
+		
+		if(vacation.funding_comps_credits){
+			//and convert it into a JSON object for display in the table
+			
+			if(typeof(vacation.funding_comps_credits) == "string")
+				vacation.funding_comps_credits = JSON.parse(vacation.funding_comps_credits);
+			
+			var totalFCC = 0.00;
+			
+			for(var obj in vacation.funding_comps_credits){
+				var fcc_object = vacation.funding_comps_credits[obj];
+				
+				if(fcc_object && fcc_object.value){
+					totalFCC += (parseFloat(fcc_object.value));
+				}
+			}
+			
+			vacation.meta.totalFCC = totalFCC;
+		}
+		
+		//calculate months, weeks, days remaining
+		const tripStartDate = this.getVacationValue(vacation, "trip_start_date", true)
+		
+		vacation.meta.monthsRemaining = "Fill Config";
+		vacation.meta.weeksRemaining = "Fill Config";
+		vacation.meta.daysRemaining = "Fill Config";
+		
+		if(tripStartDate){
+			let dateObj: Date = new Date(tripStartDate);
+			
+			let monthsAway = this.getMonthDiff(dateObj);
+			let weeksAway = this.getWeekDiff(dateObj);
+			let daysAway = this.getDayDiff(dateObj);
+			
+			vacation.meta.monthsRemaining = monthsAway || "Fill Config";
+			vacation.meta.weeksRemaining = weeksAway || "Fill Config";
+			vacation.meta.daysRemaining = daysAway || "Fill Config";
+		}
+		return vacation;
    }
   
   getUserID(): string | null{

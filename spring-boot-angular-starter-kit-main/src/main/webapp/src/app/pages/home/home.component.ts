@@ -28,11 +28,24 @@ export class HomeComponent {
   
   selectedVacation?: Vacation | null = null;
   
+  processSingleVacation(vacation: any){
+  		if(vacation){
+  			vacation.meta = {};
+  			
+  		}
+  }
+  
   processAllVacations(body: any){
+	for(var index = 0; index<body.length; index++){
+		const vacation = body[index];
+		
+		body[index] = this.util.processSingleVacation(vacation);
+	}
+	
 	//Process all vacations returned from the signal
 	
 	//For each vacation object
-	for(var index = 0; index < body.length; index++){
+	/*for(var index = 0; index < body.length; index++){
 		const vacation = body[index];
 		if(vacation){
 			vacation.meta = {};//vacation.meta holds runtime properties such as calculations that do not need storage
@@ -75,7 +88,7 @@ export class HomeComponent {
 			}
 			
 		}
-	}
+	}*/
 	console.log(body);
 	return body;//
   }

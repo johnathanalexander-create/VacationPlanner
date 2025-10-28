@@ -39,7 +39,7 @@ export class TripDashboardComponent {
 		  }
 	  }
 	  saveFCCObject(item:any){
-		console.log(item);
+		//this.util.processSingleVacation(this.selectedVacation);
 	  }
 	  
 	  // The FCC section is powered via JSON. This allows the user to remove a line item from the FCC section
@@ -56,6 +56,9 @@ export class TripDashboardComponent {
 				
 				this.selectedVacation.funding_comps_credits = fcc_objects;
 			}
+			
+			//this.selectedVacation = this.util.processSingleVacation(this.selectedVacation);console.log(this.selectedVacation);
+			
 	  	}
 	  
 	  constructor(private util: WebVacationUtilityService, private vacationService: VacationControllerService, private snackbar: SnackBarService){
@@ -65,20 +68,15 @@ export class TripDashboardComponent {
 		return this.util.getVacationValue(this.selectedVacation as Vacation, str, isConfigItemSearch);
 	  }
 	  
-	  readyToSaveVacation(vacation:Vacation, messageOnError: string) {
+	  _readyToSaveVacation(vacation:Vacation, messageOnError: string) {
 		if(vacation){
-			//vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
+			vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
+			
 			
 			this.vacationService.updateVacation(vacation).subscribe({
 				next:(resp) => {
 					if(resp && resp.body){
-						console.log("type: " + typeof(resp.body) + " / " + typeof(resp.body.funding_comps_credits));
-						console.log(resp.body.funding_comps_credits);
-						//resp.body.funding_comps_credits.replaceAll("\\", "");
-						//resp.body.funding_comps_credits.replaceAll('\\', "");
-						//resp.body.funding_comps_credits = JSON.parse(this.selectedVacation.funding_comps_credits);
-						//this.selectedVacation = resp.body as Vacation;
-						console.log(resp.body); //this.selectedVacation.funding_comps_credits = JSON.parse(this.selectedVacation.funding_comps_credits);
+						this.selectedVacation = this.util.processSingleVacation(resp.body);
 					}
 				},
 				error: (err: any) => {
@@ -88,7 +86,7 @@ export class TripDashboardComponent {
 		}
 	  }
 		
-	  updateVacation(vacation: Vacation, delay: boolean, delayFunction:string, messageOnError: string){
+	  updateVacation(vacation: Vacation, delay: boolean, messageOnError: string){
 		
 		/*if(vacation){
 			this.vacationService.vacationUpdater.vacation = vacation;
@@ -99,11 +97,10 @@ export class TripDashboardComponent {
 			clearTimeout(this.typingTimer);
 			
 			this.typingTimer = setTimeout(() =>{
-				/*if(delayFunction){
-					this[delayFunction]();
-				}*/
-				this.readyToSaveVacation(vacation, messageOnError);
+				this._readyToSaveVacation(vacation, messageOnError);
 			}, this.doneTypingInterval);
+		}else{
+			this._readyToSaveVacation(vacation, messageOnError);
 		}
 		
 	  }
