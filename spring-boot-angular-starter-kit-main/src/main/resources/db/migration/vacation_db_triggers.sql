@@ -53,5 +53,13 @@ BEGIN
 
 END//
 
+CREATE TRIGGER autoactive_user
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+	NEW.account_locked = false;
+	NEW.enabled = true;
+END//
+
 
 DELIMITER ;
