@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.angelokezimana.starter.user.dto.UserDto;
 import com.angelokezimana.starter.user.dto.UserRequestDto;
+import com.angelokezimana.starter.vacationplanner.app.dto.ConfirmationDto;
 import com.angelokezimana.starter.vacationplanner.app.dto.VacationConfigItemDto;
 import com.angelokezimana.starter.vacationplanner.app.dto.VacationDto;
 import com.angelokezimana.starter.vacationplanner.app.dto.VacationRequestDto;
@@ -50,9 +51,10 @@ public class VacationController {
 			System.out.println(d.id() + " / " + d.name() + " / " + d.state() + " / " + d.owner());
 			System.out.println(d.config().id());
 			//Set<VacationConfigItem> items = d.config().getVacationConfigItems();
-			Set<VacationConfigItemDto> items = d.config().configItems();
-			for(VacationConfigItemDto i : items) {
-				System.out.println(i.config_label());
+			//Set<VacationConfigItemDto> items = d.config().configItems();
+			Set<ConfirmationDto> c = d.confirmations();
+			for(ConfirmationDto i : c) {
+				System.out.println(i.confirmationCode());
 			}
 		}
 		return ResponseEntity.ok(list);

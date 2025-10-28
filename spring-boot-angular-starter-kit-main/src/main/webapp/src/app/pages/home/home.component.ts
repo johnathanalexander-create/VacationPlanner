@@ -35,7 +35,7 @@ export class HomeComponent {
   		}
   }
   
-  processAllVacations(body: any){
+  processAllVacations(body: any){console.log(body);
 	for(var index = 0; index<body.length; index++){
 		const vacation = body[index];
 		
