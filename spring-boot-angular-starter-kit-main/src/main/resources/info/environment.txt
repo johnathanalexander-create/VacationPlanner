@@ -1,0 +1,14 @@
+Java v21
+Node.js v22
+npm v10
+Angular CLI v19
+mySQL latest version
+
+run server: spring-boot:run
+
+in src/main/webapp:
+npm install to install dependencies
+ng serve to start client server
+
+SERVER PORT: 8081
+CLIENT PORT: 4200

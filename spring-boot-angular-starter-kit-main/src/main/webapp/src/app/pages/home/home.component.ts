@@ -1,3 +1,4 @@
+
 import {Component, Signal, Input, effect} from '@angular/core';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule, MatButton} from "@angular/material/button";
@@ -14,11 +15,11 @@ import { TripDashboardComponent } from '../../components/vacation/trip-dashboard
 import { PrepaymentsComponent } from '../../components/vacation/prepayments/prepayments.component';
 import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
 import { TripConfigComponent } from '../../components/vacation/trip-config/trip-config.component';
-
+import { ConfirmationsComponent } from '../../components/vacation/confirmations/confirmations.component';
 
 @Component({
     selector: 'app-home',
-    imports: [MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, 
+    imports: [MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
 			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
@@ -76,7 +77,7 @@ export class HomeComponent {
 		}
 	}
 	console.log(body);
-	return body;
+	return body;//
   }
   
   vacations: Signal<Vacation[] | [] | null> = toSignal(this.vacationService.getVacationsByUserId().pipe(

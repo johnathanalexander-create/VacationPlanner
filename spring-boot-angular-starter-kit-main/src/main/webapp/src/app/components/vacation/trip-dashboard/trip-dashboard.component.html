@@ -57,7 +57,7 @@
 				    			<th class="fcc-header">Actions</th>
 				    		</tr>
 		
-					    	<tr class="fcc-row" *ngFor="let item of this.selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
+					    	<tr class="fcc-row" *ngFor="let item of selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
 					    		<td class="fcc-table-cell">{{item.key}}</td>
 					    		<td *ngIf="!item.value['isEditing']" class="fcc-table-cell"><span *ngIf="item.value['value']">$</span>{{item.value["value"]}}</td>
 					    		<td *ngIf="item.value['isEditing']"><input [(ngModel)] = "item.value['value']"/></td>
@@ -113,7 +113,7 @@
 					    	<table class="width-100">
 					    		<thead>
 					    			<tr>
-					    				<th colspan="2" class="general-overview-table-header">Funding Overview</th>
+					    				<th colspan="2" class="general-overview-table-header" style="border-bottom: 2px solid gray;">Funding Overview</th>
 					    			</tr>
 					    		</thead>
 					    		<tbody>
@@ -146,25 +146,25 @@
 					    	<table class="width-100">
 					    		<thead>
 					    			<tr>
-					    				<th colspan="2" class="general-overview-table-header">Trip Status Monitor</th>
+					    				<th colspan="2" class="general-overview-table-header" style="border-bottom: 2px solid gray;">Trip Status Monitor</th>
 					    			</tr>
 					    		</thead>
 					    		<tbody>
 					    			<tr class="">
-					    				<th class="general-overview-side-header">Is Today Trip Day</th>
-					    				<td>asdf</td>
+					    				<th colspan="1" class="general-overview-side-header" style="margin-right: 0px; width: 275px;">Is Today Trip Day</th>
+					    				<td colspan="2" style="background-color: red; border-radius: 25px;"></td>
 					    			</tr>
 					    			<tr>
 					    				<th class="general-overview-side-header">Packing Status</th>
-					    				<td>asdf</td>
+					    				<td colspan="2" style="background-color: red; border-radius: 25px;"></td>
 					    			</tr>
 					    			<tr>
 					    				<th class="general-overview-side-header">Task Status</th>
-					    				<td>asdf</td>
+					    				<td colspan="2" style="background-color: red; border-radius: 25px;"></td>
 					    			</tr>
 					    			<tr>
 					    				<th class="general-overview-side-header">Past Due Tasks</th>
-					    				<td>asdf</td>
+					    				<td colspan="2" style="background-color: red; border-radius: 25px;"></td>
 					    			</tr>
 					    		</tbody>
 					    	</table>

@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import Vacation from '../../models/vacation-planner/vacation.model';
 import VacationConfig from '../../models/vacation-planner/vacation_config.model';
 import VacationConfigItem from '../../models/vacation-planner/vacation_config_item.model';
+import FCC from '../../models/vacation-planner/fcc.model';
 @Injectable({
   providedIn: 'root'
 })
 export class WebVacationUtilityService {
 
-  constructor() { }
+
+  constructor() {
+
+   }
   
   getUserID(): string | null{
 	return localStorage.getItem("userID");
@@ -80,4 +84,57 @@ export class WebVacationUtilityService {
 	return daysDifference;
 	
   }
+  /*processVacation(vacation:Vacation): Vacation{
+	if(vacation){
+		//vacation.meta holds runtime properties such as calculations that do not need storage
+		vacation.meta = {
+			totalFCC: 0.00,
+			monthsRemaining: 0,
+			weeksRemaining: 0,
+			daysRemaining: 0,
+			totalPrepayments: 0,
+			totalPrepaymentCashback: 0
+		}
+		
+		
+		if(vacation.funding_comps_credits){
+			
+			//and convert it into a JSON object for display in the table
+			vacation.fcc = JSON.parse(vacation.funding_comps_credits);
+			
+			var totalFCC = 0.00;
+			
+			for(var obj in vacation.fcc){
+				var fcc_object = vacation.fcc[obj as keyof typeof vacation.fcc];
+				
+				if(fcc_object ){
+					totalFCC += (parseFloat(fcc_object.value));
+				}
+			}
+			
+			vacation.meta.totalFCC = totalFCC;
+		}
+		
+		//calculate months, weeks, days remaining
+		const tripStartDate = this.getVacationValue(vacation, "trip_start_date", true)
+		
+		vacation.meta.monthsRemaining = "Fill Config";
+		vacation.meta.weeksRemaining = "Fill Config";
+		vacation.meta.daysRemaining = "Fill Config";
+		
+		if(tripStartDate){
+			let dateObj: Date = new Date(tripStartDate);
+			
+			let monthsAway = this.getMonthDiff(dateObj);
+			let weeksAway = this.getWeekDiff(dateObj);
+			let daysAway = this.getDayDiff(dateObj);
+			
+			vacation.meta.monthsRemaining = monthsAway || "Fill Config";
+			vacation.meta.weeksRemaining = weeksAway || "Fill Config";
+			vacation.meta.daysRemaining = daysAway || "Fill Config";
+		}
+	}
+	
+	return vacation;
+  }*/
 }

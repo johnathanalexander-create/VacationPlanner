@@ -7,6 +7,8 @@
 	</mat-select>
 </mat-form-field>
 
+<h1 class="inline" *ngIf="selectedVacation">Vacation Planner: <span style="text-decoration: underline;">{{selectedVacation.name}}</span></h1>
+
 <button (click)="delete(selectedVacation)" *ngIf="this.selectedVacation" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">Delete</button>
 
 <ng-container>
@@ -30,7 +32,7 @@
   			<mat-tab label="Prepayments"><app-prepayments [selectedVacation]="selectedVacation"></app-prepayments></mat-tab>
   			<mat-tab label="Budget Dashboard">c</mat-tab>
   			<mat-tab label="Research">d</mat-tab>
-  			<mat-tab label="Confirmations">e</mat-tab>
+  			<mat-tab label="Confirmations"><app-confirmations [selectedVacation]="selectedVacation"></app-confirmations></mat-tab>
   			<mat-tab label="Calendar">f</mat-tab>
   			<mat-tab label="Spa">g</mat-tab>
   			<mat-tab label="Packing">h</mat-tab>
