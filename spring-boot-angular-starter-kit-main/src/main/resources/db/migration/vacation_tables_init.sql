@@ -107,10 +107,12 @@ create table prepayment
 	is_refund_requested boolean,
 	is_refund_received boolean,
 	amount decimal(6,2),
-	payment_source varchar(50),
+	payment_source BIGINT,
 	notes varchar(150),
 	foreign key (vacation_id)
-	references vacation(id) on delete cascade
+	references vacation(id) on delete cascade,
+	foreign key (payment_source)
+	references prepayment_source (id)
 );
 
 create table confirmation(
@@ -130,7 +132,7 @@ create table prepayment_source(
 	id bigint primary key AUTO_INCREMENT,
 	active boolean default true,
 	name varchar(25) not null,
-	cashback_rate decimal
+	cashback_rate decimal(4,3)
 );
 
 

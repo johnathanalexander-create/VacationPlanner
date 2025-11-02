@@ -2,6 +2,8 @@ package com.johnathanalexander.vacationplanner.app.dto;
 
 import java.math.BigDecimal;
 
+import com.johnathanalexander.vacationplanner.app.model.PrepaymentSource;
+
 public record PrepaymentDto (
 			Long id,
 			String description,
@@ -11,7 +13,7 @@ public record PrepaymentDto (
 			boolean isRefundRequested,
 			boolean isRefundReceived,
 			BigDecimal amount,
-			String paymentSource,
+			PrepaymentSource paymentSource,
 			String notes
 		){
 

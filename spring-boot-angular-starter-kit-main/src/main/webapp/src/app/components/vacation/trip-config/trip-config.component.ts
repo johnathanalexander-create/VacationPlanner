@@ -19,7 +19,7 @@ export class TripConfigComponent {
 	displayedColumns:string[] = ["config_label", "config_value", "config_notes"];
 	dataSource:VacationConfigItem[] = []
 	
-	ngOnInit(){
+	/*ngOnInit(){
 		this.fetchData();
 	}
 	
@@ -27,5 +27,5 @@ export class TripConfigComponent {
 		setTimeout(()=>{
 			this.dataSource = this.selectedVacation?.config.configItems ?? [];
 		}, 1000);
-		}
+		}*/
 }

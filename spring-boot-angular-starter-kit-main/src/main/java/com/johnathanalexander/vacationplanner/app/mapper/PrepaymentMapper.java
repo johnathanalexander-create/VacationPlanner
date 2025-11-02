@@ -24,7 +24,7 @@ public class PrepaymentMapper {
 				prepayment.isRefundRequested(),
 				prepayment.isRefundReceived(),
 				prepayment.getAmount(),
-				prepayment.getPayment_source(),
+				prepayment.getPaymentSource(),
 				prepayment.getNotes()
 		);
 	}

@@ -25,19 +25,20 @@ public class Prepayment {
 	private String vendor;
 	
 	@Column()
-	private boolean is_refundable;
+	private boolean is_refundable = false;
 	
 	@Column()
-	private boolean is_refund_requested;
+	private boolean is_refund_requested = false;
 	
 	@Column()
-	private boolean is_refund_received;
+	private boolean is_refund_received = false;
 	
 	@Column()
 	private BigDecimal amount;
 	
-	@Column(length=50)
-	private String payment_source;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="payment_source", nullable=false)
+	private PrepaymentSource payment_source;
 	
 	@Column(length=150)
 	private String notes;
@@ -114,11 +115,11 @@ public class Prepayment {
 		this.amount = amount;
 	}
 
-	public String getPayment_source() {
+	public PrepaymentSource getPaymentSource() {
 		return payment_source;
 	}
 
-	public void setPayment_source(String payment_source) {
+	public void setPaymentSource(PrepaymentSource payment_source) {
 		this.payment_source = payment_source;
 	}
 

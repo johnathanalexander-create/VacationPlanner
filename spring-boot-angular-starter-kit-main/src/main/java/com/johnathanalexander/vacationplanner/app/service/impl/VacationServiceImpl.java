@@ -94,7 +94,7 @@ public class VacationServiceImpl implements VacationService{
 			newPrepayment.setIsRefundRequested(prepaymentDto.isRefundRequested());
 			newPrepayment.setIsRefundReceived(prepaymentDto.isRefundReceived());
 			newPrepayment.setAmount(prepaymentDto.amount());
-			newPrepayment.setPayment_source(prepaymentDto.paymentSource());
+			newPrepayment.setPaymentSource(prepaymentDto.paymentSource());
 			newPrepayment.setNotes(prepaymentDto.notes());
 			prepayments.add(newPrepayment);
 		}

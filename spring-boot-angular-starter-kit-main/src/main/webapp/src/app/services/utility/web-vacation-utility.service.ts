@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import Vacation from '../../models/vacation-planner/vacation.model';
 import VacationConfig from '../../models/vacation-planner/vacation_config.model';
 import VacationConfigItem from '../../models/vacation-planner/vacation_config_item.model';
+import Prepayment from '../../models/vacation-planner/prepayment.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,6 @@ export class WebVacationUtilityService {
    processSingleVacation(vacation: any){
 		if(vacation){
 			vacation.meta = {};
-			
 		}
 		
 		if(vacation.funding_comps_credits){
@@ -54,6 +54,25 @@ export class WebVacationUtilityService {
 			vacation.meta.monthsRemaining = monthsAway || "Fill Config";
 			vacation.meta.weeksRemaining = weeksAway || "Fill Config";
 			vacation.meta.daysRemaining = daysAway || "Fill Config";
+		}
+		
+		/*Process Prepayments*/
+		if(vacation.prepayments.length > 0){
+			//for(var obj in vacation.prepayments){
+			for(var count = 0; count < vacation.prepayments.length; count++){
+				const prepayment = vacation.prepayments[count];
+				prepayment.meta = {};
+				
+				const prepaymentAmount = prepayment.amount;
+				const prepaymentCashbackRate = prepayment.paymentSource.cashbackRate;
+				
+				if(prepaymentAmount > 0 && prepaymentCashbackRate > 0.00){
+					prepayment.meta.cashback = prepaymentAmount * prepaymentCashbackRate;
+					prepayment.meta.amountTooltip = "Cashback for this prepayment is $" + prepayment.meta.cashback;
+					prepayment.meta.paymentSourceTooltip = "Cashback rate is " + (prepaymentCashbackRate * 100) + "%";
+				}
+				vacation.prepayments[count] = prepayment;
+			}
 		}
 		return vacation;
    }

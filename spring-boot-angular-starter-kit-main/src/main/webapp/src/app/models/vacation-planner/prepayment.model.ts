@@ -1,3 +1,4 @@
+import PrepaymentSource from '../../models/vacation-planner/prepayment_source.model';
 
 export default interface Prepayment{
 	id: number,
@@ -8,6 +9,11 @@ export default interface Prepayment{
 	isRefundRequested: boolean,
 	isRefundReceived: boolean,
 	amount: number,
-	paymentSource: string,
-	notes: string
+	paymentSource: PrepaymentSource,
+	notes: string,
+	meta:{
+		cashback: 0,
+		amountTooltip: "",
+		paymentSourceTooltip: ""
+	}
 }
