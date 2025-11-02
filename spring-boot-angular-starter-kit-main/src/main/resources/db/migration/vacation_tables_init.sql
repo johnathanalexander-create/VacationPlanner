@@ -1,3 +1,4 @@
+drop table if exists prepayment_source;
 drop table if exists confirmation;
 drop table if exists task;
 drop table if exists task_group;
@@ -125,7 +126,12 @@ create table confirmation(
 	references vacation(id)
 );
 
-
+create table prepayment_source(
+	id bigint primary key AUTO_INCREMENT,
+	active boolean default true,
+	name varchar(25) not null,
+	cashback_rate decimal
+);
 
 
 

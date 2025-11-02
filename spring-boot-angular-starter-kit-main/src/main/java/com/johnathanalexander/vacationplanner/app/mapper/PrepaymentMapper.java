@@ -4,7 +4,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentDto;
+import com.johnathanalexander.vacationplanner.app.dto.PrepaymentSourceDto;
 import com.johnathanalexander.vacationplanner.app.model.Prepayment;
+import com.johnathanalexander.vacationplanner.app.model.PrepaymentSource;
 
 public class PrepaymentMapper {
 	public static Set<PrepaymentDto> toPrepaymentListDTO(Set<Prepayment> prepayments){
@@ -24,6 +26,15 @@ public class PrepaymentMapper {
 				prepayment.getAmount(),
 				prepayment.getPayment_source(),
 				prepayment.getNotes()
+		);
+	}
+	
+	public static PrepaymentSourceDto toPrepaymentSourceDTO(PrepaymentSource source) {
+		return new PrepaymentSourceDto(
+				source.getId(),
+				source.isActive(),
+				source.getName(),
+				source.getCashbackRate()
 		);
 	}
 }

@@ -9,27 +9,24 @@
 
 <h1 class="inline" *ngIf="selectedVacation">Vacation Planner: <span style="text-decoration: underline;">{{selectedVacation.name}}</span></h1>
 
-<button (click)="delete(selectedVacation)" *ngIf="this.selectedVacation" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">Delete</button>
+<!-- Component Control Panel -->
+<button (click)="generateModal(modals.prepayments)" *ngIf="currentTab=='prepayments'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Prepayment</button>
+<button *ngIf="currentTab=='confirmations'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Confirmation</button>
+<button *ngIf="currentTab=='spa'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Spa Treatment</button>
+<button *ngIf="currentTab=='task'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Task</button>
+<button *ngIf="currentTab=='trip_dashboard'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New FCC</button>
+
+<button class="control-panel-button" (click)="delete(selectedVacation)" *ngIf="this.selectedVacation" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">Delete</button>
 
 <ng-container>
-  <!-- <mat-toolbar class="post-list-mat-toolbar">
-    <mat-toolbar-row>
-        @defer( when !loading()){
-	        <select [(ngModel)]="selectedVacation" name="vacationSelect">
-	        	<option *ngFor="let option of vacations()" [ngValue] ="option">{{option.name}}</option>
-	        </select>
-	        
-	        
-        }
-    </mat-toolbar-row>
 
-  </mat-toolbar>-->
   <div class="card-container">
   
   	@if(selectedVacation){
-  		<mat-tab-group >
+  		<mat-tab-group (selectedTabChange)="onTabChange($event)">
   			<mat-tab label="Trip Dashboard"><app-trip-dashboard [selectedVacation] ="selectedVacation"></app-trip-dashboard></mat-tab>
   			<mat-tab label="Prepayments"><app-prepayments [selectedVacation]="selectedVacation"></app-prepayments></mat-tab>
+  			
   			<mat-tab label="Budget Dashboard">c</mat-tab>
   			<mat-tab label="Research">d</mat-tab>
   			<mat-tab label="Confirmations"><app-confirmations [selectedVacation]="selectedVacation"></app-confirmations></mat-tab>

@@ -16,17 +16,60 @@ import { PrepaymentsComponent } from '../../components/vacation/prepayments/prep
 import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
 import { TripConfigComponent } from '../../components/vacation/trip-config/trip-config.component';
 import { ConfirmationsComponent } from '../../components/vacation/confirmations/confirmations.component';
+import { MatDialog } from '@angular/material/dialog';
+import {PrepaymentModalComponent} from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
 
 @Component({
     selector: 'app-home',
     imports: [MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
-			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton],
+			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton, PrepaymentModalComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   
   selectedVacation?: Vacation | null = null;
+  
+  currentTab: string = "";
+  
+  modals = {
+	prepayments: {
+		title: 'test',
+		message:'message'
+	}
+  }
+  
+  //Identifies the current tab for control-panel button changes
+  onTabChange(evt: any): void{
+	const tabs:any = {
+		0: "trip_dashboard",
+		1: "prepayments",
+		2: "budget",
+		3: "research",
+		4: "confirmations",
+		5: "calendar",
+		6: "spa",
+		7: "packing",
+		8: "task",
+		9: "trip_analysis",
+		10: "config"
+	};
+	
+	this.currentTab = tabs[evt.index];
+  }
+  
+  generateModal(content: any): void{
+	const dialog = this.dialog.open(PrepaymentModalComponent, {
+		width: '750px',
+		data: {
+			name: 'John Doe'
+		}
+	});
+	
+	dialog.afterClosed().subscribe(result=>{
+		console.log(result);
+	})
+  }
   
   processSingleVacation(vacation: any){
   		if(vacation){
@@ -107,7 +150,7 @@ export class HomeComponent {
   
   loading:Signal<boolean> = toSignal(this.vacationService.loadingStatus(), {initialValue:true});
 
-  constructor(private vacationService: VacationControllerService, private util: WebVacationUtilityService) {
+  constructor(private vacationService: VacationControllerService, private util: WebVacationUtilityService, public dialog: MatDialog) {
 	this.vacationService.getVacationsByUserId();
   }
 }

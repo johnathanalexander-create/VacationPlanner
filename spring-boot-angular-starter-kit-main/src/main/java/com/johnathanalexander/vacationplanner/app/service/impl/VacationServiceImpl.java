@@ -43,9 +43,6 @@ public class VacationServiceImpl implements VacationService{
 	public List<VacationDto> getAllVacationsByOwner(Long id) {
 		List<Vacation> vacationList = vacationRepository.getAllVacationsByOwner(id);
 		
-		
-		
-		System.out.println(vacationList.get(0).toString());
 		return vacationList.stream().map(vacation -> {
 			return VacationMapper.toVacationDto(vacation);
 		}).collect(Collectors.toList());
