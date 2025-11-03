@@ -67,9 +67,20 @@ export class SidebarComponent {
 		        {name: 'Roles', link: '/admin/roles', icon: 'group', submenu: []},
 		        {name: 'Users', link: '/admin/users', icon: 'person', submenu: []}
 		      ]
-		    }
+		}
+		
+		var prepaymentMenuItem = {
+			name: 'Prepayments',
+			link: '',
+			icon: 'admin_panel_settings',
+			submenu: [
+				{name: 'Manage Sources', link: '', icon: 'card', submenu: []},
+				{name: 'Manage Types', link: '', icon: 'card', submenu: []}
+			]
+		}
 		
 		this.menuItems.push(adminMenuItem);
+		this.menuItems.push(prepaymentMenuItem);
 	}
   }
   

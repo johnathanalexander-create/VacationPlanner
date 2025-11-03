@@ -25,44 +25,44 @@
 				
 				<mat-form-field appearance="outline" class="form-field mt-2">
 	       			<mat-label>Type</mat-label>
-	       			<mat-select formControlName="type">
-	       				<mat-option>
+	       			<mat-select formControlName="type" value="selectedValue">
+	       				<mat-option value="Flight">
 	       					Flight
 	       				</mat-option>
 	       				
-	       				<mat-option>
+	       				<mat-option value="Hotel">
 	       					Hotel
 	       				</mat-option>
 	       				
-	       				<mat-option>
+	       				<mat-option value="Vacation Package">
 	       					Vacation Package
 	       				</mat-option>
 	       				
-	       				<mat-option>
+	       				<mat-option value="Show Ticket">
 	       					Show Ticket
 	       				</mat-option>
 	       				
-	       				<mat-option>
+	       				<mat-option value="General Travel">
 	       					General Travel
 	       				</mat-option>
 	       				
-	       				<mat-option>
+	       				<mat-option value="Dining Experience">
 	       					Dining Experience
 	       				</mat-option>
 	       				
-	       				<mat-option>
+	       				<mat-option value="Spa/Salon">
 	       					Spa/Salon
 	       				</mat-option>
 	       				
-	       				<mat-option>
+	       				<mat-option value="Other">
 	       					Other
 	       				</mat-option>
 	       				
-	       				<mat-option>
+	       				<mat-option value="Awaiting Refund">
 	       					Awaiting Refund
 	       				</mat-option>
 	       				
-	       				<mat-option>
+	       				<mat-option value="Refunded">
 	       					Refunded
 	       				</mat-option>
 	       				
@@ -90,7 +90,7 @@
 	       			<mat-label>Payment Source</mat-label>
 	       			<mat-select formControlName="paymentSource">
 	       				
-	       				<mat-option *ngFor="let option of activePrepaymentSources">
+	       				<mat-option *ngFor="let option of activePrepaymentSources" [value] = "option">
 	       					{{option.name}}
 	       				</mat-option>
 	       				
