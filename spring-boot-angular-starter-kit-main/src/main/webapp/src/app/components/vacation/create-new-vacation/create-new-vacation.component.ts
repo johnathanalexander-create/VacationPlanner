@@ -32,12 +32,11 @@ export class CreateNewVacationComponent {
 		const vacationData = {
 			...this.vacationFormGroup.value
 		};
-		console.log(vacationData);
 		
 		this.service.saveVacation(vacationData as Vacation)
 			.subscribe({
 				next: (result: HttpResponse<Vacation> | null | undefined) => {
-					alert("woo!");
+					
 				},
 				error: (error: HttpErrorResponse) => {
 					console.log("error: " + vacationData.name);

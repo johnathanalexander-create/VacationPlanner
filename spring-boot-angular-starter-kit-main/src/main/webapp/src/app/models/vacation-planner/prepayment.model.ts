@@ -2,6 +2,7 @@ import PrepaymentSource from '../../models/vacation-planner/prepayment_source.mo
 
 export default interface Prepayment{
 	id: number,
+	vacation_id: number,
 	description: string,
 	type: string,
 	vendor: string,

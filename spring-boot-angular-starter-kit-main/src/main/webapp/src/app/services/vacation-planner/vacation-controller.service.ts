@@ -8,6 +8,7 @@ import {toObservable} from "@angular/core/rxjs-interop";
 import {tap} from "rxjs/operators";
 import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
 import PrepaymentSource from '../../models/vacation-planner/prepayment_source.model';
+import Prepayment from '../../models/vacation-planner/prepayment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,7 @@ export class VacationControllerService {
 	getAllPrepaymentSources(): Observable<HttpResponse<PrepaymentSource[]>>{
 		return this.http.get("/api/v1/prepayment/getPrepaymentSources");
 	}
-	
+	createNewPrepayment(newPrepayment: any):Observable<HttpResponse<Prepayment | null | undefined>>{
+		return this.http.post("/api/v1/prepayment", newPrepayment as Prepayment);
+	}
 }

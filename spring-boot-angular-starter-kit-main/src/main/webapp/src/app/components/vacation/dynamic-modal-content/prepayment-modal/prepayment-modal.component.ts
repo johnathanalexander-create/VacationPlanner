@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Inject, Component } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -11,6 +11,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {VacationControllerService} from '../../../../services/vacation-planner/vacation-controller.service';
 import PrepaymentSource from '../../../../models/vacation-planner/prepayment_source.model';
 import { CommonModule } from '@angular/common';
+import Prepayment from '../../../../models/vacation-planner/prepayment.model';
+import {HttpResponse} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-prepayment-modal',
@@ -20,12 +23,13 @@ import { CommonModule } from '@angular/common';
 })
 export class PrepaymentModalComponent {
 	newPrepaymentFormGroup = this.formBuilder.group({
+		vacation_id: [this.modalInputData.vacation_id, []],
 		description: ['', [Validators.required, Validators.maxLength(100)]],
-		type: ['', [Validators.required]],
+		type: ['', []],
 		vendor: ['', [Validators.required]],
-		refundable: ['', []],
+		isRefundable: ['', []],
 		amount: ['', [Validators.required]],
-		payment_source: ['', [Validators.required]],
+		paymentSource: ['', []],
 	});
 	
 	activePrepaymentSources: PrepaymentSource[] | null = [];
@@ -52,10 +56,11 @@ export class PrepaymentModalComponent {
 	constructor(public dialogRef: MatDialogRef<PrepaymentModalComponent>,
 				private formBuilder: FormBuilder,
 				private formValidationService: FormValidationService,
-				private vacationService: VacationControllerService){}
+				private vacationService: VacationControllerService,
+				@Inject(MAT_DIALOG_DATA) public modalInputData: any){}
 				
 	saveNewPrepayment(){
-		
+
 	}
 	
 	isFieldInvalid(name: string): boolean | undefined {

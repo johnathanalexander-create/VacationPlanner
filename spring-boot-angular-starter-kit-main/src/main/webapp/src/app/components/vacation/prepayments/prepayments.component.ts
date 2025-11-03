@@ -15,7 +15,7 @@ export class PrepaymentsComponent {
 	
 	@Input()
 	set selectedVacation(value: Vacation){
-		this.dataSource.data = value.prepayments;console.log("val");console.log(value.prepayments);
+		this.dataSource.data = value.prepayments;
 	}
 	
 	displayedColumns:string[] = ["description", "type", "vendor", "isRefundable", 

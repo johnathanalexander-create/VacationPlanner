@@ -16,7 +16,7 @@ import { PrepaymentsComponent } from '../../components/vacation/prepayments/prep
 import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
 import { TripConfigComponent } from '../../components/vacation/trip-config/trip-config.component';
 import { ConfirmationsComponent } from '../../components/vacation/confirmations/confirmations.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PrepaymentModalComponent} from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
 
 @Component({
@@ -31,13 +31,6 @@ export class HomeComponent {
   selectedVacation?: Vacation | null = null;
   
   currentTab: string = "";
-  
-  modals = {
-	prepayments: {
-		title: 'test',
-		message:'message'
-	}
-  }
   
   //Identifies the current tab for control-panel button changes
   onTabChange(evt: any): void{
@@ -58,13 +51,20 @@ export class HomeComponent {
 	this.currentTab = tabs[evt.index];
   }
   
-  generateModal(content: any): void{
-	const dialog = this.dialog.open(PrepaymentModalComponent, {
+  generateModal(): void{
+	/*const dialog = this.dialog.open(PrepaymentModalComponent, {
 		width: '750px',
 		data: {
-			name: 'John Doe'
+			vacation_id: this.selectedVacation.id
 		}
-	});
+	});*/
+	
+	const dialogConfig = new MatDialogConfig();
+	dialogConfig.data = {
+		vacation_id: this.selectedVacation?.id
+	}
+	
+	const dialog = this.dialog.open(PrepaymentModalComponent, dialogConfig);
 	
 	dialog.afterClosed().subscribe(result=>{
 		console.log(result);
