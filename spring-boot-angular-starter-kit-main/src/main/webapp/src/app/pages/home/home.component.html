@@ -1,16 +1,9 @@
 
 
-<!--<mat-form-field>
-	<mat-label>Select Vacation Planner</mat-label>
-	<mat-select [(value)]="selectedVacation">
-		<mat-option *ngFor="let option of vacations()" [value]="option">{{option.name}}</mat-option>
-	</mat-select>
-</mat-form-field>-->
-
 <mat-form-field>
 	<mat-label>Select Vacation Planner</mat-label>
 	<mat-select (selectionChange)="setSelectedVacation($event)">
-		<mat-option *ngFor="let option of vacationList" [value]="option" id="{{option.key}}">{{option.value}}</mat-option>
+		<mat-option *ngFor="let option of vacationList" [value]="option">{{option.value}}</mat-option>
 	</mat-select>
 </mat-form-field>
 
@@ -44,91 +37,9 @@
   			<mat-tab label="Trip Analysis">j</mat-tab>
   			<mat-tab label="Config"><app-trip-config [selectedVacation]="selectedVacation"></app-trip-config></mat-tab>
   		</mat-tab-group>
+  	}@else{
+  		
   	}
-  	
-  	
-  
-  
-
-
-    <!-- <ng-container>
-      @defer (when !loading()) {
-        @if ((posts() ?? []).length > 0) {
-          @for (post of posts(); track post.id) {
-            <app-post-card [post]="post"/>
-          }
-        } @else {
-          <app-no-posts-found/>
-        }
-      } @loading {
-        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
-          <app-post-card-skeleton/>
-        }
-      } @placeholder {
-        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
-          <app-post-card-skeleton/>
-        }
-      }
-    </ng-container>-->
-    <!-- <ng-container>
-      @defer (when !loading()) {
-        @if ((vacations() ?? []).length > 0) {
-        	<div id="time_remaining_section">
-	        	<div class="x_remaining" id="months_remaining">
-	        		<div class="x_remaining_header">
-	        			Months Remaining
-	        		</div>
-	        		<div class="x_remaining_body">
-	        			6.77
-	        		</div>
-	        	</div>
-	        	<div class="x_remaining" id="weeks_remaining">
-	        		<div class="x_remaining_header">
-	        			Weeks Remaining
-	        		</div>
-	        		<div class="x_remaining_body">
-	        			29.43
-	        		</div>
-	        	</div>
-	        	<div class="x_remaining" id="days_remaining">
-	        		<div class="x_remaining_header">
-	        			Days Remaining
-	        		</div>
-	        		<div class="x_remaining_body">
-	        			206
-	        		</div>
-	        	</div>
-	        </div>
-        -->
-
-        
-          <!-- @for (v of vacations(); track v.id) {
-            <p>ID: {{v.id}}</p>
-            <p>Name: {{v.name}}</p>
-            <p>State: {{v.state}}</p>
-            <p>Owner: {{v.owner}}</p>
-            <p>Vacation Config: {{v.config}}</p>
-            <p>VacationConfig ID: {{v.config.id}}</p>
-            
-            @for( ci of v.config.configItems; track ci.id){
-            	<p>{{ci.config_name}}</p>
-            	<p>{{ci.config_value}}</p>
-            }
-            
-          }-->
-        <!-- } @else {
-          <p>did not find vacations</p>
-        }
-      } @loading {
-        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
-          <p>something3</p>
-        }
-      } @placeholder {
-        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
-          <p>something4</p>
-        }
-      }
-    </ng-container>-->
 
   </div>
 </ng-container>
