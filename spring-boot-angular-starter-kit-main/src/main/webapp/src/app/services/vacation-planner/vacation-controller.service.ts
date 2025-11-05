@@ -25,6 +25,15 @@ export class VacationControllerService {
   updateVacation(vacation: Vacation):Observable<HttpResponse<Vacation> | null | undefined>{
 	return this.http.put('/api/v1/vacation', vacation);
   }
+  getVacationListByUserID(): Observable<HttpResponse<Map<number, string> | null | undefined>>{
+	this.loading.set(true);
+	return this.http.get("/api/v1/vacation/list/" + this.util.getUserID()).pipe(
+		tap(() => this.loading.set(false))
+	);
+  }
+  getVacationByID(vacation_id:number): Observable<HttpResponse<Vacation>>{
+	return this.http.get("/api/v1/vacation/getVacation/" + vacation_id);
+  }
   getVacationsByUserId(): Observable<HttpResponse<Vacation[]>>{
 	this.loading.set(true);
 	

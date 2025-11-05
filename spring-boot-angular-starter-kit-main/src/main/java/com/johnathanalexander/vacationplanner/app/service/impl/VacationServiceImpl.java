@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,6 +41,12 @@ public class VacationServiceImpl implements VacationService{
 		this.vacationRepository = vacationRepository;
 		this.userRepository = userRepository;
 	}
+	
+	public VacationDto getVacationById(Long id) {
+		Optional<Vacation> vacation = vacationRepository.findById(id);
+		
+		return VacationMapper.toVacationDto(vacation.get());
+	}
 
 	public List<VacationDto> getAllVacationsByOwner(Long id) {
 		List<Vacation> vacationList = vacationRepository.getAllVacationsByOwner(id);
@@ -46,6 +54,12 @@ public class VacationServiceImpl implements VacationService{
 		return vacationList.stream().map(vacation -> {
 			return VacationMapper.toVacationDto(vacation);
 		}).collect(Collectors.toList());
+	}
+	
+	public List<Map<String, Object>> getVacationListByOwner(Long id){
+		List<Map<String, Object>> map =  vacationRepository.getVacationListByOwner(id);
+		System.out.println(map.toString());
+		return map;
 	}
 
 	@PreAuthorize("hasPermission('USER', 'CREATE')")

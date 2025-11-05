@@ -30,6 +30,7 @@ export class HomeComponent {
   
   selectedVacation?: Vacation | null = null;
   
+  vacationList?: Array<any>;
   currentTab: string = "";
   
   //Identifies the current tab for control-panel button changes
@@ -136,12 +137,36 @@ export class HomeComponent {
 	return body;//
   }
   
-  vacations: Signal<Vacation[] | [] | null> = toSignal(this.vacationService.getVacationsByUserId().pipe(
+  processVacationList(body:any){
+	
+	this.vacationList = body;
+	
+	return body;
+  }
+  setSelectedVacation(evt:any){
+	this.vacationService.getVacationByID(evt.value.key).subscribe({
+		next:(resp) =>{
+			this.selectedVacation = this.util.processSingleVacation(resp.body);
+		},
+		error:(err:any) =>{
+			
+		}
+	});
+  }
+  
+  vacations: Signal<Vacation[] | [] | null> = toSignal(this.vacationService.getVacationListByUserID().pipe(
+  	map(response => this.processVacationList(response.body))
+  		
+  	), {initialValue: []}
+
+  );
+  
+  /*vacations: Signal<Vacation[] | [] | null> = toSignal(this.vacationService.getVacationsByUserId().pipe(
 	map(response => this.processAllVacations(response.body))
 		
 	), {initialValue: []}
 
-  );
+  );*/
   delete(vacation: Vacation){
 	
   }

@@ -2,7 +2,9 @@ package com.johnathanalexander.vacationplanner.app.web;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,24 @@ public class VacationController {
         VacationDto vacationDTO = vacationService.createVacation(vacationRequestDTO, principal.getName());
         return ResponseEntity.ok(vacationDTO);
     }
+	
+	@GetMapping("/list/{id}")
+	private ResponseEntity<List<Map<String, Object>>> getListOfVacationsByOwnerID(@PathVariable("id") Long id){
+		List<Map<String, Object>> vacationMap = vacationService.getVacationListByOwner(id);
+		for(var count = 0; count < vacationMap.size(); count++) {
+			Map<String, Object> map = vacationMap.get(count);
+			
+			
+		}
+		return ResponseEntity.ok(vacationMap);
+	}
+	
+	@GetMapping("/getVacation/{id}")
+	private ResponseEntity<VacationDto> findVacationById(@PathVariable("id") Long id){
+		VacationDto dto = vacationService.getVacationById(id);
+		
+		return ResponseEntity.ok(dto);
+	}
 	
 	@GetMapping("/{id}")
 	private ResponseEntity<List<VacationDto>> findAll(@PathVariable("id") Long id){

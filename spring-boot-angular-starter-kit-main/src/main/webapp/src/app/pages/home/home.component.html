@@ -1,11 +1,19 @@
 
 
-<mat-form-field>
+<!--<mat-form-field>
 	<mat-label>Select Vacation Planner</mat-label>
 	<mat-select [(value)]="selectedVacation">
 		<mat-option *ngFor="let option of vacations()" [value]="option">{{option.name}}</mat-option>
 	</mat-select>
+</mat-form-field>-->
+
+<mat-form-field>
+	<mat-label>Select Vacation Planner</mat-label>
+	<mat-select (selectionChange)="setSelectedVacation($event)">
+		<mat-option *ngFor="let option of vacationList" [value]="option" id="{{option.key}}">{{option.value}}</mat-option>
+	</mat-select>
 </mat-form-field>
+
 
 <h1 class="inline" *ngIf="selectedVacation">Vacation Planner: <span style="text-decoration: underline;">{{selectedVacation.name}}</span></h1>
 
