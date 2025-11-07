@@ -7,5 +7,6 @@ public record VacationConfigItemDto(
 			String config_value,
 			String config_notes,
 			boolean primary_config,
-			boolean required
+			boolean required,
+			byte order
 		) {}

@@ -18,6 +18,7 @@ import { TripConfigComponent } from '../../components/vacation/trip-config/trip-
 import { ConfirmationsComponent } from '../../components/vacation/confirmations/confirmations.component';
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PrepaymentModalComponent} from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
+import {VacationProcessorService} from '../../services/vacation-processor/vacation-processor.service';
 
 @Component({
     selector: 'app-home',
@@ -69,7 +70,7 @@ export class HomeComponent {
 	for(var index = 0; index<body.length; index++){
 		const vacation = body[index];
 		
-		body[index] = this.util.processSingleVacation(vacation);
+		body[index] = this.processor.processSingleVacation(vacation);
 	}
 
 	return body;
@@ -84,7 +85,9 @@ export class HomeComponent {
   setSelectedVacation(evt:any){
 	this.vacationService.getVacationByID(evt.value.key).subscribe({
 		next:(resp) =>{
-			this.selectedVacation = this.util.processSingleVacation(resp.body);
+			this.processor.processSingleVacation(resp.body).then(stuff =>{
+				this.selectedVacation = stuff;
+			});
 		},
 		error:(err:any) =>{
 			
@@ -113,7 +116,7 @@ export class HomeComponent {
   
   loading:Signal<boolean> = toSignal(this.vacationService.loadingStatus(), {initialValue:true});
 
-  constructor(private vacationService: VacationControllerService, private util: WebVacationUtilityService, public dialog: MatDialog) {
+  constructor(private vacationService: VacationControllerService, private util: WebVacationUtilityService, public dialog: MatDialog, private processor: VacationProcessorService) {
 	this.vacationService.getVacationsByUserId();
   }
 }

@@ -16,7 +16,7 @@ export class TripConfigComponent {
 		this.dataSource = value.config.configItems;
 	}
 	
-	displayedColumns:string[] = ["config_label", "config_value", "config_notes"];
+	displayedColumns:string[] = ["config_label", "config_value", "config_notes", "order"];
 	dataSource:VacationConfigItem[] = []
 	
 	/*ngOnInit(){

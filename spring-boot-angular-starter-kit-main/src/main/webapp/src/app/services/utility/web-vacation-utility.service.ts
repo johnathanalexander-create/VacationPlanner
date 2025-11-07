@@ -3,6 +3,7 @@ import Vacation from '../../models/vacation-planner/vacation.model';
 import VacationConfig from '../../models/vacation-planner/vacation_config.model';
 import VacationConfigItem from '../../models/vacation-planner/vacation_config_item.model';
 import Prepayment from '../../models/vacation-planner/prepayment.model';
+import {VacationProcessorService} from '../vacation-processor/vacation-processor.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,70 +12,6 @@ export class WebVacationUtilityService {
 
   constructor() {
 
-   }
-   
-   processSingleVacation(vacation: any){
-		if(vacation){
-			vacation.meta = {};
-		}
-		
-		if(vacation.funding_comps_credits){
-			//and convert it into a JSON object for display in the table
-			
-			if(typeof(vacation.funding_comps_credits) == "string")
-				vacation.funding_comps_credits = JSON.parse(vacation.funding_comps_credits);
-			
-			var totalFCC = 0.00;
-			
-			for(var obj in vacation.funding_comps_credits){
-				var fcc_object = vacation.funding_comps_credits[obj];
-				
-				if(fcc_object && fcc_object.value){
-					totalFCC += (parseFloat(fcc_object.value));
-				}
-			}
-			
-			vacation.meta.totalFCC = totalFCC;
-		}
-		
-		//calculate months, weeks, days remaining
-		const tripStartDate = this.getVacationValue(vacation, "trip_start_date", true)
-		
-		vacation.meta.monthsRemaining = "Fill Config";
-		vacation.meta.weeksRemaining = "Fill Config";
-		vacation.meta.daysRemaining = "Fill Config";
-		
-		if(tripStartDate){
-			let dateObj: Date = new Date(tripStartDate);
-			
-			let monthsAway = this.getMonthDiff(dateObj);
-			let weeksAway = this.getWeekDiff(dateObj);
-			let daysAway = this.getDayDiff(dateObj);
-			
-			vacation.meta.monthsRemaining = monthsAway || "Fill Config";
-			vacation.meta.weeksRemaining = weeksAway || "Fill Config";
-			vacation.meta.daysRemaining = daysAway || "Fill Config";
-		}
-		
-		/*Process Prepayments*/
-		if(vacation.prepayments.length > 0){
-			//for(var obj in vacation.prepayments){
-			for(var count = 0; count < vacation.prepayments.length; count++){
-				const prepayment = vacation.prepayments[count];
-				prepayment.meta = {};
-				
-				const prepaymentAmount = prepayment.amount;
-				const prepaymentCashbackRate = prepayment.paymentSource.cashbackRate;
-				
-				if(prepaymentAmount > 0 && prepaymentCashbackRate > 0.00){
-					prepayment.meta.cashback = prepaymentAmount * prepaymentCashbackRate;
-					prepayment.meta.amountTooltip = "Cashback for this prepayment is $" + prepayment.meta.cashback;
-					prepayment.meta.paymentSourceTooltip = "Cashback rate is " + (prepaymentCashbackRate * 100) + "%";
-				}
-				vacation.prepayments[count] = prepayment;
-			}
-		}
-		return vacation;
    }
   
   getUserID(): string | null{
@@ -144,61 +81,10 @@ export class WebVacationUtilityService {
 	const differenceInMilliseconds: number = date.getTime() - today.getTime();
 
 	const daysDifference: number = Math.ceil(differenceInMilliseconds / oneDayInMilliseconds);
+	
+	console.log(daysDifference);
 
 	return daysDifference;
 	
   }
-  /*processVacation(vacation:Vacation): Vacation{
-	if(vacation){
-		//vacation.meta holds runtime properties such as calculations that do not need storage
-		vacation.meta = {
-			totalFCC: 0.00,
-			monthsRemaining: 0,
-			weeksRemaining: 0,
-			daysRemaining: 0,
-			totalPrepayments: 0,
-			totalPrepaymentCashback: 0
-		}
-		
-		
-		if(vacation.funding_comps_credits){
-			
-			//and convert it into a JSON object for display in the table
-			vacation.fcc = JSON.parse(vacation.funding_comps_credits);
-			
-			var totalFCC = 0.00;
-			
-			for(var obj in vacation.fcc){
-				var fcc_object = vacation.fcc[obj as keyof typeof vacation.fcc];
-				
-				if(fcc_object ){
-					totalFCC += (parseFloat(fcc_object.value));
-				}
-			}
-			
-			vacation.meta.totalFCC = totalFCC;
-		}
-		
-		//calculate months, weeks, days remaining
-		const tripStartDate = this.getVacationValue(vacation, "trip_start_date", true)
-		
-		vacation.meta.monthsRemaining = "Fill Config";
-		vacation.meta.weeksRemaining = "Fill Config";
-		vacation.meta.daysRemaining = "Fill Config";
-		
-		if(tripStartDate){
-			let dateObj: Date = new Date(tripStartDate);
-			
-			let monthsAway = this.getMonthDiff(dateObj);
-			let weeksAway = this.getWeekDiff(dateObj);
-			let daysAway = this.getDayDiff(dateObj);
-			
-			vacation.meta.monthsRemaining = monthsAway || "Fill Config";
-			vacation.meta.weeksRemaining = weeksAway || "Fill Config";
-			vacation.meta.daysRemaining = daysAway || "Fill Config";
-		}
-	}
-	
-	return vacation;
-  }*/
 }

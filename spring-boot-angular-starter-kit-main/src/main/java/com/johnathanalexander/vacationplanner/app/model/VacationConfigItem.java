@@ -32,6 +32,9 @@ public class VacationConfigItem {
 	@Column()
 	private boolean required;
 	
+	@Column()
+	private byte order;
+	
 	
 	@Override
 	public String toString() {
@@ -116,5 +119,15 @@ public class VacationConfigItem {
 
 	public void setRequired(boolean required) {
 		this.required = required;
+	}
+
+
+	public byte getOrder() {
+		return order;
+	}
+
+
+	public void setOrder(byte order) {
+		this.order = order;
 	}
 }

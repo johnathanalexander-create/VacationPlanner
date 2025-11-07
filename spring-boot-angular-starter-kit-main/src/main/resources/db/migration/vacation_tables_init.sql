@@ -39,6 +39,7 @@ create table vacation_config_item
     config_notes varchar(50),
     primary_config boolean default false,
     required boolean default false,
+	`order` tinyint,
     foreign key (vacation_config_id)
     references vacation_config(id) on delete cascade
 );
@@ -93,7 +94,8 @@ create table default_config_item
 	notes varchar(50),
 	primary_config boolean default false,
 	required boolean default false,
-	active boolean default true
+	active boolean default true,
+	`order` tinyint
 );
 
 create table prepayment

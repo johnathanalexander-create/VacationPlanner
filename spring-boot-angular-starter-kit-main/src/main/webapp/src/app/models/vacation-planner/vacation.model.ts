@@ -19,6 +19,7 @@ export default interface Vacation{
 		weeksRemaining: 0,
 		daysRemaining: 0,
 		totalPrepayments: 0,
-		totalPrepaymentCashback: 0
+		totalPrepaymentCashback: 0,
+		fo_main_funding:0
 	}
 }

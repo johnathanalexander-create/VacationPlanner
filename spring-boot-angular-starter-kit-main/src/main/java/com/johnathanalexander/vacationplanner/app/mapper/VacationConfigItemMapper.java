@@ -20,7 +20,8 @@ public class VacationConfigItemMapper {
 				configItem.getConfigValue(),
 				configItem.getConfig_notes(),
 				configItem.isPrimary_config(),
-				configItem.isRequired()
+				configItem.isRequired(),
+				configItem.getOrder()
 		);
 				
 	}

@@ -16,6 +16,6 @@ public interface VacationRepository extends JpaRepository<Vacation, Long>{
 	@Query("SELECT v FROM Vacation v JOIN User u ON v.owner=u.id WHERE v.owner=:owner_id")
 	List<Vacation> getAllVacationsByOwner(@Param("owner_id") Long owner_id);
 	
-	@Query("SELECT new map(v.name AS value, v.id AS key) FROM Vacation v where v.owner=:owner_id")
+	@Query("SELECT new map(v.name AS value, v.id AS key) FROM Vacation v where v.owner=:owner_id and v.state != 'Cancelled'")
 	List<Map<String, Object>> getVacationListByOwner(@Param("owner_id") Long owner_id);
 }

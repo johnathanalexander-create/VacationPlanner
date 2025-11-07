@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {VacationControllerService} from "../../../services/vacation-planner/vacation-controller.service";
 import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
+import {VacationProcessorService} from '../../../services/vacation-processor/vacation-processor.service';
 
 @Component({
   selector: 'app-trip-dashboard',
@@ -61,22 +62,24 @@ export class TripDashboardComponent {
 			
 	  	}
 	  
-	  constructor(private util: WebVacationUtilityService, private vacationService: VacationControllerService, private snackbar: SnackBarService){
+	  constructor(private util: WebVacationUtilityService, private vacationService: VacationControllerService, private snackbar: SnackBarService, private processor: VacationProcessorService){
 		
 	  }
 	  getValue(str: string, isConfigItemSearch: boolean){
 		return this.util.getVacationValue(this.selectedVacation as Vacation, str, isConfigItemSearch);
 	  }
 	  
-	  _readyToSaveVacation(vacation:Vacation, messageOnError: string) {
+	  async _readyToSaveVacation(vacation:Vacation, messageOnError: string) {
 		if(vacation){
 			vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
 			
 			
-			this.vacationService.updateVacation(vacation).subscribe({
+			await this.vacationService.updateVacation(vacation).subscribe({
 				next:(resp) => {
 					if(resp && resp.body){
-						this.selectedVacation = this.util.processSingleVacation(resp.body);
+						this.processor.processSingleVacation(resp.body).then(stuff => {
+							this.selectedVacation = stuff;
+						});
 					}
 				},
 				error: (err: any) => {

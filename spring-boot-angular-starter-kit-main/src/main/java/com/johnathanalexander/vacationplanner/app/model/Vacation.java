@@ -28,7 +28,7 @@ public class Vacation {
 	private Set<Prepayment> prepayments = new HashSet<>();
 	
 	@Column()
-	private String funding_comps_credits;
+	private String funding_comps_credits = "{\"Main Funding\":{\"value\":\"\",\"isEditing\":\"\"},\"Estimated Upcoming Funding\":{\"value\":\"\",\"isEditing\":false}}";
 	
 	@Column
 	private String notes;

@@ -29,7 +29,7 @@ export class PrepaymentModalComponent {
 		vendor: ['', [Validators.required]],
 		isRefundable: ['', []],
 		amount: ['', [Validators.required]],
-		paymentSource: ['', []],
+		paymentSource: ['', [Validators.required]],
 	});
 	
 	activePrepaymentSources: PrepaymentSource[] | null = [];

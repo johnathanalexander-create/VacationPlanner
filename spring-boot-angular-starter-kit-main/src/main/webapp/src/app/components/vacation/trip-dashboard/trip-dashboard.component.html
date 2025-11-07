@@ -16,7 +16,7 @@
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Estimated Trip Package Price</th>
-			 							<td class="trip-overview-tr align-center">NEEDS TO BE UPDATED</td>
+			 							<td class="trip-overview-tr align-center">BD Needed</td>
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Primary Flight Carrier</th>
@@ -119,23 +119,23 @@
 					    		<tbody>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Main Funding</th>
-						    			<td>$333.26</td>
+						    			<td>${{selectedVacation.meta.fo_main_funding}}</td>
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Prepayments</th>
-						    			<td>$333.26</td>
+						    			<td>${{selectedVacation.meta.totalPrepayments || 0.00}}</td>
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Credit Card Funding</th>
-						    			<td>$333.26</td>
+						    			<td>BD needed</td>
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Total Funding</th>
-						    			<td>$333.26</td>
+						    			<td>BD needed</td>
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Estimated Cost</th>
-						    			<td>$333.26</td>
+						    			<td>BD needed</td>
 						    		</tr>
 					    		</tbody>
 					    		
@@ -178,7 +178,6 @@
 		 		<div id="bottom">
 			 		<div id="notes" class="margin-top-15">
 				    	<mat-form-field id="trip-planner-notes" appearance="fill">
-				    		<mat-label>Trip Planner Notes</mat-label>
 				    		<textarea [(ngModel)]="selectedVacation.notes" (keyup) = "updateVacation(selectedVacation, true, 'Unable to update trip planner notes')" cdkTextareaAutosize style="resize: none" matInput>{{selectedVacation.notes}}</textarea>
 				    	</mat-form-field>
 				    </div>

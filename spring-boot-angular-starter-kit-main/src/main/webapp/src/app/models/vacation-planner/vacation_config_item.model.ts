@@ -8,4 +8,5 @@ export default interface VacationConfigItem{
 	config_notes: string;
 	primary_config: boolean;
 	required: boolean;
+	order: number;
 }
