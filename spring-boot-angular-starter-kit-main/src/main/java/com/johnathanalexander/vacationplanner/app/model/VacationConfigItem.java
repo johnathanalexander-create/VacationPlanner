@@ -33,7 +33,7 @@ public class VacationConfigItem {
 	private boolean required;
 	
 	@Column()
-	private byte order;
+	private byte config_order;
 	
 	
 	@Override
@@ -123,11 +123,11 @@ public class VacationConfigItem {
 
 
 	public byte getOrder() {
-		return order;
+		return config_order;
 	}
 
 
 	public void setOrder(byte order) {
-		this.order = order;
+		this.config_order = order;
 	}
 }

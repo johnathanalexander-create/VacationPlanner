@@ -179,7 +179,7 @@ export class VacationProcessorService {
 		var trip_package = this._processEstimatedTripPackagePrice();
 		
 		const results = await Promise.all([fcc, time, prepayments, funding_overview, trip_package]);
-		return new Promise((resolve)=>{
+		return new Promise((resolve)=>{console.log(this.vacation);
 			resolve(this.vacation);
 		});
 		

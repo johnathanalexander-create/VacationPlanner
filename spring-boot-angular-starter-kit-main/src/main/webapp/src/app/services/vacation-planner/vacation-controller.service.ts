@@ -9,7 +9,7 @@ import {tap} from "rxjs/operators";
 import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
 import PrepaymentSource from '../../models/vacation-planner/prepayment_source.model';
 import Prepayment from '../../models/vacation-planner/prepayment.model';
-
+import ConfigItem from '../../models/vacation-planner/vacation_config_item.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -61,5 +61,10 @@ export class VacationControllerService {
 	}
 	createNewPrepayment(newPrepayment: any):Observable<HttpResponse<Prepayment | null | undefined>>{
 		return this.http.post("/api/v1/prepayment", newPrepayment as Prepayment);
+	}
+	
+	/*CONFIG API REQUESTS*/
+	saveConfigItem(configItem:ConfigItem){
+		return this.http.put("/api/v1/vacationConfigItem/saveVacationConfigItem", configItem);
 	}
 }

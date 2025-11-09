@@ -14,7 +14,10 @@
   	</ng-container>
   	<ng-container matColumnDef="config_value">
     	<th mat-header-cell *matHeaderCellDef> Value </th>
-    	<td mat-cell *matCellDef="let element" class="primary-config-{{element.primary_config}} required-config-{{element.required}}"> {{element.config_value}} </td>
+    	<td (dblclick)="toggleEditMode(element, '')" mat-cell *matCellDef="let element" class="primary-config-{{element.primary_config}} required-config-{{element.required}}">
+	    	 <span *ngIf="!element.is_editing">{{element.config_value}}</span>
+	    	 <span *ngIf="element.is_editing"><input type="text" class="form-control" style="width: 100%" value="{{element.config_value}}" #configInput (keydown.enter)="toggleEditMode(element, configInput.value)"></span>
+    	 </td>
   	</ng-container>
   	<ng-container matColumnDef="config_notes">
     	<th mat-header-cell *matHeaderCellDef> Notes </th>

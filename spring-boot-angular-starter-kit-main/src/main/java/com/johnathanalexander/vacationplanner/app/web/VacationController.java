@@ -86,4 +86,5 @@ public class VacationController {
 		
 		return ResponseEntity.ok(dto);
 	}
+	
 }
