@@ -204,7 +204,7 @@ export class VacationProcessorService {
   
   
   
-  async processSingleVacation(vacation: any): Promise<Vacation>{
+  async processSingleVacation(vacation: any): Promise<any>{
   		if(vacation){
   			vacation.meta = {};
   		}
@@ -223,6 +223,6 @@ export class VacationProcessorService {
 			console.log(this.vacation);
 			resolve(this.vacation);
 		});
-     }
+  }
   
 }

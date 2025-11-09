@@ -25,7 +25,8 @@
   
   	@if(selectedVacation){
   		<mat-tab-group (selectedTabChange)="onTabChange($event)">
-  			<mat-tab label="Trip Dashboard"><app-trip-dashboard [selectedVacation] ="selectedVacation"></app-trip-dashboard></mat-tab>
+  			<!-- <mat-tab label="Trip Dashboard"><app-trip-dashboard [selectedVacation] ="selectedVacation"></app-trip-dashboard></mat-tab>-->
+  			<mat-tab label="Trip Dashboard"><app-trip-dashboard></app-trip-dashboard></mat-tab>
   			<mat-tab label="Prepayments"><app-prepayments [selectedVacation]="selectedVacation"></app-prepayments></mat-tab>
   			<mat-tab label="Budget Dashboard">c</mat-tab>
   			<mat-tab label="Research">d</mat-tab>

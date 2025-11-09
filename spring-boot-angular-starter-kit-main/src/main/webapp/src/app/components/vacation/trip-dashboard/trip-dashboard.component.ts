@@ -13,6 +13,8 @@ import {MatInputModule} from '@angular/material/input';
 import {VacationControllerService} from "../../../services/vacation-planner/vacation-controller.service";
 import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 import {VacationProcessorService} from '../../../services/vacation-processor/vacation-processor.service';
+import {VacationUpdaterService} from '../../../services/vacation-updater/vacation-updater.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-trip-dashboard',
@@ -22,14 +24,33 @@ import {VacationProcessorService} from '../../../services/vacation-processor/vac
 })
 export class TripDashboardComponent {
 	
-	//[key: string]: any;
+	//@Input() selectedVacation?: Vacation | null = null;
+	selectedVacation?: Vacation | null = null;
 	
-	@Input() selectedVacation?: Vacation | null = null;
+	private dataSubscription: Subscription | undefined;
 	
 	/* Used to allow a delay on certain areas of the vacation updater */
 	textAreaContent: string = '';
 	typingTimer: any;
 	doneTypingInterval: number = 5000;
+	
+	
+	constructor(private util: WebVacationUtilityService,
+				private vacationService: VacationControllerService,
+				private snackbar: SnackBarService,
+				private processor: VacationProcessorService,
+				private vacationUpdater: VacationUpdaterService){}
+				
+				
+	ngOnInit(){
+		this.dataSubscription = this.vacationUpdater.sharedData$.subscribe(data=>{
+			console.log("new thing happening");console.log(data);
+			this.selectedVacation = data;
+		});
+	}
+	ngOnDestroy(){
+		this.dataSubscription?.unsubscribe();
+	}
 
 	  
 	  
@@ -62,9 +83,7 @@ export class TripDashboardComponent {
 			
 	  	}
 	  
-	  constructor(private util: WebVacationUtilityService, private vacationService: VacationControllerService, private snackbar: SnackBarService, private processor: VacationProcessorService){
-		
-	  }
+	  
 	  getValue(str: string, isConfigItemSearch: boolean){
 		return this.util.getVacationValue(this.selectedVacation as Vacation, str, isConfigItemSearch);
 	  }

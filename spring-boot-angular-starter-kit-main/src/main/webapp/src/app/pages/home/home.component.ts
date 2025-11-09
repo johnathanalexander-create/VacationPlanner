@@ -19,6 +19,8 @@ import { ConfirmationsComponent } from '../../components/vacation/confirmations/
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PrepaymentModalComponent} from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
 import {VacationProcessorService} from '../../services/vacation-processor/vacation-processor.service';
+import {VacationUpdaterService} from '../../services/vacation-updater/vacation-updater.service';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-home',
@@ -31,8 +33,27 @@ export class HomeComponent {
   
   selectedVacation?: Vacation | null = null;
   
+  private dataSubscription: Subscription | undefined;
+  
   vacationList?: Array<any>;
   currentTab: string = "";
+  
+  constructor(private vacationService: VacationControllerService,
+			  private util: WebVacationUtilityService,
+			  public dialog: MatDialog,
+			  private processor: VacationProcessorService,
+		  	  private vacationUpdater: VacationUpdaterService) {
+  	this.vacationService.getVacationsByUserId();
+  }
+  
+  ngOnInit(){
+	this.dataSubscription = this.vacationUpdater.sharedData$.subscribe(data=>{console.log("home updater");console.log(data);
+		this.selectedVacation = data;
+	});
+  }
+  ngOnDestroy(){
+	this.dataSubscription?.unsubscribe();
+  }
   
   //Identifies the current tab for control-panel button changes
   onTabChange(evt: any): void{
@@ -82,17 +103,16 @@ export class HomeComponent {
 	
 	return body;
   }
+  
   setSelectedVacation(evt:any){
-	this.vacationService.getVacationByID(evt.value.key).subscribe({
-		next:(resp) =>{
-			this.processor.processSingleVacation(resp.body).then(stuff =>{
-				this.selectedVacation = stuff;
-			});
-		},
-		error:(err:any) =>{
-			
-		}
-	});
+  	this.vacationService.getVacationByID(evt.value.key).subscribe({
+  		next:(resp) =>{
+  			this.vacationUpdater.updateVacation(resp.body);
+  		},
+  		error:(err:any) =>{
+  			
+  		}
+  	});
   }
   
   vacations: Signal<Vacation[] | [] | null> = toSignal(this.vacationService.getVacationListByUserID().pipe(
@@ -116,7 +136,5 @@ export class HomeComponent {
   
   loading:Signal<boolean> = toSignal(this.vacationService.loadingStatus(), {initialValue:true});
 
-  constructor(private vacationService: VacationControllerService, private util: WebVacationUtilityService, public dialog: MatDialog, private processor: VacationProcessorService) {
-	this.vacationService.getVacationsByUserId();
-  }
+  
 }

@@ -4,6 +4,8 @@ import Vacation from '../../../models/vacation-planner/vacation.model';
 import VacationConfigItem from '../../../models/vacation-planner/vacation_config_item.model';
 import { CommonModule } from '@angular/common';
 import {VacationControllerService} from '../../../services/vacation-planner/vacation-controller.service';
+import {VacationUpdaterService} from '../../../services/vacation-updater/vacation-updater.service';
+
 
 
 @Component({
@@ -18,7 +20,7 @@ export class TripConfigComponent {
 		this.dataSource = value.config.configItems;
 	}
 	
-	constructor(private service: VacationControllerService){}
+	constructor(private service: VacationControllerService, private vacationUpdater: VacationUpdaterService){}
 	
 	
 	displayedColumns:string[] = ["config_label", "config_value", "config_notes", "order"];
@@ -50,6 +52,8 @@ export class TripConfigComponent {
 					next:(resp) => {
 						console.log("updated config");
 						console.log(resp);
+						
+						this.vacationUpdater.updateVacation(resp.body);
 					}
 				});
 			}
