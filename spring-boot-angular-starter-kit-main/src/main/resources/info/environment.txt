@@ -1,3 +1,5 @@
+See this Github for issues: https://github.com/angelokezimana/spring-boot-angular-starter-kit
+
 Java v21
 Node.js v22
 npm v10
@@ -12,3 +14,16 @@ ng serve to start client server
 
 SERVER PORT: 8081
 CLIENT PORT: 4200
+
+NEXT STEPS:
+
+Execute the following SQL scripts in mySQL in the following order:
+	1. V1_first_migration.sql
+	2. V2_init_data.sql
+	3. vacation_tables_init.sql
+	4. vacation_db_data.sql
+	5. vacation_db_triggers.sql
+	
+There is now one test user ready to go.
+username: admin@gmail.com
+password: password

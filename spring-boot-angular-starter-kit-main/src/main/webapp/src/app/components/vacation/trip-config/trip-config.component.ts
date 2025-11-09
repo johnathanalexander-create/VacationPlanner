@@ -24,7 +24,7 @@ export class TripConfigComponent {
 	displayedColumns:string[] = ["config_label", "config_value", "config_notes", "order"];
 	dataSource:VacationConfigItem[] = []
 	
-	toggleEditMode(element:any, newValue:string){alert(newValue);
+	toggleEditMode(element:any, newValue:string){
 		var save = false;
 		if(element){
 			
@@ -39,22 +39,17 @@ export class TripConfigComponent {
 				
 				this.dataSource.forEach(function(value, index, array){
 					if(value.id == element.id){
-						console.log("value");console.log(value);console.log("end of value");
-						console.log("before array");console.log(array);console.log("done before array");
 						value.config_value = newValue;
 						
 						array[index] = value;
-						
-						console.log("after array");
-						console.log(array);
-						console.log("done after array");
 					}
 				});
 				
 				//Need to send api request
 				this.service.saveConfigItem(element).subscribe({
 					next:(resp) => {
-						
+						console.log("updated config");
+						console.log(resp);
 					}
 				});
 			}

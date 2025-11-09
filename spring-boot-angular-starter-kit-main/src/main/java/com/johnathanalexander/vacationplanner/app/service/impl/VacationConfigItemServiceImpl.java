@@ -4,9 +4,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.johnathanalexander.vacationplanner.app.dto.VacationConfigItemDto;
+import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.exception.VacationConfigItemNotFoundException;
+import com.johnathanalexander.vacationplanner.app.mapper.VacationMapper;
+import com.johnathanalexander.vacationplanner.app.model.Vacation;
 import com.johnathanalexander.vacationplanner.app.model.VacationConfigItem;
 import com.johnathanalexander.vacationplanner.app.repository.VacationConfigItemRepository;
+import com.johnathanalexander.vacationplanner.app.repository.VacationRepository;
 import com.johnathanalexander.vacationplanner.app.service.VacationConfigItemService;
 
 @Service
@@ -14,13 +18,15 @@ import com.johnathanalexander.vacationplanner.app.service.VacationConfigItemServ
 public class VacationConfigItemServiceImpl implements VacationConfigItemService {
 	
 	private final VacationConfigItemRepository repository;
+	private final VacationRepository vacationRepository;
 	
-	public VacationConfigItemServiceImpl(VacationConfigItemRepository repository) {
+	public VacationConfigItemServiceImpl(VacationConfigItemRepository repository, VacationRepository vacationRepository) {
 		this.repository = repository;
+		this.vacationRepository = vacationRepository;
 	}
 
-	public void saveVacationConfigItem(VacationConfigItemDto dto) {
-		VacationConfigItem item = repository.findById(dto.id())
+	public VacationDto saveVacationConfigItem(VacationConfigItemDto dto) {
+		/*VacationConfigItem item = repository.findById(dto.id())
 				.orElseThrow(()-> VacationConfigItemNotFoundException.forId(dto.id()));
 		
 		System.out.println("JWSA: " + item.getConfigKey());
@@ -29,7 +35,11 @@ public class VacationConfigItemServiceImpl implements VacationConfigItemService 
 		item.setConfigValue(dto.config_value());
 		
 		
-		repository.save(item);
+		repository.save(item);*/
+		
+		Vacation vacation = vacationRepository.getVacationByConfigItem(dto.id());
+
+		return VacationMapper.toVacationDto(vacation);
 	}
 
 }

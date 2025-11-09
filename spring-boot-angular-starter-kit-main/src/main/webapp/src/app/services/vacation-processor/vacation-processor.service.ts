@@ -16,9 +16,11 @@ export class VacationProcessorService {
 	"time":"not_started",
 	"prepayments":"not_started",
 	"funding_overview":"not_started",
-	"package":"not_started"
+	"package":"not_started",
+	"tsm":"not_started"
   }
   
+  //Process funding, comps, & credits
   async _processFCC(): Promise<string>{
 	
 	if(!this.vacation){
@@ -51,6 +53,8 @@ export class VacationProcessorService {
 		resolve(this.processStatus.fcc);
 	});
   }
+  
+  //Process days, weeks, and months remaining
   async _processDaysWeeksMonthsRemaining(): Promise<string>{
 	
 	if(!this.vacation){
@@ -64,10 +68,9 @@ export class VacationProcessorService {
 	this.vacation.meta.monthsRemaining = "Fill Config";
 	this.vacation.meta.weeksRemaining = "Fill Config";
 	this.vacation.meta.daysRemaining = "Fill Config";
-	console.log("start date debugging");
+	
 	if(tripStartDate){
-		let dateObj: Date = new Date(tripStartDate);console.log(dateObj);
-		
+		let dateObj: Date = new Date(tripStartDate);		
 		let monthsAway = this.utility.getMonthDiff(dateObj);
 		let weeksAway = this.utility.getWeekDiff(dateObj);
 		let daysAway = this.utility.getDayDiff(dateObj);
@@ -84,6 +87,7 @@ export class VacationProcessorService {
 	});
   }
   
+  //Process prepayments and prepayment cashback
   async _processPrepayments(): Promise<string>{
 	if(!this.vacation){
 		this.processStatus.prepayments = "error";
@@ -119,6 +123,7 @@ export class VacationProcessorService {
 	});
   }
   
+  //Process the funding overview section
   async _processFundingOverview(): Promise<string>{
 	if(!this.vacation){
 		this.processStatus.funding_overview = "error";
@@ -151,12 +156,46 @@ export class VacationProcessorService {
 	});
   }
   
+  //Calculate the estimated trip package price.
   async _processEstimatedTripPackagePrice(): Promise<string>{//Needs the budget dashboard first
 	if(!this.vacation){
 		this.processStatus.package = "error";
 	}
 	this.processStatus.package = "in_progress";
 	this.processStatus.package = "complete";
+	
+	return new Promise((resolve)=>{
+		resolve(this.processStatus.package);
+	});
+  }
+  
+  //Process the trip status monitor triggers
+  async _processTripStatusMonitor(): Promise<string>{
+	
+	const oneDayMS = 86400000;
+	const sevenDaysMS = oneDayMS * 7;
+	
+	//Is Today Trip Day
+	const startDate = this.utility.getVacationValue(this.vacation, "trip_start_date", true);
+	
+	var startDateObject = new Date(startDate);
+	startDateObject.setHours(0,0,0,0);
+	
+	var today = new Date();
+	today.setHours(0,0,0,0);
+	
+	const diff = Math.abs(startDateObject.getTime() - today.getTime());
+	
+	this.vacation.meta.tsm_istodaytripday_stylecolor = "red";
+	
+	if(diff >= oneDayMS && diff <= sevenDaysMS){
+		this.vacation.meta.tsm_istodaytripday_stylecolor = "yellow";
+	}
+	if(diff >= 0 && diff < oneDayMS){
+		this.vacation.meta.tsm_istodaytripday_stylecolor = "green";
+	}
+	
+	//End Is Today Trip Day
 	
 	return new Promise((resolve)=>{
 		resolve(this.processStatus.package);
@@ -177,19 +216,13 @@ export class VacationProcessorService {
   		var prepayments = this._processPrepayments();
 		var funding_overview = this._processFundingOverview();
 		var trip_package = this._processEstimatedTripPackagePrice();
+		var tsm = this._processTripStatusMonitor();
 		
-		const results = await Promise.all([fcc, time, prepayments, funding_overview, trip_package]);
-		return new Promise((resolve)=>{console.log(this.vacation);
+		const results = await Promise.all([fcc, time, prepayments, funding_overview, trip_package, tsm]);
+		return new Promise((resolve)=>{
+			console.log(this.vacation);
 			resolve(this.vacation);
 		});
-		
-		/*try{
-			
-			console.log(results);
-			
-		}catch(error:any){
-			console.log(error);
-		}*/
      }
   
 }

@@ -81,8 +81,6 @@ export class WebVacationUtilityService {
 	const differenceInMilliseconds: number = date.getTime() - today.getTime();
 
 	const daysDifference: number = Math.ceil(differenceInMilliseconds / oneDayInMilliseconds);
-	
-	console.log(daysDifference);
 
 	return daysDifference;
 	

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.johnathanalexander.vacationplanner.app.dto.VacationConfigItemDto;
+import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.service.VacationConfigItemService;
 
 @RestController
@@ -21,10 +22,11 @@ public class VacationConfigItemController {
 		this.service = service;
 	}
 	
+	/*TODO: Need to update this for incoming param to be a VacationConfigItemRequestDto and response as VacationConfigItemDto*/
 	@PutMapping("/saveVacationConfigItem")
-	private ResponseEntity saveVacationConfigItem(@RequestBody VacationConfigItemDto dto) {
-		service.saveVacationConfigItem(dto);
-		return ResponseEntity.ok(null);
+	private ResponseEntity<VacationDto> saveVacationConfigItem(@RequestBody VacationConfigItemDto dto) {
+		VacationDto vacationDto = service.saveVacationConfigItem(dto);
+		return ResponseEntity.ok(vacationDto);
 	}
 
 }

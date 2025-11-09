@@ -20,6 +20,7 @@ export default interface Vacation{
 		daysRemaining: 0,
 		totalPrepayments: 0,
 		totalPrepaymentCashback: 0,
-		fo_main_funding:0
+		fo_main_funding:0,
+		tsm_istodaytripday_stylecolor: "red"
 	}
 }
