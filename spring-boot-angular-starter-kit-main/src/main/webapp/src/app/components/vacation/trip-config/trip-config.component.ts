@@ -28,7 +28,7 @@ export class TripConfigComponent implements AfterViewInit{
 	constructor(private service: VacationControllerService, private vacationUpdater: VacationUpdaterService){}
 	
 	
-	displayedColumns:string[] = ["config_label", "config_value", "config_notes", "order"];
+	displayedColumns:string[] = ["config_label", "config_value", "config_notes"];
 	
 	@ViewChild(MatSort) sort!: MatSort;
 	
