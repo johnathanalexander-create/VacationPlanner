@@ -1,3 +1,4 @@
+drop table if exists spa;
 drop table if exists prepayment_source;
 drop table if exists confirmation;
 drop table if exists task;
@@ -135,6 +136,18 @@ create table prepayment_source(
 	active boolean default true,
 	name varchar(25) not null,
 	cashback_rate decimal(4,3)
+);
+
+create table spa(
+	id bigint primary key AUTO_INCREMENT,
+	vacation_id bigint not null,
+	description varchar(75) not null,
+	location varchar(100) not null,
+	treatment_date varchar(10) not null,
+	treatment_time varchar(10),
+	price decimal(6,2),
+	foreign key (vacation_id)
+	references vacation(id) on delete cascade
 );
 
 

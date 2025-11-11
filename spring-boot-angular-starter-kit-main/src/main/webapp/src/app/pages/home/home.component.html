@@ -1,6 +1,6 @@
 
 
-<mat-form-field>
+<mat-form-field id="vacation-planner-selector">
 	<mat-label>Select Vacation Planner</mat-label>
 	<mat-select (selectionChange)='setSelectedVacation($event, -1)'>
 		<mat-option *ngFor="let option of vacationList" [value]="option">{{option.value}}</mat-option>

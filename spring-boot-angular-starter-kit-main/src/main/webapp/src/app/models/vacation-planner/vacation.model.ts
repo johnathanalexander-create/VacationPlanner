@@ -2,6 +2,7 @@
 import VacationConfig from './vacation_config.model';
 import Prepayment from './prepayment.model';
 import Confirmation from './confirmation.model';
+import Spa from './spa.model';
 
 export default interface Vacation{
 	id: number;
@@ -11,6 +12,7 @@ export default interface Vacation{
 	notes: string;
 	config: VacationConfig,
 	prepayments: Prepayment[],
+	spas: Spa[],
 	funding_comps_credits:{},
 	confirmations: Confirmation[],
 	meta:{

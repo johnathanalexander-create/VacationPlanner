@@ -14,6 +14,7 @@ public record VacationDto(
 							String notes,
 							VacationConfigDto config,
 							Set<PrepaymentDto> prepayments,
+							Set<SpaDto> spas,
 							String funding_comps_credits,
 							Set<ConfirmationDto> confirmations
 						 ) {

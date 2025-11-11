@@ -27,6 +27,9 @@ public class Vacation {
 	@OneToMany(mappedBy="vacation_id", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<Prepayment> prepayments = new HashSet<>();
 	
+	@OneToMany(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Set<Spa> spas = new HashSet<>();
+	
 	@Column()
 	private String funding_comps_credits = "{\"Main Funding\":{\"value\":\"\",\"isEditing\":\"\"},\"Estimated Upcoming Funding\":{\"value\":\"\",\"isEditing\":false}}";
 	
@@ -115,5 +118,13 @@ public class Vacation {
 
 	public void setConfirmations(Set<Confirmation> confirmations) {
 		this.confirmations = confirmations;
+	}
+
+	public Set<Spa> getSpas() {
+		return spas;
+	}
+
+	public void setSpas(Set<Spa> spas) {
+		this.spas = spas;
 	}
 }
