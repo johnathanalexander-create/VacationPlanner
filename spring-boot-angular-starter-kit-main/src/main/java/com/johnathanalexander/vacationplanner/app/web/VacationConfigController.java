@@ -13,12 +13,12 @@ import com.johnathanalexander.vacationplanner.app.service.VacationConfigItemServ
 
 @RestController
 @RequestMapping("/api/v1/vacationConfigItem")
-public class VacationConfigItemController {
+public class VacationConfigController {
 	
 	private final VacationConfigItemService service;
 	
 	@Autowired
-	public VacationConfigItemController(VacationConfigItemService service) {
+	public VacationConfigController(VacationConfigItemService service) {
 		this.service = service;
 	}
 	

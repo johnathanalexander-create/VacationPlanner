@@ -8,11 +8,12 @@ import {VacationUpdaterService} from '../../../services/vacation-updater/vacatio
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ViewChild, AfterViewInit } from '@angular/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
   selector: 'app-trip-config',
-  imports: [MatTableModule, CommonModule, MatSort],
+  imports: [MatTableModule, CommonModule, MatSort, MatTooltipModule],
   templateUrl: './trip-config.component.html',
   styleUrl: './trip-config.component.scss'
 })

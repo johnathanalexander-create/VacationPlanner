@@ -61,5 +61,12 @@ BEGIN
 	NEW.enabled = true;
 END//
 
+CREATE TRIGGER trip_state_generator_insert
+AFTER INSERT on vacation_config_item
+FOR EACH ROW
+BEGIN
+	IF strcmp(NEW.config_value, "trip_start_date")=1, , "")
+END//
+
 
 DELIMITER ;
