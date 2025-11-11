@@ -95,7 +95,7 @@ create table default_config_item
 	primary_config boolean default false,
 	required boolean default false,
 	active boolean default true,
-	`order` tinyint
+	config_order tinyint
 );
 
 create table prepayment

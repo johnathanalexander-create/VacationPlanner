@@ -101,11 +101,27 @@ export class HomeComponent {
 	
 	this.vacationList = body;
 	
+	if(this.vacationList?.length == 1){
+		var vacationID = this.vacationList[0].key;
+		
+		console.log('attempting');
+		
+		this.setSelectedVacation(null, vacationID);
+	}
+	
 	return body;
   }
   
-  setSelectedVacation(evt:any){
-  	this.vacationService.getVacationByID(evt.value.key).subscribe({
+  setSelectedVacation(evt:any, vacationID:number){
+	
+	var id = vacationID;
+	
+	if(evt || vacationID == -1){
+		id = evt.value.key;
+	}
+	
+
+  	this.vacationService.getVacationByID(id).subscribe({
   		next:(resp) =>{
   			this.vacationUpdater.updateVacation(resp.body);
   		},

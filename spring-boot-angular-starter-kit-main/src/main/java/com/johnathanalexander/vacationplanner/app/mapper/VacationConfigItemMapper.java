@@ -21,7 +21,7 @@ public class VacationConfigItemMapper {
 				configItem.getConfig_notes(),
 				configItem.isPrimary_config(),
 				configItem.isRequired(),
-				configItem.getOrder()
+				configItem.getConfigOrder()
 		);
 				
 	}

@@ -122,12 +122,12 @@ public class VacationConfigItem {
 	}
 
 
-	public byte getOrder() {
+	public byte getConfigOrder() {
 		return config_order;
 	}
 
 
-	public void setOrder(byte order) {
-		this.config_order = order;
+	public void setConfigOrder(byte config_order) {
+		this.config_order = config_order;
 	}
 }
