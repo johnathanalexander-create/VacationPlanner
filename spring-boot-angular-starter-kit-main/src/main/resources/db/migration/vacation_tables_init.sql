@@ -1,3 +1,4 @@
+drop table if exists budget_item;
 drop table if exists spa;
 drop table if exists prepayment_source;
 drop table if exists confirmation;
@@ -146,6 +147,18 @@ create table spa(
 	treatment_date varchar(10) not null,
 	treatment_time varchar(10),
 	price decimal(6,2),
+	foreign key (vacation_id)
+	references vacation(id) on delete cascade
+);
+
+create table budget_item(
+	id bigint primary key AUTO_INCREMENT,
+	vacation_id bigint not null,
+	item varchar(75) unique not null,
+	amount decimal(7,2),
+	amount_goal decimal(7,2),
+	cash_requirement decimal(5,0),
+	notes varchar(150),
 	foreign key (vacation_id)
 	references vacation(id) on delete cascade
 );

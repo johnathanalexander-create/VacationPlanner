@@ -30,6 +30,9 @@ public class Vacation {
 	@OneToMany(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<Spa> spas = new HashSet<>();
 	
+	@OneToMany(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Set<BudgetItem> budgetItems = new HashSet<>();
+	
 	@Column()
 	private String funding_comps_credits = "{\"Main Funding\":{\"value\":\"\",\"isEditing\":\"\"},\"Estimated Upcoming Funding\":{\"value\":\"\",\"isEditing\":false}}";
 	
@@ -126,5 +129,13 @@ public class Vacation {
 
 	public void setSpas(Set<Spa> spas) {
 		this.spas = spas;
+	}
+
+	public Set<BudgetItem> getBudgetItems() {
+		return budgetItems;
+	}
+
+	public void setBudgetItems(Set<BudgetItem> budgetItems) {
+		this.budgetItems = budgetItems;
 	}
 }

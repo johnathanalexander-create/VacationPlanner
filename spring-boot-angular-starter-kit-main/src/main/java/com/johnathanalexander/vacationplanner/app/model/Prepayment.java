@@ -12,7 +12,7 @@ public class Prepayment {
 	private Long id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="vacation_id", nullable=true)
+	@JoinColumn(name="vacation_id")
 	private Vacation vacation_id;
 	
 	@Column(length=100, nullable=false)

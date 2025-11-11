@@ -13,6 +13,7 @@ public class VacationMapper {
 			vacation.getNotes(),
 			vacation.getVacationConfig() != null ? (VacationConfigMapper.toVacationConfigDTO(vacation.getVacationConfig())) : null,
 			vacation.getPrepayments() != null ? (PrepaymentMapper.toPrepaymentListDTO(vacation.getPrepayments())) : null,
+			vacation.getBudgetItems() != null ? (BudgetItemMapper.toBudgetItemListDTO(vacation.getBudgetItems())) : null,
 			vacation.getSpas() != null ? (SpaMapper.toSpaListDTO(vacation.getSpas())) : null,
 			vacation.getFundingCompsCredits(),
 			vacation.getConfirmations() != null ? (ConfirmationMapper.toConfirmationDTOList(vacation.getConfirmations())) : null
