@@ -14,6 +14,8 @@ public class StarterApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StarterApplication.class, args);
+		
+		TodoAnnotationScanner.scan();
 	}
 
 	@Override
