@@ -9,6 +9,4 @@ import com.johnathanalexander.vacationplanner.app.model.VacationConfigItem;
 
 public interface VacationConfigItemRepository extends JpaRepository<VacationConfigItem, Long>{
 
-	/*@Query("SELECT v FROM VacationConfigItem vci JOIN VacationConfig vc JOIN Vacation v ON vci.vacationConfig.id=vc.id AND vc.vacation.id=v.id WHERE vci.id=:config_item_id")
-	Vacation getVacationByConfigItem(@Param("config_item_id") Long configItemId);*/
 }

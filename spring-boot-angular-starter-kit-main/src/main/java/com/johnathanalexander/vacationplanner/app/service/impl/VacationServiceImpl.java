@@ -82,9 +82,6 @@ public class VacationServiceImpl implements VacationService{
 		Vacation updatedVacation = vacationRepository.findById(vacationRequestDto.id())
 				.orElseThrow(() -> VacationNotFoundException.forId(vacationRequestDto.id()));
 		
-		//Vacation updatedVacation = vacationRepository.findById(vacationRequestDto.id());
-				//.orElseThrow(() -> Exception.forId(vacationRequestDto.id()));
-		//updatedVacation.setId(vacationRequestDto.id());
 		updatedVacation.setName(vacationRequestDto.name());
 		updatedVacation.setState(vacationRequestDto.state());
 		updatedVacation.setOwner(vacationRequestDto.owner());
@@ -99,8 +96,6 @@ public class VacationServiceImpl implements VacationService{
 			PrepaymentDto prepaymentDto = prepaymentDtoList.get(ppIndex);
 			
 			Prepayment newPrepayment = new Prepayment();
-			//newPrepayment.setId(prepaymentDto.id());//TODO can probably update this to non conditional
-			//newPrepayment.setVacation(updatedVacation);
 			newPrepayment.setDescription(prepaymentDto.description());
 			newPrepayment.setType(prepaymentDto.type());
 			newPrepayment.setVendor(prepaymentDto.vendor());
@@ -113,39 +108,7 @@ public class VacationServiceImpl implements VacationService{
 			prepayments.add(newPrepayment);
 		}
 		
-		updatedVacation.setPrepayments(prepayments);
-		
-		//VacationConfig config = new VacationConfig();
-		//config.setId(vacationRequestDto.config().id());
-		
-		//List<VacationConfigItem> configItems = new ArrayList<>();
-		//List<VacationConfigItemDto> dtoConfigItems = new ArrayList<>(vacationRequestDto.config().configItems());
-		
-		/*for(var ciIndex = 0; ciIndex < dtoConfigItems.size(); ciIndex++) {
-			VacationConfigItemDto dto = dtoConfigItems.get(ciIndex);
-			VacationConfigItem configItem = new VacationConfigItem();
-			
-			//configItem.setId(dto.id());//TODO can probably update this to non conditional
-			//configItem.setVacationConfig(config);
-			configItem.setConfigKey(dto.config_key());
-			configItem.setConfigLabel(dto.config_label());
-			configItem.setConfigValue(dto.config_value());
-			configItem.setConfig_notes(dto.config_notes());
-			configItem.setPrimary_config(dto.primary_config());
-			configItem.setRequired(dto.required());
-			
-			configItems.add(configItem);
-		}*/
-		
-		
-		//config.setVacationConfigItems(new HashSet<>(configItems));
-		
-		//updatedVacation.setVacationConfig(config);
-		
-		System.out.println("ALL THE IDS");
-		System.out.println("VACATION ID: " + updatedVacation.getId());
-		System.out.println("VACATION CONFIG ID: " + updatedVacation.getVacationConfig().getId());
-		
+		updatedVacation.setPrepayments(prepayments);		
 
 		Vacation vacation = vacationRepository.save(updatedVacation);
 			

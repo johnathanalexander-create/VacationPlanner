@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.johnathanalexander.vacationplanner.app.dto.VacationConfigItemDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.service.VacationConfigItemService;
+import com.johnathanalexander.vacationplanner.TODO;
 
 @RestController
 @RequestMapping("/api/v1/vacationConfigItem")
@@ -22,7 +23,7 @@ public class VacationConfigController {
 		this.service = service;
 	}
 	
-	/*TODO: Need to update this for incoming param to be a VacationConfigItemRequestDto and response as VacationConfigItemDto*/
+	@TODO("Need to update this for incoming param to be a VacationConfigItemRequestDto and response as VacationConfigItemDto")
 	@PutMapping("/saveVacationConfigItem")
 	private ResponseEntity<VacationDto> saveVacationConfigItem(@RequestBody VacationConfigItemDto dto) {
 		System.out.println("VACATION CONFIG ITEM ATTEMPTING TO SAVE: " + dto.config_value());

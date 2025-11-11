@@ -50,11 +50,7 @@ public class VacationController {
 	@GetMapping("/list/{id}")
 	private ResponseEntity<List<Map<String, Object>>> getListOfVacationsByOwnerID(@PathVariable("id") Long id){
 		List<Map<String, Object>> vacationMap = vacationService.getVacationListByOwner(id);
-		for(var count = 0; count < vacationMap.size(); count++) {
-			Map<String, Object> map = vacationMap.get(count);
-			
-			
-		}
+
 		return ResponseEntity.ok(vacationMap);
 	}
 	
@@ -69,17 +65,7 @@ public class VacationController {
 	@GetMapping("/{id}")
 	private ResponseEntity<List<VacationDto>> findAll(@PathVariable("id") Long id){
 		List<VacationDto> list = vacationService.getAllVacationsByOwner(id);
-		for(int count = 0; count < list.size(); count++) {
-			VacationDto d = list.get(count);
-			System.out.println(d.id() + " / " + d.name() + " / " + d.state() + " / " + d.owner());
-			System.out.println(d.config().id());
-			//Set<VacationConfigItem> items = d.config().getVacationConfigItems();
-			//Set<VacationConfigItemDto> items = d.config().configItems();
-			Set<ConfirmationDto> c = d.confirmations();
-			for(ConfirmationDto i : c) {
-				System.out.println(i.confirmationCode());
-			}
-		}
+
 		return ResponseEntity.ok(list);
 	}
 	
