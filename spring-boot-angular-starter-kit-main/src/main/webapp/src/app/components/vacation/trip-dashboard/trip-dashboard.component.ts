@@ -127,7 +127,7 @@ export class TripDashboardComponent {
 		
 	  }
 	  
-	  getCreditCardFunding(){
+	  calculateCreditCardFunding(){
 		var creditCardFunding:number = 0;
 		if(this.selectedVacation){
 			const useAutomaticCreditCardFunding = this.util.getVacationValue(this.selectedVacation, "use_automatic_credit_card_funding", true, "");
@@ -145,7 +145,25 @@ export class TripDashboardComponent {
 			}
 		}
 		
-		return creditCardFunding.toFixed(2);
+		return creditCardFunding;
+	  }
+	  
+	  getCreditCardFunding(){
+		return this.calculateCreditCardFunding().toFixed(2);
+	  }
+	  
+	  getTotalFunding(){
+		var totalFunding = 0;
+		
+		if(this.selectedVacation){
+			totalFunding = this.calculateCreditCardFunding() + ( this.selectedVacation.meta.totalPrepayments || 0 ) + ( this.selectedVacation.meta.fo_main_funding || 0 );
+		}
+		
+		return totalFunding.toFixed(2);
+	  }
+	  
+	  getEstimatedCost(){
+		
 	  }
 	  
 	  

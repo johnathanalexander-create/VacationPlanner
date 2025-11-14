@@ -175,7 +175,7 @@ export class VacationProcessorService {
 		}
 	}
 	
-	this.vacation.meta.estimated_trip_package_price = totalBudgetItems;//.toFixed(2);
+	this.vacation.meta.estimated_trip_package_price = totalBudgetItems;
 	
 	this.processStatus.package = "complete";
 	
