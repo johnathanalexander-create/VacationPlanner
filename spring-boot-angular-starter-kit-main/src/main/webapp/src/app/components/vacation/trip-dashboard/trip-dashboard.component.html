@@ -119,11 +119,11 @@
 					    		<tbody>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Main Funding</th>
-						    			<td>${{selectedVacation.meta.fo_main_funding}}</td>
+						    			<td>${{selectedVacation.meta.fo_main_funding || "0.00"}}</td>
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Prepayments</th>
-						    			<td>${{selectedVacation.meta.totalPrepayments || 0.00}}</td>
+						    			<td>${{selectedVacation.meta.totalPrepayments || "0.00"}}</td>
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">{{getValue("additional_funding_label", true, "Credit Card Funding")}}</th>
@@ -135,7 +135,7 @@
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Estimated Cost</th>
-						    			<td>BD needed</td>
+						    			<td>${{getValue("estimated_trip_package_price", true, "0.00")}}</td>
 						    		</tr>
 					    		</tbody>
 					    		
