@@ -63,7 +63,7 @@ export class VacationProcessorService {
 	
 	this.processStatus.time = "in_progress";
 	
-	const tripStartDate = this.utility.getVacationValue(this.vacation, "trip_start_date", true);
+	const tripStartDate = this.utility.getVacationValue(this.vacation, "trip_start_date", true, "");
 	  		
 	this.vacation.meta.monthsRemaining = "Fill Config";
 	this.vacation.meta.weeksRemaining = "Fill Config";
@@ -157,11 +157,26 @@ export class VacationProcessorService {
   }
   
   //Calculate the estimated trip package price.
-  async _processEstimatedTripPackagePrice(): Promise<string>{//Needs the budget dashboard first
+  async _processEstimatedTripPackagePrice(): Promise<string>{
 	if(!this.vacation){
 		this.processStatus.package = "error";
 	}
 	this.processStatus.package = "in_progress";
+	
+	const budgetItems = this.vacation.budgetItems;
+	var totalBudgetItems = 0.00;
+	
+	if(budgetItems && budgetItems.length > 0){
+		for(var count = 0; count < budgetItems.length; count++){
+			const budgetItem = budgetItems[count];
+			
+			if(budgetItem.amount && budgetItem.amount > 0)
+				totalBudgetItems += budgetItem.amount;
+		}
+	}
+	
+	this.vacation.meta.estimated_trip_package_price = totalBudgetItems;//.toFixed(2);
+	
 	this.processStatus.package = "complete";
 	
 	return new Promise((resolve)=>{
@@ -176,7 +191,7 @@ export class VacationProcessorService {
 	const sevenDaysMS = oneDayMS * 7;
 	
 	//Is Today Trip Day
-	const startDate = this.utility.getVacationValue(this.vacation, "trip_start_date", true);
+	const startDate = this.utility.getVacationValue(this.vacation, "trip_start_date", true, "");
 	
 	var startDateObject = new Date(startDate);
 	startDateObject.setHours(0,0,0,0);

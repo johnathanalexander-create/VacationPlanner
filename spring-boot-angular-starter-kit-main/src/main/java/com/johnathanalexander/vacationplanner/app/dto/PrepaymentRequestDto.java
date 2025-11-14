@@ -6,7 +6,7 @@ import com.johnathanalexander.vacationplanner.app.model.Vacation;
 
 public record PrepaymentRequestDto(
 			Long id,
-			Vacation vacation,
+			Long vacation_id,
 			String description,
 			String type,
 			String vendor,
@@ -17,5 +17,7 @@ public record PrepaymentRequestDto(
 			PrepaymentSourceRequestDto paymentSource,
 			String notes
 		) {
-
+	public String toString() {
+		return "vacationID: " + vacation_id;
+	}
 }

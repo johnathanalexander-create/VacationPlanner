@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentRequestDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentSourceDto;
+import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.service.PrepaymentService;
 
 @RestController
@@ -29,15 +30,13 @@ public class PrepaymentController {
 	private ResponseEntity<List<PrepaymentSourceDto>> getAllPrepaymentSources(){System.out.println("jwsa working");
 		
 		List<PrepaymentSourceDto> dto = prepaymentService.getAllPrepaymentSources();
-		System.out.println(dto.get(0).name());
 		
 		return ResponseEntity.ok(dto);
 		
 	}
 	
 	@PostMapping()
-	private ResponseEntity<PrepaymentDto> createPrepayment(@RequestBody PrepaymentRequestDto dto){
-		
-		return ResponseEntity.ok(null);
+	private ResponseEntity<VacationDto> createPrepayment(@RequestBody PrepaymentRequestDto dto){
+		return ResponseEntity.ok(prepaymentService.savePrepayment(dto));
 	}
 }

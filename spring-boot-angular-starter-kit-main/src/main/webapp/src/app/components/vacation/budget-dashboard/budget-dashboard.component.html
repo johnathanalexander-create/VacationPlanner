@@ -1,0 +1,29 @@
+
+
+
+<table style="margin-top: 15px" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+	
+		<ng-container matColumnDef="item">
+	    	<th mat-header-cell *matHeaderCellDef> Budget Item </th>
+	    	<td mat-cell *matCellDef="let element"> {{element.item}} </td>
+	  	</ng-container>
+	  	<ng-container matColumnDef="amount">
+	    	<th mat-header-cell *matHeaderCellDef> Amount </th>
+	    	<td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+	  	</ng-container>
+	  	<ng-container matColumnDef="amountGoal">
+	    	<th mat-header-cell *matHeaderCellDef> Goal </th>
+	    	<td mat-cell *matCellDef="let element"> {{element.amountGoal}} </td>
+	  	</ng-container>
+	  	<ng-container matColumnDef="cashRequirement">
+	    	<th mat-header-cell *matHeaderCellDef> Cash Requirement </th>
+	    	<td mat-cell *matCellDef="let element"> {{element.cashRequirement}} </td>
+	  	</ng-container>
+
+	  	<ng-container matColumnDef="notes">
+	    	<th mat-header-cell *matHeaderCellDef> Notes </th>
+	    	<td mat-cell *matCellDef="let element"> {{element.notes}} </td>
+	  	</ng-container>
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	  	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+	</table>

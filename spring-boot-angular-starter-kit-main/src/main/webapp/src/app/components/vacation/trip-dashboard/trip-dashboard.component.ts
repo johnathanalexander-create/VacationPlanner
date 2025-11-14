@@ -84,8 +84,8 @@ export class TripDashboardComponent {
 	  	}
 	  
 	  
-	  getValue(str: string, isConfigItemSearch: boolean){
-		return this.util.getVacationValue(this.selectedVacation as Vacation, str, isConfigItemSearch);
+	  getValue(str: string, isConfigItemSearch: boolean, onErrorReturnMessage: string){
+		return this.util.getVacationValue(this.selectedVacation as Vacation, str, isConfigItemSearch, onErrorReturnMessage);
 	  }
 	  
 	  async _readyToSaveVacation(vacation:Vacation, messageOnError: string) {
@@ -93,7 +93,7 @@ export class TripDashboardComponent {
 			vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
 			
 			
-			await this.vacationService.updateVacation(vacation).subscribe({
+			this.vacationService.updateVacation(vacation).subscribe({
 				next:(resp) => {
 					if(resp && resp.body){
 						this.processor.processSingleVacation(resp.body).then(stuff => {
@@ -125,6 +125,27 @@ export class TripDashboardComponent {
 			this._readyToSaveVacation(vacation, messageOnError);
 		}
 		
+	  }
+	  
+	  getCreditCardFunding(){
+		var creditCardFunding:number = 0;
+		if(this.selectedVacation){
+			const useAutomaticCreditCardFunding = this.util.getVacationValue(this.selectedVacation, "use_automatic_credit_card_funding", true, "");
+			
+			if(useAutomaticCreditCardFunding.toString().toLowerCase() == "true"){
+				const estimatedTripPackagePrice:number = this.selectedVacation.meta.estimated_trip_package_price || 0;
+				const totalPrepayments:number = this.selectedVacation.meta.totalPrepayments || 0;
+				const mainFunding:number = this.selectedVacation.meta.fo_main_funding || 0;
+				
+				creditCardFunding = ( estimatedTripPackagePrice - totalPrepayments - mainFunding );
+				
+				if(creditCardFunding < 0){
+					creditCardFunding = 0;
+				}
+			}
+		}
+		
+		return creditCardFunding.toFixed(2);
 	  }
 	  
 	  

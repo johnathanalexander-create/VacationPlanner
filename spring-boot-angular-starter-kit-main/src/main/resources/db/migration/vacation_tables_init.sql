@@ -154,7 +154,8 @@ create table spa(
 create table budget_item(
 	id bigint primary key AUTO_INCREMENT,
 	vacation_id bigint not null,
-	item varchar(75) unique not null,
+	active boolean default true,
+	item varchar(75) not null,
 	amount decimal(7,2),
 	amount_goal decimal(7,2),
 	cash_requirement decimal(5,0),

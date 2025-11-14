@@ -9,11 +9,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ViewChild, AfterViewInit } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
   selector: 'app-trip-config',
-  imports: [MatTableModule, CommonModule, MatSort, MatTooltipModule],
+  imports: [MatTableModule, CommonModule, MatSort, MatTooltipModule, MatInputModule],
   templateUrl: './trip-config.component.html',
   styleUrl: './trip-config.component.scss'
 })

@@ -18,7 +18,7 @@ export class WebVacationUtilityService {
 	return localStorage.getItem("userID");
   }
   
-  getVacationValue(vacation: Vacation, search:string, isConfigItemSearch: boolean): string{
+  getVacationValue(vacation: Vacation, search:string, isConfigItemSearch: boolean, onErrorReturnMessage: string): string{
 	
 	var ret: any = "";
 	
@@ -47,6 +47,10 @@ export class WebVacationUtilityService {
 			});
 		}
 			
+	}
+	
+	if(ret == null || ret == "" && onErrorReturnMessage){
+		return onErrorReturnMessage;
 	}
 	
 	return ret;

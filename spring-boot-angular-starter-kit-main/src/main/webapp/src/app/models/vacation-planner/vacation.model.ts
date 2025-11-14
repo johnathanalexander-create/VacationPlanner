@@ -3,6 +3,7 @@ import VacationConfig from './vacation_config.model';
 import Prepayment from './prepayment.model';
 import Confirmation from './confirmation.model';
 import Spa from './spa.model';
+import BudgetItem from './budget_item.model';
 
 export default interface Vacation{
 	id: number;
@@ -12,6 +13,7 @@ export default interface Vacation{
 	notes: string;
 	config: VacationConfig,
 	prepayments: Prepayment[],
+	budgetItems: BudgetItem[],
 	spas: Spa[],
 	funding_comps_credits:{},
 	confirmations: Confirmation[],
@@ -23,6 +25,7 @@ export default interface Vacation{
 		totalPrepayments: 0,
 		totalPrepaymentCashback: 0,
 		fo_main_funding:0,
-		tsm_istodaytripday_stylecolor: "red"
+		tsm_istodaytripday_stylecolor: "red",
+		estimated_trip_package_price:0
 	}
 }

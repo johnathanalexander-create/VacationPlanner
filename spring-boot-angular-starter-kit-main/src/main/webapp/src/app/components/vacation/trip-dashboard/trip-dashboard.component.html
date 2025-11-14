@@ -12,31 +12,31 @@
 			 					<tbody>
 			 						<tr>
 			 							<th class="trip-overview-tr">Primary Hotel</th>
-			 							<td class="trip-overview-tr align-center">{{getValue("hotel_name_primary", true)}}</td>
+			 							<td class="trip-overview-tr align-center">{{getValue("hotel_name_primary", true, "")}}</td>
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Estimated Trip Package Price</th>
-			 							<td class="trip-overview-tr align-center">BD Needed</td>
+			 							<td class="trip-overview-tr align-center">${{selectedVacation.meta.estimated_trip_package_price.toFixed(2)}}</td>
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Primary Flight Carrier</th>
-			 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true)}}</td>
+			 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true, "")}}</td>
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Primary Flight Class</th>
-			 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true)}}</td>
+			 							<td class="trip-overview-tr align-center">{{getValue("flight_primary", true, "")}}</td>
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Trip Dates</th>
-			 							<td class="trip-overview-tr align-center">{{getValue("trip_start_date", true)}} - {{getValue("trip_end_date", true)}}</td>
+			 							<td class="trip-overview-tr align-center">{{getValue("trip_start_date", true, "")}} - {{getValue("trip_end_date", true, "")}}</td>
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Trip Status</th>
-			 							<td class="trip-overview-tr align-center">{{getValue("state", false)}}</td>
+			 							<td class="trip-overview-tr align-center">{{getValue("state", false, "")}}</td>
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Budget Buffering</th>
-			 							<td class="trip-overview-tr align-center">{{getValue("enable_budget_buffer", true)}}</td>
+			 							<td class="trip-overview-tr align-center">{{getValue("enable_budget_buffer", true, "False")}}</td>
 			 						</tr>
 			 						
 			 					</tbody>
@@ -126,8 +126,8 @@
 						    			<td>${{selectedVacation.meta.totalPrepayments || 0.00}}</td>
 						    		</tr>
 						    		<tr class="">
-						    			<th class="general-overview-side-header">{{getValue("additional_funding_label", true)}}</th>
-						    			<td>BD needed</td>
+						    			<th class="general-overview-side-header">{{getValue("additional_funding_label", true, "Credit Card Funding")}}</th>
+						    			<td>${{getCreditCardFunding()}}</td>
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Total Funding</th>

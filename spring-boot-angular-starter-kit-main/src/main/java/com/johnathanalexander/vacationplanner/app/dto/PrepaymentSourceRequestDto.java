@@ -8,5 +8,7 @@ public record PrepaymentSourceRequestDto(
 			String name,
 			BigDecimal cashback_rate
 		) {
-	
+	public String toString() {
+		return "ID: " + id + " / NAME: " + name;
+	}
 }

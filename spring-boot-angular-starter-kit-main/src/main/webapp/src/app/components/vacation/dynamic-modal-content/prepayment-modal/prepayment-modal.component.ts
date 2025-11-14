@@ -13,6 +13,7 @@ import PrepaymentSource from '../../../../models/vacation-planner/prepayment_sou
 import { CommonModule } from '@angular/common';
 import Prepayment from '../../../../models/vacation-planner/prepayment.model';
 import {HttpResponse} from '@angular/common/http';
+import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
 
 
 @Component({
@@ -57,10 +58,17 @@ export class PrepaymentModalComponent {
 				private formBuilder: FormBuilder,
 				private formValidationService: FormValidationService,
 				private vacationService: VacationControllerService,
-				@Inject(MAT_DIALOG_DATA) public modalInputData: any){}
+				@Inject(MAT_DIALOG_DATA) public modalInputData: any,
+				private vacationUpdater: VacationUpdaterService ){}
 				
 	saveNewPrepayment(){
-
+		console.log(this.newPrepaymentFormGroup.value);
+		this.vacationService.createNewPrepayment(this.newPrepaymentFormGroup.value)
+			.subscribe({
+				next: (resp: any) => {
+					this.vacationUpdater.updateVacation(resp.body);
+				}
+			});
 	}
 	
 	isFieldInvalid(name: string): boolean | undefined {
