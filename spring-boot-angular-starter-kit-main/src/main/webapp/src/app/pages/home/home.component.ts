@@ -31,7 +31,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-home',
     imports: [MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
-			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton, PrepaymentModalComponent, BudgetDashboardComponent],
+			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton, BudgetDashboardComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
@@ -53,7 +53,7 @@ export class HomeComponent {
   }
   
   ngOnInit(){
-	this.dataSubscription = this.vacationUpdater.sharedData$.subscribe(data=>{console.log("home updater");console.log(data);
+	this.dataSubscription = this.vacationUpdater.sharedData$.subscribe(data=>{
 		this.selectedVacation = data;
 	});
   }

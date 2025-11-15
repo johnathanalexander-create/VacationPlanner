@@ -1,0 +1,36 @@
+
+
+<form (submit) = "updateBudgetItem()" [formGroup] = "updateBudgetItemGroup">
+	<h1 mat-dialog-title>Update Budget Item: <span style="text-decoration: underline">{{modalInputData.budgetItem.item}}</span></h1>
+	
+	<mat-dialog-content>
+		<div class="form-group">
+			<div><!-- Used to adjust size of all fields here to full width -->
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Amount</mat-label>
+					<input matInput formControlName="amount" type="text" autocomplete = "off" [ngModel]="modalInputData.budgetItem.amount">
+				</mat-form-field>
+				
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Goal</mat-label>
+					<input matInput formControlName="goal" type="text" autocomplete = "off" [ngModel]="modalInputData.budgetItem.amountGoal">
+				</mat-form-field>
+				
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Cash Requirement</mat-label>
+					<input matInput formControlName="cashRequirement" type="text" autocomplete = "off" [ngModel]="modalInputData.budgetItem.cashRequirement">
+				</mat-form-field>
+				
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Notes</mat-label>
+					<input matInput formControlName="notes" type="text" autocomplete = "off" [ngModel]="modalInputData.budgetItem.notes">
+				</mat-form-field>
+			</div>
+			
+		</div>
+	</mat-dialog-content>
+	<mat-dialog-actions style="float: right;">
+		<button mat-button [mat-dialog-close] = "false">Close</button>
+		<button type="submit" mat-flat-button color="primary" [disabled] = "updateBudgetItemGroup.invalid">Update Budget Item</button>
+	</mat-dialog-actions>
+</form>

@@ -15,62 +15,28 @@ import Prepayment from '../../../../models/vacation-planner/prepayment.model';
 import {HttpResponse} from '@angular/common/http';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
 
-
 @Component({
-  selector: 'app-prepayment-modal',
+  selector: 'app-budget-item-modal-component',
   imports: [MatSelectModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, FormsModule, MultiSelectComponent, CommonModule],
-  templateUrl: './prepayment-modal.component.html',
-  styleUrl: './prepayment-modal.component.scss'
+  templateUrl: './budget-item-modal-component.component.html',
+  styleUrl: './budget-item-modal-component.component.scss'
 })
-export class PrepaymentModalComponent {
-	newPrepaymentFormGroup = this.formBuilder.group({
+export class BudgetItemModalComponent {
+	
+	updateBudgetItemGroup = this.formBuilder.group({
 		vacation_id: [this.modalInputData.vacation_id, []],
-		description: ['', [Validators.required, Validators.maxLength(100)]],
-		type: ['', []],
-		vendor: ['', [Validators.required]],
-		isRefundable: ['', []],
-		amount: ['', [Validators.required]],
-		paymentSource: ['', [Validators.required]],
+		amount: ['', []],
+		amountGoal: ['', []],
+		cashRequirement: ['', []],
+		notes: ['', []]
 	});
 	
-	activePrepaymentSources: PrepaymentSource[] | null = [];
-	
-	ngOnInit(){
-		this.retrievePrepaymentSources();
-	}
-	
-	retrievePrepaymentSources(){
-		this.vacationService.getAllPrepaymentSources().subscribe({
-			next:(resp) => {
-				this.activePrepaymentSources = resp.body;
-			},
-			error:(err:any) =>{
-				
-			}
-		});
-	}
-	
-	closeModal(): void{
-		this.dialogRef.close('thingify');
-	}
-	
-	constructor(public dialogRef: MatDialogRef<PrepaymentModalComponent>,
+	constructor(public dialogRef: MatDialogRef<BudgetItemModalComponent>,
 				private formBuilder: FormBuilder,
 				private formValidationService: FormValidationService,
 				private vacationService: VacationControllerService,
 				@Inject(MAT_DIALOG_DATA) public modalInputData: any,
 				private vacationUpdater: VacationUpdaterService ){}
 				
-	saveNewPrepayment(){
-		this.vacationService.createNewPrepayment(this.newPrepaymentFormGroup.value)
-			.subscribe({
-				next: (resp: any) => {
-					this.vacationUpdater.updateVacation(resp.body);
-				}
-			});
-	}
-	
-	isFieldInvalid(name: string): boolean | undefined {
-	    return this.formValidationService.isFieldInvalid(this.newPrepaymentFormGroup, name);
-	}
+	updateBudgetItem(){}
 }
