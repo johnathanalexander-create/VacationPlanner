@@ -66,6 +66,8 @@ export class PrepaymentModalComponent {
 			.subscribe({
 				next: (resp: any) => {
 					this.vacationUpdater.updateVacation(resp.body);
+					
+					this.dialogRef.close();
 				}
 			});
 	}

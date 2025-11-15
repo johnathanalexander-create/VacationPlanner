@@ -38,5 +38,7 @@ export class BudgetItemModalComponent {
 				@Inject(MAT_DIALOG_DATA) public modalInputData: any,
 				private vacationUpdater: VacationUpdaterService ){}
 				
-	updateBudgetItem(){}
+	updateBudgetItem(){
+		this.dialogRef.close();
+	}
 }

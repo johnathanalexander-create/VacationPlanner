@@ -89,7 +89,7 @@ export class HomeComponent {
 	const dialog = this.dialog.open(PrepaymentModalComponent, dialogConfig);
 	
 	dialog.afterClosed().subscribe(result=>{
-		console.log(result);
+		
 	})
   }
   
@@ -109,8 +109,6 @@ export class HomeComponent {
 	
 	if(this.vacationList?.length == 1){
 		var vacationID = this.vacationList[0].key;
-		
-		console.log('attempting');
 		
 		this.setSelectedVacation(null, vacationID);
 	}
