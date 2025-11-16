@@ -54,7 +54,7 @@
 				    		<tr class="fcc-row">
 				    			<th class="fcc-header">Description</th>
 				    			<th class="fcc-header">Amount</th>
-				    			<th class="fcc-header">Actions</th>
+				    			<th class="fcc-header"></th><!-- No column header required here -->
 				    		</tr>
 		
 					    	<tr class="fcc-row" *ngFor="let item of selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
