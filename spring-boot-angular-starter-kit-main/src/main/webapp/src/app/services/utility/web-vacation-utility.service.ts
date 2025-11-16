@@ -4,13 +4,16 @@ import VacationConfig from '../../models/vacation-planner/vacation_config.model'
 import VacationConfigItem from '../../models/vacation-planner/vacation_config_item.model';
 import Prepayment from '../../models/vacation-planner/prepayment.model';
 import {VacationProcessorService} from '../vacation-processor/vacation-processor.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PrepaymentModalComponent } from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
+import { FCCModalComponent } from '../../components/vacation/dynamic-modal-content/fcc-modal/fcc-modal.component';
 @Injectable({
   providedIn: 'root'
 })
 export class WebVacationUtilityService {
 
 
-  constructor() {
+  constructor(public dialog: MatDialog,) {
 
    }
   
@@ -89,4 +92,54 @@ export class WebVacationUtilityService {
 	return daysDifference;
 	
   }
+  
+  _getModalComponentDataItems(modalTarget:string, data:any):any{
+	  var resp:any = {
+	  	component:null,
+	  	dialogConfig:{
+	  		vacation_id: data.vacation_id,
+			data:data
+	  	}
+	  }
+	  switch(modalTarget){
+	  	case "new-prepayment":
+	  		resp.component = PrepaymentModalComponent;
+	  		break;
+	  	case "fcc":
+	  		resp.component = FCCModalComponent;
+
+			if(!resp.dialogConfig.data.fcc){
+				resp.dialogConfig.data.fcc = {
+					"key":"",
+					"value":{
+						"value":"",
+						"isEditing":false
+					}
+				}
+				
+				resp.dialogConfig.data.createNewFCC = true;
+			}
+	  		break;
+	  }
+	  
+	  console.log("resp");
+	  console.log(resp);
+	  return resp;
+  }
+  
+  generateModal(modalTarget:string, data:any): void{
+  	if(modalTarget){
+  		const dialogConfig = new MatDialogConfig();
+  		
+  		var dialogConfigData = this._getModalComponentDataItems(modalTarget, data);
+  		dialogConfig.data = dialogConfigData.dialogConfig;
+  		
+  		const dialog = this.dialog.open(dialogConfigData.component, dialogConfig);
+  		
+  		
+  		dialog.afterClosed().subscribe(result=>{
+  			
+  		})
+  	}
+   }
 }

@@ -1,0 +1,25 @@
+
+
+<form (submit)="submitFCC()" [formGroup]="fccItemGroup">
+	<h1 mat-dialog-title>FCC Item</h1>
+	
+	<mat-dialog-content>
+		<div class="form-group">
+			<div>
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Description</mat-label>
+					<input matInput formControlName="key" type="text" autocomplete = "off">
+				</mat-form-field>
+				
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Amount</mat-label>
+					<input matInput formControlName="value" type="text" autocomplete = "off">
+				</mat-form-field>
+			</div>
+		</div>
+	</mat-dialog-content>
+	<mat-dialog-actions style="float: right;">
+		<button mat-button [mat-dialog-close] = "false">Close</button>
+		<button type="submit" mat-flat-button color="primary" [disabled] = "fccItemGroup.invalid">Submit</button>
+	</mat-dialog-actions>
+</form>

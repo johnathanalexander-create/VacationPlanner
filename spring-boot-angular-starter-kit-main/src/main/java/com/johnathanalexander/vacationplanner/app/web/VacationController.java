@@ -76,4 +76,11 @@ public class VacationController {
 		return ResponseEntity.ok(dto);
 	}
 	
+	@PutMapping("/setFCC/{id}")
+	private ResponseEntity<VacationDto> updateFCC(@PathVariable("id") Long id, @RequestBody String fccString){		
+		VacationDto dto = vacationService.setFCC(id, fccString);
+		
+		return ResponseEntity.ok(dto);
+	}
+	
 }

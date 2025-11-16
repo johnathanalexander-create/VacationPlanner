@@ -7,6 +7,7 @@ import { BudgetDashboardComponent } from '../../components/vacation/budget-dashb
 import { TripDashboardComponent } from '../../components/vacation/trip-dashboard/trip-dashboard.component';
 import { PrepaymentsComponent } from '../../components/vacation/prepayments/prepayments.component';
 import { PrepaymentModalComponent } from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
+import { FCCModalComponent } from '../../components/vacation/dynamic-modal-content/fcc-modal/fcc-modal.component';
 
 import Vacation from '../../models/vacation-planner/vacation.model';
 
@@ -30,8 +31,9 @@ import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-home',
-    imports: [MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
-			 CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton, BudgetDashboardComponent],
+    imports: [	MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
+				CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton, BudgetDashboardComponent,
+			 	FCCModalComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
@@ -54,6 +56,7 @@ export class HomeComponent {
   
   ngOnInit(){
 	this.dataSubscription = this.vacationUpdater.sharedData$.subscribe(data=>{
+		
 		this.selectedVacation = data;
 	});
   }
@@ -80,18 +83,50 @@ export class HomeComponent {
 	this.currentTab = tabs[evt.index];
   }
   
-  generateModal(): void{	
-	const dialogConfig = new MatDialogConfig();
-	dialogConfig.data = {
-		vacation_id: this.selectedVacation?.id
+  generateModal(modalTarget:string){
+	if(modalTarget){
+		var data = {
+			vacation_id: this.selectedVacation?.id,
+			vacation: this.selectedVacation
+		}
+		this.util.generateModal(modalTarget, data);
+	}
+  }
+  
+  /*_getModalComponentDataItems(modalTarget:string):any{
+	var resp:any = {
+		component:null,
+		dialogConfig:{
+			vacation_id: this.selectedVacation?.id
+		}
+	}
+	switch(modalTarget){
+		case "new-prepayment":
+			resp.component = PrepaymentModalComponent;
+			break;
+		case "new-fcc":
+			resp.component = FCCModalComponent;
+			break;
 	}
 	
-	const dialog = this.dialog.open(PrepaymentModalComponent, dialogConfig);
-	
-	dialog.afterClosed().subscribe(result=>{
-		
-	})
+	return resp;
   }
+  
+  generateModal(modalTarget:string): void{
+	if(modalTarget){
+		const dialogConfig = new MatDialogConfig();
+		
+		var dialogConfigData = this._getModalComponentDataItems(modalTarget);
+		dialogConfig.data = dialogConfigData.dialogConfig;
+		
+		const dialog = this.dialog.open(dialogConfigData.component, dialogConfig);
+		
+		
+		dialog.afterClosed().subscribe(result=>{
+			
+		})
+	}
+  }*/
   
   processAllVacations(body: any){console.log(body);
 	for(var index = 0; index<body.length; index++){
@@ -117,7 +152,7 @@ export class HomeComponent {
   }
   
   setSelectedVacation(evt:any, vacationID:number){
-	
+	this.currentTab = "trip_dashboard";
 	var id = vacationID;
 	
 	if(evt || vacationID == -1){

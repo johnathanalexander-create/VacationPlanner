@@ -116,4 +116,14 @@ public class VacationServiceImpl implements VacationService{
 
 	}
 	
+	public VacationDto setFCC(Long id, String fcc) {
+		Vacation updatedVacation = vacationRepository.findById(id)
+				.orElseThrow(() -> VacationNotFoundException.forId(id));
+		
+		updatedVacation.setFundingCompsCredits(fcc);
+		
+		Vacation response = vacationRepository.save(updatedVacation);
+		
+		return VacationMapper.toVacationDto(response);
+	}
 }

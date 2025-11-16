@@ -11,11 +11,11 @@
 <h1 class="inline" *ngIf="selectedVacation">Vacation Planner: <span style="text-decoration: underline;">{{selectedVacation.name}}</span></h1>
 <!-- Component Control Panel -->
 <!-- Consider using ngrepeat and a list of buttons in the TS -->
-<button (click)="generateModal()" *ngIf="currentTab=='prepayments'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Prepayment</button>
+<button (click)="generateModal('new-prepayment')" *ngIf="currentTab=='prepayments'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Prepayment</button>
 <button *ngIf="currentTab=='confirmations'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Confirmation</button>
 <button *ngIf="currentTab=='spa'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Spa Treatment</button>
 <button *ngIf="currentTab=='task'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Task</button>
-<button *ngIf="currentTab=='trip_dashboard'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New FCC</button>
+<button (click)="generateModal('fcc')" *ngIf="currentTab=='trip_dashboard'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New FCC</button>
 <button *ngIf="currentTab=='budget'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Budget Item</button>
 
 <button class="control-panel-button" (click)="delete(selectedVacation)" *ngIf="this.selectedVacation" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">Delete</button>

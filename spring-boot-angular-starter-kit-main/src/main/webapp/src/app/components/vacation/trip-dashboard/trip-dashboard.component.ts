@@ -110,11 +110,6 @@ export class TripDashboardComponent {
 		
 	  updateVacation(vacation: Vacation, delay: boolean, messageOnError: string){
 		
-		/*if(vacation){
-			this.vacationService.vacationUpdater.vacation = vacation;
-			this.vacationService.vacationUpdater.messages.onError = messageOnError;
-		}*/
-		
 		if(delay){
 			clearTimeout(this.typingTimer);
 			
@@ -162,10 +157,17 @@ export class TripDashboardComponent {
 		return totalFunding.toFixed(2);
 	  }
 	  
-	  getEstimatedCost(){
+	  generateModal(modalTarget:string, fcc:any){
+		var data = {
+			vacation_id: this.selectedVacation?.id,
+			vacation: this.selectedVacation,
+			fcc:fcc
+		}
 		
+		console.log("trip dashboard genmod data");
+		console.log(data);
+	  	if(modalTarget){
+	  		this.util.generateModal(modalTarget, data);
+	  	}
 	  }
-	  
-	  
-	  
 }

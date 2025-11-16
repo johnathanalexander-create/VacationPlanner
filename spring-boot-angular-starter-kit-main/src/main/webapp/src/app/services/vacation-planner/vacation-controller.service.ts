@@ -67,4 +67,11 @@ export class VacationControllerService {
 	saveConfigItem(configItem:ConfigItem){
 		return this.http.put("/api/v1/vacationConfigItem/saveVacationConfigItem", configItem);
 	}
+	
+	/* Update FCC */
+	setFCC(fcc:any, vacation_id: number):Observable<HttpResponse<Vacation>>{		
+		return this.http.put("/api/v1/vacation/setFCC/" + vacation_id, JSON.stringify(fcc));
+		
+		//return this.http.post("/api/v1/vacation/newFCC", JSON.stringify(alteredFCC), fcc.vacation_id);
+	}
 }

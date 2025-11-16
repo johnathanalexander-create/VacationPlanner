@@ -15,30 +15,64 @@ import Prepayment from '../../../../models/vacation-planner/prepayment.model';
 import {HttpResponse} from '@angular/common/http';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
 
+
+
+
+
+
 @Component({
-  selector: 'app-budget-item-modal-component',
+  selector: 'app-fcc-modal',
   imports: [MatSelectModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, FormsModule, MultiSelectComponent, CommonModule],
-  templateUrl: './budget-item-modal-component.component.html',
-  styleUrl: './budget-item-modal-component.component.scss'
+  templateUrl: './fcc-modal.component.html',
+  styleUrl: './fcc-modal.component.scss'
 })
-export class BudgetItemModalComponent {
-	
-	updateBudgetItemGroup = this.formBuilder.group({
+export class FCCModalComponent {
+	fccItemGroup = this.formBuilder.group({
 		vacation_id: [this.modalInputData.vacation_id, []],
-		amount: [this.modalInputData.budgetItem.amount, []],
-		amountGoal: [this.modalInputData.budgetItem.amountGoal, []],
-		cashRequirement: [this.modalInputData.budgetItem.cashRequirement, []],
-		notes: [this.modalInputData.budgetItem.notes, []]
+		id: [this.modalInputData.data.fcc.id || "", []],
+		key: [this.modalInputData.data.fcc.key || "", [Validators.required]],
+		value: [this.modalInputData.data.fcc.value.value || "", []]		
 	});
 	
-	constructor(public dialogRef: MatDialogRef<BudgetItemModalComponent>,
-				private formBuilder: FormBuilder,
+	constructor(private formBuilder: FormBuilder,
 				private formValidationService: FormValidationService,
 				private vacationService: VacationControllerService,
 				@Inject(MAT_DIALOG_DATA) public modalInputData: any,
-				private vacationUpdater: VacationUpdaterService ){}
-				
-	updateBudgetItem(){
-		this.dialogRef.close();
+				private vacationUpdater: VacationUpdaterService,
+				public dialogRef: MatDialogRef<FCCModalComponent>
+	){}
+	
+	submitFCC(){
+		
+		var fccFromModal = this.fccItemGroup.value;
+		var createNewFCC = this.modalInputData.data.createNewFCC;
+		
+		var fcc = this.modalInputData.data.vacation.funding_comps_credits;
+		
+		if(createNewFCC){
+			//Need to add a new object to fcc
+			fcc[fccFromModal.key] = {
+				value:fccFromModal.value,
+				isEditing: false
+			}
+		}else{
+			//Need to update an existing fcc object
+			
+			for(var fccKey in fcc){
+				if(fccKey == fccFromModal.key){
+					fcc[fccKey] = {
+						value: fccFromModal.value,
+						idEditing: false
+					}
+				}
+			}
+		}		
+		
+		this.vacationService.setFCC(fcc, this.fccItemGroup.value.vacation_id).subscribe({
+			next:(resp:any) =>{
+				this.vacationUpdater.updateVacation(resp);
+				this.dialogRef.close();				
+			}
+		})
 	}
 }

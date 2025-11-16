@@ -58,11 +58,11 @@
 				    		</tr>
 		
 					    	<tr class="fcc-row" *ngFor="let item of selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
-					    		<td class="fcc-table-cell">{{item.key}}</td>
-					    		<td *ngIf="!item.value['isEditing']" class="fcc-table-cell"><span *ngIf="item.value['value']">$</span>{{item.value["value"]}}</td>
+					    		<td (dblclick) = "generateModal('fcc', item)" class="fcc-table-cell">{{item.key}}</td>
+					    		<td (dblclick) = "generateModal('fcc', item)" *ngIf="!item.value['isEditing']" class="fcc-table-cell"><span *ngIf="item.value['value']">$</span>{{item.value["value"]}}</td>
 					    		<td *ngIf="item.value['isEditing']"><input [(ngModel)] = "item.value['value']"/></td>
 					    		<td class="fcc-table-cell">				    		
-						    		<mat-icon *ngIf="!item.value['isEditing']" (click)="toggleEditModeForFCC(item)">mode_edit</mat-icon>
+						    		<!-- <mat-icon *ngIf="!item.value['isEditing']" (click)="toggleEditModeForFCC(item)">mode_edit</mat-icon>-->
 						    		<mat-icon *ngIf="item.value['isEditing']" (click)="toggleEditModeForFCC(item); updateVacation(selectedVacation, false, 'Unable to update Funding, Comps, & Credits')">done</mat-icon>
 						    		<mat-icon (click)="deleteElementFromFCC(item); updateVacation(selectedVacation, false, 'Unable to update Funding, Comps, & Credits')">delete</mat-icon>
 					    		</td>
