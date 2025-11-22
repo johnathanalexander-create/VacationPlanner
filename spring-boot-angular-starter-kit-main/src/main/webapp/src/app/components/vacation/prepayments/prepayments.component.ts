@@ -4,6 +4,7 @@ import Prepayment from '../../../models/vacation-planner/prepayment.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { WebVacationUtilityService } from '../../../services/utility/web-vacation-utility.service';
 
 @Component({
   selector: 'app-prepayments',
@@ -25,17 +26,17 @@ export class PrepaymentsComponent {
 	//dataSource:Prepayment[] = [];
 	dataSource = new MatTableDataSource<Prepayment>();
 	
-	/*ngOnInit(){
-		this.fetchData();
-		
-		console.log("prepayments");
-		console.log(this.dataSource.data);
-		
-	}
+	constructor(private util: WebVacationUtilityService){}
 	
-	fetchData(){
-		setTimeout(()=>{
-			//this.dataSource.data = this.selectedVacation?.prepayments ?? [];console.log("the other");console.log(this.dataSource.data);
-		}, 1000);
-	}*/
+	generateModal(item:any){
+		if(item){
+			var data = {
+				vacation_id: this.selectedVacation?.id,
+				vacation: this.selectedVacation,
+				prepayment:item
+			}
+			
+			this.util.generateModal("prepayment", data);
+		}
+	}
 }

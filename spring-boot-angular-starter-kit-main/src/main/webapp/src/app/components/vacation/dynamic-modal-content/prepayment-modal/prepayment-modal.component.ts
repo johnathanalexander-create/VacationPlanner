@@ -25,12 +25,12 @@ import {VacationUpdaterService} from '../../../../services/vacation-updater/vaca
 export class PrepaymentModalComponent {
 	newPrepaymentFormGroup = this.formBuilder.group({
 		vacation_id: [this.modalInputData.vacation_id, []],
-		description: ['', [Validators.required, Validators.maxLength(100)]],
-		type: ['', []],
-		vendor: ['', [Validators.required]],
-		isRefundable: ['', []],
-		amount: ['', [Validators.required]],
-		paymentSource: ['', [Validators.required]],
+		description: [this.modalInputData.data.prepayment.description || "", [Validators.required, Validators.maxLength(100)]],
+		type: [this.modalInputData.data.prepayment.type || "", []],
+		vendor: [this.modalInputData.data.prepayment.vendor || "", [Validators.required]],
+		isRefundable: [this.modalInputData.data.prepayment.isRefundable || "", []],
+		amount: [this.modalInputData.data.prepayment.amount || "", [Validators.required]],
+		paymentSource: [this.modalInputData.data.prepayment.paymentSource.id || "", [Validators.required]],
 	});
 	
 	activePrepaymentSources: PrepaymentSource[] | null = [];

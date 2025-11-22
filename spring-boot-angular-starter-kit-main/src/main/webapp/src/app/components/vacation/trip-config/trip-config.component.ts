@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { ViewChild, AfterViewInit } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
+import {WebVacationUtilityService} from '../../../services/utility/web-vacation-utility.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class TripConfigComponent implements AfterViewInit{
 	
 	dataSource = new MatTableDataSource<VacationConfigItem>([]);
 	
-	constructor(private service: VacationControllerService, private vacationUpdater: VacationUpdaterService){}
+	constructor(private service: VacationControllerService, private vacationUpdater: VacationUpdaterService, private util: WebVacationUtilityService){}
 	
 	
 	displayedColumns:string[] = ["config_label", "config_value", "config_notes"];
@@ -39,6 +40,18 @@ export class TripConfigComponent implements AfterViewInit{
 	
 	ngAfterViewInit(){
 		this.dataSource.sort = this.sort;
+	}
+	
+	generateModal(item:any){
+		if(item){
+			var data = {
+				vacation_id: this.selectedVacation?.id,
+				vacation: this.selectedVacation,
+				config:item
+			}
+			
+			this.util.generateModal("config", data);
+		}
 	}
 	
 	

@@ -7,6 +7,7 @@ import {VacationProcessorService} from '../vacation-processor/vacation-processor
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PrepaymentModalComponent } from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
 import { FCCModalComponent } from '../../components/vacation/dynamic-modal-content/fcc-modal/fcc-modal.component';
+import {ConfigModalComponent} from '../../components/vacation/dynamic-modal-content/config-modal/config-modal.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -102,9 +103,32 @@ export class WebVacationUtilityService {
 	  	}
 	  }
 	  switch(modalTarget){
-	  	case "new-prepayment":
+	  	case "prepayment":
 	  		resp.component = PrepaymentModalComponent;
+			
+			if(!resp.dialogConfig.data.prepayment){
+				resp.dialogConfig.data.prepayment = {
+					"description":"",
+					"type":"",
+					"vendor":"",
+					"isRefundable":"",
+					"amount":"",
+					"paymentSource":""
+				}
+			}
 	  		break;
+		case "config":
+			resp.component = ConfigModalComponent;
+			
+			if(!resp.dialogConfig.data.config){
+				resp.dialogConfig.data.config = {
+					config_label:"",
+					config_key:"",
+					config_value:"",
+					config_notes:""
+				}
+			}
+			break;
 	  	case "fcc":
 	  		resp.component = FCCModalComponent;
 

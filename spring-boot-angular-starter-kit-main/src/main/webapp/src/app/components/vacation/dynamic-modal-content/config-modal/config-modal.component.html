@@ -1,0 +1,26 @@
+
+
+
+<form (submit)="submitConfigItem()" [formGroup]="configItemGroup">
+	<h1 mat-dialog-title>Update Config Item: <span style="text-decoration:underline">{{modalInputData.data.config.config_label}}</span></h1>
+	
+	<mat-dialog-content>
+		<div class="form-group">
+			<div>
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Config Value</mat-label>
+					<input matInput formControlName="config_value" type="text" autocomplete = "off">
+				</mat-form-field>
+				
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Config Notes</mat-label>
+					<input matInput formControlName="config_notes" type="text" autocomplete = "off">
+				</mat-form-field>
+			</div>
+		</div>
+	</mat-dialog-content>
+	<mat-dialog-actions style="float: right;">
+		<button mat-button [mat-dialog-close] = "false">Close</button>
+		<button type="submit" mat-flat-button color="primary" [disabled] = "configItemGroup.invalid">Save Config Item</button>
+	</mat-dialog-actions>
+</form>
