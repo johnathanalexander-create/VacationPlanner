@@ -1,3 +1,4 @@
+drop table if exists sticky_note;
 drop table if exists budget_item;
 drop table if exists spa;
 drop table if exists prepayment_source;
@@ -164,6 +165,22 @@ create table budget_item(
 	references vacation(id) on delete cascade
 );
 
+create table sticky_note(
+ id bigint primary key AUTO_INCREMENT,
+ vacation_id bigint not null,
+ title varchar(30),
+ content varchar(1000),
+ note_size varchar(5) default 'md',
+ foreign key (vacation_id)
+ references vacation(id) on delete cascade
+);
+
+create table message(
+	id bigint primary key AUTO_INCREMENT,
+	sticky_note_id bigint not null,
+	foreign key (sticky_note_id)
+	references sticky_note(id) on delete cascade
+);
 
 
 

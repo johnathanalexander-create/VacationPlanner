@@ -8,6 +8,7 @@ import { TripDashboardComponent } from '../../components/vacation/trip-dashboard
 import { PrepaymentsComponent } from '../../components/vacation/prepayments/prepayments.component';
 import { PrepaymentModalComponent } from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
 import { FCCModalComponent } from '../../components/vacation/dynamic-modal-content/fcc-modal/fcc-modal.component';
+import { ResearchComponent } from '../../components/vacation/research/research.component';
 
 import Vacation from '../../models/vacation-planner/vacation.model';
 
@@ -33,7 +34,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-home',
     imports: [	MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
 				CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton, BudgetDashboardComponent,
-			 	FCCModalComponent],
+			 	FCCModalComponent, ResearchComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
