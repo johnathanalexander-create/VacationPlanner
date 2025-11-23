@@ -1,5 +1,4 @@
 .x_remaining{
-	border: 2px solid black;
 	text-align: center;
 	font-size: 30px;
 	margin-right: 25px;
@@ -40,9 +39,7 @@
 .width-95{
 	width: 95%;
 }
-#fcc-table, .fcc-header, .fcc-table-cell{
-	border-bottom: 1px solid black;
-}
+
 #fcc-table{
 	padding: 10px;
 	width: 100%;
@@ -57,12 +54,12 @@
 	gap: 15px;
 }
 #left-side{
-	width: 40%;
+	width:38%;
+	margin-right:2%;
 }
 #funding-comps-credits{
-	border: 2px solid black;
 	margin-right: 15px;
-	width: 95%;
+	width: 100%;
 }
 #fcc_total_label{
 	font-weight: bold;
@@ -75,17 +72,22 @@
 }
 #funding-overview{
 	width: 100%;
-	border: 2px solid black;
 	margin-right: 15px;
 }
 #trip-status-monitor{
-	border: 2px solid black;
+
 	width: 93%;
 }
+
 #trip-planner-notes{
 	width: 1377px !important;
 	height: 178px !important;
 	resize: none;
+}
+
+.trip-dashboard-widget{
+	background-color: #d3d3d3;
+	box-shadow:5px 5px 10px rgba(0,0,0,.5);
 }
 
 /*Trip Status Monitor*/

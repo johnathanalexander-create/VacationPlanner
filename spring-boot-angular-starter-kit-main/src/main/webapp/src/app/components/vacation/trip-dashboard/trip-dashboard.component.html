@@ -6,9 +6,9 @@
 
 		 		<div id="left-side" class="inline-grid">
 		 		<!-- Trip Overview -->
-			 		<div id="trip-overview-section">
+			 		<div id="trip-overview-section" class="trip-dashboard-widget">
 			 			<ng-container>
-			 				<table style="border: 2px solid black; width: 95%; padding: 15px">
+			 				<table style="width: 95%; padding: 15px">
 			 					<tbody>
 			 						<tr>
 			 							<th class="trip-overview-tr">Primary Hotel</th>
@@ -44,7 +44,7 @@
 			 			</ng-container>
 			 		</div>
 			 		
-			 		<div id="funding-comps-credits" class="margin-top-15">
+			 		<div id="funding-comps-credits" class="margin-top-15 trip-dashboard-widget">
 				    	<table id = "fcc-table">
 				    		<thead id="fcc-header">
 				    			<tr class="fcc-row" id="fcc-header-row">
@@ -81,7 +81,7 @@
 			    <div id="right-side" class="inline-grid">
 			    
 				    <!-- Months, Weeks, Days Remaining From Trip -->
-				 	<div id="time_remaining_section" >
+				 	<div id="time_remaining_section" class="trip-dashboard-widget" >
 				        	<div class="x_remaining" id="months_remaining">
 				        		<div class="x_remaining_header">
 				        			Months<br>Remaining
@@ -108,7 +108,7 @@
 				        	</div>
 				    </div>
 				    
-					<div id="fo-tsm" class="inline-grid margin-top-15">
+					<div id="fo-tsm" class="inline-grid margin-top-15 trip-dashboard-widget">
 						<div id = "funding-overview">
 					    	<table class="width-100">
 					    		<thead>
@@ -142,9 +142,9 @@
 					    	</table>
 					    </div>
 					    
-					    <div id="trip-status-monitor" style="width: 100;">
+					    <div id="trip-status-monitor" style="width: 100;" >
 					    	<table class="width-95">
-					    		<thead>
+					    		<thead >
 					    			<tr>
 					    				<th colspan="2" class="general-overview-table-header" style="border-bottom: 2px solid gray;">Trip Status Monitor</th>
 					    			</tr>
