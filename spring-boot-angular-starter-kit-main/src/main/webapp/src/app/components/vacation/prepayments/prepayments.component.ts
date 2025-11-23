@@ -33,7 +33,7 @@ export class PrepaymentsComponent {
 			var data = {
 				vacation_id: this.selectedVacation?.id,
 				vacation: this.selectedVacation,
-				prepayment:item
+				prepayment:item,
 			}
 			
 			this.util.generateModal("prepayment", data);

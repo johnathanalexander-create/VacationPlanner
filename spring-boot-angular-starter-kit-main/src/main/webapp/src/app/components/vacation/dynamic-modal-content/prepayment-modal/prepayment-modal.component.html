@@ -3,7 +3,7 @@
 <!-- Don't forget the [formGroup] -->
 <!-- <form (submit)="saveNewPrepayment()">-->
 <form (submit)="saveNewPrepayment()" [formGroup] = "newPrepaymentFormGroup">
-	<h2 mat-dialog-title>New Prepayment</h2>
+	<h2 mat-dialog-title>Prepayments</h2>
 	
 	<mat-dialog-content>
 		<div class="form-group">
@@ -104,7 +104,21 @@
 	       			}
 	     		</mat-form-field>
 	     		
+	     		<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Notes</mat-label>
+					<input matInput formControlName="notes" type="text" autocomplete="off">
+					@if (isFieldInvalid('notes')) {
+		           		<mat-error>
+				            @if (newPrepaymentFormGroup.get('notes')?.errors?.['maxlength']) {
+				              This field must not exceed 150 characters
+				            }
+		          		</mat-error>
+		        	}
+				</mat-form-field>
+	     		
 	     		<mat-checkbox formControlName="isRefundable">Refundable</mat-checkbox>
+	     		<mat-checkbox *ngIf="newPrepaymentFormGroup.get('isRefundable')?.value == true" formControlName="isRefundRequested">Refund Requested</mat-checkbox>
+	     		<mat-checkbox *ngIf="newPrepaymentFormGroup.get('isRefundRequested')?.value == true" formControlName="isRefundReceived">Refund Received</mat-checkbox>
 
 			</div>
 			

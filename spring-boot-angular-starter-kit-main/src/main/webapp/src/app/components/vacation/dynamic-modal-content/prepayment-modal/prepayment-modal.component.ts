@@ -29,8 +29,11 @@ export class PrepaymentModalComponent {
 		type: [this.modalInputData.data.prepayment.type || "", []],
 		vendor: [this.modalInputData.data.prepayment.vendor || "", [Validators.required]],
 		isRefundable: [this.modalInputData.data.prepayment.isRefundable || "", []],
+		isRefundRequested: [this.modalInputData.data.prepayment.isRefundRequested || "", []],
+		isRefundReceived: [this.modalInputData.data.prepayment.isRefundReceived || "", []],
 		amount: [this.modalInputData.data.prepayment.amount || "", [Validators.required]],
 		paymentSource: [this.modalInputData.data.prepayment.paymentSource.id || "", [Validators.required]],
+		notes: [this.modalInputData.data.prepayment.notes || "", [Validators.maxLength(150)]]
 	});
 	
 	activePrepaymentSources: PrepaymentSource[] | null = [];

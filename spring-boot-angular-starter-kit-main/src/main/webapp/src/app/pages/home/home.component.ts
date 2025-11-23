@@ -1,5 +1,5 @@
 
-import {Component, Signal, Input, effect} from '@angular/core';
+import {Component, Signal, Input, effect, ViewChild} from '@angular/core';
 
 import { TripConfigComponent } from '../../components/vacation/trip-config/trip-config.component';
 import { ConfirmationsComponent } from '../../components/vacation/confirmations/confirmations.component';
@@ -23,6 +23,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSelect } from '@angular/material/select';
 
 import { CommonModule } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
@@ -34,11 +35,12 @@ import { Subscription } from 'rxjs';
     selector: 'app-home',
     imports: [	MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
 				CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton, BudgetDashboardComponent,
-			 	FCCModalComponent, ResearchComponent],
+			 	ResearchComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  selectedVacationizer:string | null = null;
   
   selectedVacation?: Vacation | null = null;
   
@@ -94,42 +96,7 @@ export class HomeComponent {
 	}
   }
   
-  /*_getModalComponentDataItems(modalTarget:string):any{
-	var resp:any = {
-		component:null,
-		dialogConfig:{
-			vacation_id: this.selectedVacation?.id
-		}
-	}
-	switch(modalTarget){
-		case "new-prepayment":
-			resp.component = PrepaymentModalComponent;
-			break;
-		case "new-fcc":
-			resp.component = FCCModalComponent;
-			break;
-	}
-	
-	return resp;
-  }
-  
-  generateModal(modalTarget:string): void{
-	if(modalTarget){
-		const dialogConfig = new MatDialogConfig();
-		
-		var dialogConfigData = this._getModalComponentDataItems(modalTarget);
-		dialogConfig.data = dialogConfigData.dialogConfig;
-		
-		const dialog = this.dialog.open(dialogConfigData.component, dialogConfig);
-		
-		
-		dialog.afterClosed().subscribe(result=>{
-			
-		})
-	}
-  }*/
-  
-  processAllVacations(body: any){console.log(body);
+  processAllVacations(body: any){
 	for(var index = 0; index<body.length; index++){
 		const vacation = body[index];
 		
@@ -139,7 +106,7 @@ export class HomeComponent {
 	return body;
   }
   
-  processVacationList(body:any){
+  processVacationList(body:any){console.log("bodybodybody");console.log(body);
 	
 	this.vacationList = body;
 	
@@ -147,6 +114,7 @@ export class HomeComponent {
 		var vacationID = this.vacationList[0].key;
 		
 		this.setSelectedVacation(null, vacationID);
+		this.selectedVacationizer = this.vacationList[0].value;console.log(this.selectedVacationizer);
 	}
 	
 	return body;
@@ -178,12 +146,6 @@ export class HomeComponent {
 
   );
   
-  /*vacations: Signal<Vacation[] | [] | null> = toSignal(this.vacationService.getVacationsByUserId().pipe(
-	map(response => this.processAllVacations(response.body))
-		
-	), {initialValue: []}
-
-  );*/
   delete(vacation: Vacation){
 	
   }

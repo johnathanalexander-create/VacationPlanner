@@ -111,6 +111,7 @@ export class VacationProcessorService {
 				prepayment.meta.paymentSourceTooltip = "Cashback rate is " + (prepaymentCashbackRate * 100) + "%";
 			}
 			this.vacation.prepayments[count] = prepayment;
+			this.vacation.prepayments[count].amount = this.vacation.prepayments[count].amount.toFixed(2);
 		}
 		
 		this.vacation.meta.totalPrepayments = totalPrepaymentAmount;
