@@ -16,6 +16,7 @@ import { VacationControllerService } from '../../services/vacation-planner/vacat
 import { VacationProcessorService } from '../../services/vacation-processor/vacation-processor.service';
 import { VacationUpdaterService } from '../../services/vacation-updater/vacation-updater.service';
 import { WebVacationUtilityService } from '../../services/utility/web-vacation-utility.service';
+import { SnackBarService } from '../../services/snack-bar/snack-bar.service';
 
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule, MatButton } from "@angular/material/button";
@@ -53,7 +54,8 @@ export class HomeComponent {
 			  private util: WebVacationUtilityService,
 			  public dialog: MatDialog,
 			  private processor: VacationProcessorService,
-		  	  private vacationUpdater: VacationUpdaterService) {
+		  	  private vacationUpdater: VacationUpdaterService,
+		  	  private snackbar: SnackBarService) {
   	this.vacationService.getVacationsByUserId();
   }
   
@@ -146,8 +148,14 @@ export class HomeComponent {
 
   );
   
-  delete(vacation: Vacation){
-	
+  cancelTripPlanner(vacation: Vacation){
+	this.vacationService.cancelTripPlanner(vacation.id).subscribe({
+		next:(resp)=>{
+			this.snackbar.showMessage("Vacation Planner ( " + vacation.name + " ) has been cancelled.", "success");
+			
+			this.vacationUpdater.updateVacation(resp.body);
+		}
+	})
   }
   
   	

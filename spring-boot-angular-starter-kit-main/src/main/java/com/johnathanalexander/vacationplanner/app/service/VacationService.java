@@ -17,4 +17,5 @@ public interface VacationService {
 	VacationDto createVacation(VacationRequestDto vacationRequestDto, String name);
 	VacationDto updateVacation(VacationRequestDto vacationRequestDto);
 	VacationDto setFCC(Long id, String fcc);
+	VacationDto cancel(Long id);
 }

@@ -17,7 +17,8 @@ export class VacationProcessorService {
 	"prepayments":"not_started",
 	"funding_overview":"not_started",
 	"package":"not_started",
-	"tsm":"not_started"
+	"tsm":"not_started",
+	"tasks":"not_started"
   }
   
   //Process funding, comps, & credits
@@ -25,6 +26,9 @@ export class VacationProcessorService {
 	
 	if(!this.vacation){
 		this.processStatus.fcc = "error";
+		return new Promise((resolve)=>{
+			resolve(this.processStatus.fcc);
+		});
 	}
 	
 	this.processStatus.fcc = "in_progress";
@@ -188,6 +192,12 @@ export class VacationProcessorService {
   //Process the trip status monitor triggers
   async _processTripStatusMonitor(): Promise<string>{
 	
+	if(!this.vacation){
+		this.processStatus.tsm = "error";
+	}
+	
+	this.processStatus.tsm = "in_progress";
+	
 	const oneDayMS = 86400000;
 	const sevenDaysMS = oneDayMS * 7;
 	
@@ -213,8 +223,26 @@ export class VacationProcessorService {
 	
 	//End Is Today Trip Day
 	
+	this.processStatus.tsm = "complete";
+	
 	return new Promise((resolve)=>{
 		resolve(this.processStatus.package);
+	});
+  }
+  
+  async _processTasks(): Promise<string>{
+	if(!this.vacation){
+		this.processStatus.tasks = "error";
+		
+		return new Promise((resolve)=>{
+			resolve(this.processStatus.tasks);
+		});
+	}
+	
+	this.processStatus.tasks = "in_progress";
+	this.processStatus.tasks = "complete";
+	return new Promise((resolve)=>{
+		resolve(this.processStatus.tasks);
 	});
   }
   

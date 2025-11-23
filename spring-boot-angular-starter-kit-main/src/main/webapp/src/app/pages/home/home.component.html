@@ -19,7 +19,7 @@
 <button (click)="generateModal('fcc')" *ngIf="currentTab=='trip_dashboard'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New FCC</button>
 <button *ngIf="currentTab=='budget'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Budget Item</button>
 
-<button class="control-panel-button" (click)="delete(selectedVacation)" *ngIf="this.selectedVacation" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">Delete</button>
+<button class="control-panel-button" (click)="cancelTripPlanner(selectedVacation)" *ngIf="this.selectedVacation" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">Cancel Trip</button>
 
 <ng-container>
 

@@ -83,4 +83,11 @@ public class VacationController {
 		return ResponseEntity.ok(dto);
 	}
 	
+	@PutMapping("/cancel/{id}")
+	private ResponseEntity<VacationDto> cancelTripPlanner(@PathVariable("id") Long id){
+		VacationDto dto = vacationService.cancel(id);
+		
+		return ResponseEntity.ok(dto);
+	}
+	
 }

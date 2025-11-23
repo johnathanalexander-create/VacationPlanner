@@ -55,6 +55,10 @@ export class VacationControllerService {
 		return toObservable(this.loading);
 	}
 	
+	cancelTripPlanner(id: number):Observable<HttpResponse<Vacation>>{
+		return this.http.put("/api/v1/vacation/cancel/" + id, null);
+	}
+	
 	/* PREPAYMENT API REQUESTS */
 	getAllPrepaymentSources(): Observable<HttpResponse<PrepaymentSource[]>>{
 		return this.http.get("/api/v1/prepayment/getPrepaymentSources");

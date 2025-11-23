@@ -126,4 +126,15 @@ public class VacationServiceImpl implements VacationService{
 		
 		return VacationMapper.toVacationDto(response);
 	}
+	
+	public VacationDto cancel(Long id) {
+		Vacation vacationToCancel = vacationRepository.findById(id)
+				.orElseThrow(() -> VacationNotFoundException.forId(id));
+		
+		vacationToCancel.setState("Cancelled");
+		
+		Vacation response = vacationRepository.save(vacationToCancel);
+		
+		return VacationMapper.toVacationDto(response);
+	}
 }
