@@ -1,9 +1,6 @@
 package com.johnathanalexander.vacationplanner.common.config;
 
-import com.johnathanalexander.vacationplanner.blog.model.Comment;
-import com.johnathanalexander.vacationplanner.blog.model.Post;
-import com.johnathanalexander.vacationplanner.blog.repository.CommentRepository;
-import com.johnathanalexander.vacationplanner.blog.repository.PostRepository;
+import com.johnathanalexander.vacationplanner.TODO;
 import com.johnathanalexander.vacationplanner.user.model.User;
 
 import org.springframework.security.access.PermissionEvaluator;
@@ -16,13 +13,17 @@ import java.util.Optional;
 @Component
 public class CustomPermissionEvaluator implements PermissionEvaluator {
 
-    private final PostRepository postRepository;
-    private final CommentRepository commentRepository;
+    //private final PostRepository postRepository;
+    //private final CommentRepository commentRepository;
 
-    public CustomPermissionEvaluator(PostRepository postRepository, CommentRepository commentRepository) {
-        this.postRepository = postRepository;
-        this.commentRepository = commentRepository;
-    }
+   // public CustomPermissionEvaluator(PostRepository postRepository, CommentRepository commentRepository) {
+        //this.postRepository = postRepository;
+        //this.commentRepository = commentRepository;
+   // }
+	
+	public CustomPermissionEvaluator() {
+		
+	}
 
     @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
@@ -45,33 +46,21 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
     }
 
     @Override
+    @TODO("Look into this and evaluate its usefulness")
     public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType, Object permission) {
         if (authentication == null || !(targetId instanceof Long) || targetType == null || permission == null) {
             return false;
         }
 
         User user = (User) authentication.getPrincipal();
+        /*case "POST" -> isPostAuthor(user, targetId);
+        case "COMMENT" -> isCommentAuthor(user, targetId);
+        default -> false;*/
 
+        
         return switch (targetType.toUpperCase()) {
-            case "POST" -> isPostAuthor(user, targetId);
-            case "COMMENT" -> isCommentAuthor(user, targetId);
-            default -> false;
+        	case "ANY" -> true;
+        	default -> false;
         };
-    }
-
-    private boolean isPostAuthor(User user, Serializable targetId) {
-        Long postId = (Long) targetId;
-
-        Optional<Post> optionalPost = postRepository.findById(postId);
-
-        return optionalPost.isPresent() && optionalPost.get().getAuthor().equals(user);
-    }
-
-    private boolean isCommentAuthor(User user, Serializable targetId) {
-        Long commentId = (Long) targetId;
-
-        Optional<Comment> optionalComment = commentRepository.findById(commentId);
-
-        return optionalComment.isPresent() && optionalComment.get().getAuthor().equals(user);
     }
 }

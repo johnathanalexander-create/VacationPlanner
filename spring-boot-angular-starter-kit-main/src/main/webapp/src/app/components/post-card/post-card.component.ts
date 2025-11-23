@@ -6,7 +6,6 @@ import {TruncatePipe} from "../../pipes/truncate/truncate.pipe";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {DeleteConfirmationDialogComponent} from "../shared/delete-confirmation-dialog/delete-confirmation-dialog.component";
-import Post from "../../models/blog/post.model";
 import {DatePipe} from "@angular/common";
 
 @Component({
@@ -16,7 +15,7 @@ import {DatePipe} from "@angular/common";
     styleUrl: './post-card.component.scss'
 })
 export class PostCardComponent {
-  post = input.required<Post>();
+  //post = input.required<Post>();
 
   constructor(
     private router: Router,

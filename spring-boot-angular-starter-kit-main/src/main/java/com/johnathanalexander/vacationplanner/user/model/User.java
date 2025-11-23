@@ -5,8 +5,6 @@ import com.johnathanalexander.vacationplanner.admin.model.Role;
 import com.johnathanalexander.vacationplanner.app.model.Vacation;
 import com.johnathanalexander.vacationplanner.auth.model.ActivationToken;
 import com.johnathanalexander.vacationplanner.auth.model.BlacklistedToken;
-import com.johnathanalexander.vacationplanner.blog.model.Comment;
-import com.johnathanalexander.vacationplanner.blog.model.Post;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -50,16 +48,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     @JsonIgnore
     private Set<Role> roles = new HashSet<>();
-
-    //TODO To be removed
-    @OneToMany(mappedBy = "author")
-    @JsonIgnore
-    private Set<Post> posts = new HashSet<>();
-
-    //TODO To be removed
-    @OneToMany(mappedBy = "author")
-    @JsonIgnore
-    private Set<Comment> comments = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
@@ -156,22 +144,6 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public Set<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
     }
 
     public Set<ActivationToken> getActivationTokens() {

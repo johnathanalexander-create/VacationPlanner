@@ -7,13 +7,9 @@ import {ActivateAccountComponent} from "./pages/auth/activate-account/activate-a
 import {DefaultComponent} from "./layouts/default/default.component";
 import {NotFoundComponent} from "./pages/not-found/not-found.component";
 import {ForgotPasswordComponent} from "./pages/auth/forgot-password/forgot-password.component";
-import {MyPostsComponent} from "./pages/posts/my-posts/my-posts.component";
-import {PostFormComponent} from "./pages/posts/post-form/post-form.component";
 import {UsersComponent} from "./pages/admin/users/users.component";
 import {RolesComponent} from "./pages/admin/roles/roles.component";
 import {ProfileComponent} from "./pages/profile/profile.component";
-import {PostDetailComponent} from "./pages/posts/post-detail/post-detail.component";
-import {AllPostsComponent} from "./pages/posts/all-posts/all-posts.component";
 import {authGuard} from "./guards/auth/auth.guard";
 import {ResetPasswordComponent} from "./pages/auth/reset-password/reset-password.component";
 import { CreateNewVacationComponent } from './components/vacation/create-new-vacation/create-new-vacation.component';
@@ -46,36 +42,11 @@ export const routes: Routes = [
         title: 'User profile',
         component: ProfileComponent
       },
-      {
-        path: 'all-posts',
-        title: 'Posts list',
-        component: AllPostsComponent
-      },
-      {
-        path: 'my-posts',
-        title: 'My posts',
-        component: MyPostsComponent
-      },
 	  {
 		path:'app-create-new-vacation',
 		title:"Create New Vacation",
 		component: CreateNewVacationComponent
 	  },
-      {
-        path: 'post-form',
-        title: 'Post form',
-        component: PostFormComponent
-      },
-      {
-        path: 'post/edit/:id',
-        title: 'Post Update',
-        component: PostFormComponent
-      },
-      {
-        path: 'post/:id',
-        title: 'Post details',
-        component: PostDetailComponent
-      },
       {
         path: 'admin', children: [
           {
