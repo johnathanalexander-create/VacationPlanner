@@ -9,8 +9,6 @@ export default interface User {
   email: string;
   accountLocked: boolean;
   enabled: boolean;
-  //posts?: Post[];
-  //comments?: Comment[];
   roles: Role[];
   roleIds: number[];
 }
