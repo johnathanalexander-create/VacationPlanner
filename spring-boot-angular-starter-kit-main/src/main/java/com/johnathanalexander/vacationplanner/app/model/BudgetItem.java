@@ -29,6 +29,9 @@ public class BudgetItem {
 	
 	@Column(length=150)
 	private String notes;
+	
+	@Column()
+	private byte budget_item_order;
 
 	public Long getId() {
 		return id;
@@ -84,6 +87,14 @@ public class BudgetItem {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+
+	public byte getBudgetItemOrder() {
+		return budget_item_order;
+	}
+
+	public void setBudgetItemOrder(byte budget_item_order) {
+		this.budget_item_order = budget_item_order;
 	}
 	
 }

@@ -161,6 +161,7 @@ create table budget_item(
 	amount_goal decimal(7,2),
 	cash_requirement decimal(5,0),
 	notes varchar(150),
+	budget_item_order tinyint,
 	foreign key (vacation_id)
 	references vacation(id) on delete cascade
 );

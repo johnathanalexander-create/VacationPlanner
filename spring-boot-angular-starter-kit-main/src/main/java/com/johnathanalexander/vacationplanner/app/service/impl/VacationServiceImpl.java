@@ -17,14 +17,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.johnathanalexander.vacationplanner.TODO;
+import com.johnathanalexander.vacationplanner.app.dto.BudgetItemDto;
+import com.johnathanalexander.vacationplanner.app.dto.ConfirmationDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentDto;
+import com.johnathanalexander.vacationplanner.app.dto.SpaDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationConfigItemDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationRequestDto;
+import com.johnathanalexander.vacationplanner.app.enums.VacationState;
 import com.johnathanalexander.vacationplanner.app.exception.VacationNotFoundException;
 import com.johnathanalexander.vacationplanner.app.mapper.VacationMapper;
+import com.johnathanalexander.vacationplanner.app.model.BudgetItem;
+import com.johnathanalexander.vacationplanner.app.model.Confirmation;
 import com.johnathanalexander.vacationplanner.app.model.Prepayment;
 import com.johnathanalexander.vacationplanner.app.model.PrepaymentSource;
+import com.johnathanalexander.vacationplanner.app.model.Spa;
 import com.johnathanalexander.vacationplanner.app.model.Vacation;
 import com.johnathanalexander.vacationplanner.app.model.VacationConfig;
 import com.johnathanalexander.vacationplanner.app.model.VacationConfigItem;
@@ -72,7 +79,7 @@ public class VacationServiceImpl implements VacationService{
 		
 		Vacation vacation = new Vacation();
 		vacation.setName(vacationRequestDto.name());
-		vacation.setState("Draft");
+		vacation.setState(VacationState.IN_PLANNING.getDisplayValue());
 		vacation.setOwner(userRepository.findUserIDByEmail(user));
 		vacation.setVacationConfig(null);
 		
@@ -82,38 +89,8 @@ public class VacationServiceImpl implements VacationService{
 		return VacationMapper.toVacationDto(savedVacation);
 	}
 	
-	@TODO("Payment source should be retrieved using a findById from the id sent via the dto. Dto should implement PrepaymentSourceDto instead of the actual entity")
-	@PreAuthorize("hasRole('ROLE_USER')")
-	public VacationDto updateVacation(VacationRequestDto vacationRequestDto) {
-		
-		Vacation updatedVacation = vacationRepository.findById(vacationRequestDto.id())
-				.orElseThrow(() -> VacationNotFoundException.forId(vacationRequestDto.id()));
-
-		updatedVacation.setName(vacationRequestDto.name());
-		updatedVacation.setState(vacationRequestDto.state());
-		updatedVacation.setNotes(vacationRequestDto.notes());
-		updatedVacation.setFundingCompsCredits(vacationRequestDto.funding_comps_credits());
-		
-		//Need to update Prepayments; Spas, Budget Items, Config, Confirmations
-		
-		
-		List<PrepaymentDto> prepaymentDtoList = new ArrayList<>(vacationRequestDto.prepayments());//Incoming from UI
+	private Set<Prepayment> generatePrepaymentsForUpdatedVacation(Vacation updatedVacation, List<PrepaymentDto> prepaymentDtoList){
 		Set<Prepayment> prepayments = new HashSet<>();//What we are converting UI prepayments into
-		
-		/*List<PrepaymentDto> existingPrepayments = prepaymentDtoList.stream()
-													.filter(pp -> pp.id() != 0)
-													.collect(Collectors.toList());
-		
-		List<PrepaymentDto> newPrepayments = prepaymentDtoList.stream()
-												.filter(pp -> pp.id() == 0)
-												.collect(Collectors.toList());*/
-		
-		/*for(PrepaymentDto ppDto : existingPrepayments) {
-			Prepayment existingPrepayment = updatedVacation.getPrepayments().stream()
-												.filter(prepayment -> prepayment.getId() == ppDto.id())
-												.findFirst()
-												.orElse(null)
-		}*/
 		
 		for(PrepaymentDto dto : prepaymentDtoList) {
 			Prepayment prepayment = updatedVacation.getPrepayments().stream()
@@ -144,7 +121,52 @@ public class VacationServiceImpl implements VacationService{
 			
 		}
 		
-		updatedVacation.setPrepayments(prepayments);
+		return prepayments;
+	}
+	
+
+	private Set<Confirmation> generateConfirmationsForUpdatedVacation(Vacation vacation, List<ConfirmationDto> confirmationDtoList){
+		return null;
+	}
+
+	private Set<Spa> generateSpaForUpdatedVacation(Vacation vacation, List<SpaDto> spaDtoList){
+		return null;
+	}
+	private Set<VacationConfigItem> generateVacationConfigItemsForUpdatedVacation(Vacation vacation, List<VacationConfigItemDto> vciDtoList){
+		return null;
+	}
+	private Set<BudgetItem> generateBudgetItemsForUpdatedVacation(Vacation vacation, List<BudgetItemDto> budgetItemDtoList){
+		return null;
+	}
+	
+	@TODO("Payment source should be retrieved using a findById from the id sent via the dto. Dto should implement PrepaymentSourceDto instead of the actual entity")
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public VacationDto updateVacation(VacationRequestDto vacationRequestDto) {
+		
+		Vacation updatedVacation = vacationRepository.findById(vacationRequestDto.id())
+				.orElseThrow(() -> VacationNotFoundException.forId(vacationRequestDto.id()));
+
+		List<PrepaymentDto> prepaymentDtoList = new ArrayList<>(vacationRequestDto.prepayments());
+		//List<ConfirmationDto> confirmationDtoList = new ArrayList<>(vacationRequestDto.confirmations());
+		//List<SpaDto> spaDtoList = new ArrayList<>(vacationRequestDto.spas());
+		
+		updatedVacation.setName(vacationRequestDto.name());
+		updatedVacation.setState(vacationRequestDto.state());
+		updatedVacation.setNotes(vacationRequestDto.notes());
+		updatedVacation.setFundingCompsCredits(vacationRequestDto.funding_comps_credits());
+		updatedVacation.setPrepayments(this.generatePrepaymentsForUpdatedVacation(updatedVacation, prepaymentDtoList));
+		//updatedVacation.setSpas(this.generateSpaForUpdatedVacation(updatedVacation, spaDtoList));//Populate the null
+		//updatedVacation.setConfirmations(this.generateConfirmationsForUpdatedVacation(updatedVacation, confirmationDtoList));
+		
+		//Need to update Prepayments; Spas, Budget Items, Config, Confirmations
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
