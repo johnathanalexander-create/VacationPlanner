@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +46,7 @@ public class PrepaymentServiceImpl implements PrepaymentService{
 		}).collect(Collectors.toList());
 	}
 	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public VacationDto savePrepayment(PrepaymentRequestDto dto) {
 		
 		Vacation vacation = vacationRepository.findById(dto.vacation_id())

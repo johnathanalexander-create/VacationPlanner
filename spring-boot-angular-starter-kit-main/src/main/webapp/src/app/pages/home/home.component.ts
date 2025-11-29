@@ -32,6 +32,8 @@ import { map } from "rxjs/operators";
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+import { AuthService } from '../../services/auth/auth.service';
+
 @Component({
     selector: 'app-home',
     imports: [	MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
@@ -49,21 +51,32 @@ export class HomeComponent {
   
   vacationList?: Array<any>;
   currentTab: string = "";
+  isAdmin: boolean = false;
   
   constructor(private vacationService: VacationControllerService,
 			  private util: WebVacationUtilityService,
 			  public dialog: MatDialog,
 			  private processor: VacationProcessorService,
 		  	  private vacationUpdater: VacationUpdaterService,
-		  	  private snackbar: SnackBarService) {
+		  	  private snackbar: SnackBarService,
+		  	  private authService: AuthService) {
   	this.vacationService.getVacationsByUserId();
+	
   }
+  
+  async getIsAdmin(){
+  	const isAdmin = await (this.authService.isAdmin());
+  	
+  	this.isAdmin = isAdmin;
+    }
   
   ngOnInit(){
 	this.dataSubscription = this.vacationUpdater.sharedData$.subscribe(data=>{
 		
 		this.selectedVacation = data;
 	});
+	
+	this.getIsAdmin();
   }
   ngOnDestroy(){
 	this.dataSubscription?.unsubscribe();

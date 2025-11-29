@@ -70,7 +70,7 @@ export class SidebarComponent {
 		}
 		
 		var prepaymentMenuItem = {
-			name: 'Prepayments',
+			name: 'Manage Prepayments',
 			link: '',
 			icon: 'admin_panel_settings',
 			submenu: [
@@ -79,8 +79,18 @@ export class SidebarComponent {
 			]
 		}
 		
+		var configItemMenuItem = {
+			name: 'Manage Vacation Config',
+			link: '',
+			icon: 'admin_panel_settings',
+			submenu: [
+				{name: 'Manage Config Item Templates', link: '', icon: 'card', submenu:[]}
+			]
+		}
+		
 		this.menuItems.push(adminMenuItem);
 		this.menuItems.push(prepaymentMenuItem);
+		this.menuItems.push(configItemMenuItem);
 	}
   }
   

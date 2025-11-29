@@ -23,8 +23,22 @@ import {VacationUpdaterService} from '../../../../services/vacation-updater/vaca
   styleUrl: './prepayment-modal.component.scss'
 })
 export class PrepaymentModalComponent {
-	newPrepaymentFormGroup = this.formBuilder.group({
+	/*newPrepaymentFormGroup = this.formBuilder.group({
 		vacation_id: [this.modalInputData.vacation_id, []],
+		description: [this.modalInputData.data.prepayment.description || "", [Validators.required, Validators.maxLength(100)]],
+		type: [this.modalInputData.data.prepayment.type || "", []],
+		vendor: [this.modalInputData.data.prepayment.vendor || "", [Validators.required]],
+		isRefundable: [this.modalInputData.data.prepayment.isRefundable || "", []],
+		isRefundRequested: [this.modalInputData.data.prepayment.isRefundRequested || "", []],
+		isRefundReceived: [this.modalInputData.data.prepayment.isRefundReceived || "", []],
+		amount: [this.modalInputData.data.prepayment.amount || "", [Validators.required]],
+		paymentSource: [this.modalInputData.data.prepayment.paymentSource.id || "", [Validators.required]],
+		notes: [this.modalInputData.data.prepayment.notes || "", [Validators.maxLength(150)]]
+	});*/
+	
+	newPrepaymentFormGroup = this.formBuilder.group({
+		id: [this.modalInputData.data.prepayment.id || 0, []],
+		vacation_id: [this.modalInputData.data.vacation_id, []],
 		description: [this.modalInputData.data.prepayment.description || "", [Validators.required, Validators.maxLength(100)]],
 		type: [this.modalInputData.data.prepayment.type || "", []],
 		vendor: [this.modalInputData.data.prepayment.vendor || "", [Validators.required]],
@@ -65,7 +79,20 @@ export class PrepaymentModalComponent {
 				private vacationUpdater: VacationUpdaterService ){}
 				
 	saveNewPrepayment(){
-		this.vacationService.createNewPrepayment(this.newPrepaymentFormGroup.value)
+		/*this.vacationService.createNewPrepayment(this.newPrepaymentFormGroup.value)
+			.subscribe({
+				next: (resp: any) => {
+					this.vacationUpdater.updateVacation(resp.body);
+					
+					this.dialogRef.close();
+				}
+			});*/
+			
+		const vacation = this.modalInputData.data.vacation;
+		vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
+		vacation.prepayments.push(this.newPrepaymentFormGroup.value as Prepayment);
+			
+		this.vacationService.updateVacation(vacation)
 			.subscribe({
 				next: (resp: any) => {
 					this.vacationUpdater.updateVacation(resp.body);

@@ -3,6 +3,7 @@ package com.johnathanalexander.vacationplanner.app.service.impl;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,7 @@ public class VacationConfigItemServiceImpl implements VacationConfigItemService 
 		this.vacationRepository = vacationRepository;
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public VacationDto saveVacationConfigItem(VacationConfigItemDto dto) {
 		
 		Vacation vacation = vacationRepository.getVacationByConfigItem(dto.id());

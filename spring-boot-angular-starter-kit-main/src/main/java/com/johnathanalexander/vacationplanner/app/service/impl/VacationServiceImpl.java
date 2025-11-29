@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.johnathanalexander.vacationplanner.TODO;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationConfigItemDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
@@ -23,9 +24,11 @@ import com.johnathanalexander.vacationplanner.app.dto.VacationRequestDto;
 import com.johnathanalexander.vacationplanner.app.exception.VacationNotFoundException;
 import com.johnathanalexander.vacationplanner.app.mapper.VacationMapper;
 import com.johnathanalexander.vacationplanner.app.model.Prepayment;
+import com.johnathanalexander.vacationplanner.app.model.PrepaymentSource;
 import com.johnathanalexander.vacationplanner.app.model.Vacation;
 import com.johnathanalexander.vacationplanner.app.model.VacationConfig;
 import com.johnathanalexander.vacationplanner.app.model.VacationConfigItem;
+import com.johnathanalexander.vacationplanner.app.repository.PrepaymentSourceRepository;
 import com.johnathanalexander.vacationplanner.app.repository.VacationRepository;
 import com.johnathanalexander.vacationplanner.app.service.VacationService;
 import com.johnathanalexander.vacationplanner.user.repository.UserRepository;
@@ -36,10 +39,12 @@ public class VacationServiceImpl implements VacationService{
 	
 	private final VacationRepository vacationRepository;
 	private final UserRepository userRepository;
+	private final PrepaymentSourceRepository prepaymentSourceRepository;
 	
-	public VacationServiceImpl(VacationRepository vacationRepository, UserRepository userRepository) {
+	public VacationServiceImpl(VacationRepository vacationRepository, UserRepository userRepository, PrepaymentSourceRepository prepaymentSourceRepository) {
 		this.vacationRepository = vacationRepository;
 		this.userRepository = userRepository;
+		this.prepaymentSourceRepository = prepaymentSourceRepository;
 	}
 	
 	public VacationDto getVacationById(Long id) {
@@ -58,11 +63,11 @@ public class VacationServiceImpl implements VacationService{
 	
 	public List<Map<String, Object>> getVacationListByOwner(Long id){
 		List<Map<String, Object>> map =  vacationRepository.getVacationListByOwner(id);
-		System.out.println(map.toString());
+
 		return map;
 	}
 
-	//@PreAuthorize("hasPermission('USER', 'CREATE')")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public VacationDto createVacation(VacationRequestDto vacationRequestDto, String user) {
 		
 		Vacation vacation = new Vacation();
@@ -77,6 +82,8 @@ public class VacationServiceImpl implements VacationService{
 		return VacationMapper.toVacationDto(savedVacation);
 	}
 	
+	@TODO("Payment source should be retrieved using a findById from the id sent via the dto. Dto should implement PrepaymentSourceDto instead of the actual entity")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public VacationDto updateVacation(VacationRequestDto vacationRequestDto) {
 		
 		Vacation updatedVacation = vacationRepository.findById(vacationRequestDto.id())
@@ -84,9 +91,69 @@ public class VacationServiceImpl implements VacationService{
 
 		updatedVacation.setName(vacationRequestDto.name());
 		updatedVacation.setState(vacationRequestDto.state());
-		updatedVacation.setOwner(vacationRequestDto.owner());
 		updatedVacation.setNotes(vacationRequestDto.notes());
 		updatedVacation.setFundingCompsCredits(vacationRequestDto.funding_comps_credits());
+		
+		//Need to update Prepayments; Spas, Budget Items, Config, Confirmations
+		
+		
+		List<PrepaymentDto> prepaymentDtoList = new ArrayList<>(vacationRequestDto.prepayments());//Incoming from UI
+		Set<Prepayment> prepayments = new HashSet<>();//What we are converting UI prepayments into
+		
+		/*List<PrepaymentDto> existingPrepayments = prepaymentDtoList.stream()
+													.filter(pp -> pp.id() != 0)
+													.collect(Collectors.toList());
+		
+		List<PrepaymentDto> newPrepayments = prepaymentDtoList.stream()
+												.filter(pp -> pp.id() == 0)
+												.collect(Collectors.toList());*/
+		
+		/*for(PrepaymentDto ppDto : existingPrepayments) {
+			Prepayment existingPrepayment = updatedVacation.getPrepayments().stream()
+												.filter(prepayment -> prepayment.getId() == ppDto.id())
+												.findFirst()
+												.orElse(null)
+		}*/
+		
+		for(PrepaymentDto dto : prepaymentDtoList) {
+			Prepayment prepayment = updatedVacation.getPrepayments().stream()
+										.filter(pp -> pp.getId() == dto.id())
+										.findFirst()
+										.orElseGet(() ->{
+											return new Prepayment();
+										});
+			//implement this
+			//PrepaymentSource paymentSource = prepaymentSourceRepository.findById(dto.payment)
+			
+			prepayment.setDescription(dto.description());
+			prepayment.setType(dto.type());
+			prepayment.setVendor(dto.vendor());
+			prepayment.setIsRefundable(dto.isRefundable());
+			prepayment.setIsRefundRequested(dto.isRefundRequested());
+			prepayment.setIsRefundReceived(dto.isRefundReceived());
+			prepayment.setAmount(dto.amount());
+			prepayment.setPaymentSource(dto.paymentSource());//Update this
+			prepayment.setNotes(dto.notes());
+			
+			if(prepayment.getVacation() == null) {
+				prepayment.setVacation(updatedVacation);
+			}
+			
+			prepayments.add(prepayment);
+			
+			
+		}
+		
+		updatedVacation.setPrepayments(prepayments);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//Set<Prepayment> prepayments = new HashSet<>();
 		//List<PrepaymentDto> prepaymentDtoList = new ArrayList<>(vacationRequestDto.prepayments());
