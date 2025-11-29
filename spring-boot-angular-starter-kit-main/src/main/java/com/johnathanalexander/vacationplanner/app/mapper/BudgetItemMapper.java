@@ -22,7 +22,8 @@ public class BudgetItemMapper {
 			item.getAmount(),
 			item.getGoalAmount(),
 			item.getCashRequirement(),
-			item.getNotes()
+			item.getNotes(),
+			item.getBudgetItemOrder()
 		);
 	}
 }

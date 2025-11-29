@@ -8,7 +8,8 @@ public record BudgetItemDto(
 			BigDecimal amount,
 			BigDecimal amountGoal,
 			BigDecimal cashRequirement,
-			String notes
+			String notes,
+			byte order
 		) {
 
 }

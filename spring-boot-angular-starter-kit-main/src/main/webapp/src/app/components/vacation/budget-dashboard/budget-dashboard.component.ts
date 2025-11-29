@@ -2,24 +2,32 @@ import { Component, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import Vacation from '../../../models/vacation-planner/vacation.model';
 import BudgetItem from '../../../models/vacation-planner/budget_item.model';
 import {VacationUpdaterService} from '../../../services/vacation-updater/vacation-updater.service';
 import {Subscription} from 'rxjs';
 import {BudgetItemModalComponent} from '../dynamic-modal-content/budget-item-modal-component/budget-item-modal-component.component';
+import { ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-budget-dashboard',
-  imports: [MatTableModule, MatTooltipModule],
+  imports: [MatTableModule, MatTooltipModule, MatSort],
   templateUrl: './budget-dashboard.component.html',
   styleUrl: './budget-dashboard.component.scss'
 })
 export class BudgetDashboardComponent {
 	@Input()
 	set selectedVacation(value: Vacation){
-		this.dataSource.data = value.budgetItems;
+		//this.dataSource.data = value.budgetItems;
+		this.dataSource = new MatTableDataSource<BudgetItem>(value.budgetItems);
+		this.dataSource.sort = this.sort;
 	}
+	
+	dataSource = new MatTableDataSource<BudgetItem>([]);//dataSource = new MatTableDataSource<BudgetItem>();
+	
+	@ViewChild(MatSort) sort!: MatSort;
 	
 	constructor(private vacationUpdater: VacationUpdaterService, private dialog:MatDialog){}
 	
@@ -30,6 +38,9 @@ export class BudgetDashboardComponent {
 			console.log("new thing happening");console.log(data);
 			this.selectedVacation = data;
 		});
+	}
+	ngAfterViewInit(){
+		this.dataSource.sort = this.sort;
 	}
 	editBudgetItem(budgetItem: BudgetItem){
 		if(budgetItem){
@@ -49,5 +60,5 @@ export class BudgetDashboardComponent {
 	
 	displayedColumns:string[] = ["item", "amount", "amountGoal", "cashRequirement", "notes"];
 								 
-	dataSource = new MatTableDataSource<BudgetItem>();
+	
 }
