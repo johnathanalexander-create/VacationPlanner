@@ -149,11 +149,13 @@ export class HomeComponent {
   );
   
   cancelTripPlanner(vacation: Vacation){
-	this.vacationService.cancelTripPlanner(vacation.id).subscribe({
+	vacation.state = "Cancelled";
+	vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
+	this.vacationService.updateVacation(vacation).subscribe({
 		next:(resp)=>{
 			this.snackbar.showMessage("Vacation Planner ( " + vacation.name + " ) has been cancelled.", "success");
 			
-			this.vacationUpdater.updateVacation(resp.body);
+			this.vacationUpdater.updateVacation(resp);
 		}
 	})
   }

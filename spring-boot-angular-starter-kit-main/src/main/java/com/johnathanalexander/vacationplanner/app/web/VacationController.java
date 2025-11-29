@@ -47,6 +47,17 @@ public class VacationController {
         return ResponseEntity.ok(vacationDTO);
     }
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/list/{id}")
 	private ResponseEntity<List<Map<String, Object>>> getListOfVacationsByOwnerID(@PathVariable("id") Long id){
 		List<Map<String, Object>> vacationMap = vacationService.getVacationListByOwner(id);
@@ -69,23 +80,25 @@ public class VacationController {
 		return ResponseEntity.ok(list);
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@PutMapping()
 	private ResponseEntity<VacationDto> updateVacation(@RequestBody VacationRequestDto vacation){
+		System.out.println("RUNNING THE UPDATE VACATION FUNCTION");
 		VacationDto dto = vacationService.updateVacation(vacation);
-		
-		return ResponseEntity.ok(dto);
-	}
-	
-	@PutMapping("/setFCC/{id}")
-	private ResponseEntity<VacationDto> updateFCC(@PathVariable("id") Long id, @RequestBody String fccString){		
-		VacationDto dto = vacationService.setFCC(id, fccString);
-		
-		return ResponseEntity.ok(dto);
-	}
-	
-	@PutMapping("/cancel/{id}")
-	private ResponseEntity<VacationDto> cancelTripPlanner(@PathVariable("id") Long id){
-		VacationDto dto = vacationService.cancel(id);
 		
 		return ResponseEntity.ok(dto);
 	}

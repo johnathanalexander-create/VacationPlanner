@@ -12,6 +12,8 @@ import {VacationControllerService} from '../../../../services/vacation-planner/v
 import { CommonModule } from '@angular/common';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
 
+import Vacation from '../../../../models/vacation-planner/vacation.model';
+
 
 
 
@@ -41,10 +43,12 @@ export class FCCModalComponent {
 	
 	submitFCC(){
 		
+		const vacation = this.modalInputData.data.vacation;
+		
 		var fccFromModal = this.fccItemGroup.value;
 		var createNewFCC = this.modalInputData.data.createNewFCC;
 		
-		var fcc = this.modalInputData.data.vacation.funding_comps_credits;
+		var fcc = vacation.funding_comps_credits;
 		
 		if(createNewFCC){
 			//Need to add a new object to fcc
@@ -63,12 +67,21 @@ export class FCCModalComponent {
 					}
 				}
 			}
-		}		
+		}
 		
-		this.vacationService.setFCC(fcc, this.fccItemGroup.value.vacation_id).subscribe({
+		vacation.funding_comps_credits = JSON.stringify(fcc);	
+		
+		/*this.vacationService.setFCC(fcc, this.fccItemGroup.value.vacation_id).subscribe({
 			next:(resp:any) =>{
 				this.vacationUpdater.updateVacation(resp);
 				this.dialogRef.close();				
+			}
+		})*/
+		
+		this.vacationService.updateVacation(this.modalInputData.data.vacation as Vacation).subscribe({
+			next:(resp:any) => {
+				this.vacationUpdater.updateVacation(resp);
+				this.dialogRef.close();
 			}
 		})
 	}

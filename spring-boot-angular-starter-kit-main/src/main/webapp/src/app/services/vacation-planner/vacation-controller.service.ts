@@ -55,9 +55,9 @@ export class VacationControllerService {
 		return toObservable(this.loading);
 	}
 	
-	cancelTripPlanner(id: number):Observable<HttpResponse<Vacation>>{
+	/*cancelTripPlanner(id: number):Observable<HttpResponse<Vacation>>{
 		return this.http.put("/api/v1/vacation/cancel/" + id, null);
-	}
+	}*/
 	
 	/* PREPAYMENT API REQUESTS */
 	getAllPrepaymentSources(): Observable<HttpResponse<PrepaymentSource[]>>{
@@ -73,9 +73,9 @@ export class VacationControllerService {
 	}
 	
 	/* Update FCC */
-	setFCC(fcc:any, vacation_id: number):Observable<HttpResponse<Vacation>>{		
+	/*setFCC(fcc:any, vacation_id: number):Observable<HttpResponse<Vacation>>{		
 		return this.http.put("/api/v1/vacation/setFCC/" + vacation_id, JSON.stringify(fcc));
 		
 		//return this.http.post("/api/v1/vacation/newFCC", JSON.stringify(alteredFCC), fcc.vacation_id);
-	}
+	}*/
 }

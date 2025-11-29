@@ -81,18 +81,17 @@ public class VacationServiceImpl implements VacationService{
 		
 		Vacation updatedVacation = vacationRepository.findById(vacationRequestDto.id())
 				.orElseThrow(() -> VacationNotFoundException.forId(vacationRequestDto.id()));
-		
+
 		updatedVacation.setName(vacationRequestDto.name());
 		updatedVacation.setState(vacationRequestDto.state());
 		updatedVacation.setOwner(vacationRequestDto.owner());
 		updatedVacation.setNotes(vacationRequestDto.notes());
 		updatedVacation.setFundingCompsCredits(vacationRequestDto.funding_comps_credits());
-		//updatedVacation.setFunding_comps_credits(vacationRequestDto.funding_comps_credits().toString());
 		
-		Set<Prepayment> prepayments = new HashSet<>();
-		List<PrepaymentDto> prepaymentDtoList = new ArrayList<>(vacationRequestDto.prepayments());
-		
-		for(int ppIndex = 0; ppIndex < prepaymentDtoList.size(); ppIndex++) {
+		//Set<Prepayment> prepayments = new HashSet<>();
+		//List<PrepaymentDto> prepaymentDtoList = new ArrayList<>(vacationRequestDto.prepayments());
+
+		/*for(int ppIndex = 0; ppIndex < prepaymentDtoList.size(); ppIndex++) {
 			PrepaymentDto prepaymentDto = prepaymentDtoList.get(ppIndex);
 			
 			Prepayment newPrepayment = new Prepayment();
@@ -106,17 +105,16 @@ public class VacationServiceImpl implements VacationService{
 			newPrepayment.setPaymentSource(prepaymentDto.paymentSource());
 			newPrepayment.setNotes(prepaymentDto.notes());
 			prepayments.add(newPrepayment);
-		}
-		
-		updatedVacation.setPrepayments(prepayments);		
+		}*/
+
+		//updatedVacation.setPrepayments(prepayments);		
 
 		Vacation vacation = vacationRepository.save(updatedVacation);
-			
 		return VacationMapper.toVacationDto(vacation);
 
 	}
 	
-	public VacationDto setFCC(Long id, String fcc) {
+	/*public VacationDto setFCC(Long id, String fcc) {
 		Vacation updatedVacation = vacationRepository.findById(id)
 				.orElseThrow(() -> VacationNotFoundException.forId(id));
 		
@@ -136,5 +134,5 @@ public class VacationServiceImpl implements VacationService{
 		Vacation response = vacationRepository.save(vacationToCancel);
 		
 		return VacationMapper.toVacationDto(response);
-	}
+	}*/
 }
