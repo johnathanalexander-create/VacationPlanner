@@ -8,6 +8,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PrepaymentModalComponent } from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
 import { FCCModalComponent } from '../../components/vacation/dynamic-modal-content/fcc-modal/fcc-modal.component';
 import {ConfigModalComponent} from '../../components/vacation/dynamic-modal-content/config-modal/config-modal.component';
+import {BudgetItemModalComponent} from '../../components/vacation/dynamic-modal-content/budget-item-modal-component/budget-item-modal-component.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -144,10 +145,22 @@ export class WebVacationUtilityService {
 				resp.dialogConfig.data.createNewFCC = true;
 			}
 	  		break;
+		case "bi":
+			resp.component = BudgetItemModalComponent;
+			
+			if(!resp.dialogConfig.data.budgetItem){
+				resp.dialogConfig.data.budgetItem = {
+					id:"",
+					item:"",
+					amount:"",
+					amountGoal:"",
+					cashRequirement:"",
+					notes:"",
+					order:""
+				}
+			}
+			break;
 	  }
-	  
-	  console.log("resp");
-	  console.log(resp);
 	  return resp;
   }
   

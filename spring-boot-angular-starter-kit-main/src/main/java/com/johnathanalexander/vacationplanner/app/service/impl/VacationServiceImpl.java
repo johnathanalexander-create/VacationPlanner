@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.johnathanalexander.vacationplanner.TODO;
+import com.johnathanalexander.vacationplanner.app.calculators.BudgetItemCalculator;
 import com.johnathanalexander.vacationplanner.app.dto.BudgetItemDto;
 import com.johnathanalexander.vacationplanner.app.dto.ConfirmationDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentDto;
@@ -38,6 +39,7 @@ import com.johnathanalexander.vacationplanner.app.model.VacationConfigItem;
 import com.johnathanalexander.vacationplanner.app.repository.PrepaymentSourceRepository;
 import com.johnathanalexander.vacationplanner.app.repository.VacationRepository;
 import com.johnathanalexander.vacationplanner.app.service.VacationService;
+import com.johnathanalexander.vacationplanner.common.utility.VacationConfigItemUtility;
 import com.johnathanalexander.vacationplanner.user.repository.UserRepository;
 
 @Service
@@ -135,8 +137,57 @@ public class VacationServiceImpl implements VacationService{
 	private Set<VacationConfigItem> generateVacationConfigItemsForUpdatedVacation(Vacation vacation, List<VacationConfigItemDto> vciDtoList){
 		return null;
 	}
+	
+	@TODO("Need to create a new exception for vacation config item parsing")
 	private Set<BudgetItem> generateBudgetItemsForUpdatedVacation(Vacation vacation, List<BudgetItemDto> budgetItemDtoList){
-		return null;
+		Set<BudgetItem> ret = new HashSet<>();
+		
+		//First, process the dtos into budget item objects
+		for(BudgetItemDto dto : budgetItemDtoList) {
+			BudgetItem budgetItem = vacation.getBudgetItems().stream()
+					.filter(bi -> bi.getId() == dto.id())
+					.findFirst()
+					.orElseGet(() ->{
+						return new BudgetItem();
+					});
+			
+			budgetItem.setItem(dto.item());
+			budgetItem.setAmount(dto.amount());
+			budgetItem.setGoalAmount(dto.amountGoal());
+			budgetItem.setCashRequirement(dto.cashRequirement());
+			budgetItem.setNotes(dto.notes());
+			budgetItem.setBudgetItemOrder(dto.order());
+			
+			if(budgetItem.getVacation() == null) {
+				budgetItem.setVacation(vacation);
+			}
+			
+			ret.add(budgetItem);
+		}
+		
+		
+		//Second, perform special calculations as needed
+		try {
+			//If budget buffer has been enabled, calculate the budget buffer using the budget buffer rate
+			boolean isBudgetBufferEnabled = Boolean.parseBoolean(VacationConfigItemUtility.getVCIValue(vacation.getVacationConfig(), "enable_budget_buffer"));
+			
+			if(isBudgetBufferEnabled) {
+				String budgetBufferRateStr = VacationConfigItemUtility.getVCIValue(vacation.getVacationConfig(), "budget_buffer_rate");
+				if(budgetBufferRateStr != null && !budgetBufferRateStr.equals("")) {
+					ret.stream()
+						.filter(bi -> bi.getItem() == "Budget Buffer")
+						.forEach(bi -> bi.setAmount(BudgetItemCalculator.calculateBudgetBuffer(ret, Double.parseDouble(budgetBufferRateStr))));
+				}
+				
+			}
+		}catch(Exception e) {
+			System.out.println("Unable to parse Vacation Config Item value. Unexpected data type.");
+		}
+		
+		
+		
+		
+		return ret;
 	}
 	
 	@TODO("Payment source should be retrieved using a findById from the id sent via the dto. Dto should implement PrepaymentSourceDto instead of the actual entity")
@@ -147,6 +198,7 @@ public class VacationServiceImpl implements VacationService{
 				.orElseThrow(() -> VacationNotFoundException.forId(vacationRequestDto.id()));
 
 		List<PrepaymentDto> prepaymentDtoList = new ArrayList<>(vacationRequestDto.prepayments());
+		List<BudgetItemDto> budgetItemDtoList = new ArrayList<>(vacationRequestDto.budgetItems());
 		//List<ConfirmationDto> confirmationDtoList = new ArrayList<>(vacationRequestDto.confirmations());
 		//List<SpaDto> spaDtoList = new ArrayList<>(vacationRequestDto.spas());
 		
@@ -155,6 +207,7 @@ public class VacationServiceImpl implements VacationService{
 		updatedVacation.setNotes(vacationRequestDto.notes());
 		updatedVacation.setFundingCompsCredits(vacationRequestDto.funding_comps_credits());
 		updatedVacation.setPrepayments(this.generatePrepaymentsForUpdatedVacation(updatedVacation, prepaymentDtoList));
+		updatedVacation.setBudgetItems(this.generateBudgetItemsForUpdatedVacation(updatedVacation, budgetItemDtoList));
 		//updatedVacation.setSpas(this.generateSpaForUpdatedVacation(updatedVacation, spaDtoList));//Populate the null
 		//updatedVacation.setConfirmations(this.generateConfirmationsForUpdatedVacation(updatedVacation, confirmationDtoList));
 		

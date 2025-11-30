@@ -9,12 +9,12 @@ public record VacationRequestDto(
 									
 									@NotBlank(message="The vacation planner needs a name")
 									String name,
-									
 									String state,
 									Long owner,
 									String notes,
 									VacationConfigDto config,
 									Set<PrepaymentDto> prepayments,
+									Set<BudgetItemDto> budgetItems,
 									String funding_comps_credits
 								) {
 }

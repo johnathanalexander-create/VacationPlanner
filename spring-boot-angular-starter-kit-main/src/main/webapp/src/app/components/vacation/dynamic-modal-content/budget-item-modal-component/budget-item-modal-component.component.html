@@ -1,11 +1,15 @@
 
 
 <form (submit) = "updateBudgetItem()" [formGroup] = "updateBudgetItemGroup">
-	<h1 mat-dialog-title>Update Budget Item: <span style="text-decoration: underline">{{modalInputData.budgetItem.item}}</span></h1>
+	<h1 mat-dialog-title>Update Budget Item: <span style="text-decoration: underline">{{modalInputData.data.budgetItem.item}}</span></h1>
 	
 	<mat-dialog-content>
 		<div class="form-group">
 			<div><!-- Used to adjust size of all fields here to full width -->
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Item</mat-label>
+					<input matInput formControlName="item" type="text" autocomplete = "off">
+				</mat-form-field>
 				<mat-form-field appearance="outline" class="form-field mt-2">
 					<mat-label>Amount</mat-label>
 					<input matInput formControlName="amount" type="text" autocomplete = "off">
@@ -31,6 +35,6 @@
 	</mat-dialog-content>
 	<mat-dialog-actions style="float: right;">
 		<button mat-button [mat-dialog-close] = "false">Close</button>
-		<button type="submit" mat-flat-button color="primary" [disabled] = "updateBudgetItemGroup.invalid">Update Budget Item</button>
+		<button type="submit" mat-flat-button color="primary" [disabled] = "updateBudgetItemGroup.invalid">Save Budget Item</button>
 	</mat-dialog-actions>
 </form>
