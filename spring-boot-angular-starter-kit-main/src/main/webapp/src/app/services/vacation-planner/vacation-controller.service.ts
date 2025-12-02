@@ -34,6 +34,9 @@ export class VacationControllerService {
   getVacationByID(vacation_id:number): Observable<HttpResponse<Vacation>>{
 	return this.http.get("/api/v1/vacation/getVacation/" + vacation_id);
   }
+  deleteBudgetItem(budgetItemId:number):Observable<HttpResponse<Vacation>>{
+	return this.http.delete("/api/v1/vacation/deleteBudgetItem/" + budgetItemId);
+  }
   getVacationsByUserId(): Observable<HttpResponse<Vacation[]>>{
 	this.loading.set(true);
 	

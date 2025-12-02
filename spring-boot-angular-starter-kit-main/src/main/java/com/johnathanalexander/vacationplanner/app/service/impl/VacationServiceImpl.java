@@ -61,6 +61,11 @@ public class VacationServiceImpl implements VacationService{
 		
 		return VacationMapper.toVacationDto(vacation.get());
 	}
+	
+	@TODO("populate this")
+	public VacationDto deleteBudgetItem(Long id) {
+		return null;
+	}
 
 	public List<VacationDto> getAllVacationsByOwner(Long id) {
 		List<Vacation> vacationList = vacationRepository.getAllVacationsByOwner(id);
@@ -161,6 +166,8 @@ public class VacationServiceImpl implements VacationService{
 			if(budgetItem.getVacation() == null) {
 				budgetItem.setVacation(vacation);
 			}
+			
+			System.out.println(budgetItem.toString());
 			
 			ret.add(budgetItem);
 		}

@@ -30,7 +30,7 @@ export class BudgetItemModalComponent {
 	
 	updateBudgetItemGroup = this.formBuilder.group({
 		vacation_id: [this.modalInputData.vacation_id, []],
-		id: [this.modalInputData.data.id, []],
+		id: [this.modalInputData.data.budgetItem.id, []],
 		item: [this.modalInputData.data.budgetItem.item, []],
 		amount: [this.modalInputData.data.budgetItem.amount, []],
 		amountGoal: [this.modalInputData.data.budgetItem.amountGoal, []],
@@ -45,25 +45,57 @@ export class BudgetItemModalComponent {
 				@Inject(MAT_DIALOG_DATA) public modalInputData: any,
 				private vacationUpdater: VacationUpdaterService ){}
 				
-	updateBudgetItem(){console.log("update budget item 1");
+	/*delete(){
+		var vacation = this.modalInputData.data.vacation;
+		
+		var budgetItems:BudgetItem[] = vacation.budgetItems;
+		
+		budgetItems.forEach((budgetItem: BudgetItem, index: number) => {
+			if(budgetItem.id == this.updateBudgetItemGroup.value.id && budgetItem.id > 0){
+				//vacation.budgetItems.splice(index, 1);
+				//vacation.budgetItems = vacation.budgetItems.filter(bi:any => bi.id != budgetItem.id);
+				budgetItems = budgetItems.splice(index, 1);
+			}
+		});
+		
+		console.log(budgetItems);
+		
+		vacation.budgetItems = budgetItems;
+		
+		vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
+		
+		this.vacationService.updateVacation(vacation)
+			.subscribe({
+				next: (resp:any) => {
+					
+				}
+			})
+	}*/
+	
+	delete(){
+		var vacation = this.modalInputData.data.vacation;
+		var budgetItems:BudgetItem[] = vacation.budgetItems;
+		
+		budgetItems.forEach((budgetItem: BudgetItem, index: number) => {
+			if(budgetItem.id == this.updateBudgetItemGroup.value.id && budgetItem.id > 0){
+				this.vacationService.deleteBudgetItem(budgetItem.id);
+			}
+		});
+	}
+				
+	updateBudgetItem(){
 		const vacation = this.modalInputData.data.vacation;
 		
 		
 		var biGroup = this.updateBudgetItemGroup.value;
 		var budgetItems:BudgetItem[] = vacation?.budgetItems;
-		console.log("update budget item 2");
-		
-		console.log("budgetItems:");
-		console.log(budgetItems);
-		
-		console.log("vacation:");
-		console.log(vacation);
 		
 		if(budgetItems && budgetItems.length > 0){
 			var updated = false;
-			console.log("update budget item 3");
+
 			budgetItems.forEach(budgetItem => {
-				if(biGroup.id == budgetItem.id && budgetItem.id != null){console.log("update budget item 4");
+
+				if(biGroup.id == budgetItem.id && budgetItem.id > 0){
 					budgetItem.item = biGroup.item;
 					budgetItem.amount = biGroup.amount;
 					budgetItem.amountGoal = biGroup.amountGoal;
@@ -72,15 +104,15 @@ export class BudgetItemModalComponent {
 					updated = true;
 				}
 			});
-			console.log("update budget item 5");
+
 			vacation.budgetItems = budgetItems;
 			
 			if(!updated){
 				vacation.budgetItems.push(biGroup as BudgetItem);
 			}
-			console.log("update budget item 6");
+
 			vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
-			console.log("update budget item 7");
+
 			this.vacationService.updateVacation(vacation)
 				.subscribe({
 					next: (resp:any) => {

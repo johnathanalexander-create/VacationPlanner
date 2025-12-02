@@ -2,13 +2,29 @@
 	<h2 mat-dialog-title>Create New Vacation</h2>
 	<mat-dialog-content>
 		<div class="form-group">
-			<mat-form-field appearance="outline" class="form-field mt-2">
-				<mat-label>New Vacation Planner Name</mat-label>
-				<input matInput formControlName = "name" type="text" autocomplete = "off">
-			</mat-form-field>
+			<div>
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>New Vacation Planner Name</mat-label>
+					<input matInput formControlName = "name" type="text" autocomplete = "off">
+				</mat-form-field>
+				
+				<mat-form-field appearance="outline" class="form-field mt-2">
+					<mat-label>Apply Vacation Template</mat-label>
+					<mat-select formControlName="template" value="selectedValue">
+						<mat-option value = "">None</mat-option>
+						<mat-option value = "General">General</mat-option>
+						<mat-option value = "UO">Universal Orlando</mat-option>
+						<mat-option value = "Vegas">Las Vegas</mat-option>
+						<mat-option value = "Cruise">Cruise</mat-option>
+					</mat-select>
+				</mat-form-field>
+				
+				<mat-checkbox>Enable Budget Buffer</mat-checkbox>
+			</div>
+			
 		</div>
 	</mat-dialog-content>
-	<mat-dialog-actions>
+	<mat-dialog-actions style="float:right">
 		<button mat-button [mat-dialog-close]="false">Cancel</button>
     	<button type="submit" mat-flat-button color="primary" [disabled]="vacationFormGroup.invalid">Save</button>
 	</mat-dialog-actions>

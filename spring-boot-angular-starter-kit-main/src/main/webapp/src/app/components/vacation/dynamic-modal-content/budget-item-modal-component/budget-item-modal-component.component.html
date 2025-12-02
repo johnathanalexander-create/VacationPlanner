@@ -35,6 +35,7 @@
 	</mat-dialog-content>
 	<mat-dialog-actions style="float: right;">
 		<button mat-button [mat-dialog-close] = "false">Close</button>
+		<button mat-button color="warn" (click)="delete()">Delete</button>
 		<button type="submit" mat-flat-button color="primary" [disabled] = "updateBudgetItemGroup.invalid">Save Budget Item</button>
 	</mat-dialog-actions>
 </form>

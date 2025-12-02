@@ -1,18 +1,4 @@
-drop table if exists sticky_note;
-drop table if exists budget_item;
-drop table if exists spa;
-drop table if exists prepayment_source;
-drop table if exists confirmation;
-drop table if exists task;
-drop table if exists task_group;
-drop table if exists prepayment;
-drop table if exists calculated_report_data_item;
-drop table if exists report_data_item;
-drop table if exists report_header;
-drop table if exists report;
-drop table if exists vacation_config_item;
-drop table if exists vacation_config;
-drop table if exists vacation;
+drop database if exists vacation_db;
 
 create table vacation
 (
@@ -182,6 +168,36 @@ create table message(
 	foreign key (sticky_note_id)
 	references sticky_note(id) on delete cascade
 );
+
+/*Packing*/
+
+create table luggage_set(
+	id bigint primary key AUTO_INCREMENT,
+	vacation_id bigint not null,
+	title varchar(50) not null,
+	foreign key (vacation_id)
+	references vacation(id) on delete cascade
+);
+
+create table pack_set(
+	id bigint primary key AUTO_INCREMENT,
+	luggage_set_id bigint not null,
+	title varchar(50) not null,
+	foreign key (luggage_set_id)
+	references luggage_set(id) on delete cascade
+);
+
+create table packed_item(
+	id bigint primary key AUTO_INCREMENT,
+	luggage_set_id bigint not null,
+	title varchar(50) not null,
+	status ENUM('Yes', 'No', 'WIP') default 'No',
+	mandatory ENUM('Mandatory', 'Recommended', 'Optional') default 'Mandatory',
+	foreign key (luggage_set_id)
+	references luggage_set(id) on delete cascade
+);
+
+/*End of Packing*/
 
 
 

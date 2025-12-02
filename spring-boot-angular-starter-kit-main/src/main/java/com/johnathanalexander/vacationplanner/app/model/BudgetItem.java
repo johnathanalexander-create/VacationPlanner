@@ -97,4 +97,9 @@ public class BudgetItem {
 		this.budget_item_order = budget_item_order;
 	}
 	
+	@Override
+	public String toString() {
+		return "id: " + id + " / item name: " + item + " / amount: " + amount;
+	}
+	
 }

@@ -3,6 +3,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder,Validators,ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from "@angular/material/dialog";
 import { VacationControllerService } from '../../../services/vacation-planner/vacation-controller.service';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
@@ -16,7 +18,8 @@ import Vacation from '../../../models/vacation-planner/vacation.model';
 	ReactiveFormsModule,
 	FormsModule,
 	MatButtonModule,
-	
+	MatCheckboxModule,
+	MatSelectModule
   ],
   templateUrl: './create-new-vacation.component.html',
   styleUrl: './create-new-vacation.component.scss'
