@@ -10,6 +10,15 @@ create table vacation
 	'funding_comps_credits' varchar(500) default '{"Main Funding":{"value":"","isEditing":""},"Estimated Upcoming Funding":{"value":"","isEditing":false}}'
 );
 
+create table fcc(
+	id BIGINT primary key AUTO_INCREMENT,
+	vacation_id BIGINT not null,
+	fcc_title varchar(50) not null,
+	fcc_amount decimal(6,2), 
+	foreign key (vacation_id)
+	references vacation(id) on delete cascade
+);
+
 create table vacation_config
 (
 	id BIGINT primary key AUTO_INCREMENT,
@@ -31,48 +40,6 @@ create table vacation_config_item
 	config_order tinyint,
     foreign key (vacation_config_id)
     references vacation_config(id) on delete cascade
-);
-
-create table report
-(
-	id BIGINT primary key AUTO_INCREMENT,
-    vacation_id BIGINT not null,
-    title varchar(50) not null,
-    active boolean default false,
-    foreign key (vacation_id)
-    references vacation(id) on delete cascade
-);
-
-create table report_header
-(
-	id BIGINT primary key AUTO_INCREMENT,
-    report_id BIGINT not null,
-    label varchar(25) not null,
-    `order` integer,
-    foreign key(report_id)
-    references report(id) on delete cascade
-);
-
-create table report_data_item
-(
-	id BIGINT primary key AUTO_INCREMENT,
-    report_header_id BIGINT not null,
-    `key` varchar(25) not null,
-    `value` varchar(25),
-    foreign key (report_header_id)
-    references report_header(id) on delete cascade
-);
-
-create table calculated_report_data_item
-(
-	id BIGINT primary key AUTO_INCREMENT,
-    report_data_item_id BIGINT not null,
-    treat_as_header_left boolean default true,
-    report_id BIGINT,
-    foreign key (report_data_item_id)
-    references report_data_item(id) on delete cascade,
-    foreign key (report_id)
-    references report(id) on delete cascade
 );
 
 create table default_config_item
@@ -199,19 +166,14 @@ create table packed_item(
 
 /*End of Packing*/
 
+/*Tasks*/
 
-
-
-
-
-
-
-
-create table task_group
+create table task_set
 (
 	id bigint primary key AUTO_INCREMENT,
 	vacation_id bigint not null,
-	task_group_name varchar(40),
+	task_set_title varchar(40),
+	template boolean default false,
 	foreign key (vacation_id)
 	references vacation(id) on delete cascade
 );
@@ -219,30 +181,14 @@ create table task_group
 create table task
 (
 	id bigint primary key auto_increment,
-	task_group_id bigint not null,
-	task_description varchar(100) not null,
+	task_set_id bigint not null,
+	task_title varchar(100) not null,
 	task_due_date varchar(10),
-	task_status varchar(10),
-	task_mandatory_level varchar(15)
+	task_status ENUM('Yes', 'No', 'WIP') default 'No',
+	task_mandatory_level ENUM('Mandatory', 'Recommended', 'Optional') default 'Mandatory',
+	template boolean default false,
 	foreign key (task_group_id)
-	references task_group(id) on delete cascade
+	references task_set(id) on delete cascade
 );
 
-create table task_group_template
-(
-	id bigint primary key auto_increment,
-	task_group_template_name varchar(40) not null,
-	active boolean default true
-);
-
-create table task_template
-(
-	id bigint primary key AUTO_INCREMENT,
-	task_group_template_id bigint not null,
-	task_template_description varchar(100) not null,
-	task_template_days_out_due tinyint not null,
-	task_template_mandatory_level varchar(15),
-	active boolean default true,
-	foreign key (task_group_template_id)
-	references task_group_template(id) on delete cascade
-);
+/* End of Tasks */
