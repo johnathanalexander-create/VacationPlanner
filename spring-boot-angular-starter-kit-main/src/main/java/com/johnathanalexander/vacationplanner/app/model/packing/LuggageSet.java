@@ -21,10 +21,10 @@ public class LuggageSet {
 	@Column(length=50)
 	private String title;
 	
-	@OneToMany(mappedBy="luggage_set_id", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="luggageSet", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<PackSet> packSets = new HashSet<>();
 	
-	@OneToMany(mappedBy="luggage_Set_id", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="luggageSet", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<PackedItem> packedItems = new HashSet<>();
 
 	public Long getId() {

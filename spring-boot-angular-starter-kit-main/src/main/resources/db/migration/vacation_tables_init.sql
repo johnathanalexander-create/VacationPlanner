@@ -156,12 +156,15 @@ create table pack_set(
 
 create table packed_item(
 	id bigint primary key AUTO_INCREMENT,
-	luggage_set_id bigint not null,
+	luggage_set_id bigint,
+	pack_set_id bigint,
 	title varchar(50) not null,
 	status ENUM('Yes', 'No', 'WIP') default 'No',
 	mandatory ENUM('Mandatory', 'Recommended', 'Optional') default 'Mandatory',
 	foreign key (luggage_set_id)
-	references luggage_set(id) on delete cascade
+	references luggage_set(id) on delete cascade,
+	foreign key (pack_set_id)
+	references pack_set(id) on delete cascade
 );
 
 /*End of Packing*/

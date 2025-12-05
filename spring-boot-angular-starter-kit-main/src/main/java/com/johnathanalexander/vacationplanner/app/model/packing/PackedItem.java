@@ -1,5 +1,8 @@
 package com.johnathanalexander.vacationplanner.app.model.packing;
 
+import com.johnathanalexander.vacationplanner.app.enums.Mandatory;
+import com.johnathanalexander.vacationplanner.app.enums.Status;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +13,10 @@ public class PackedItem {
 	private Long id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="pack_set_id")
+	private PackSet packSet;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="luggage_set_id")
 	private LuggageSet luggageSet;
 	
@@ -17,10 +24,12 @@ public class PackedItem {
 	private String title;
 	
 	@Column()
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 	
 	@Column()
-	private String mandatory;
+	@Enumerated(EnumType.STRING)
+	private Mandatory mandatory;
 
 	public Long getId() {
 		return id;
@@ -46,19 +55,19 @@ public class PackedItem {
 		this.title = title;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public String getMandatory() {
+	public Mandatory getMandatory() {
 		return mandatory;
 	}
 
-	public void setMandatory(String mandatory) {
+	public void setMandatory(Mandatory mandatory) {
 		this.mandatory = mandatory;
 	}
 	

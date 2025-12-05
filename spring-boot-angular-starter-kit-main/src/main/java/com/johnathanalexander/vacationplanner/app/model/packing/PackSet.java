@@ -16,11 +16,13 @@ public class PackSet {
 	@JoinColumn(name="luggage_set_id")
 	private LuggageSet luggageSet;
 	
+	@OneToMany(mappedBy="packSet", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Set<PackedItem> packedItems = new HashSet<>();
+	
 	@Column(length=50)
 	private String title;
 	
-	@OneToMany(mappedBy="", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private Set<PackedItem> packedItems = new HashSet<>();
+	
 
 	public Long getId() {
 		return id;
