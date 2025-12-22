@@ -23,6 +23,8 @@ Execute the following SQL scripts in mySQL in the following order:
 	3. vacation_tables_init.sql
 	4. vacation_db_data.sql
 	5. vacation_db_triggers.sql
+	6. vacation_db_procedures.sql
+	7. vacation_db_scheduled_jobs.sql
 	
 There is now one test user ready to go.
 username: admin@gmail.com
