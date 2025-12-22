@@ -1,3 +1,5 @@
+/* Vacation DB Scripts Run Order: 3 */
+
 drop trigger if exists generate_vacation_config;
 drop trigger if exists generate_default_config_items;
 drop trigger if exists autotask_generator;
@@ -104,25 +106,34 @@ END//
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 CREATE TRIGGER trip_state_generator_insert
 AFTER INSERT on vacation_config_item
 FOR EACH ROW
 BEGIN
-	IF strcmp(NEW.config_value, "trip_start_date")=1, , "")
+	declare v_vacation_id bigint;
+	if NEW.config_key in ('trip_start_date', 'trip_end_date', 'is_cancelled', 'is_funded', 'is_employed', 'is_transportation_funded')
+	THEN
+		
+		select vacation_id into v_vacation_id from vacation_config where id = NEW.vacation_config_id;
+		call update_single_trip_state(
+			v_vacation_id
+        );
+	end if;
+END//
+
+CREATE TRIGGER trip_state_generator_update
+AFTER UPDATE on vacation_config_item
+FOR EACH ROW
+BEGIN
+	declare v_vacation_id bigint;
+	if NEW.config_key in ('trip_start_date', 'trip_end_date', 'is_cancelled', 'is_funded', 'is_employed', 'is_transportation_funded')
+	THEN
+		select vacation_id into v_vacation_id from vacation_config where id = NEW.vacation_config_id;
+
+		call update_single_trip_state(
+			v_vacation_id
+        );
+	end if;
 END//
 
 

@@ -1,2 +1,7 @@
 
-export default interface PackedItem{}
+export default interface PackedItem{
+	id:number,
+	title:string,
+	status:string,
+	mandatory:string
+}

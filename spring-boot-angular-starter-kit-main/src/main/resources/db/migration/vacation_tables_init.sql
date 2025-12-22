@@ -1,3 +1,5 @@
+/* Vacation DB Scripts Run Order: 1 */
+
 drop database if exists vacation_db;
 
 create table vacation
@@ -195,3 +197,11 @@ create table task
 );
 
 /* End of Tasks */
+
+create table process_log
+(
+	id bigint primary key auto_increment,
+	msg varchar(200) not null,
+	process_source varchar(100) not null,
+	created_on timestamp default current_timestamp
+);

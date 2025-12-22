@@ -1,3 +1,4 @@
+/* Vacation DB Scripts Run Order: 2 */
 use vacation_db;
 
 insert into default_config_item (config_key, config_label, config_value, notes, primary_config, required, `order`)
