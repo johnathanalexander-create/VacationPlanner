@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import Prepayment from '../../../../models/vacation-planner/prepayment.model';
 import {HttpResponse} from '@angular/common/http';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
+import VacationConfigItem from '../../../../models/vacation-planner/vacation_config_item.model';
 
 @Component({
   selector: 'app-config-modal',
@@ -24,6 +25,7 @@ import {VacationUpdaterService} from '../../../../services/vacation-updater/vaca
 export class ConfigModalComponent {
 	configItemGroup = this.formBuilder.group({
 		vacation_id: [this.modalInputData.vacation_id, []],
+		id: [this.modalInputData.data.config.id, []],
 		config_key: [this.modalInputData.data.config.config_key, []],
 		config_value: [this.modalInputData.data.config.config_value, []],
 		config_notes: [this.modalInputData.data.config.config_notes, []]
@@ -37,7 +39,43 @@ export class ConfigModalComponent {
 				public dialogRef: MatDialogRef<ConfigModalComponent>
 	){}
 	
-	submitConfigItem(){
+	updateConfigItem(){
+		/*const vacation = this.modalInputData.data.vacation;
 		
+		console.log("updateconfigitems");
+		console.log("vacation");
+		console.log(vacation);
+		
+		var ciGroup = this.configItemGroup.value;
+		var configItems:VacationConfigItem[] = vacation?.config.configItems;
+		
+		console.log("ci");
+		console.log(configItems);
+		
+		if(configItems && configItems.length > 0){
+
+			configItems.forEach(configItem =>{
+				if(ciGroup.config_key == configItem.config_key){
+					configItem.config_value = ciGroup.config_value;
+					configItem.config_notes = ciGroup.config_notes;
+				}
+			});
+			
+			vacation.config.configItems = configItems;
+			
+			vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);*/
+			
+			
+			
+			this.vacationService.saveConfigItem(this.configItemGroup.value as VacationConfigItem)
+				.subscribe({
+					next: (resp:any) =>{
+						console.log("RESP RESP RESP");
+						console.log(resp);
+						this.vacationUpdater.updateVacation(resp.body);
+						this.dialogRef.close();
+					}
+				})
+		//}
 	}
 }

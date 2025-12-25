@@ -124,6 +124,7 @@ export class WebVacationUtilityService {
 			if(!resp.dialogConfig.data.config){
 				resp.dialogConfig.data.config = {
 					config_label:"",
+					id: "",
 					config_key:"",
 					config_value:"",
 					config_notes:""

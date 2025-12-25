@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.johnathanalexander.vacationplanner.app.dto.VacationConfigItemDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.exception.VacationConfigItemNotFoundException;
+import com.johnathanalexander.vacationplanner.app.exception.VacationNotFoundException;
 import com.johnathanalexander.vacationplanner.app.mapper.VacationMapper;
 import com.johnathanalexander.vacationplanner.app.model.Vacation;
 import com.johnathanalexander.vacationplanner.app.model.VacationConfig;
@@ -18,6 +19,9 @@ import com.johnathanalexander.vacationplanner.app.repository.VacationConfigItemR
 import com.johnathanalexander.vacationplanner.app.repository.VacationRepository;
 import com.johnathanalexander.vacationplanner.app.service.VacationConfigItemService;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
 @Service
 @Transactional
 public class VacationConfigItemServiceImpl implements VacationConfigItemService {
@@ -25,9 +29,13 @@ public class VacationConfigItemServiceImpl implements VacationConfigItemService 
 	private final VacationConfigItemRepository repository;
 	private final VacationRepository vacationRepository;
 	
-	public VacationConfigItemServiceImpl(VacationConfigItemRepository repository, VacationRepository vacationRepository) {
+	//@PersistenceContext
+	private EntityManager entityManager;
+	
+	public VacationConfigItemServiceImpl(VacationConfigItemRepository repository, VacationRepository vacationRepository, EntityManager entityManager) {
 		this.repository = repository;
 		this.vacationRepository = vacationRepository;
+		this.entityManager = entityManager;
 	}
 
 	@PreAuthorize("hasRole('ROLE_USER')")
@@ -47,7 +55,8 @@ public class VacationConfigItemServiceImpl implements VacationConfigItemService 
 		}
 		
 		
-		Vacation updatedVacation = vacationRepository.save(vacation);
+		Vacation updatedVacation = vacationRepository.saveAndFlush(vacation);
+		entityManager.refresh(updatedVacation);
 		
 
 		return VacationMapper.toVacationDto(updatedVacation);

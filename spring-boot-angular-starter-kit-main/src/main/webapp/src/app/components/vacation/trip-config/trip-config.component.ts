@@ -20,10 +20,14 @@ import {WebVacationUtilityService} from '../../../services/utility/web-vacation-
   styleUrl: './trip-config.component.scss'
 })
 export class TripConfigComponent implements AfterViewInit{
+	private _selectedVacation?: Vacation;
+	
 	@Input()
 	set selectedVacation(value: Vacation){
 		this.dataSource = new MatTableDataSource<VacationConfigItem>(value.config.configItems);
 		this.dataSource.sort = this.sort;
+		
+		this._selectedVacation = value;
 	}
 	
 	dataSource = new MatTableDataSource<VacationConfigItem>([]);
@@ -43,12 +47,17 @@ export class TripConfigComponent implements AfterViewInit{
 	}
 	
 	generateModal(item:any){
+		console.log("itemitemitem");
+		console.log(item);
 		if(item){
 			var data = {
-				vacation_id: this.selectedVacation?.id,
-				vacation: this.selectedVacation,
+				vacation_id: this._selectedVacation?.id,
+				vacation: this._selectedVacation,
 				config:item
 			}
+			
+			console.log("the ci modal data");
+			console.log(data);
 			
 			this.util.generateModal("config", data);
 		}

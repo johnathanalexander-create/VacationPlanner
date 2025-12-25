@@ -44,33 +44,6 @@ export class BudgetItemModalComponent {
 				private vacationService: VacationControllerService,
 				@Inject(MAT_DIALOG_DATA) public modalInputData: any,
 				private vacationUpdater: VacationUpdaterService ){}
-				
-	/*delete(){
-		var vacation = this.modalInputData.data.vacation;
-		
-		var budgetItems:BudgetItem[] = vacation.budgetItems;
-		
-		budgetItems.forEach((budgetItem: BudgetItem, index: number) => {
-			if(budgetItem.id == this.updateBudgetItemGroup.value.id && budgetItem.id > 0){
-				//vacation.budgetItems.splice(index, 1);
-				//vacation.budgetItems = vacation.budgetItems.filter(bi:any => bi.id != budgetItem.id);
-				budgetItems = budgetItems.splice(index, 1);
-			}
-		});
-		
-		console.log(budgetItems);
-		
-		vacation.budgetItems = budgetItems;
-		
-		vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
-		
-		this.vacationService.updateVacation(vacation)
-			.subscribe({
-				next: (resp:any) => {
-					
-				}
-			})
-	}*/
 	
 	delete(){
 		var vacation = this.modalInputData.data.vacation;

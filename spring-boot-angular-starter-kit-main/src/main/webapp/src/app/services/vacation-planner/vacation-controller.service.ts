@@ -9,7 +9,7 @@ import {tap} from "rxjs/operators";
 import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
 import PrepaymentSource from '../../models/vacation-planner/prepayment_source.model';
 import Prepayment from '../../models/vacation-planner/prepayment.model';
-import ConfigItem from '../../models/vacation-planner/vacation_config_item.model';
+import VacationConfigItem from '../../models/vacation-planner/vacation_config_item.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -72,7 +72,7 @@ export class VacationControllerService {
 	}
 	
 	/*CONFIG API REQUESTS*/
-	saveConfigItem(configItem:ConfigItem){
+	saveConfigItem(configItem:VacationConfigItem){
 		return this.http.put("/api/v1/vacationConfigItem/saveVacationConfigItem", configItem);
 	}
 	
