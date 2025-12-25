@@ -65,7 +65,7 @@ public class PrepaymentServiceImpl implements PrepaymentService{
 		prepayment.setVacation(vacation);
 		prepayment.setIsRefundable(dto.isRefundable());
 		
-		Prepayment savedPrepayment = repository.save(prepayment);
+		repository.save(prepayment);
 		
 		//return PrepaymentMapper.toPrepaymentDTO(savedPrepayment);
 		
