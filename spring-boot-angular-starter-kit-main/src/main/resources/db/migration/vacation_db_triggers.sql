@@ -17,18 +17,18 @@ CREATE TRIGGER generate_default_config_items
 AFTER INSERT ON vacation_config
 FOR EACH ROW
 BEGIN
-    
-	INSERT INTO vacation_config_item(vacation_config_Id, config_key, config_label, config_value, config_notes, primary_config, required, config_order)
-	SELECT NEW.id, def.config_key, def.config_label, def.config_value, def.notes, def.primary_config, def.required, def.config_order
-	FROM default_config_item def
-	WHERE def.active=true;
+
+	insert into vacation_config_item (vacation_config_id, config_key, config_label, config_value, config_notes, primary_config, required, config_order, config_type)
+    select NEW.id, template.config_key, template.config_label, template.config_value, template.config_notes, template.primary_config, template.required, template.config_order, template.config_type
+    from vacation_config_item as template
+    where template.template=true;
     
 END//
 
 
 
 -- These two triggers are not possible UNLESS I require a trip start date on creation of the vacation
-CREATE TRIGGER autotask_generator_task_groups
+/*CREATE TRIGGER autotask_generator_task_groups
 AFTER INSERT on vacation
 FOR EACH ROW
 BEGIN
@@ -38,9 +38,9 @@ BEGIN
 	FROM task_group_template tg_template
 	WHERE tg_template.active = true;
 
-END//
+END// */
 
-CREATE TRIGGER autotask_generator_tasks
+/*CREATE TRIGGER autotask_generator_tasks
 AFTER INSERT on task_group
 FOR EACH ROW
 BEGIN
@@ -53,14 +53,14 @@ BEGIN
 	FROM task_template t_template
 	WHERE t_template = true;
 
-END//
+END// */
 
 CREATE TRIGGER autoactive_user
 BEFORE INSERT ON users
 FOR EACH ROW
 BEGIN
-	NEW.account_locked = false;
-	NEW.enabled = true;
+	SET NEW.account_locked = false;
+	SET NEW.enabled = true;
 END//
 
 

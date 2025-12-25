@@ -2,6 +2,10 @@
 
 drop database if exists vacation_db;
 
+create database vacation_db;
+
+use vacation_db;
+
 create table vacation
 (
 	id BIGINT primary key AUTO_INCREMENT,
@@ -9,7 +13,7 @@ create table vacation
     state varchar(25) default 'Draft',
     `owner` BIGINT,
 	notes text,
-	'funding_comps_credits' varchar(500) default '{"Main Funding":{"value":"","isEditing":""},"Estimated Upcoming Funding":{"value":"","isEditing":false}}'
+	funding_comps_credits varchar(500) default '{"Main Funding":{"value":"","isEditing":""},"Estimated Upcoming Funding":{"value":"","isEditing":false}}'
 );
 
 create table fcc(
@@ -40,11 +44,13 @@ create table vacation_config_item
     primary_config boolean default false,
     required boolean default false,
 	config_order tinyint,
+    config_type varchar(10) default 'string',
+    template boolean default false,
     foreign key (vacation_config_id)
     references vacation_config(id) on delete cascade
 );
 
-create table default_config_item
+/*create table default_config_item
 (
 	config_key varchar(50) primary key,
 	config_label varchar(50) not null,
@@ -54,6 +60,13 @@ create table default_config_item
 	required boolean default false,
 	active boolean default true,
 	config_order tinyint
+);*/
+
+create table prepayment_source(
+	id bigint primary key AUTO_INCREMENT,
+	active boolean default true,
+	name varchar(25) not null,
+	cashback_rate decimal(4,3)
 );
 
 create table prepayment
@@ -86,13 +99,6 @@ create table confirmation(
 	notes varchar(100),
 	foreign key (vacation_id)
 	references vacation(id)
-);
-
-create table prepayment_source(
-	id bigint primary key AUTO_INCREMENT,
-	active boolean default true,
-	name varchar(25) not null,
-	cashback_rate decimal(4,3)
 );
 
 create table spa(
@@ -173,7 +179,7 @@ create table packed_item(
 
 /*Tasks*/
 
-create table task_set
+/*create table task_set
 (
 	id bigint primary key AUTO_INCREMENT,
 	vacation_id bigint not null,
@@ -194,7 +200,7 @@ create table task
 	template boolean default false,
 	foreign key (task_group_id)
 	references task_set(id) on delete cascade
-);
+);*/
 
 /* End of Tasks */
 

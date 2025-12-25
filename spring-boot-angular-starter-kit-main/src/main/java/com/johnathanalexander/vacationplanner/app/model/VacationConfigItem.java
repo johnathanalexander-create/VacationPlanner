@@ -35,6 +35,9 @@ public class VacationConfigItem {
 	@Column()
 	private byte config_order;
 	
+	@Column
+	private String config_type;
+	
 	
 	@Override
 	public String toString() {
@@ -82,7 +85,7 @@ public class VacationConfigItem {
 	}
 
 
-	public String getConfig_notes() {
+	public String getConfigNotes() {
 		return config_notes;
 	}
 
@@ -97,17 +100,17 @@ public class VacationConfigItem {
 	}
 
 
-	public void setConfig_notes(String config_notes) {
+	public void setConfigNotes(String config_notes) {
 		this.config_notes = config_notes;
 	}
 
 
-	public boolean isPrimary_config() {
+	public boolean isPrimaryConfig() {
 		return primary_config;
 	}
 
 
-	public void setPrimary_config(boolean primary_config) {
+	public void setPrimaryConfig(boolean primary_config) {
 		this.primary_config = primary_config;
 	}
 
@@ -129,5 +132,13 @@ public class VacationConfigItem {
 
 	public void setConfigOrder(byte config_order) {
 		this.config_order = config_order;
+	}
+	
+	public String getConfigType() {
+		return config_type;
+	}
+	
+	public void setConfigType(String config_type) {
+		this.config_type = config_type;
 	}
 }

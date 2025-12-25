@@ -50,7 +50,7 @@ public class VacationConfigItemServiceImpl implements VacationConfigItemService 
 		for(VacationConfigItem item : vacationConfigItems) {
 			if(item.getId() == dto.id()) {
 				item.setConfigValue(dto.config_value());
-				item.setConfig_notes(dto.config_notes());
+				item.setConfigNotes(dto.config_notes());
 			}
 		}
 		

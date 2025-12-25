@@ -15,10 +15,11 @@ import Prepayment from '../../../../models/vacation-planner/prepayment.model';
 import {HttpResponse} from '@angular/common/http';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
 import VacationConfigItem from '../../../../models/vacation-planner/vacation_config_item.model';
+import {SnackBarService} from '../../../../services/snack-bar/snack-bar.service';
 
 @Component({
   selector: 'app-config-modal',
-  imports: [MatSelectModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, FormsModule, MultiSelectComponent, CommonModule],
+  imports: [MatSelectModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, FormsModule, CommonModule],
   templateUrl: './config-modal.component.html',
   styleUrl: './config-modal.component.scss'
 })
@@ -28,7 +29,8 @@ export class ConfigModalComponent {
 		id: [this.modalInputData.data.config.id, []],
 		config_key: [this.modalInputData.data.config.config_key, []],
 		config_value: [this.modalInputData.data.config.config_value, []],
-		config_notes: [this.modalInputData.data.config.config_notes, []]
+		config_notes: [this.modalInputData.data.config.config_notes, []],
+		config_type: [this.modalInputData.data.config.config_type, []]
 	})
 	
 	constructor(private formBuilder: FormBuilder,
@@ -36,46 +38,57 @@ export class ConfigModalComponent {
 				private vacationService: VacationControllerService,
 				@Inject(MAT_DIALOG_DATA) public modalInputData: any,
 				private vacationUpdater: VacationUpdaterService,
-				public dialogRef: MatDialogRef<ConfigModalComponent>
+				public dialogRef: MatDialogRef<ConfigModalComponent>,
+				private snackbar: SnackBarService
 	){}
 	
-	updateConfigItem(){
-		/*const vacation = this.modalInputData.data.vacation;
+	processValueByType(value:string, type:string):boolean{
 		
-		console.log("updateconfigitems");
-		console.log("vacation");
-		console.log(vacation);
+		console.log("Processing " + value + " for type " + type);
 		
-		var ciGroup = this.configItemGroup.value;
-		var configItems:VacationConfigItem[] = vacation?.config.configItems;
+		if(value == "" || type == ""){
+			return true;
+		}
 		
-		console.log("ci");
-		console.log(configItems);
+		value = value.toLowerCase();
+		type = type.toLowerCase();
 		
-		if(configItems && configItems.length > 0){
-
-			configItems.forEach(configItem =>{
-				if(ciGroup.config_key == configItem.config_key){
-					configItem.config_value = ciGroup.config_value;
-					configItem.config_notes = ciGroup.config_notes;
+		switch(type){
+			case "string":
+				return true;
+			case "number":
+				const regex = /^\d+(\.\d+)?$/;//regex allowing numerical caharacters and a single decimal
+				
+				if(regex.test(value)){
+					return true;
 				}
-			});
+				return false;
+			case "boolean":
+				return (value == "true" || value == "false");
+			case "date":
+				const date = new Date(value);
+				return (!isNaN(date.getTime()) && value.trim() !== '');
+		}
+		
+		return false;
+	}
+	
+	updateConfigItem(){
 			
-			vacation.config.configItems = configItems;
+			const isValueTypematched = this.processValueByType(this.configItemGroup.value.config_value, this.configItemGroup.value.config_type);
 			
-			vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);*/
-			
-			
+			if(!isValueTypematched){
+				this.snackbar.showMessage("This Config Item requires input of the type " + this.configItemGroup.value.config_type.toUpperCase(), "error");
+				return;
+			}
 			
 			this.vacationService.saveConfigItem(this.configItemGroup.value as VacationConfigItem)
-				.subscribe({
+					.subscribe({
 					next: (resp:any) =>{
-						console.log("RESP RESP RESP");
-						console.log(resp);
 						this.vacationUpdater.updateVacation(resp.body);
 						this.dialogRef.close();
 					}
 				})
-		//}
+			
 	}
 }

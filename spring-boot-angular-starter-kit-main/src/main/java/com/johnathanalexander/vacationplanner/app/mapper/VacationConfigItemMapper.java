@@ -18,10 +18,11 @@ public class VacationConfigItemMapper {
 				configItem.getConfigKey(),
 				configItem.getConfigLabel(),
 				configItem.getConfigValue(),
-				configItem.getConfig_notes(),
-				configItem.isPrimary_config(),
+				configItem.getConfigNotes(),
+				configItem.isPrimaryConfig(),
 				configItem.isRequired(),
-				configItem.getConfigOrder()
+				configItem.getConfigOrder(),
+				configItem.getConfigType()
 		);
 				
 	}
