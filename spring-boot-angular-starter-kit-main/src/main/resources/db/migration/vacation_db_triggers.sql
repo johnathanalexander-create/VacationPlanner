@@ -5,6 +5,7 @@ drop trigger if exists generate_default_config_items;
 drop trigger if exists autotask_generator;
 
 DELIMITER //
+/*Generates config items using templates*/
 CREATE TRIGGER generate_vacation_config
 AFTER INSERT ON vacation
 FOR EACH ROW
@@ -55,6 +56,7 @@ BEGIN
 
 END// */
 
+/*Automatically activate a new user*/
 CREATE TRIGGER autoactive_user
 BEFORE INSERT ON users
 FOR EACH ROW
@@ -63,7 +65,7 @@ BEGIN
 	SET NEW.enabled = true;
 END//
 
-
+/*Generates basic budget dashboard*/
 CREATE TRIGGER create_budget_dashboard_items
 AFTER INSERT ON vacation
 FOR EACH ROW
@@ -105,7 +107,7 @@ BEGIN
 END//
 
 
-
+/*Updates trip state*/
 CREATE TRIGGER trip_state_generator_insert
 AFTER INSERT on vacation_config_item
 FOR EACH ROW
@@ -121,6 +123,7 @@ BEGIN
 	end if;
 END//
 
+/*Updates Trip State*/
 CREATE TRIGGER trip_state_generator_update
 AFTER UPDATE on vacation_config_item
 FOR EACH ROW
@@ -135,6 +138,41 @@ BEGIN
         );
 	end if;
 END//
+
+create trigger config_item_changes
+after update on vacation_config_item
+for each row
+begin
+	declare v_config_key varchar(50);
+    declare v_config_value varchar(100);
+    declare v_vacation_id bigint;
+    declare calculated_budget_buffer float;
+    
+    declare process_type varchar(20) default "Config Item Changes";
+    
+    call create_process_log_entry("Starting the Config Item Changes trigger", process_type);
+    
+    select vacation_id into v_vacation_id from vacation_config where id = NEW.vacation_config_id;
+    
+    set v_config_key = NEW.config_key;
+    set v_config_value = NEW.config_value;
+
+    set calculated_budget_buffer = (calculate_budget_buffer(v_vacation_id, NEW.vacation_config_id));
+
+	if v_config_key = 'enable_budget_buffer'
+    then
+		if v_config_value = "True"
+        then
+            insert ignore into budget_item(vacation_id, active, item, amount, notes)
+            values(v_vacation_id, true, "Budget Buffer", calculated_budget_buffer, "Allows a buffer for unexpected costs");
+        end if;
+        
+        if v_config_value = "False"
+        then
+			delete from budget_item where vacation_id = v_vacation_id and item = "Budget Buffer";
+        end if;
+    end if;
+end//
 
 
 DELIMITER ;

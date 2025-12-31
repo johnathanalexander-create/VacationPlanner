@@ -126,6 +126,7 @@
 	</mat-dialog-content>
 	
 	<mat-dialog-actions style="float: right;">
+		<mat-icon (click)="deletePrepayment()" *ngIf="newPrepaymentFormGroup.value.id > 0">delete</mat-icon>
 		<button mat-button [mat-dialog-close] = "false">Close</button>
 		<button type="submit" mat-flat-button color="primary" [disabled] = "newPrepaymentFormGroup.invalid">Save Prepayment</button>
 	</mat-dialog-actions>

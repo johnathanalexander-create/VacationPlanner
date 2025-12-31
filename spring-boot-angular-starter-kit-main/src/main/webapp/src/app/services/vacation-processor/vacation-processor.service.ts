@@ -18,7 +18,36 @@ export class VacationProcessorService {
 	"funding_overview":"not_started",
 	"package":"not_started",
 	"tsm":"not_started",
-	"tasks":"not_started"
+	"tasks":"not_started",
+	"disabler":"not_started"
+  }
+  
+  async _processDisabler():Promise<string>{
+	
+	var disablePacking = this.utility.getVacationValue(this.vacation, "tab_disable_packing", true, "");
+	var disableSpa = this.utility.getVacationValue(this.vacation, "tab_disable_spa", true, "");
+	var disableCalendar = this.utility.getVacationValue(this.vacation, "tab_disable_calendar", true, "");
+	var disableResearch = this.utility.getVacationValue(this.vacation, "tab_disable_research", true, "");
+	var disableTripAnalysis = this.utility.getVacationValue(this.vacation, "tab_disable_trip_analysis", true, "");
+	
+	this.vacation.meta.tab_disabler = {
+		packing: false,
+		spa: false,
+		calendar: false,
+		research: false,
+		tripAnalysis: false
+	}
+	
+	this.vacation.meta.tab_disabler.packing = disablePacking.toLowerCase() == "true";
+	this.vacation.meta.tab_disabler.spa = disableSpa.toLowerCase() == "true";
+	this.vacation.meta.tab_disabler.calendar = disableCalendar.toLowerCase() == "true";
+	this.vacation.meta.tab_disabler.research = disableResearch.toLowerCase() == "true";
+	this.vacation.meta.tab_disabler.tripAnalysis = disableTripAnalysis.toLowerCase() == "true";
+	
+	
+	return new Promise((resolve) => {
+		resolve(this.processStatus.disabler);
+	});
   }
   
   //Process funding, comps, & credits
@@ -91,11 +120,7 @@ export class VacationProcessorService {
 	});
   }
   
-  //Process prepayments and prepayment cashback
-  async _processPrepayments(): Promise<string>{
-	if(!this.vacation){
-		this.processStatus.prepayments = "error";
-	}
+  _calculatePrepayments(){
 	if(this.vacation.prepayments.length > 0){
 		this.processStatus.prepayments = "in_progress";
 		
@@ -118,8 +143,21 @@ export class VacationProcessorService {
 			this.vacation.prepayments[count].amount = this.vacation.prepayments[count].amount.toFixed(2);
 		}
 		
-		this.vacation.meta.totalPrepayments = totalPrepaymentAmount;
+		return totalPrepaymentAmount;
+		
+		
 	}
+	
+	return 0;
+  }
+  
+  //Process prepayments and prepayment cashback
+  async _processPrepayments(): Promise<string>{
+	if(!this.vacation){
+		this.processStatus.prepayments = "error";
+	}
+	
+	this.vacation.meta.totalPrepayments = this._calculatePrepayments();
 	
 	this.processStatus.prepayments = "complete";
 	
@@ -133,9 +171,9 @@ export class VacationProcessorService {
 	if(!this.vacation){
 		this.processStatus.funding_overview = "error";
 	}
-	const startTime = Date.now();
+	//const startTime = Date.now();
 	
-	while(this.processStatus.fcc != "complete" && false){
+	/*while(this.processStatus.fcc != "complete" && false){
 		
 		if(this.processStatus.fcc == "complete" || this.processStatus.fcc == "error"){
 			break;
@@ -148,11 +186,15 @@ export class VacationProcessorService {
 		if (elapsedTime >= durationMs) {
 			break;//Don't want to keep the application from finishing processing for too long. Max 5 seconds
 		}
-	}
+	}*/
 	
 	this.processStatus.funding_overview = "in_progress";
 	
+	this.vacation.meta.fo_estimated_cost = this._calculateBudgetDashboard();//budget db total
 	this.vacation.meta.fo_main_funding = this.vacation.meta.totalFCC;
+	this.vacation.meta.fo_credit_card_funding = this.vacation.meta.fo_estimated_cost - this.vacation.meta.fo_main_funding;// - this._calculatePrepayments();//Budget DB total - Main Funding - Prepayments
+	
+	
 	
 	this.processStatus.funding_overview = "complete";
 	
@@ -161,13 +203,7 @@ export class VacationProcessorService {
 	});
   }
   
-  //Calculate the estimated trip package price.
-  async _processEstimatedTripPackagePrice(): Promise<string>{
-	if(!this.vacation){
-		this.processStatus.package = "error";
-	}
-	this.processStatus.package = "in_progress";
-	
+  _calculateBudgetDashboard(){
 	const budgetItems = this.vacation.budgetItems;
 	var totalBudgetItems = 0.00;
 	
@@ -180,7 +216,19 @@ export class VacationProcessorService {
 		}
 	}
 	
-	this.vacation.meta.estimated_trip_package_price = totalBudgetItems;
+	return totalBudgetItems;
+  }
+  
+  //Calculate the estimated trip package price.
+  async _processEstimatedTripPackagePrice(): Promise<string>{
+	if(!this.vacation){
+		this.processStatus.package = "error";
+	}
+	this.processStatus.package = "in_progress";
+	
+	
+	
+	this.vacation.meta.estimated_trip_package_price = this._calculateBudgetDashboard();
 	
 	this.processStatus.package = "complete";
 	
@@ -261,9 +309,11 @@ export class VacationProcessorService {
 		var funding_overview = this._processFundingOverview();
 		var trip_package = this._processEstimatedTripPackagePrice();
 		var tsm = this._processTripStatusMonitor();
+		var disabler = this._processDisabler();
 		
-		const results = await Promise.all([fcc, time, prepayments, funding_overview, trip_package, tsm]);
+		const results = await Promise.all([fcc, time, prepayments, funding_overview, trip_package, tsm, disabler]);
 		return new Promise((resolve)=>{
+			console.log("the processed vacation");
 			console.log(this.vacation);
 			resolve(this.vacation);
 		});

@@ -76,6 +76,17 @@ values("trip_start_date", "Trip Start Date", "", "", true, true, 33, 'date', tru
 insert into vacation_config_item (config_key, config_label, config_value, config_notes, primary_config, required, config_order, config_type, template, vacation_config_id)
 values("trip_end_date", "Trip End Date", "", "", true, false, 34, 'date', true, -1);
 
+insert into vacation_config_item(config_key, config_label, config_value, config_notes, primary_config, required, config_order, config_type, template, vacation_config_id)
+values('tab_disable_spa', 'Disable Spa Tab', "False", "", false, false, 35, 'boolean', true, -1);
+insert into vacation_config_item(config_key, config_label, config_value, config_notes, primary_config, required, config_order, config_type, template, vacation_config_id)
+values('tab_disable_research', 'Disable Research Tab', "False", "", false, false, 35, 'boolean', true, -1);
+insert into vacation_config_item(config_key, config_label, config_value, config_notes, primary_config, required, config_order, config_type, template, vacation_config_id)
+values('tab_disable_calendar', 'Disable Calendar Tab', "False", "", false, false, 35, 'boolean', true, -1);
+insert into vacation_config_item(config_key, config_label, config_value, config_notes, primary_config, required, config_order, config_type, template, vacation_config_id)
+values('tab_disable_packing', 'Disable Packing Tab', "False", "", false, false, 35, 'boolean', true, -1);
+insert into vacation_config_item(config_key, config_label, config_value, config_notes, primary_config, required, config_order, config_type, template, vacation_config_id)
+values('tab_disable_trip_analysis', 'Disable Trip Analysis Tab', "False", "", false, false, 35, 'boolean', true, -1);
+
 set foreign_key_checks = 1;
 
 insert into prepayment_source(name, cashback_rate)

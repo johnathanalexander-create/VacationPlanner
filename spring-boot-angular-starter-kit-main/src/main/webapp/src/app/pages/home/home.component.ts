@@ -24,7 +24,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatSelect } from '@angular/material/select';
 
 import { CommonModule } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";

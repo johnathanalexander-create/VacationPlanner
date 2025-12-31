@@ -71,16 +71,9 @@ export class FCCModalComponent {
 		
 		vacation.funding_comps_credits = JSON.stringify(fcc);	
 		
-		/*this.vacationService.setFCC(fcc, this.fccItemGroup.value.vacation_id).subscribe({
-			next:(resp:any) =>{
-				this.vacationUpdater.updateVacation(resp);
-				this.dialogRef.close();				
-			}
-		})*/
-		
 		this.vacationService.updateVacation(this.modalInputData.data.vacation as Vacation).subscribe({
 			next:(resp:any) => {
-				this.vacationUpdater.updateVacation(resp);
+				this.vacationUpdater.updateVacation(resp.body);
 				this.dialogRef.close();
 			}
 		})

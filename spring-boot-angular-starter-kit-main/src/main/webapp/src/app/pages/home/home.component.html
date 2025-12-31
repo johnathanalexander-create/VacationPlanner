@@ -26,18 +26,23 @@
   <div class="card-container">
   
   	@if(selectedVacation){
-  		<mat-tab-group (selectedTabChange)="onTabChange($event)">
-  			<!-- <mat-tab label="Trip Dashboard"><app-trip-dashboard [selectedVacation] ="selectedVacation"></app-trip-dashboard></mat-tab>-->
+  		<mat-tab-group (selectedTabChange)="onTabChange($event)" preserveContent>
   			<mat-tab label="Trip Dashboard"><app-trip-dashboard></app-trip-dashboard></mat-tab>
   			<mat-tab label="Prepayments"><app-prepayments [selectedVacation]="selectedVacation"></app-prepayments></mat-tab>
   			<mat-tab label="Budget Dashboard"><app-budget-dashboard></app-budget-dashboard></mat-tab>
   			<mat-tab label="Research"><app-research></app-research></mat-tab>
+  			
   			<mat-tab label="Confirmations"><app-confirmations [selectedVacation]="selectedVacation"></app-confirmations></mat-tab>
   			<mat-tab label="Calendar">f</mat-tab>
   			<mat-tab label="Spa">g</mat-tab>
   			<mat-tab label="Packing">h</mat-tab>
+  			
+  			
+  			
+  			
   			<mat-tab label="Tasks">i</mat-tab>
   			<mat-tab label="Trip Analysis">j</mat-tab>
+  			
   			<mat-tab label="Config"><app-trip-config [selectedVacation]="selectedVacation"></app-trip-config></mat-tab>
   		</mat-tab-group>
   	}@else{

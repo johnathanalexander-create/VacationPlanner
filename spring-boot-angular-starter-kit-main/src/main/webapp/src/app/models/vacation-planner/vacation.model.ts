@@ -20,6 +20,13 @@ export default interface Vacation{
 	funding_comps_credits:{},
 	confirmations: Confirmation[],
 	meta:{
+		tab_disabler: {
+			packing: false,
+			spa: false,
+			calendar: false,
+			research: false,
+			tripAnalysis: false
+		},
 		totalFCC: 0,
 		monthsRemaining: 0,
 		weeksRemaining: 0,
@@ -27,6 +34,8 @@ export default interface Vacation{
 		totalPrepayments: 0,
 		totalPrepaymentCashback: 0,
 		fo_main_funding:0,
+		fo_credit_card_funding: 0,
+		fo_estimated_cost: 0,
 		tsm_istodaytripday_stylecolor: "red",
 		estimated_trip_package_price:0
 	}

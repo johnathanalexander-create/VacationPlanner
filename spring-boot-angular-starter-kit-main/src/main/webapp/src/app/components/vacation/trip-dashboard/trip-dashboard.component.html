@@ -127,7 +127,7 @@
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">{{getValue("additional_funding_label", true, "Credit Card Funding")}}</th>
-						    			<td>${{getCreditCardFunding()}}</td>
+						    			<td>${{selectedVacation.meta.fo_credit_card_funding || "0.00"}}</td>
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Total Funding</th>
@@ -135,7 +135,7 @@
 						    		</tr>
 						    		<tr class="">
 						    			<th class="general-overview-side-header">Estimated Cost</th>
-						    			<td>${{getValue("estimated_trip_package_price", true, "0.00")}}</td>
+						    			<td>${{selectedVacation.meta.fo_estimated_cost || "0.00"}}</td>
 						    		</tr>
 					    		</tbody>
 					    		

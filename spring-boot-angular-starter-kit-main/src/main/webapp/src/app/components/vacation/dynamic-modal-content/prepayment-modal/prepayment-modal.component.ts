@@ -9,6 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 
 import {FormValidationService} from "../../../../services/form-validation/form-validation.service";
 
@@ -24,7 +25,7 @@ import {VacationUpdaterService} from '../../../../services/vacation-updater/vaca
 
 @Component({
   selector: 'app-prepayment-modal',
-  imports: [MatSelectModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, FormsModule, CommonModule],
+  imports: [MatSelectModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, FormsModule, CommonModule, MatIconModule],
   templateUrl: './prepayment-modal.component.html',
   styleUrl: './prepayment-modal.component.scss'
 })
@@ -60,6 +61,10 @@ export class PrepaymentModalComponent {
 	
 	ngOnInit(){
 		this.retrievePrepaymentSources();
+	}
+	
+	deletePrepayment(){
+		alert("deletrius");
 	}
 	
 	retrievePrepaymentSources(){
