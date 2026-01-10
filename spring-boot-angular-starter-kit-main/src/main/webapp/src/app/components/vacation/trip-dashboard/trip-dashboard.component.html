@@ -32,11 +32,11 @@
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Trip Status</th>
-			 							<td class="trip-overview-tr align-center">{{getValue("state", false, "")}}</td>
+			 							<td class="trip-overview-tr align-center trip-status-{{getValue('state', false, '').replaceAll(' ', '_')}}">{{getValue("state", false, "")}}</td>
 			 						</tr>
 			 						<tr>
 			 							<th class="trip-overview-tr">Budget Buffering</th>
-			 							<td class="trip-overview-tr align-center">{{getValue("enable_budget_buffer", true, "False")}}</td>
+			 							<td class="trip-overview-tr align-center"><strong>{{getValue("enable_budget_buffer", true, "False").toUpperCase()}}</strong></td>
 			 						</tr>
 			 						
 			 					</tbody>

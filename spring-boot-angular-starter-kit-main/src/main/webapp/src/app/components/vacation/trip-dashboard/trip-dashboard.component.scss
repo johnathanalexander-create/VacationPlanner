@@ -100,3 +100,30 @@
 .tsm-ittd-background-green{
 	background-color: green;
 }
+
+.trip-status-Official{
+	color: green;
+	font-weight: bold;
+}
+.trip-status-Cancelled{
+	color: red;
+}
+.trip-status-Draft{
+	color: black;
+}
+.trip-status-Complete{
+	color: white;
+	background-color: green;
+}
+.trip-status-Active{
+	color: white;
+	background-color: green;
+}
+.trip-status-In_Planning{
+	color: black;
+	background-color: yellow;
+}
+.trip-status-Not_Funded{
+	color: orange;
+	font-style: italic;
+}

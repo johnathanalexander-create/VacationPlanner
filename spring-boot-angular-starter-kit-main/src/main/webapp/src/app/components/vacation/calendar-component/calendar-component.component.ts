@@ -60,6 +60,19 @@ export class CalendarComponent {
 	} = {
 	    plugins: [dayGridPlugin, interactionPlugin],
 	    initialView: 'dayGridWeek',
+		headerToolbar: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'addEventButton'
+		},
+		customButtons: {
+			addEventButton: {
+				text: 'Add Event',
+				click: () => {
+					this.addEvent();
+				}
+			}
+		},
 		editable: true,
 		selectable: true,
 	    weekends: true,
@@ -81,6 +94,17 @@ export class CalendarComponent {
 		}
 		
 		return "";
+	 }
+	 
+	 addEvent(){
+		//gen modal, get data, save
+		
+		this.calendarComponent.getApi().addEvent({
+			title: 'New Event',
+			start: new Date('2026-05-16'),
+			allDay: true,
+			color: "#f44336"
+		});
 	 }
 
 }
