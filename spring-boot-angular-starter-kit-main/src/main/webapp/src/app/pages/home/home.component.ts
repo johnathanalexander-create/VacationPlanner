@@ -9,6 +9,7 @@ import { PrepaymentsComponent } from '../../components/vacation/prepayments/prep
 import { PrepaymentModalComponent } from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
 import { FCCModalComponent } from '../../components/vacation/dynamic-modal-content/fcc-modal/fcc-modal.component';
 import { ResearchComponent } from '../../components/vacation/research/research.component';
+import { CalendarComponent } from '../../components/vacation/calendar-component/calendar-component.component';
 
 import Vacation from '../../models/vacation-planner/vacation.model';
 
@@ -33,15 +34,18 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../services/auth/auth.service';
 
+
+
 @Component({
     selector: 'app-home',
     imports: [	MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
-				CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, TripConfigComponent, MatButton, BudgetDashboardComponent,
+				CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, CalendarComponent, TripConfigComponent, MatButton, BudgetDashboardComponent,
 			 	ResearchComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  //@ViewChild('calendar') calendarComponent!: FullCalendarComponent;
   selectedVacationizer:string | null = null;
   
   selectedVacation?: Vacation | null = null;
@@ -51,6 +55,10 @@ export class HomeComponent {
   vacationList?: Array<any>;
   currentTab: string = "";
   isAdmin: boolean = false;
+  
+  /*onTabChange(event: MatTabChangeEvent) {
+   
+  }*/
   
   constructor(private vacationService: VacationControllerService,
 			  private util: WebVacationUtilityService,
@@ -83,6 +91,14 @@ export class HomeComponent {
   
   //Identifies the current tab for control-panel button changes
   onTabChange(evt: any): void{
+	
+	/*if (evt && evt.index === 5) {
+     setTimeout(() => {
+		console.log("view child");
+		console.log(this.calendarComponent);
+       this.calendarComponent.getApi().updateSize();
+     });
+	}*/
 	const tabs:any = {
 		0: "trip_dashboard",
 		1: "prepayments",

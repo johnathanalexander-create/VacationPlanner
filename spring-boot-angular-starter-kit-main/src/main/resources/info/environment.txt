@@ -29,3 +29,9 @@ Execute the following SQL scripts in mySQL in the following order:
 There is now one test user ready to go.
 username: admin@gmail.com
 password: password
+
+The angular cli will need to install as follows:
+
+npm install @fullcalendar/angular @fullcalendar/core @fullcalendar/daygrid
+npm install @fullcalendar/interaction
+npm install @fullcalendar/list

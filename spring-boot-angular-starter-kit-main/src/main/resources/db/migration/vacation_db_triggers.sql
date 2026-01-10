@@ -1,5 +1,7 @@
 /* Vacation DB Scripts Run Order: 3 */
 
+use vacation_db;
+
 drop trigger if exists generate_vacation_config;
 drop trigger if exists generate_default_config_items;
 drop trigger if exists autotask_generator;
@@ -159,6 +161,7 @@ begin
 
     set calculated_budget_buffer = (calculate_budget_buffer(v_vacation_id, NEW.vacation_config_id));
 
+	/* Budget Buffer */
 	if v_config_key = 'enable_budget_buffer'
     then
 		if v_config_value = "True"
@@ -172,6 +175,64 @@ begin
 			delete from budget_item where vacation_id = v_vacation_id and item = "Budget Buffer";
         end if;
     end if;
+    /* End Budget Buffer */
+    
+    /* Main Title */
+    if v_config_key = 'main_title'
+    then
+		update vacation
+        set name = v_config_value
+        where id = v_vacation_id;
+    end if;
+    /* End Main Title*/
+    
+    /* Haircut Autobudget Amount */
+    if v_config_key = "enable_haircut_autobudget"
+    then
+		if v_config_value = "True"
+        then
+            insert ignore into budget_item(vacation_id, active, item, amount, notes)
+            values(v_vacation_id, true, "Haircut", calculated_budget_buffer, "Allows autobudgeting for a haircut");
+        end if;
+        
+        if v_config_value = "False"
+        then
+			delete from budget_item where vacation_id = v_vacation_id and item = "Haircut";
+        end if;
+	end if;
+    /* End Haircut Autobudget Amount */
+    
+    /* Automatic Funding Items */
+    if v_config_key = 'use_automatic_funding_items'
+    then
+		if v_config_value = "True"
+        then
+			insert ignore into fcc(vacation_id, fcc_title)
+            values(v_vacation_id, "Main Funding");
+            
+            insert ignore into fcc(vacation_id, fcc_title)
+            values(v_vacation_id, "Estimated Upcoming Funding");
+            
+            insert ignore into fcc(vacation_id, fcc_title)
+            values(v_vacation_id, "Prepayment Cashback");
+        end if;
+        
+        if v_config_value = "False"
+        then
+			delete from fcc
+            where vacation_id = v_vacation_id
+            and fcc_title = "Main Funding";
+            
+            delete from fcc
+            where vacation_id = v_vacation_id
+            and fcc_title = "Estimated Upcoming Funding";
+            
+            delete from fcc
+            where vacation_id = v_vacation_id
+            and fcc_title = "Prepayment Cashback";
+        end if;
+    end if;
+    /* End Automatic Funding Items */
 end//
 
 

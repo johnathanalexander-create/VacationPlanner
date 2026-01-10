@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {WebVacationUtilityService} from '../utility/web-vacation-utility.service';
 import Vacation from '../../models/vacation-planner/vacation.model';
+import Confirmation from '../../models/vacation-planner/confirmation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,59 @@ export class VacationProcessorService {
 	"package":"not_started",
 	"tsm":"not_started",
 	"tasks":"not_started",
-	"disabler":"not_started"
+	"disabler":"not_started",
+	"calendar":"not_started"
+  }
+  
+ /* preprocessVacation(v:Vacation):Vacation{
+	v.meta = {};
+	v.meta.calendarEvents = [];
+	
+	
+	
+	return v;
+  }*/
+  
+  async _processCalendar():Promise<string>{
+	if(!this.vacation){
+		this.processStatus.calendar = "error";
+		return new Promise((resolve)=>{
+			resolve(this.processStatus.calendar);
+		});
+	}
+	
+	
+	
+	if(this.vacation.confirmations.length > 0){
+		this.vacation.confirmations.forEach((confirmation:Confirmation) => {
+			this._createCalendarEvent(confirmation.description, confirmation.date);
+		});
+	}
+		
+	this.processStatus.calendar = "in_progress";
+	
+	return new Promise((resolve) => {
+		resolve(this.processStatus.calendar);
+	});
+  }
+  
+  async _createCalendarEvent(title: string, date: string):Promise<boolean>{
+	
+	var calendarEvent = {
+		title:title,
+		date:date
+	}
+	
+	this.vacation.meta.calendarEvents.push(calendarEvent);
+	
+	return new Promise((resolve) => {
+		resolve(true);
+	});
   }
   
   async _processDisabler():Promise<string>{
+	
+	/* Need to strip out the entire disabler feature due to UI limitations*/
 	
 	var disablePacking = this.utility.getVacationValue(this.vacation, "tab_disable_packing", true, "");
 	var disableSpa = this.utility.getVacationValue(this.vacation, "tab_disable_spa", true, "");
@@ -31,12 +81,12 @@ export class VacationProcessorService {
 	var disableTripAnalysis = this.utility.getVacationValue(this.vacation, "tab_disable_trip_analysis", true, "");
 	
 	this.vacation.meta.tab_disabler = {
-		packing: false,
-		spa: false,
-		calendar: false,
-		research: false,
-		tripAnalysis: false
-	}
+			packing: false,
+			spa: false,
+			calendar: false,
+			research: false,
+			tripAnalysis: false
+		}
 	
 	this.vacation.meta.tab_disabler.packing = disablePacking.toLowerCase() == "true";
 	this.vacation.meta.tab_disabler.spa = disableSpa.toLowerCase() == "true";
@@ -298,7 +348,9 @@ export class VacationProcessorService {
   
   async processSingleVacation(vacation: any): Promise<any>{
   		if(vacation){
-  			vacation.meta = {};
+			//vacation = this.preprocessVacation(vacation);
+			vacation.meta = {};
+			vacation.meta.calendarEvents = [];
   		}
 		
 		this.vacation = vacation;
@@ -310,8 +362,9 @@ export class VacationProcessorService {
 		var trip_package = this._processEstimatedTripPackagePrice();
 		var tsm = this._processTripStatusMonitor();
 		var disabler = this._processDisabler();
+		var calendar = this._processCalendar();
 		
-		const results = await Promise.all([fcc, time, prepayments, funding_overview, trip_package, tsm, disabler]);
+		const results = await Promise.all([fcc, time, prepayments, funding_overview, trip_package, tsm, disabler, calendar]);
 		return new Promise((resolve)=>{
 			console.log("the processed vacation");
 			console.log(this.vacation);

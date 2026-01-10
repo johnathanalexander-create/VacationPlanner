@@ -27,6 +27,7 @@ export default interface Vacation{
 			research: false,
 			tripAnalysis: false
 		},
+		calendarEvents:[],
 		totalFCC: 0,
 		monthsRemaining: 0,
 		weeksRemaining: 0,
