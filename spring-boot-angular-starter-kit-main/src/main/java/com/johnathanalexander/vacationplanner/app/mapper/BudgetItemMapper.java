@@ -23,7 +23,8 @@ public class BudgetItemMapper {
 			item.getGoalAmount(),
 			item.getCashRequirement(),
 			item.getNotes(),
-			item.getBudgetItemOrder()
+			item.getBudgetItemOrder(),
+			item.isDeletable()
 		);
 	}
 }

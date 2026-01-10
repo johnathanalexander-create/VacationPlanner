@@ -32,6 +32,9 @@ public class BudgetItem {
 	
 	@Column()
 	private byte budget_item_order;
+	
+	@Column()
+	private boolean deletable;
 
 	public Long getId() {
 		return id;
@@ -97,6 +100,14 @@ public class BudgetItem {
 		this.budget_item_order = budget_item_order;
 	}
 	
+	public boolean isDeletable() {
+		return deletable;
+	}
+
+	public void setDeletable(boolean deletable) {
+		this.deletable = deletable;
+	}
+
 	@Override
 	public String toString() {
 		return "id: " + id + " / item name: " + item + " / amount: " + amount;

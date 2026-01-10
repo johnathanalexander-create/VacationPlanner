@@ -10,6 +10,13 @@
 				<mat-form-field appearance="outline" class="form-field mt-2">
 					<mat-label>Config Value</mat-label>
 					<input matInput formControlName="config_value" type="text" autocomplete = "off">
+					<!-- <input matInput formControlName="config_value" type="text" autocomplete = "off" *ngIf="configItemGroup.value.config_type.toLowerCase()=='string'">
+					<select matSelect formControlName="config_value" *ngIf="configItemGroup.value.config_type.toLowerCase() == 'boolean'">
+						<option>Yes</option>
+						<option>No</option>
+					</select>-->
+					
+					
 				</mat-form-field>
 				
 				<mat-form-field appearance="outline" class="form-field mt-2">

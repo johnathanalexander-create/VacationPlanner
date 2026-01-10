@@ -9,10 +9,7 @@ import {FormValidationService} from "../../../../services/form-validation/form-v
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {VacationControllerService} from '../../../../services/vacation-planner/vacation-controller.service';
-import PrepaymentSource from '../../../../models/vacation-planner/prepayment_source.model';
 import { CommonModule } from '@angular/common';
-import Prepayment from '../../../../models/vacation-planner/prepayment.model';
-import {HttpResponse} from '@angular/common/http';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
 import VacationConfigItem from '../../../../models/vacation-planner/vacation_config_item.model';
 import {SnackBarService} from '../../../../services/snack-bar/snack-bar.service';
@@ -44,8 +41,6 @@ export class ConfigModalComponent {
 	
 	processValueByType(value:string, type:string):boolean{
 		
-		console.log("Processing " + value + " for type " + type);
-		
 		if(value == "" || type == ""){
 			return true;
 		}
@@ -59,10 +54,7 @@ export class ConfigModalComponent {
 			case "number":
 				const regex = /^\d+(\.\d+)?$/;//regex allowing numerical caharacters and a single decimal
 				
-				if(regex.test(value)){
-					return true;
-				}
-				return false;
+				return regex.test(value);
 			case "boolean":
 				return (value == "true" || value == "false");
 			case "date":

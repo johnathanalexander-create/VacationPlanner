@@ -9,7 +9,8 @@ public record BudgetItemDto(
 			BigDecimal amountGoal,
 			BigDecimal cashRequirement,
 			String notes,
-			byte order
+			byte order,
+			boolean isDeletable
 		) {
 
 }

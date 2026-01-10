@@ -1,7 +1,6 @@
 import { Inject, Component } from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import { CommonModule } from '@angular/common';
-import {HttpResponse} from '@angular/common/http';
 
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -11,9 +10,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import {FormValidationService} from "../../../../services/form-validation/form-validation.service";
-
-import PrepaymentSource from '../../../../models/vacation-planner/prepayment_source.model';
-import Prepayment from '../../../../models/vacation-planner/prepayment.model';
 import BudgetItem from '../../../../models/vacation-planner/budget_item.model';
 
 import {VacationControllerService} from '../../../../services/vacation-planner/vacation-controller.service';
@@ -35,7 +31,8 @@ export class BudgetItemModalComponent {
 		amount: [this.modalInputData.data.budgetItem.amount, []],
 		amountGoal: [this.modalInputData.data.budgetItem.amountGoal, []],
 		cashRequirement: [this.modalInputData.data.budgetItem.cashRequirement, []],
-		notes: [this.modalInputData.data.budgetItem.notes, []]
+		notes: [this.modalInputData.data.budgetItem.notes, []],
+		isDeletable: [this.modalInputData.data.budgetItem.isDeletable, []]
 	});
 	
 	constructor(public dialogRef: MatDialogRef<BudgetItemModalComponent>,

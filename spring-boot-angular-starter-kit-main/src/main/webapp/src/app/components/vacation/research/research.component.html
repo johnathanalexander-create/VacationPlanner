@@ -1,9 +1,6 @@
 
-
-<div class="app">
-	<app-sticky-notes *ngFor="let note of notes" (dismiss)="deleteNote($event)" (focusout)="saveNote($event)" id="{{note.id}}" size="{{note.size}}">{{note.content}}</app-sticky-notes>
-</div>
 <div class="toolbar" id="toolbar" tabindex="0">
+	<button style="float: left;">Configure Page</button>
 	<button class="add material-icons" (click)="addNote('sm')" >
   		note_add
 	</button>
@@ -16,4 +13,7 @@
   		note_add
 	</button>
 
+</div>
+<div class="app">
+	<app-sticky-notes *ngFor="let note of notes" (dismiss)="deleteNote($event)" (focusout)="saveNote($event)" id="{{note.id}}" size="{{note.size}}">{{note.content}}</app-sticky-notes>
 </div>

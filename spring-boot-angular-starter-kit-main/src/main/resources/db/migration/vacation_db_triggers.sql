@@ -73,38 +73,38 @@ AFTER INSERT ON vacation
 FOR EACH ROW
 BEGIN
 
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Dining & Beverages", "", 1);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Dining & Beverages", "", 1, false);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Entertainment, Exhibits, & Shopping", "", 2);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Entertainment, Exhibits, & Shopping", "", 2, false);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Gambling", "", 3);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Gambling", "", 3, false);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Hotel", "", 4);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Hotel", "", 4, false);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Estimated Tipping Costs", "Extra tipping outside of standard tips", 5);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Estimated Tipping Costs", "Extra tipping outside of standard tips", 5, true);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Spa & Salon", "", 6);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Spa & Salon", "", 6, false);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Air & Rail Transportation", "Flights, trains, etc.", 7);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Air & Rail Transportation", "Flights, trains, etc.", 7, false);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Ground Transportation", "Services such as Uber or Limos", 8);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Ground Transportation", "Services such as Uber or Limos", 8, false);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Travel Insurance", "", 9);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Travel Insurance", "", 9, true);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "New Clothing", "Pre-trip budgeting for new clothes", 10);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "New Clothing", "Pre-trip budgeting for new clothes", 10, true);
 	
-	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order)
-	VALUES(NEW.id, "Budget Buffer", "Allows a buffer for unexpected costs", 11);
+	INSERT INTO budget_item(vacation_id, item, notes, budget_item_order, deletable)
+	VALUES(NEW.id, "Budget Buffer", "Allows a buffer for unexpected costs", 11, true);
 
 END//
 

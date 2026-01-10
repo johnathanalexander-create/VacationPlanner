@@ -10,4 +10,5 @@ export default interface VacationConfigItem{
 	required: boolean;
 	order: number;
 	is_editing: boolean;
+	config_type:string;
 }

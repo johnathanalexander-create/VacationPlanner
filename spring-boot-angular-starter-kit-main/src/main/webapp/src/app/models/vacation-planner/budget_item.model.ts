@@ -6,5 +6,6 @@ export default interface BudgetItem{
 	amountGoal: number,
 	cashRequirement: number,
 	notes: string,
-	order: number
+	order: number,
+	isDeletable: boolean
 }

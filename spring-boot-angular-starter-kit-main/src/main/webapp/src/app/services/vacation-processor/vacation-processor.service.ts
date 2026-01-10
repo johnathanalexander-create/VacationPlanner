@@ -160,7 +160,10 @@ export class VacationProcessorService {
 		
 		this.vacation.meta.monthsRemaining = monthsAway || "Fill Config";
 		this.vacation.meta.weeksRemaining = weeksAway || "Fill Config";
-		this.vacation.meta.daysRemaining = daysAway || "Fill Config";
+		
+		if(daysAway || daysAway == 0){
+			this.vacation.meta.daysRemaining = daysAway;
+		}
 	}
 	
 	this.processStatus.time = "complete";

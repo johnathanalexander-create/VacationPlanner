@@ -47,17 +47,12 @@ export class TripConfigComponent implements AfterViewInit{
 	}
 	
 	generateModal(item:any){
-		console.log("itemitemitem");
-		console.log(item);
 		if(item){
 			var data = {
 				vacation_id: this._selectedVacation?.id,
 				vacation: this._selectedVacation,
 				config:item
 			}
-			
-			console.log("the ci modal data");
-			console.log(data);
 			
 			this.util.generateModal("config", data);
 		}
