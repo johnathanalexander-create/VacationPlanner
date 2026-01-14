@@ -9,7 +9,7 @@
 </mat-form-field>
 
 
-<h1 class="inline" *ngIf="selectedVacation">Vacation Planner: <span style="text-decoration: underline;">{{selectedVacation.name}}</span></h1>
+<h1 style="margin-left: 20%" class="inline align-center" *ngIf="selectedVacation"><span style="text-decoration: underline;">{{selectedVacation.name}}</span></h1>
 <!-- Component Control Panel -->
 <!-- Consider using ngrepeat and a list of buttons in the TS -->
 <button (click)="generateModal('prepayment')" *ngIf="currentTab=='prepayments'" class="control-panel-button" mat-button matButton="filled" style="vertical-align: middle; float: right; background-color: #939799;">New Prepayment</button>

@@ -20,7 +20,8 @@ create table fcc(
 	id BIGINT primary key AUTO_INCREMENT,
 	vacation_id BIGINT not null,
 	fcc_title varchar(50) not null,
-	fcc_amount decimal(6,2), 
+	fcc_amount decimal(6,2),
+    template boolean default false,
 	foreign key (vacation_id)
 	references vacation(id) on delete cascade
 );

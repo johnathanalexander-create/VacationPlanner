@@ -42,11 +42,16 @@ $custom-theme: mat.m2-define-light-theme(
 
 /*Vacation Planner Globals*/
 
+.mt-2 {
+  margin-top: 6px;
+}
+
+
 .inline{
 	display: inline-block;
 }
 .align-center{
-	text-align: center;
+	text-align: center !important;
 }
 .align-right{
 	text-align: right;

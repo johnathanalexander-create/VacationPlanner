@@ -5,6 +5,7 @@ import Confirmation from './confirmation.model';
 import Spa from './spa.model';
 import BudgetItem from './budget_item.model';
 import LuggageSet from './packing/luggage_set.model';
+import FCC from './fcc.model';
 
 export default interface Vacation{
 	id: number;
@@ -18,6 +19,7 @@ export default interface Vacation{
 	luggageSets: LuggageSet[],
 	spas: Spa[],
 	funding_comps_credits:{},
+	fcc: FCC[],
 	confirmations: Confirmation[],
 	meta:{
 		tab_disabler: {

@@ -17,6 +17,7 @@ public record VacationDto(
 							Set<BudgetItemDto> budgetItems,
 							Set<SpaDto> spas,
 							String funding_comps_credits,
+							Set<FCCDto> fcc,
 							Set<ConfirmationDto> confirmations
 						 ) {
 	

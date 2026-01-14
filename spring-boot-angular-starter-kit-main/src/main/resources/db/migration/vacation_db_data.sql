@@ -87,6 +87,13 @@ values('tab_disable_packing', 'Disable Packing Tab', "False", "", false, false, 
 insert into vacation_config_item(config_key, config_label, config_value, config_notes, primary_config, required, config_order, config_type, template, vacation_config_id)
 values('tab_disable_trip_analysis', 'Disable Trip Analysis Tab', "False", "", false, false, 35, 'boolean', true, -1);
 
+insert into fcc(vacation_id, fcc_title, fcc_amount, template)
+values(-1, "Main Funding", 0, true);
+insert into fcc(vacation_id, fcc_title, fcc_amount, template)
+values(-1, "Estimated Upcoming Funding", 0, true);
+insert into fcc(vacation_id, fcc_title, fcc_amount, template)
+values(-1, "Prepayment Cashback", 0, true);
+
 set foreign_key_checks = 1;
 
 insert into prepayment_source(name, cashback_rate)
@@ -111,3 +118,4 @@ insert into prepayment_source(name, cashback_rate)
 values ("SavorOne CC - Dining", 0.03);
 insert into prepayment_source(name, cashback_rate)
 values ("Other", 0.00);
+

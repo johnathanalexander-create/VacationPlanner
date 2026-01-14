@@ -44,7 +44,7 @@
 			 			</ng-container>
 			 		</div>
 			 		
-			 		<div id="funding-comps-credits" class="margin-top-15 trip-dashboard-widget">
+			 		<!-- <div id="funding-comps-credits" class="margin-top-15 trip-dashboard-widget">
 				    	<table id = "fcc-table">
 				    		<thead id="fcc-header">
 				    			<tr class="fcc-row" id="fcc-header-row">
@@ -54,7 +54,7 @@
 				    		<tr class="fcc-row">
 				    			<th class="fcc-header">Description</th>
 				    			<th class="fcc-header">Amount</th>
-				    			<th class="fcc-header"></th><!-- No column header required here -->
+				    			<th class="fcc-header"></th>
 				    		</tr>
 		
 					    	<tr class="fcc-row" *ngFor="let item of selectedVacation.funding_comps_credits | keyvalue" id="fcc-{{item.key.replaceAll(' ', '_')}}">
@@ -62,7 +62,7 @@
 					    		<td (dblclick) = "generateModal('fcc', item)" *ngIf="!item.value['isEditing']" class="fcc-table-cell"><span *ngIf="item.value['value']">$</span>{{item.value["value"]}}</td>
 					    		<td *ngIf="item.value['isEditing']"><input [(ngModel)] = "item.value['value']"/></td>
 					    		<td class="fcc-table-cell">				    		
-						    		<!-- <mat-icon *ngIf="!item.value['isEditing']" (click)="toggleEditModeForFCC(item)">mode_edit</mat-icon>-->
+						    		
 						    		<mat-icon *ngIf="item.value['isEditing']" (click)="toggleEditModeForFCC(item); updateVacation(selectedVacation, false, 'Unable to update Funding, Comps, & Credits')">done</mat-icon>
 						    		<mat-icon (click)="deleteElementFromFCC(item); updateVacation(selectedVacation, false, 'Unable to update Funding, Comps, & Credits')">delete</mat-icon>
 					    		</td>
@@ -75,7 +75,12 @@
 					    		</tr>
 					    	</tfoot>
 				    	</table>
-				    </div>
+				    </div>-->
+				    
+				    <div id="funding-comps-credits" class="margin-top-15 trip-dashboard-widget">FCC under reconstruction</div>
+				    
+				    
+				    
 			    </div><!-- End Left Side -->
 			    
 			    <div id="right-side" class="inline-grid">
