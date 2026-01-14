@@ -1,0 +1,21 @@
+
+
+
+<table style="margin-top: 15px" mat-table [dataSource]="fccDataSource" class="mat-elevation-z8">
+	<thead id="fcc-header">
+		<tr class="fcc-row" id="fcc-header-row">
+			<th colspan="2">Funding, Comps, & Credits</th>
+		</tr>
+	</thead>
+	<ng-container matColumnDef="fccTitle">
+   		<th mat-header-cell *matHeaderCellDef> Description </th>
+   		<td mat-cell *matCellDef="let element"> {{element.fccTitle}} </td>
+			</ng-container>
+  	<ng-container matColumnDef="fccAmount">
+    	<th mat-header-cell *matHeaderCellDef> Amount </th>
+    	<td mat-cell *matCellDef="let element"> {{element.fccAmount}} </td>
+  	</ng-container>
+  	
+  	<tr mat-header-row *matHeaderRowDef="fccDisplayedColumns"></tr>
+	<tr mat-row *matRowDef="let row; columns: fccDisplayedColumns;"></tr>
+</table>

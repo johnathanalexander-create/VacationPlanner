@@ -3,8 +3,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
 import Vacation from '../../../models/vacation-planner/vacation.model';
-import { FormsModule } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import {WebVacationUtilityService} from '../../../services/utility/web-vacation-utility.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,17 +14,25 @@ import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 import {VacationProcessorService} from '../../../services/vacation-processor/vacation-processor.service';
 import {VacationUpdaterService} from '../../../services/vacation-updater/vacation-updater.service';
 import {Subscription} from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+
+import {FccComponent} from '../fcc/fcc.component';
+
+
+import FCC from '../../../models/vacation-planner/fcc.model';
 
 @Component({
   selector: 'app-trip-dashboard',
-  imports: [MatTabsModule, MatTableModule, FormsModule, MatToolbarModule, MatButtonModule, CommonModule, MatIconModule, MatFormFieldModule, MatInputModule],
+  imports: [FccComponent, MatTableModule, MatTabsModule, FormsModule, MatToolbarModule, ReactiveFormsModule, MatButtonModule, CommonModule, MatIconModule, MatFormFieldModule, MatInputModule],
   templateUrl: './trip-dashboard.component.html',
   styleUrl: './trip-dashboard.component.scss'
 })
 export class TripDashboardComponent {
 	
-	//@Input() selectedVacation?: Vacation | null = null;
-	selectedVacation?: Vacation | null = null;
+	@Input() selectedVacation?: Vacation | null = null;
+	
+	
 	
 	private dataSubscription: Subscription | undefined;
 	
@@ -39,6 +46,7 @@ export class TripDashboardComponent {
 				private vacationService: VacationControllerService,
 				private snackbar: SnackBarService,
 				private processor: VacationProcessorService,
+				private formBuilder: FormBuilder,
 				private vacationUpdater: VacationUpdaterService){}
 				
 				
@@ -64,25 +72,6 @@ export class TripDashboardComponent {
 		//this.util.processSingleVacation(this.selectedVacation);
 	  }
 	  
-	  // The FCC section is powered via JSON. This allows the user to remove a line item from the FCC section
-	  deleteElementFromFCC(item: any){
-			
-			if(item && this.selectedVacation){
-				var fcc_objects = this.selectedVacation.funding_comps_credits;
-				
-				for(var key in fcc_objects){
-					if(item.key == key){
-						delete fcc_objects[key as keyof typeof fcc_objects];
-					}
-				}
-				
-				this.selectedVacation.funding_comps_credits = fcc_objects;
-			}
-			
-			//this.selectedVacation = this.util.processSingleVacation(this.selectedVacation);console.log(this.selectedVacation);
-			
-	  	}
-	  
 	  
 	  getValue(str: string, isConfigItemSearch: boolean, onErrorReturnMessage: string){
 		return this.util.getVacationValue(this.selectedVacation as Vacation, str, isConfigItemSearch, onErrorReturnMessage);
@@ -96,8 +85,8 @@ export class TripDashboardComponent {
 			this.vacationService.updateVacation(vacation).subscribe({
 				next:(resp) => {
 					if(resp && resp.body){
-						this.processor.processSingleVacation(resp.body).then(stuff => {
-							this.selectedVacation = stuff;
+						this.processor.processSingleVacation(resp.body).then(processedVacation => {
+							this.selectedVacation = processedVacation;
 						});
 					}
 				},
@@ -163,11 +152,9 @@ export class TripDashboardComponent {
 			vacation: this.selectedVacation,
 			fcc:fcc
 		}
-		
-		console.log("trip dashboard genmod data");
-		console.log(data);
 	  	if(modalTarget){
 	  		this.util.generateModal(modalTarget, data);
 	  	}
 	  }
+	  updateFCCItem(){}
 }
