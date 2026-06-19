@@ -27,14 +27,14 @@
   
   	@if(selectedVacation){
   		<mat-tab-group (selectedTabChange)="onTabChange($event)" preserveContent>
-  			<mat-tab label="Trip Dashboard"><app-trip-dashboard [selectedVacation="selectedVacation"></app-trip-dashboard></mat-tab>
+  			<mat-tab label="Trip Dashboard"><app-trip-dashboard [selectedVacation]="selectedVacation"></app-trip-dashboard></mat-tab>
   			<mat-tab label="Prepayments"><app-prepayments [selectedVacation]="selectedVacation"></app-prepayments></mat-tab>
   			<mat-tab label="Budget Dashboard"><app-budget-dashboard></app-budget-dashboard></mat-tab>
   			<mat-tab label="Research"><app-research></app-research></mat-tab>
   			
   			<mat-tab label="Confirmations"><app-confirmations [selectedVacation]="selectedVacation"></app-confirmations></mat-tab>
   			<mat-tab label="Calendar"><app-calendar-component [selectedVacation]="selectedVacation" [active]="currentTab=='calendar'"></app-calendar-component></mat-tab>
-  			<mat-tab label="Spa">g</mat-tab>
+  			<mat-tab label="Spa"><app-spa ></app-spa></mat-tab>
   			<mat-tab label="Packing">h</mat-tab>
   			
   			

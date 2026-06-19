@@ -1,26 +1,28 @@
-import {Component, Input} from '@angular/core';
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatButtonModule} from "@angular/material/button";
-import {CommonModule} from "@angular/common";
-import Vacation from '../../../models/vacation-planner/vacation.model';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from "@angular/common";
 import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { MatTabsModule } from '@angular/material/tabs';
-import {WebVacationUtilityService} from '../../../services/utility/web-vacation-utility.service';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {VacationControllerService} from "../../../services/vacation-planner/vacation-controller.service";
-import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
-import {VacationProcessorService} from '../../../services/vacation-processor/vacation-processor.service';
-import {VacationUpdaterService} from '../../../services/vacation-updater/vacation-updater.service';
-import {Subscription} from 'rxjs';
+
+import { Subscription } from 'rxjs';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonModule } from "@angular/material/button";
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
-import {FccComponent} from '../fcc/fcc.component';
+import { FccComponent } from '../fcc/fcc.component';
 
+import { WebVacationUtilityService } from '../../../services/utility/web-vacation-utility.service';
+import { VacationControllerService } from "../../../services/vacation-planner/vacation-controller.service";
+import { SnackBarService } from '../../../services/snack-bar/snack-bar.service';
+import { VacationProcessorService } from '../../../services/vacation-processor/vacation-processor.service';
+import { VacationUpdaterService } from '../../../services/vacation-updater/vacation-updater.service';
 
 import FCC from '../../../models/vacation-planner/fcc.model';
+import Vacation from '../../../models/vacation-planner/vacation.model';
 
 @Component({
   selector: 'app-trip-dashboard',

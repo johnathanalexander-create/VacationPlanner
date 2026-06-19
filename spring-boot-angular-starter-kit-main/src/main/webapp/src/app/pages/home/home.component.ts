@@ -10,6 +10,7 @@ import { PrepaymentModalComponent } from '../../components/vacation/dynamic-moda
 import { FCCModalComponent } from '../../components/vacation/dynamic-modal-content/fcc-modal/fcc-modal.component';
 import { ResearchComponent } from '../../components/vacation/research/research.component';
 import { CalendarComponent } from '../../components/vacation/calendar-component/calendar-component.component';
+import { SpaComponent } from '../../components/vacation/spa/spa.component';
 
 import Vacation from '../../models/vacation-planner/vacation.model';
 
@@ -39,7 +40,7 @@ import { AuthService } from '../../services/auth/auth.service';
 @Component({
     selector: 'app-home',
     imports: [	MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
-				CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, CalendarComponent, TripConfigComponent, MatButton, BudgetDashboardComponent,
+				CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, SpaComponent, CalendarComponent, TripConfigComponent, MatButton, BudgetDashboardComponent,
 			 	ResearchComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'

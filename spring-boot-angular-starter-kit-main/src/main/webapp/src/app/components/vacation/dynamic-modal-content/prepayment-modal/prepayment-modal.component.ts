@@ -98,10 +98,15 @@ export class PrepaymentModalComponent {
 					this.dialogRef.close();
 				}
 			});*/
-			
+			console.log("input");
+		console.log(this.modalInputData);
 		const vacation = this.modalInputData.data.vacation;
-		vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
+		//vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
+		
+		console.log(vacation);
 		vacation.prepayments.push(this.newPrepaymentFormGroup.value as Prepayment);
+		
+		alert("here");
 			
 		this.vacationService.updateVacation(vacation)
 			.subscribe({

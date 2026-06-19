@@ -87,20 +87,6 @@ public class VacationController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@PutMapping()
 	private ResponseEntity<VacationDto> updateVacation(@RequestBody VacationRequestDto vacation){
 		System.out.println("RUNNING THE UPDATE VACATION FUNCTION");
