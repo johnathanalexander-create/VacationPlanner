@@ -15,8 +15,11 @@ import { ModalService } from '../../../services/utility/modal-service/modal-serv
 })
 export class PrepaymentsComponent {
 	
+	private _selectedVacation: Vacation | null = null;
+	
 	@Input()
 	set selectedVacation(value: Vacation){
+		this._selectedVacation = value;
 		this.dataSource.data = value.prepayments;
 	}
 	
@@ -24,7 +27,6 @@ export class PrepaymentsComponent {
 								 "isRefundRequested", "isRefundReceived", "amount", 
 								 "paymentSource", "notes"];
 	
-	//dataSource:Prepayment[] = [];
 	dataSource = new MatTableDataSource<Prepayment>();
 	
 	constructor(private util: WebVacationUtilityService, private modal: ModalService){}
@@ -32,8 +34,8 @@ export class PrepaymentsComponent {
 	generateModal(item:any){
 		if(item){
 			var data = {
-				vacation_id: this.selectedVacation?.id,
-				vacation: this.selectedVacation,
+				vacation_id: this._selectedVacation?.id,
+				vacation: this._selectedVacation,
 				prepayment:item,
 			}
 			
