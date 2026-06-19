@@ -10,6 +10,7 @@ import {Subscription} from 'rxjs';
 import {BudgetItemModalComponent} from '../dynamic-modal-content/budget-item-modal-component/budget-item-modal-component.component';
 import { ViewChild, AfterViewInit } from '@angular/core';
 import { WebVacationUtilityService } from '../../../services/utility/web-vacation-utility.service';
+import { ModalService } from '../../../services/utility/modal-service/modal-service.service';
 
 @Component({
   selector: 'app-budget-dashboard',
@@ -33,7 +34,10 @@ export class BudgetDashboardComponent {
 	
 	@ViewChild(MatSort) sort!: MatSort;
 	
-	constructor(private vacationUpdater: VacationUpdaterService, private dialog:MatDialog, private util: WebVacationUtilityService){}
+	constructor(private vacationUpdater: VacationUpdaterService,
+				private dialog:MatDialog,
+				private util: WebVacationUtilityService,
+				private modal: ModalService){}
 	
 	private dataSubscription: Subscription | undefined;
 	
@@ -55,7 +59,7 @@ export class BudgetDashboardComponent {
 				budgetItem: budgetItem
 			}
 			
-			this.util.generateModal("bi", data);
+			this.modal.generateModal("bi", data);
 			
 			/*const dialogConfig = new MatDialogConfig();
 			dialogConfig.data = {

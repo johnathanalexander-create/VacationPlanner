@@ -19,6 +19,7 @@ import { VacationProcessorService } from '../../services/vacation-processor/vaca
 import { VacationUpdaterService } from '../../services/vacation-updater/vacation-updater.service';
 import { WebVacationUtilityService } from '../../services/utility/web-vacation-utility.service';
 import { SnackBarService } from '../../services/snack-bar/snack-bar.service';
+import { ModalService } from '../../services/utility/modal-service/modal-service.service';
 
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule, MatButton } from "@angular/material/button";
@@ -67,7 +68,8 @@ export class HomeComponent {
 			  private processor: VacationProcessorService,
 		  	  private vacationUpdater: VacationUpdaterService,
 		  	  private snackbar: SnackBarService,
-		  	  private authService: AuthService) {
+		  	  private authService: AuthService,
+		  	  private modal: ModalService) {
   	this.vacationService.getVacationsByUserId();
 	
   }
@@ -123,7 +125,7 @@ export class HomeComponent {
 			vacation_id: this.selectedVacation?.id,
 			vacation: this.selectedVacation
 		}
-		this.util.generateModal(modalTarget, data);
+		this.modal.generateModal(modalTarget, data);
 	}
   }
   

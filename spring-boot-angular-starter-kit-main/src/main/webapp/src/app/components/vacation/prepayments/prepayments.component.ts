@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { WebVacationUtilityService } from '../../../services/utility/web-vacation-utility.service';
+import { ModalService } from '../../../services/utility/modal-service/modal-service.service';
 
 @Component({
   selector: 'app-prepayments',
@@ -26,7 +27,7 @@ export class PrepaymentsComponent {
 	//dataSource:Prepayment[] = [];
 	dataSource = new MatTableDataSource<Prepayment>();
 	
-	constructor(private util: WebVacationUtilityService){}
+	constructor(private util: WebVacationUtilityService, private modal: ModalService){}
 	
 	generateModal(item:any){
 		if(item){
@@ -36,7 +37,7 @@ export class PrepaymentsComponent {
 				prepayment:item,
 			}
 			
-			this.util.generateModal("prepayment", data);
+			this.modal.generateModal("prepayment", data);
 		}
 	}
 }

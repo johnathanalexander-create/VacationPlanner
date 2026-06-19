@@ -11,6 +11,7 @@ import { ViewChild, AfterViewInit } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import {WebVacationUtilityService} from '../../../services/utility/web-vacation-utility.service';
+import { ModalService } from '../../../services/utility/modal-service/modal-service.service';
 
 
 @Component({
@@ -32,7 +33,10 @@ export class TripConfigComponent implements AfterViewInit{
 	
 	dataSource = new MatTableDataSource<VacationConfigItem>([]);
 	
-	constructor(private service: VacationControllerService, private vacationUpdater: VacationUpdaterService, private util: WebVacationUtilityService){}
+	constructor(private service: VacationControllerService,
+				private vacationUpdater: VacationUpdaterService,
+				private util: WebVacationUtilityService,
+				private modal: ModalService){}
 	
 	
 	displayedColumns:string[] = ["config_label", "config_value", "config_notes"];
@@ -54,7 +58,7 @@ export class TripConfigComponent implements AfterViewInit{
 				config:item
 			}
 			
-			this.util.generateModal("config", data);
+			this.modal.generateModal("config", data);
 		}
 	}
 	

@@ -20,6 +20,7 @@ import { VacationControllerService } from "../../../services/vacation-planner/va
 import { SnackBarService } from '../../../services/snack-bar/snack-bar.service';
 import { VacationProcessorService } from '../../../services/vacation-processor/vacation-processor.service';
 import { VacationUpdaterService } from '../../../services/vacation-updater/vacation-updater.service';
+import { ModalService } from '../../../services/utility/modal-service/modal-service.service';
 
 import FCC from '../../../models/vacation-planner/fcc.model';
 import Vacation from '../../../models/vacation-planner/vacation.model';
@@ -49,7 +50,8 @@ export class TripDashboardComponent {
 				private snackbar: SnackBarService,
 				private processor: VacationProcessorService,
 				private formBuilder: FormBuilder,
-				private vacationUpdater: VacationUpdaterService){}
+				private vacationUpdater: VacationUpdaterService,
+				private modal: ModalService){}
 				
 				
 	ngOnInit(){
@@ -155,7 +157,7 @@ export class TripDashboardComponent {
 			fcc:fcc
 		}
 	  	if(modalTarget){
-	  		this.util.generateModal(modalTarget, data);
+	  		this.modal.generateModal(modalTarget, data);
 	  	}
 	  }
 	  updateFCCItem(){}
