@@ -13,6 +13,7 @@ import {ProfileComponent} from "./pages/profile/profile.component";
 import {authGuard} from "./guards/auth/auth.guard";
 import {ResetPasswordComponent} from "./pages/auth/reset-password/reset-password.component";
 import { CreateNewVacationComponent } from './components/vacation/create-new-vacation/create-new-vacation.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 /*import {NewVacationFormComponent} from "./"*/
 
 
@@ -36,7 +37,11 @@ export const routes: Routes = [
         path: 'home',
         title: 'Dashboard',
         component: HomeComponent
-      },
+      },{
+		path: 'admin-home',
+		title: 'Admin Dashboard',
+		component: AdminHomeComponent
+	  },
       {
         path: 'profile',
         title: 'User profile',

@@ -1,0 +1,21 @@
+.x_report{
+	text-align: center;
+	font-size: 30px;
+	margin-right: 25px;
+	display: inline-block;
+	padding: 10px;
+	width: 30%;
+}
+.report_header{
+	border-bottom: 2px solid gray;
+	font-weight: bold;
+}
+.trip-dashboard-widget{
+	background-color: #d3d3d3;
+	box-shadow:5px 5px 10px rgba(0,0,0,.5);
+}
+#time_remaining_section{
+	text-align: center;
+	display: flex;
+	width: 100%;
+}

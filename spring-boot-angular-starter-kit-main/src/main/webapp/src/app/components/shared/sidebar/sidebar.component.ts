@@ -28,12 +28,12 @@ export class SidebarComponent {
   
 
   menuItems: MenuItem[] = [
-    {
+    /*{
       name: 'Dashboard',
       link: '/home',
       icon: 'house',
       submenu: []
-    },
+    },*/
     /*{
       name: 'Posts',
       link: '',
@@ -58,7 +58,24 @@ export class SidebarComponent {
   async addAdminMenuItem(){
 	const isAdmin = await this.getIsAdmin();
 	
+	if(!isAdmin){
+		var userDashboard = {
+		      name: 'Dashboard',
+		      link: '/home',
+		      icon: 'house',
+		      submenu: []
+		}
+		
+		this.menuItems.push(userDashboard);
+	}
+	
 	if(isAdmin){
+		var adminDashboard = {
+	      name: 'Admin Dashboard',
+	      link: '/admin-home',
+	      icon: 'house',
+	      submenu: []
+		}
 		var adminMenuItem = {
 		      name: 'Admin',
 		      link: '',
@@ -88,6 +105,14 @@ export class SidebarComponent {
 			]
 		}
 		
+		var viewVacationReadonly = {
+			name:"Vacation Viewer",
+			link: "",
+			icon: "admin_panel_settings",
+			submenu: []
+		}
+		this.menuItems.push(adminDashboard);
+		this.menuItems.push(viewVacationReadonly);
 		this.menuItems.push(adminMenuItem);
 		this.menuItems.push(prepaymentMenuItem);
 		this.menuItems.push(configItemMenuItem);
