@@ -33,12 +33,9 @@ public class Vacation {
 	@OneToMany(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<BudgetItem> budgetItems = new HashSet<>();
 	
-	@Column()
-	@Deprecated
-	private String funding_comps_credits = "{\"Main Funding\":{\"value\":\"\",\"isEditing\":\"\"},\"Estimated Upcoming Funding\":{\"value\":\"\",\"isEditing\":false}}";
 	
 	@OneToMany(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private Set<FCC> funding_comps_credits_ = new HashSet<>();
+	private Set<FCC> funding_comps_credits = new HashSet<>();
 	
 	@Column
 	private String notes;
@@ -103,14 +100,6 @@ public class Vacation {
 		this.notes = notes;
 	}
 
-	public String getFundingCompsCredits() {
-		return funding_comps_credits;
-	}
-
-	public void setFundingCompsCredits(String funding_comps_credits) {
-		this.funding_comps_credits = funding_comps_credits;
-	}
-
 	public Set<Prepayment> getPrepayments() {
 		return prepayments;
 	}
@@ -144,6 +133,9 @@ public class Vacation {
 	}
 	
 	public Set<FCC> getFCC(){
-		return funding_comps_credits_;
+		return funding_comps_credits;
+	}
+	public void setFCC(Set<FCC> fcc) {
+		this.funding_comps_credits = fcc;
 	}
 }

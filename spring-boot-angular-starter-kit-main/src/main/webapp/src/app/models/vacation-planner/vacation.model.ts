@@ -18,8 +18,7 @@ export default interface Vacation{
 	budgetItems: BudgetItem[],
 	luggageSets: LuggageSet[],
 	spas: Spa[],
-	funding_comps_credits:{},
-	fcc: FCC[],
+	funding_comps_credits: FCC[],
 	confirmations: Confirmation[],
 	meta:{
 		tab_disabler: {

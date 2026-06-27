@@ -21,7 +21,7 @@ export class FccComponent {
 			
 	@Input()
 	set selectedVacation(value: Vacation){
-		this.fccDataSource = new MatTableDataSource<FCC>(value.fcc);
+		this.fccDataSource = new MatTableDataSource<FCC>(value.funding_comps_credits);
 		
 		this._selectedVacation = value;
 	}

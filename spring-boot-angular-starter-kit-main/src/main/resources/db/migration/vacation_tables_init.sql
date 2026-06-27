@@ -12,8 +12,7 @@ create table vacation
     name varchar(250) not null,
     state varchar(25) default 'Draft',
     `owner` BIGINT,
-	notes text,
-	funding_comps_credits varchar(500) default '{"Main Funding":{"value":"","isEditing":""},"Estimated Upcoming Funding":{"value":"","isEditing":false}}'
+	notes text
 );
 
 create table fcc(

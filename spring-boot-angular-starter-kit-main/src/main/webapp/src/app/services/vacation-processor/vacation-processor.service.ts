@@ -112,10 +112,13 @@ export class VacationProcessorService {
 	
 	this.processStatus.fcc = "in_progress";
 	
+	console.log("vacation");
+	console.log(this.vacation);
+	
 	if(this.vacation.funding_comps_credits){
 		
-		if(typeof(this.vacation.funding_comps_credits) == "string")
-			this.vacation.funding_comps_credits = JSON.parse(this.vacation.funding_comps_credits);
+		/*if(typeof(this.vacation.funding_comps_credits) == "string")
+			this.vacation.funding_comps_credits = JSON.parse(this.vacation.funding_comps_credits);*/
 		
 		var totalFCC = 0.00;
 		

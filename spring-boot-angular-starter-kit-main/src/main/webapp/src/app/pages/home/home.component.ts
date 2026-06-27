@@ -181,7 +181,7 @@ export class HomeComponent {
   
   cancelTripPlanner(vacation: Vacation){
 	vacation.state = "Cancelled";
-	vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
+	//vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
 	this.vacationService.updateVacation(vacation).subscribe({
 		next:(resp)=>{
 			this.snackbar.showMessage("Vacation Planner ( " + vacation.name + " ) has been cancelled.", "success");

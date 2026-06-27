@@ -83,7 +83,7 @@ export class TripDashboardComponent {
 	  
 	  async _readyToSaveVacation(vacation:Vacation, messageOnError: string) {
 		if(vacation){
-			vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
+			//vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
 			
 			
 			this.vacationService.updateVacation(vacation).subscribe({
