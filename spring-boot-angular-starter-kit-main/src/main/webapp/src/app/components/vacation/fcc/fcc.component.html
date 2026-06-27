@@ -10,11 +10,11 @@
 
 	<ng-container matColumnDef="fccTitle">
    		<th mat-header-cell *matHeaderCellDef> Description </th>
-   		<td mat-cell *matCellDef="let element"> {{element.fccTitle}} </td>
-			</ng-container>
+   		<td (dblclick)="generateModal(element)" mat-cell *matCellDef="let element"> {{element.fccTitle}} </td>
+	</ng-container>
   	<ng-container matColumnDef="fccAmount">
     	<th mat-header-cell *matHeaderCellDef> Amount </th>
-    	<td mat-cell *matCellDef="let element"> ${{element.fccAmount}} </td>
+    	<td (dblclick)="generateModal(element)" mat-cell *matCellDef="let element"> ${{element.fccAmount}} </td>
   	</ng-container>
   	
   	<tr mat-header-row *matHeaderRowDef="fccDisplayedColumns"></tr>

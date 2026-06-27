@@ -29,8 +29,8 @@ export class FCCModalComponent {
 	fccItemGroup = this.formBuilder.group({
 		vacation_id: [this.modalInputData.vacation_id, []],
 		id: [this.modalInputData.data.fcc.id || "", []],
-		key: [this.modalInputData.data.fcc.key || "", [Validators.required]],
-		value: [this.modalInputData.data.fcc.value.value || "", []]		
+		key: [this.modalInputData.data.fcc.fccTitle || "", [Validators.required]],
+		value: [this.modalInputData.data.fcc.fccAmount || "", []]		
 	});
 	
 	constructor(private formBuilder: FormBuilder,
@@ -69,7 +69,7 @@ export class FCCModalComponent {
 			}
 		}
 		
-		vacation.funding_comps_credits = JSON.stringify(fcc);	
+		//vacation.funding_comps_credits = JSON.stringify(fcc);//shouldn't need to stringify anymore. got a table for it
 		
 		this.vacationService.updateVacation(this.modalInputData.data.vacation as Vacation).subscribe({
 			next:(resp:any) => {
