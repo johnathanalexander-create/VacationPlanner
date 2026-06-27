@@ -139,7 +139,7 @@ export class HomeComponent {
 	return body;
   }
   
-  processVacationList(body:any){console.log("bodybodybody");console.log(body);
+  processVacationList(body:any){
 	
 	this.vacationList = body;
 	
@@ -147,7 +147,7 @@ export class HomeComponent {
 		var vacationID = this.vacationList[0].key;
 		
 		this.setSelectedVacation(null, vacationID);
-		this.selectedVacationizer = this.vacationList[0].value;console.log(this.selectedVacationizer);
+		this.selectedVacationizer = this.vacationList[0].value;
 	}
 	
 	return body;
@@ -181,7 +181,6 @@ export class HomeComponent {
   
   cancelTripPlanner(vacation: Vacation){
 	vacation.state = "Cancelled";
-	//vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
 	this.vacationService.updateVacation(vacation).subscribe({
 		next:(resp)=>{
 			this.snackbar.showMessage("Vacation Planner ( " + vacation.name + " ) has been cancelled.", "success");

@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
 
 import Vacation from '../../../../models/vacation-planner/vacation.model';
+import FCC from '../../../../models/vacation-planner/fcc.model';
 
 
 
@@ -29,8 +30,8 @@ export class FCCModalComponent {
 	fccItemGroup = this.formBuilder.group({
 		vacation_id: [this.modalInputData.vacation_id, []],
 		id: [this.modalInputData.data.fcc.id || "", []],
-		key: [this.modalInputData.data.fcc.fccTitle || "", [Validators.required]],
-		value: [this.modalInputData.data.fcc.fccAmount || "", []]		
+		fccTitle: [this.modalInputData.data.fcc.fccTitle || "", [Validators.required]],
+		fccAmount: [this.modalInputData.data.fcc.fccAmount || "", []]		
 	});
 	
 	constructor(private formBuilder: FormBuilder,
@@ -43,36 +44,49 @@ export class FCCModalComponent {
 	
 	submitFCC(){
 		
-		const vacation = this.modalInputData.data.vacation;
+		/*const vacation = this.modalInputData.data.vacation;
 		
-		var fccFromModal = this.fccItemGroup.value;
+		//var fccFromModal = this.fccItemGroup.fccAmount;
+		var fccFromModal = this.fccItemGroup.get("fccAmount")?.value;
 		var createNewFCC = this.modalInputData.data.createNewFCC;
 		
 		var fcc = vacation.funding_comps_credits;
 		
-		if(createNewFCC){
+		console.log("fcc");
+		console.log(fcc);*/
+		
+		/*if(createNewFCC){
 			//Need to add a new object to fcc
-			fcc[fccFromModal.key] = {
-				value:fccFromModal.value,
+			fcc[fccFromModal.fccTitle] = {
+				value:fccFromModal.fccAmount,
 				isEditing: false
 			}
 		}else{
 			//Need to update an existing fcc object
 			
 			for(var fccKey in fcc){
-				if(fccKey == fccFromModal.key){
+				if(fccKey == fccFromModal.fccTitle){
 					fcc[fccKey] = {
-						value: fccFromModal.value,
+						value: fccFromModal.fccAmount,
 						idEditing: false
 					}
 				}
 			}
-		}
+		}*/
 		
 		//vacation.funding_comps_credits = JSON.stringify(fcc);//shouldn't need to stringify anymore. got a table for it
+		const fccObject: FCC = {
+            id: 0,
+            fccTitle: this.fccItemGroup.get("fccTitle")?.value,
+            fccAmount: this.fccItemGroup.get("fccAmount")?.value
+        };
+		this.modalInputData.data.vacation.funding_comps_credits.push(fccObject);
+		
+		console.log("fcc updating attempt");
+		console.log(this.modalInputData.data.vacation)
 		
 		this.vacationService.updateVacation(this.modalInputData.data.vacation as Vacation).subscribe({
-			next:(resp:any) => {
+			next:(resp:any) => {console.log("fcc updated");
 				this.vacationUpdater.updateVacation(resp.body);
 				this.dialogRef.close();
 			}

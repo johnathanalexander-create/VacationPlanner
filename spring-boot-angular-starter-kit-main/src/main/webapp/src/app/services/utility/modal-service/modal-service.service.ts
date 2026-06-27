@@ -55,11 +55,8 @@ export class ModalService {
 
   			if(!resp.dialogConfig.data.fcc){
   				resp.dialogConfig.data.fcc = {
-  					"key":"",
-  					"value":{
-  						"value":"",
-  						"isEditing":false
-  					}
+  					"fccTitle":"",
+  					"fccAmount":0
   				}
   				
   				resp.dialogConfig.data.createNewFCC = true;

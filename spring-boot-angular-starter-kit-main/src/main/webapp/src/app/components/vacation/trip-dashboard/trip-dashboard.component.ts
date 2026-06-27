@@ -69,7 +69,7 @@ export class TripDashboardComponent {
 	  // Contains the functions and necessary attributes for the Funding, Comps, & Credits section
 	  toggleEditModeForFCC(item: any){
 		  if(item){
-		  	item.value.isEditing = (!item.value.isEditing);
+		  	//item.value.isEditing = (!item.value.isEditing);
 		  }
 	  }
 	  saveFCCObject(item:any){

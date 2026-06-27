@@ -20,6 +20,7 @@ import com.johnathanalexander.vacationplanner.TODO;
 import com.johnathanalexander.vacationplanner.app.calculators.BudgetItemCalculator;
 import com.johnathanalexander.vacationplanner.app.dto.BudgetItemDto;
 import com.johnathanalexander.vacationplanner.app.dto.ConfirmationDto;
+import com.johnathanalexander.vacationplanner.app.dto.FCCDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentDto;
 import com.johnathanalexander.vacationplanner.app.dto.SpaDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationConfigItemDto;
@@ -30,6 +31,7 @@ import com.johnathanalexander.vacationplanner.app.exception.VacationNotFoundExce
 import com.johnathanalexander.vacationplanner.app.mapper.VacationMapper;
 import com.johnathanalexander.vacationplanner.app.model.BudgetItem;
 import com.johnathanalexander.vacationplanner.app.model.Confirmation;
+import com.johnathanalexander.vacationplanner.app.model.FCC;
 import com.johnathanalexander.vacationplanner.app.model.Prepayment;
 import com.johnathanalexander.vacationplanner.app.model.PrepaymentSource;
 import com.johnathanalexander.vacationplanner.app.model.Spa;
@@ -94,6 +96,30 @@ public class VacationServiceImpl implements VacationService{
 		Vacation savedVacation = vacationRepository.save(vacation);
 
 		return VacationMapper.toVacationDto(savedVacation);
+	}
+	
+	private Set<FCC> generatedFCCForUpdatedVacation(Vacation updatedVacation, List<FCCDto> fccDtoList){
+		Set<FCC> fccs = new HashSet<>();
+		
+		for(FCCDto dto : fccDtoList) {
+			FCC fcc = updatedVacation.getFCC().stream()
+						.filter(f -> f.getId() == dto.id())
+						.findFirst()
+						.orElseGet(() -> {
+							return new FCC();
+						});
+			
+			fcc.setFCCAmount(dto.fccAmount());
+			fcc.setFCCTitle(dto.fccTitle());
+			
+			if(fcc.getVacation() == null) {
+				fcc.setVacation(updatedVacation);
+			}
+			
+			fccs.add(fcc);
+		}
+		
+		return fccs;
 	}
 	
 	private Set<Prepayment> generatePrepaymentsForUpdatedVacation(Vacation updatedVacation, List<PrepaymentDto> prepaymentDtoList){
@@ -197,7 +223,7 @@ public class VacationServiceImpl implements VacationService{
 		return ret;
 	}
 	
-	@TODO("Payment source should be retrieved using a findById from the id sent via the dto. Dto should implement PrepaymentSourceDto instead of the actual entity")
+	@TODO("Payment source should be retrieved using a findById from the id sent via the dto. Dto should implement PrepaymentSourceDto instead of the actual entity. ")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public VacationDto updateVacation(VacationRequestDto vacationRequestDto) {
 		
@@ -206,15 +232,19 @@ public class VacationServiceImpl implements VacationService{
 
 		List<PrepaymentDto> prepaymentDtoList = new ArrayList<>(vacationRequestDto.prepayments());
 		List<BudgetItemDto> budgetItemDtoList = new ArrayList<>(vacationRequestDto.budgetItems());
+		List<FCCDto> fccList = new ArrayList<>(vacationRequestDto.funding_comps_credits());
 		//List<ConfirmationDto> confirmationDtoList = new ArrayList<>(vacationRequestDto.confirmations());
 		//List<SpaDto> spaDtoList = new ArrayList<>(vacationRequestDto.spas());
 		
 		updatedVacation.setName(vacationRequestDto.name());
 		updatedVacation.setState(vacationRequestDto.state());
 		updatedVacation.setNotes(vacationRequestDto.notes());
-		updatedVacation.setFundingCompsCredits(vacationRequestDto.funding_comps_credits());
+		
+		
+		
 		updatedVacation.setPrepayments(this.generatePrepaymentsForUpdatedVacation(updatedVacation, prepaymentDtoList));
 		updatedVacation.setBudgetItems(this.generateBudgetItemsForUpdatedVacation(updatedVacation, budgetItemDtoList));
+		updatedVacation.setFCC(this.generatedFCCForUpdatedVacation(updatedVacation, fccList));
 		//updatedVacation.setSpas(this.generateSpaForUpdatedVacation(updatedVacation, spaDtoList));//Populate the null
 		//updatedVacation.setConfirmations(this.generateConfirmationsForUpdatedVacation(updatedVacation, confirmationDtoList));
 		
