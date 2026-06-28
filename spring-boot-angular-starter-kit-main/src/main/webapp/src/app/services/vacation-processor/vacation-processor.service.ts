@@ -127,8 +127,8 @@ export class VacationProcessorService {
 		
 		for(var obj in this.vacation.funding_comps_credits){
 			var fcc_object = this.vacation.funding_comps_credits[obj];
-			
-			this.vacation.funding_comps_credits[obj].fccAmount = parseFloat(this.vacation.funding_comps_credits[obj].fccAmount);
+
+			this.vacation.funding_comps_credits[obj].fccAmount = this.vacation.funding_comps_credits[obj].fccAmount.toFixed(2);
 			
 			if(fcc_object && fcc_object.fccAmount){
 				totalFCC += (parseFloat(fcc_object.fccAmount));
@@ -138,7 +138,7 @@ export class VacationProcessorService {
 		this.vacation.meta.totalFCC = totalFCC;
 		
 		console.log("vacay2");
-				console.log(this.vacation);
+		console.log(this.vacation);
 	}
 	
 	this.processStatus.fcc = "complete";

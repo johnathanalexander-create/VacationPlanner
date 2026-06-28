@@ -147,7 +147,7 @@ export class HomeComponent {
 		var vacationID = this.vacationList[0].key;
 		
 		this.setSelectedVacation(null, vacationID);
-		this.selectedVacationizer = this.vacationList[0].value;
+		this.selectedVacationizer = this.vacationList[0];
 	}
 	
 	return body;

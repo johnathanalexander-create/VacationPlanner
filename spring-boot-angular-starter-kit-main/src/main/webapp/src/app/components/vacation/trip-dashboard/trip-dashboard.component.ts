@@ -63,18 +63,6 @@ export class TripDashboardComponent {
 	ngOnDestroy(){
 		this.dataSubscription?.unsubscribe();
 	}
-
-	  
-	  
-	  // Contains the functions and necessary attributes for the Funding, Comps, & Credits section
-	  toggleEditModeForFCC(item: any){
-		  if(item){
-		  	//item.value.isEditing = (!item.value.isEditing);
-		  }
-	  }
-	  saveFCCObject(item:any){
-		//this.util.processSingleVacation(this.selectedVacation);
-	  }
 	  
 	  
 	  getValue(str: string, isConfigItemSearch: boolean, onErrorReturnMessage: string){
@@ -83,9 +71,6 @@ export class TripDashboardComponent {
 	  
 	  async _readyToSaveVacation(vacation:Vacation, messageOnError: string) {
 		if(vacation){
-			//vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
-			
-			
 			this.vacationService.updateVacation(vacation).subscribe({
 				next:(resp) => {
 					if(resp && resp.body){
@@ -160,5 +145,5 @@ export class TripDashboardComponent {
 	  		this.modal.generateModal(modalTarget, data);
 	  	}
 	  }
-	  updateFCCItem(){}
+
 }

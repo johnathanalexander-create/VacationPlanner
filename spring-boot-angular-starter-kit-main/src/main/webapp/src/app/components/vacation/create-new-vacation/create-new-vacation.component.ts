@@ -28,7 +28,8 @@ export class CreateNewVacationComponent {
 	constructor(private formBuilder: FormBuilder, private service: VacationControllerService){}
 	
 	vacationFormGroup = this.formBuilder.group({
-		name: ['', [Validators.required, Validators.maxLength(100)]]
+		name: ['', [Validators.required, Validators.maxLength(100)]],
+		template: ['', []]
 	});
 	
 	saveNewVacation(): void{
