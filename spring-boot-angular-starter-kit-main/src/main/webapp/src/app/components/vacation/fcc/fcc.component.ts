@@ -8,9 +8,11 @@ import { ModalService } from '../../../services/utility/modal-service/modal-serv
 import FCC from '../../../models/vacation-planner/fcc.model';
 import Vacation from '../../../models/vacation-planner/vacation.model';
 
+import { CommonModule } from "@angular/common";
+
 @Component({
   selector: 'app-fcc',
-  imports: [MatTableModule],
+  imports: [MatTableModule, CommonModule],
   templateUrl: './fcc.component.html',
   styleUrl: './fcc.component.scss'
 })

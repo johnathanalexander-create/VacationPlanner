@@ -1,6 +1,6 @@
 
 
-<h1 style="text-align: center; font-size: 24px">Funding, Comps, & Credits <span ng-if="_selectedVacation?.meta?.fo_main_funding>0"> | ${{_selectedVacation?.meta?.fo_main_funding}}</span></h1>
+<h1 style="text-align: center; font-size: 24px">Funding, Comps, & Credits <span *ngIf="(_selectedVacation?.meta?.fo_main_funding ?? 0) > 0"> | ${{_selectedVacation?.meta?.fo_main_funding}}</span></h1>
 <table style="margin-top: 15px" mat-table [dataSource]="fccDataSource" class="mat-elevation-z8">
 	<!-- <thead id="fcc-header">
 		<tr class="fcc-row" id="fcc-header-row">

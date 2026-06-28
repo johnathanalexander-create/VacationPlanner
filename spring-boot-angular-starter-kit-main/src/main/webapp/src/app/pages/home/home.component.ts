@@ -6,8 +6,6 @@ import { ConfirmationsComponent } from '../../components/vacation/confirmations/
 import { BudgetDashboardComponent } from '../../components/vacation/budget-dashboard/budget-dashboard.component';
 import { TripDashboardComponent } from '../../components/vacation/trip-dashboard/trip-dashboard.component';
 import { PrepaymentsComponent } from '../../components/vacation/prepayments/prepayments.component';
-import { PrepaymentModalComponent } from '../../components/vacation/dynamic-modal-content/prepayment-modal/prepayment-modal.component';
-import { FCCModalComponent } from '../../components/vacation/dynamic-modal-content/fcc-modal/fcc-modal.component';
 import { ResearchComponent } from '../../components/vacation/research/research.component';
 import { CalendarComponent } from '../../components/vacation/calendar-component/calendar-component.component';
 import { SpaComponent } from '../../components/vacation/spa/spa.component';

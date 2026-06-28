@@ -132,7 +132,7 @@ export class TripDashboardComponent {
 			totalFunding = this.calculateCreditCardFunding() + ( this.selectedVacation.meta.totalPrepayments || 0 ) + ( this.selectedVacation.meta.fo_main_funding || 0 );
 		}
 		
-		return totalFunding.toFixed(2);
+		return totalFunding;
 	  }
 	  
 	  generateModal(modalTarget:string, fcc:any){

@@ -1,0 +1,15 @@
+.dialog-actions {
+  display: flex;
+  justify-content: space-between; /* pushes left group left, right group right */
+  width: 100%;
+}
+
+.left-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.right-actions {
+  display: flex;
+  gap: 8px;
+}

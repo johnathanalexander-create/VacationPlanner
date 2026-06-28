@@ -18,8 +18,16 @@
 			</div>
 		</div>
 	</mat-dialog-content>
-	<mat-dialog-actions style="float: right;">
-		<button mat-button [mat-dialog-close] = "false">Close</button>
-		<button type="submit" mat-flat-button color="primary" [disabled] = "fccItemGroup.invalid">Submit</button>
+	
+	<mat-dialog-actions class="dialog-actions">
+		<div class='left-actions'>
+			<button mat-button color="warn">Delete</button>
+		</div>
+		<div class='right-actions'>
+			<button mat-button [mat-dialog-close] = "false">Close</button>
+			<button type="submit" mat-flat-button color="primary" [disabled] = "fccItemGroup.invalid">Submit</button>
+		</div>
+		
+		
 	</mat-dialog-actions>
 </form>
