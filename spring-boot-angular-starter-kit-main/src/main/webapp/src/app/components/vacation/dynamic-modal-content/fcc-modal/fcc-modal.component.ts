@@ -49,14 +49,37 @@ export class FCCModalComponent {
             fccTitle: this.fccItemGroup.get("fccTitle")?.value,
             fccAmount: this.fccItemGroup.get("fccAmount")?.value
         };
-		this.modalInputData.data.vacation.funding_comps_credits.push(fccObject);
 		
-		this.vacationService.updateVacation(this.modalInputData.data.vacation as Vacation).subscribe({
-			next:(resp:any) => {console.log("fcc updated");
-				this.vacationUpdater.updateVacation(resp.body);
-				this.dialogRef.close();
+		const vacation = this.modalInputData.data.vacation;
+		if(vacation){
+			var fcc = vacation.funding_comps_credits;
+			
+			var found = false;
+			
+			fcc.forEach(function(item:any){
+				var id = item.id;
+				if(id == fccObject.id){
+					item.fccTitle = fccObject.fccTitle;
+					item.fccAmount = fccObject.fccAmount;
+					
+					found = true;
+				}
+			});
+			
+			if(!found){
+				this.modalInputData.data.vacation.funding_comps_credits.push(fccObject);
 			}
-		})
+			
+			this.vacationService.updateVacation(this.modalInputData.data.vacation as Vacation).subscribe({
+				next:(resp:any) => {console.log("fcc updated");
+					this.vacationUpdater.updateVacation(resp.body);
+					this.dialogRef.close();
+				}
+			})
+		}
+		
+		
+		
 	}
 	
 	deleteFCC(){
