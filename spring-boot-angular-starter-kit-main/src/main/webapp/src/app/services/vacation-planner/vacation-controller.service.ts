@@ -10,6 +10,7 @@ import {WebVacationUtilityService} from '../../services/utility/web-vacation-uti
 import PrepaymentSource from '../../models/vacation-planner/prepayment_source.model';
 import Prepayment from '../../models/vacation-planner/prepayment.model';
 import VacationConfigItem from '../../models/vacation-planner/vacation_config_item.model';
+import FCC from '../../models/vacation-planner/fcc.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -76,10 +77,7 @@ export class VacationControllerService {
 		return this.http.put("/api/v1/vacationConfigItem/saveVacationConfigItem", configItem);
 	}
 	
-	/* Update FCC */
-	/*setFCC(fcc:any, vacation_id: number):Observable<HttpResponse<Vacation>>{		
-		return this.http.put("/api/v1/vacation/setFCC/" + vacation_id, JSON.stringify(fcc));
-		
-		//return this.http.post("/api/v1/vacation/newFCC", JSON.stringify(alteredFCC), fcc.vacation_id);
-	}*/
+	deleteFCC(fcc:FCC){
+		return this.http.delete("/api/v1/vacation/deleteFCCItem/" + fcc.id, fcc);
+	}
 }

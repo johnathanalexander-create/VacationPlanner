@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.johnathanalexander.vacationplanner.TODO;
 import com.johnathanalexander.vacationplanner.app.dto.ConfirmationDto;
+import com.johnathanalexander.vacationplanner.app.dto.FCCDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationConfigItemDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationRequestDto;
@@ -50,8 +51,14 @@ public class VacationController {
 	
 	
 	@DeleteMapping("/deleteBudgetItem/{id}")
-	private ResponseEntity<VacationDto> deleteBudgetItem(@PathVariable("id") Long id){
+	private ResponseEntity<VacationDto> deleteBudgetItem(@PathVariable("id") Long id, FCCDto fcc){
 		VacationDto dto = vacationService.deleteBudgetItem(id);
+		return ResponseEntity.ok(dto);
+	}
+	
+	@DeleteMapping("/deleteFCCItem/{id}")
+	private ResponseEntity<VacationDto> deleteFCCItem(@PathVariable("id") Long id){
+		VacationDto dto = vacationService.deleteFCCItem(id);
 		return ResponseEntity.ok(dto);
 	}
 	

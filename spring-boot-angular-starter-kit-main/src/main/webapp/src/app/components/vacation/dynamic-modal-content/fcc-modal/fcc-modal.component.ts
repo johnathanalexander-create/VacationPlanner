@@ -58,4 +58,13 @@ export class FCCModalComponent {
 			}
 		})
 	}
+	
+	deleteFCC(){
+		this.vacationService.deleteFCC(this.fccItemGroup.value as FCC).subscribe({
+			next:(resp:any) =>{
+				this.vacationUpdater.updateVacation(resp);
+				this.dialogRef.close();
+			}
+		});
+	}
 }

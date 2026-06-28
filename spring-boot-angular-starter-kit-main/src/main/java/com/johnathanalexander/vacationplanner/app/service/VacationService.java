@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.johnathanalexander.vacationplanner.app.dto.FCCDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationConfigItemDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationRequestDto;
@@ -17,4 +18,5 @@ public interface VacationService {
 	VacationDto createVacation(VacationRequestDto vacationRequestDto, String name);
 	VacationDto updateVacation(VacationRequestDto vacationRequestDto);
 	VacationDto deleteBudgetItem(Long id);
+	VacationDto deleteFCCItem(Long id);
 }

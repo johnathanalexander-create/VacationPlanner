@@ -12,7 +12,7 @@ export class VacationUpdaterService {
 
   	constructor(private processor: VacationProcessorService) { }
 	
-	updateVacation(newData: any){console.log("updating");
+	updateVacation(newData: any){
 		this.processor.processSingleVacation(newData).then(processedVacation=>{
 			this.selectedVacation.next(processedVacation);
 		});

@@ -38,6 +38,7 @@ import com.johnathanalexander.vacationplanner.app.model.Spa;
 import com.johnathanalexander.vacationplanner.app.model.Vacation;
 import com.johnathanalexander.vacationplanner.app.model.VacationConfig;
 import com.johnathanalexander.vacationplanner.app.model.VacationConfigItem;
+import com.johnathanalexander.vacationplanner.app.repository.FCCRepository;
 import com.johnathanalexander.vacationplanner.app.repository.PrepaymentSourceRepository;
 import com.johnathanalexander.vacationplanner.app.repository.VacationRepository;
 import com.johnathanalexander.vacationplanner.app.service.VacationService;
@@ -51,11 +52,16 @@ public class VacationServiceImpl implements VacationService{
 	private final VacationRepository vacationRepository;
 	private final UserRepository userRepository;
 	private final PrepaymentSourceRepository prepaymentSourceRepository;
+	private final FCCRepository fccRepository;
 	
-	public VacationServiceImpl(VacationRepository vacationRepository, UserRepository userRepository, PrepaymentSourceRepository prepaymentSourceRepository) {
+	public VacationServiceImpl(VacationRepository vacationRepository,
+							   UserRepository userRepository,
+							   PrepaymentSourceRepository prepaymentSourceRepository,
+							   FCCRepository fccRepository) {
 		this.vacationRepository = vacationRepository;
 		this.userRepository = userRepository;
 		this.prepaymentSourceRepository = prepaymentSourceRepository;
+		this.fccRepository = fccRepository;
 	}
 	
 	public VacationDto getVacationById(Long id) {
@@ -292,26 +298,24 @@ public class VacationServiceImpl implements VacationService{
 		return VacationMapper.toVacationDto(vacation);
 
 	}
-	
-	/*public VacationDto setFCC(Long id, String fcc) {
-		Vacation updatedVacation = vacationRepository.findById(id)
+
+	@Override
+	public VacationDto deleteFCCItem(Long id) {
+		FCC fcc = fccRepository.findById(id)
 				.orElseThrow(() -> VacationNotFoundException.forId(id));
 		
-		updatedVacation.setFundingCompsCredits(fcc);
 		
-		Vacation response = vacationRepository.save(updatedVacation);
+		Long vacationId = fcc.getVacation().getId();
 		
-		return VacationMapper.toVacationDto(response);
+		Vacation oldVacation = fcc.getVacation();
+		oldVacation.getFCC().remove(fcc);
+		
+		fccRepository.delete(fcc);
+		
+		Vacation updatedVacation = vacationRepository.findById(vacationId)
+				.orElseThrow(() -> VacationNotFoundException.forId(vacationId));
+		
+		return VacationMapper.toVacationDto(updatedVacation);
 	}
-	
-	public VacationDto cancel(Long id) {
-		Vacation vacationToCancel = vacationRepository.findById(id)
-				.orElseThrow(() -> VacationNotFoundException.forId(id));
-		
-		vacationToCancel.setState("Cancelled");
-		
-		Vacation response = vacationRepository.save(vacationToCancel);
-		
-		return VacationMapper.toVacationDto(response);
-	}*/
+
 }
