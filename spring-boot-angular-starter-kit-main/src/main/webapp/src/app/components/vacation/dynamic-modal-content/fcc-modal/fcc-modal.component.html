@@ -21,7 +21,7 @@
 	
 	<mat-dialog-actions class="dialog-actions">
 		<div class='left-actions'>
-			<button mat-button color="warn">Delete</button>
+			<button *ngIf="(modalInputData.data.fcc.id) > 0" mat-button color="warn">Delete</button>
 		</div>
 		<div class='right-actions'>
 			<button mat-button [mat-dialog-close] = "false">Close</button>
