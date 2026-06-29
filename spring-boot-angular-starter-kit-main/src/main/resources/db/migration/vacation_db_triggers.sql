@@ -7,6 +7,18 @@ drop trigger if exists generate_default_config_items;
 drop trigger if exists autotask_generator;
 
 DELIMITER //
+
+
+
+/*Generates FCC Items*/
+CREATE TRIGGER generate_fcc_items
+AFTER INSERT ON vacation
+FOR EACH ROW
+BEGIN
+	INSERT INTO fcc(vacation_id, fcc_title, fcc_amount)
+    VALUES( NEW.id, "Main Funding", 0.00),( NEW.id, "Estimated Upcoming Funding", 0.00 ), (NEW.id, "Prepayment Cashback", 0.00);
+END//
+
 /*Generates config items using templates*/
 CREATE TRIGGER generate_vacation_config
 AFTER INSERT ON vacation

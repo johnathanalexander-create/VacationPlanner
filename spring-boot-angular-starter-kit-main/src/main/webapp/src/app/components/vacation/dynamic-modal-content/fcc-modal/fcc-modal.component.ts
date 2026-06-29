@@ -71,7 +71,7 @@ export class FCCModalComponent {
 			}
 			
 			this.vacationService.updateVacation(this.modalInputData.data.vacation as Vacation).subscribe({
-				next:(resp:any) => {console.log("fcc updated");
+				next:(resp:any) => {
 					this.vacationUpdater.updateVacation(resp.body);
 					this.dialogRef.close();
 				}
