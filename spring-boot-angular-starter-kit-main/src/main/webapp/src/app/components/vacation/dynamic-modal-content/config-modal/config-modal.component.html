@@ -9,7 +9,11 @@
 			<div>
 				<mat-form-field appearance="outline" class="form-field mt-2">
 					<mat-label>Config Value</mat-label>
-					<input matInput formControlName="config_value" type="text" autocomplete = "off">
+					<input *ngIf="modalInputData.data.config.config_type == 'string'" matInput formControlName="config_value" type="text" autocomplete = "off">
+					<input *ngIf="modalInputData.data.config.config_type == 'date'" matInput formControlName="config_value" type="date" autocomplete = "off">
+					<input *ngIf="modalInputData.data.config.config_type == 'number'" matInput formControlName="config_value" type="number" autocomplete = "off">
+					<input *ngIf="modalInputData.data.config.config_type == 'boolean'" matInput formControlName="config_value" type="text" autocomplete = "off">
+					
 					<!-- <input matInput formControlName="config_value" type="text" autocomplete = "off" *ngIf="configItemGroup.value.config_type.toLowerCase()=='string'">
 					<select matSelect formControlName="config_value" *ngIf="configItemGroup.value.config_type.toLowerCase() == 'boolean'">
 						<option>Yes</option>

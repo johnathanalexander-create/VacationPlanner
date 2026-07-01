@@ -15,6 +15,9 @@ import {ResetPasswordComponent} from "./pages/auth/reset-password/reset-password
 import { CreateNewVacationComponent } from './components/vacation/create-new-vacation/create-new-vacation.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 /*import {NewVacationFormComponent} from "./"*/
+import { ManagePrepaymentSourceComponent } from './pages/admin/manage/prepayment/source/manage-prepayment-source/manage-prepayment-source.component';
+import { ManagePrepaymentTypeComponent } from './pages/admin/manage/prepayment/type/manage-prepayment-type/manage-prepayment-type.component';
+
 
 
 export const routes: Routes = [
@@ -63,7 +66,17 @@ export const routes: Routes = [
             path: 'roles',
             title: 'Roles',
             component: RolesComponent
-          }
+          },
+		  {
+			path: 'manage/prepayment/source',
+			title: 'Manage Prepayment Sources',
+			component: ManagePrepaymentSourceComponent
+		  },
+		  {
+			path: 'manage/prepayment/type',
+			title: 'Manage Prepayment Types',
+			component: ManagePrepaymentTypeComponent
+		  }
         ]
       },
     ]

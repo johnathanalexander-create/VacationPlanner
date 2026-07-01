@@ -91,8 +91,8 @@ export class SidebarComponent {
 			link: '',
 			icon: 'admin_panel_settings',
 			submenu: [
-				{name: 'Manage Sources', link: '', icon: 'card', submenu: []},
-				{name: 'Manage Types', link: '', icon: 'card', submenu: []}
+				{name: 'Manage Sources', link: '/admin/manage/prepayment/source', icon: 'card', submenu: []},
+				{name: 'Manage Types', link: '/admin/manage/prepayment/type', icon: 'card', submenu: []}
 			]
 		}
 		
