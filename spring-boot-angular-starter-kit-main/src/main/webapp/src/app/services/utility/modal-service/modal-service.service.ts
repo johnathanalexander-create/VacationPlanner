@@ -4,7 +4,8 @@ import { PrepaymentModalComponent } from '../../../components/vacation/dynamic-m
 import { FCCModalComponent } from '../../../components/vacation/dynamic-modal-content/fcc-modal/fcc-modal.component';
 import {ConfigModalComponent} from '../../../components/vacation/dynamic-modal-content/config-modal/config-modal.component';
 import {BudgetItemModalComponent} from '../../../components/vacation/dynamic-modal-content/budget-item-modal-component/budget-item-modal-component.component';
-
+import {PrepaymentSourceModalComponent} from '../../../pages/admin/manage/prepayment/source/manage-prepayment-source/prepaymentsourcemodal/prepaymentsourcemodal.component';
+import PrepaymentSource from '../../../models/vacation-planner/prepayment_source.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,17 @@ export class ModalService {
   	  }
 	  
   	  switch(modalTarget){
+		case "prepaymentsource":
+			resp.component = PrepaymentSourceModalComponent;
+			if(!resp.dialogConfig.data.prepaymentSource){
+				resp.dialogConfig.data.prepaymentSource = {
+					id:"",
+					active:"",
+					name:"",
+					cashback_rate:""
+				}
+			}
+			break;
   	  	case "prepayment":
   	  		resp.component = PrepaymentModalComponent;
   			

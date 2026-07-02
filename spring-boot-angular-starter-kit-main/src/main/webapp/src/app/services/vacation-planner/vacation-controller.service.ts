@@ -68,6 +68,9 @@ export class VacationControllerService {
 	getAllPrepaymentSources(): Observable<HttpResponse<PrepaymentSource[]>>{
 		return this.http.get("/api/v1/prepayment/getPrepaymentSources");
 	}
+	getAllPrepaymentTypes(): Observable<HttpResponse<PrepaymentSource[]>>{
+		return this.http.get("/api/v1/prepayment/getPrepaymentTypes");
+	}
 	createNewPrepayment(newPrepayment: any):Observable<HttpResponse<Prepayment | null | undefined>>{
 		return this.http.post("/api/v1/prepayment", newPrepayment as Prepayment);
 	}

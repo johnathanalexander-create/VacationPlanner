@@ -1,1 +1,30 @@
-<p>manage-prepayment-source works!</p>
+<mat-toolbar class="post-list-mat-toolbar">
+    <mat-toolbar-row>
+      <p>Manage Prepayment Sources</p>
+      <div>
+        <button type="button" mat-mini-fab color="primary" (click)="addSource()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row>/admin/manage/prepayment/source</mat-toolbar-row>
+  </mat-toolbar>
+
+<table style="margin-top: 15px" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="order" matSortDirection="asc">
+	
+		<ng-container matColumnDef="name">
+	    	<th mat-header-cell *matHeaderCellDef> Name </th>
+	    	<td (dblclick)="editPrepaymentSource(element)" mat-cell *matCellDef="let element"> {{element.name}} </td>
+	  	</ng-container>
+	  	<ng-container matColumnDef="cashback_rate">
+	    	<th mat-header-cell *matHeaderCellDef> Cashback Rate </th>
+	    	<td (dblclick)="editPrepaymentSource(element)" mat-cell *matCellDef="let element"> {{element.cashbackRate || "-"}} </td>
+	  	</ng-container>
+	  	<ng-container matColumnDef="active">
+	    	<th mat-header-cell *matHeaderCellDef> Active </th>
+	    	<td (dblclick)="editPrepaymentSource(element)" mat-cell *matCellDef="let element"> {{element.active}} </td>
+	  	</ng-container>
+	  	
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	  	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
