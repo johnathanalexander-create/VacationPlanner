@@ -53,6 +53,6 @@ export class ManagePrepaymentSourceComponent {
 		}
 	}
 	addSource(){
-		
+		this.modal.generateModal("prepaymentsource", {});
 	}
 }

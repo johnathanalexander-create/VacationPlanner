@@ -15,10 +15,16 @@
 					<input matInput formControlName="cashbackRate" type="text" autocomplete = "off">
 				</mat-form-field>
 				
-				<mat-form-field appearance="outline" class="form-field mt-2">
+				<!-- <mat-form-field appearance="outline" class="form-field mt-2">
 					<mat-label>Active</mat-label>
 					<input matInput formControlName="active" type="text" autocomplete = "off">
-				</mat-form-field>
+				</mat-form-field>-->
+				
+				<div class="active-container">
+					<mat-checkbox [formControl]="prepaymentSourceGroup.controls.active">
+						Active
+					</mat-checkbox>
+				</div>
 				
 			</div>
 			
@@ -26,7 +32,7 @@
 	</mat-dialog-content>
 	<mat-dialog-actions class="dialog-actions">
 		<div class="left-actions">
-			<button mat-button color="warn" (click)="delete()">Delete</button>
+			<button *ngIf="prepaymentSourceGroup.get('id')?.value != ''" mat-button color="warn" (click)="delete()">Delete</button>
 		</div>
 		<div class="right-actions">
 			<button mat-button [mat-dialog-close] = "false">Close</button>
