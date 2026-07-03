@@ -1,5 +1,6 @@
 package com.johnathanalexander.vacationplanner.app.mapper;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,12 @@ public class PrepaymentMapper {
 				prepayment.getPaymentSource(),
 				prepayment.getNotes()
 		);
+	}
+	
+	public static Set<PrepaymentSourceDto> toPrepaymentSourceListDTO(List<PrepaymentSource> prepaymentSources){
+		return prepaymentSources.stream()
+				.map(PrepaymentMapper::toPrepaymentSourceDTO)
+				.collect(Collectors.toSet());
 	}
 	
 	public static PrepaymentSourceDto toPrepaymentSourceDTO(PrepaymentSource source) {

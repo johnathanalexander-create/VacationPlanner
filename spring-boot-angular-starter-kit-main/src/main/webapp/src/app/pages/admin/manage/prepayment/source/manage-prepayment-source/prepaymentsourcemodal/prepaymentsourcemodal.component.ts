@@ -11,6 +11,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import {FormValidationService} from "../../../../../../../services/form-validation/form-validation.service";
 
+import PrepaymentSource from '../../../../../../../models/vacation-planner/prepayment_source.model';
+
+import {VacationControllerService} from '../../../../../../../services/vacation-planner/vacation-controller.service';
+
 
 
 
@@ -24,16 +28,29 @@ export class PrepaymentSourceModalComponent {
 	
 	prepaymentSourceGroup = this.formBuilder.group({
 		id: [this.modalInputData.data.prepaymentSource.id, []],
-		name: [this.modalInputData.data.prepaymentSource.name, []],
-		cashbackRate: [this.modalInputData.data.prepaymentSource.cashbackRate, []],
-		active: [this.modalInputData.data.prepaymentSource.active, []],
+		name: [this.modalInputData.data.prepaymentSource.name || "", []],
+		cashbackRate: [this.modalInputData.data.prepaymentSource.cashbackRate || 0.00, []],
+		active: [this.modalInputData.data.prepaymentSource.active || false, []],
 	});
 	
 	constructor(public dialogRef: MatDialogRef<PrepaymentSourceModalComponent>,
 				private formBuilder: FormBuilder,
 				private formValidationService: FormValidationService,
+				private controller: VacationControllerService,
 				@Inject(MAT_DIALOG_DATA) public modalInputData: any){}
 				
-	update(){}
+	update(){
+		const payload = {
+			id: this.prepaymentSourceGroup.get("id")!.value,
+			name: this.prepaymentSourceGroup.get("name")!.value,
+			cashbackRate: this.prepaymentSourceGroup.get("cashbackRate")!.value,
+			active: this.prepaymentSourceGroup.get("active")!.value
+		}
+		this.controller.updatePrepaymentSource(payload).subscribe({
+			next:(resp) => {
+				
+			}
+		});
+	}
 	delete(){}
 }

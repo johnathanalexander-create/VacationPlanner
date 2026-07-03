@@ -74,6 +74,10 @@ export class VacationControllerService {
 	createNewPrepayment(newPrepayment: any):Observable<HttpResponse<Prepayment | null | undefined>>{
 		return this.http.post("/api/v1/prepayment", newPrepayment as Prepayment);
 	}
+	updatePrepaymentSource(item:any):Observable<HttpResponse<Prepayment | null | undefined>>{
+		console.log(item);
+		return this.http.post("/api/v1/admin/prepayments/manage/sources/update", item);
+	}
 	
 	/*CONFIG API REQUESTS*/
 	saveConfigItem(configItem:VacationConfigItem){

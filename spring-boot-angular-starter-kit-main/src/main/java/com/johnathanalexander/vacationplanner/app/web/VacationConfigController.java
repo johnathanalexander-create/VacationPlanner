@@ -26,7 +26,6 @@ public class VacationConfigController {
 	@TODO("Need to update this for incoming param to be a VacationConfigItemRequestDto and response as VacationConfigItemDto")
 	@PutMapping("/saveVacationConfigItem")
 	private ResponseEntity<VacationDto> saveVacationConfigItem(@RequestBody VacationConfigItemDto dto) {
-		System.out.println("VACATION CONFIG ITEM ATTEMPTING TO SAVE: " + dto.config_value());
 		VacationDto vacationDto = service.saveVacationConfigItem(dto);
 		return ResponseEntity.ok(vacationDto);
 	}

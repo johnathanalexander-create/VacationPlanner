@@ -11,4 +11,6 @@ import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 public interface PrepaymentService {
 	List<PrepaymentSourceDto> getAllPrepaymentSources();
 	VacationDto savePrepayment(PrepaymentRequestDto dto);
+	Set<PrepaymentSourceDto> updateOrCreatePrepaymentSource(PrepaymentSourceDto dto);
+	List<PrepaymentSourceDto> deletePrepaymentSource(Long id);
 }

@@ -37,6 +37,47 @@ public class PrepaymentServiceImpl implements PrepaymentService{
 		this.prepaymentSourceRepository = prepaymentSourceRepository;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public Set<PrepaymentSourceDto> updateOrCreatePrepaymentSource(PrepaymentSourceDto dto) {
+		PrepaymentSource paymentSource = prepaymentSourceRepository.findById(dto.id())
+				.orElseGet(() ->{
+					return new PrepaymentSource();
+				});
+		
+		
+
+		System.out.println("hello hello");
+		
+		paymentSource.setActive(dto.active());
+		paymentSource.setCashbackRate(dto.cashbackRate());
+		paymentSource.setName(dto.name());
+		
+		this.prepaymentSourceRepository.save(paymentSource);
+		
+		List<PrepaymentSource> allPrepaymentSources = this.prepaymentSourceRepository.findAll();
+		
+		return PrepaymentMapper.toPrepaymentSourceListDTO(allPrepaymentSources);
+		
+		/*return allPrepaymentSources.stream().map(prepaymentSource -> {
+			return PrepaymentMapper.toPrepaymentSourceDTO(prepaymentSource);
+		}).collect(Collectors.toList());*/
+		
+		
+	}
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public List<PrepaymentSourceDto> deletePrepaymentSource(Long id) {
+		PrepaymentSource paymentSource = prepaymentSourceRepository.findById(id)
+				.orElseThrow(() -> VacationNotFoundException.forId(id));
+		
+		prepaymentSourceRepository.delete(paymentSource);
+		
+		List<PrepaymentSource> allPrepaymentSources = this.prepaymentSourceRepository.findAll();
+		
+		return allPrepaymentSources.stream().map(prepaymentSource -> {
+			return PrepaymentMapper.toPrepaymentSourceDTO(prepaymentSource);
+		}).collect(Collectors.toList());
+	}
+	
 	
 	public List<PrepaymentSourceDto> getAllPrepaymentSources(){
 		List<PrepaymentSource> prepaymentSources = repository.getAllActivePrepaymentSources();

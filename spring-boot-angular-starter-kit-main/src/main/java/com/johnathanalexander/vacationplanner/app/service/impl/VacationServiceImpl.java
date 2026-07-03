@@ -199,8 +199,6 @@ public class VacationServiceImpl implements VacationService{
 				budgetItem.setVacation(vacation);
 			}
 			
-			System.out.println(budgetItem.toString());
-			
 			ret.add(budgetItem);
 		}
 		
