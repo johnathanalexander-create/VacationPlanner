@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import User from '../../models/security/user.model';
+import User from '@models/security/user.model';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {WebApiService} from '../web-api/web-api.service';
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {Router} from "@angular/router";
 
-import Permission from '../../models/security/permission.model'
+import Permission from '@models/security/permission.model'
 
 export interface Credentials {
   email: string;

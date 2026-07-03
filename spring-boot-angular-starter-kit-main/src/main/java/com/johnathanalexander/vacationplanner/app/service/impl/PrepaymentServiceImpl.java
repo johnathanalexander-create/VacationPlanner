@@ -39,28 +39,24 @@ public class PrepaymentServiceImpl implements PrepaymentService{
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public Set<PrepaymentSourceDto> updateOrCreatePrepaymentSource(PrepaymentSourceDto dto) {
-		PrepaymentSource paymentSource = prepaymentSourceRepository.findById(dto.id())
-				.orElseGet(() ->{
-					return new PrepaymentSource();
-				});
+		PrepaymentSource paymentSource = null;
+		if(dto.id() == null) {
+			paymentSource = new PrepaymentSource();
+		}else {
+			paymentSource = prepaymentSourceRepository.findById(dto.id())
+					.orElseThrow(() -> VacationNotFoundException.forId(dto.id()));
+		}
 		
-		
-
-		System.out.println("hello hello");
 		
 		paymentSource.setActive(dto.active());
 		paymentSource.setCashbackRate(dto.cashbackRate());
 		paymentSource.setName(dto.name());
-		
+
 		this.prepaymentSourceRepository.save(paymentSource);
 		
 		List<PrepaymentSource> allPrepaymentSources = this.prepaymentSourceRepository.findAll();
 		
 		return PrepaymentMapper.toPrepaymentSourceListDTO(allPrepaymentSources);
-		
-		/*return allPrepaymentSources.stream().map(prepaymentSource -> {
-			return PrepaymentMapper.toPrepaymentSourceDTO(prepaymentSource);
-		}).collect(Collectors.toList());*/
 		
 		
 	}

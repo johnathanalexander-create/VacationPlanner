@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import Vacation from '../../../models/vacation-planner/vacation.model';
-import VacationConfigItem from '../../../models/vacation-planner/vacation_config_item.model';
+import Vacation from '@models/vacation-planner/vacation.model';
+import VacationConfigItem from '@models/vacation-planner/vacation_config_item.model';
 import { CommonModule } from '@angular/common';
 import {VacationControllerService} from '../../../services/vacation-planner/vacation-controller.service';
 import {VacationUpdaterService} from '../../../services/vacation-updater/vacation-updater.service';

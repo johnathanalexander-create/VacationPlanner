@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import Vacation from '../../../models/vacation-planner/vacation.model';
-import Confirmation from '../../../models/vacation-planner/confirmation.model';
+import Vacation from '@models/vacation-planner/vacation.model';
+import Confirmation from '@models/vacation-planner/confirmation.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 

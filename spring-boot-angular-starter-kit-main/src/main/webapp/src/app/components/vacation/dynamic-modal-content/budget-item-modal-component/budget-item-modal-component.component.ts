@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import {FormValidationService} from "../../../../services/form-validation/form-validation.service";
-import BudgetItem from '../../../../models/vacation-planner/budget_item.model';
+import BudgetItem from '@models/vacation-planner/budget_item.model';
 
 import {VacationControllerService} from '../../../../services/vacation-planner/vacation-controller.service';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';

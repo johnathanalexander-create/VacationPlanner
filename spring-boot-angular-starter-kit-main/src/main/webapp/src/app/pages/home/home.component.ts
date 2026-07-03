@@ -10,7 +10,7 @@ import { ResearchComponent } from '../../components/vacation/research/research.c
 import { CalendarComponent } from '../../components/vacation/calendar-component/calendar-component.component';
 import { SpaComponent } from '../../components/vacation/spa/spa.component';
 
-import Vacation from '../../models/vacation-planner/vacation.model';
+import Vacation from '@models/vacation-planner/vacation.model';
 
 import { VacationControllerService } from '../../services/vacation-planner/vacation-controller.service';
 import { VacationProcessorService } from '../../services/vacation-processor/vacation-processor.service';

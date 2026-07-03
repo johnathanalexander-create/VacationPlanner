@@ -13,8 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 
 import {FormValidationService} from "../../../../services/form-validation/form-validation.service";
 
-import PrepaymentSource from '../../../../models/vacation-planner/prepayment_source.model';
-import Prepayment from '../../../../models/vacation-planner/prepayment.model';
+import PrepaymentSource from '@models/vacation-planner/prepayment_source.model';
+import Prepayment from '@models/vacation-planner/prepayment.model';
 
 import {VacationControllerService} from '../../../../services/vacation-planner/vacation-controller.service';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';

@@ -11,7 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {VacationControllerService} from '../../../../services/vacation-planner/vacation-controller.service';
 import { CommonModule } from '@angular/common';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
-import VacationConfigItem from '../../../../models/vacation-planner/vacation_config_item.model';
+import VacationConfigItem from '@models/vacation-planner/vacation_config_item.model';
 import {SnackBarService} from '../../../../services/snack-bar/snack-bar.service';
 
 @Component({

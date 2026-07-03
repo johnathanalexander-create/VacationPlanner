@@ -12,8 +12,8 @@ import {VacationControllerService} from '../../../../services/vacation-planner/v
 import { CommonModule } from '@angular/common';
 import {VacationUpdaterService} from '../../../../services/vacation-updater/vacation-updater.service';
 
-import Vacation from '../../../../models/vacation-planner/vacation.model';
-import FCC from '../../../../models/vacation-planner/fcc.model';
+import Vacation from '@models/vacation-planner/vacation.model';
+import FCC from '@models/vacation-planner/fcc.model';
 
 
 

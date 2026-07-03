@@ -6,7 +6,7 @@ import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import { ViewChild, AfterViewInit } from '@angular/core';
 
-import PrepaymentSource from '../../../../../../models/vacation-planner/prepayment_source.model';
+import PrepaymentSource from '@models/vacation-planner/prepayment_source.model';
 
 import { PrepaymentService } from '../../../../../../services/admin/prepayment/prepayment.service';
 import { VacationControllerService } from "../../../../../../services/vacation-planner/vacation-controller.service";

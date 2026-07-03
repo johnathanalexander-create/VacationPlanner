@@ -3,7 +3,7 @@ import {WebApiService} from "../../web-api/web-api.service";
 import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http";
 import {tap} from "rxjs/operators";
-import Role from "../../../models/security/role.model";
+import Role from "@models/security/role.model";
 
 @Injectable({
   providedIn: 'root'

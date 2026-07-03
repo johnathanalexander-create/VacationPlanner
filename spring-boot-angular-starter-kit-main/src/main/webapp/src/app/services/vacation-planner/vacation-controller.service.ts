@@ -2,15 +2,15 @@ import { Injectable, signal } from '@angular/core';
 import { WebApiService } from '../../services/web-api/web-api.service';
 import {Observable} from "rxjs";
 import {HttpResponse, HttpErrorResponse} from "@angular/common/http";
-import Vacation from '../../models/vacation-planner/vacation.model';
+import Vacation from '@models/vacation-planner/vacation.model';
 //import VacationUpdater from '../../models/vacation-planner/vacation_updater.model';
 import {toObservable} from "@angular/core/rxjs-interop";
 import {tap} from "rxjs/operators";
 import {WebVacationUtilityService} from '../../services/utility/web-vacation-utility.service';
-import PrepaymentSource from '../../models/vacation-planner/prepayment_source.model';
-import Prepayment from '../../models/vacation-planner/prepayment.model';
-import VacationConfigItem from '../../models/vacation-planner/vacation_config_item.model';
-import FCC from '../../models/vacation-planner/fcc.model';
+import PrepaymentSource from '@models/vacation-planner/prepayment_source.model';
+import Prepayment from '@models/vacation-planner/prepayment.model';
+import VacationConfigItem from '@models/vacation-planner/vacation_config_item.model';
+import FCC from '@models/vacation-planner/fcc.model';
 @Injectable({
   providedIn: 'root'
 })

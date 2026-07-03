@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {WebVacationUtilityService} from '../utility/web-vacation-utility.service';
-import Vacation from '../../models/vacation-planner/vacation.model';
-import Confirmation from '../../models/vacation-planner/confirmation.model';
+import Vacation from '@models/vacation-planner/vacation.model';
+import Confirmation from '@models/vacation-planner/confirmation.model';
 
 @Injectable({
   providedIn: 'root'

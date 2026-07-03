@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import Vacation from '../../../models/vacation-planner/vacation.model';
-import Prepayment from '../../../models/vacation-planner/prepayment.model';
+import Vacation from '@models/vacation-planner/vacation.model';
+import Prepayment from '@models/vacation-planner/prepayment.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';

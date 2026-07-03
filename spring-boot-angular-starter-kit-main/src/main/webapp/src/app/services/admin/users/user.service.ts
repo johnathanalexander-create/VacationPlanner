@@ -4,8 +4,8 @@ import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 import {toObservable} from "@angular/core/rxjs-interop";
-import User from "../../../models/security/user.model";
-import UserRequest from "../../../models/security/user.request.model";
+import User from "@models/security/user.model";
+import UserRequest from "@models/security/user.request.model";
 import {PagedResponse} from "../../../interface/PagedResponse";
 import {QueryParams} from "../../../interface/QueryParams";
 

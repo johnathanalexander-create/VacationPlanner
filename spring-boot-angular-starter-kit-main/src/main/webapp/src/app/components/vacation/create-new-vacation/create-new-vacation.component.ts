@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from "@angular/material/dialog";
 import { VacationControllerService } from '../../../services/vacation-planner/vacation-controller.service';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import Vacation from '../../../models/vacation-planner/vacation.model';
+import Vacation from '@models/vacation-planner/vacation.model';
 @Component({
   selector: 'app-create-new-vacation',
   imports: [

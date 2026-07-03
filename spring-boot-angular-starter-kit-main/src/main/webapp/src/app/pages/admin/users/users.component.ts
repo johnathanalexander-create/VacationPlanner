@@ -4,7 +4,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatPaginator, MatPaginatorModule, PageEvent} from "@angular/material/paginator";
-import User from "../../../models/security/user.model";
+import User from "@models/security/user.model";
 import {UserService} from "../../../services/admin/users/user.service";
 import {MatSort, MatSortModule, Sort} from "@angular/material/sort";
 import {LiveAnnouncer} from "@angular/cdk/a11y";

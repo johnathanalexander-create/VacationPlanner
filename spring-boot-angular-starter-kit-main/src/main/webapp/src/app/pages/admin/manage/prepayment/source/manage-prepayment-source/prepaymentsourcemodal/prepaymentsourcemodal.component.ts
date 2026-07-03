@@ -11,7 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import {FormValidationService} from "../../../../../../../services/form-validation/form-validation.service";
 
-import PrepaymentSource from '../../../../../../../models/vacation-planner/prepayment_source.model';
+import PrepaymentSource from '@models/vacation-planner/prepayment_source.model';
 
 import {VacationControllerService} from '../../../../../../../services/vacation-planner/vacation-controller.service';
 
@@ -39,7 +39,7 @@ export class PrepaymentSourceModalComponent {
 				private controller: VacationControllerService,
 				@Inject(MAT_DIALOG_DATA) public modalInputData: any){}
 				
-	update(){
+	update(){//
 		const payload = {
 			id: this.prepaymentSourceGroup.get("id")!.value,
 			name: this.prepaymentSourceGroup.get("name")!.value,

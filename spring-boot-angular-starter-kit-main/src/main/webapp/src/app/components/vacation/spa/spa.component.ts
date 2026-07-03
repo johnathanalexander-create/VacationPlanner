@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import Vacation from '../../../models/vacation-planner/vacation.model';
+import Vacation from '@models/vacation-planner/vacation.model';
 
 @Component({
   selector: 'app-spa',

@@ -22,8 +22,8 @@ import { VacationProcessorService } from '../../../services/vacation-processor/v
 import { VacationUpdaterService } from '../../../services/vacation-updater/vacation-updater.service';
 import { ModalService } from '../../../services/utility/modal-service/modal-service.service';
 
-import FCC from '../../../models/vacation-planner/fcc.model';
-import Vacation from '../../../models/vacation-planner/vacation.model';
+import FCC from '@models/vacation-planner/fcc.model';
+import Vacation from '@models/vacation-planner/vacation.model';
 
 @Component({
   selector: 'app-trip-dashboard',
