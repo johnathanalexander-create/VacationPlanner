@@ -31,7 +31,6 @@ public class AdminController {
 	
 	@PostMapping("prepayments/manage/sources/update")
 	public ResponseEntity<Set<PrepaymentSourceDto>> updateOrCreatePrepaymentSource(@RequestBody PrepaymentSourceDto dto){
-		System.out.println("jwsa: " + dto.id());
 		return ResponseEntity.ok(this.prepaymentService.updateOrCreatePrepaymentSource(dto));
 	}
 	

@@ -26,8 +26,16 @@ public class PrepaymentController {
 		this.prepaymentService = service;
 	}
 	
-	@GetMapping("/getPrepaymentSources")
-	private ResponseEntity<List<PrepaymentSourceDto>> getAllPrepaymentSources(){System.out.println("jwsa working");
+	@GetMapping("/getActivePrepaymentSources")
+	private ResponseEntity<List<PrepaymentSourceDto>> getAllActivePrepaymentSources(){
+		
+		List<PrepaymentSourceDto> dto = prepaymentService.getAllActivePrepaymentSources();
+		
+		return ResponseEntity.ok(dto);
+		
+	}
+	@GetMapping("/getAllPrepaymentSources")
+	private ResponseEntity<List<PrepaymentSourceDto>> getAllPrepaymentSources(){
 		
 		List<PrepaymentSourceDto> dto = prepaymentService.getAllPrepaymentSources();
 		

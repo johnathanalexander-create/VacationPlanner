@@ -74,9 +74,18 @@ public class PrepaymentServiceImpl implements PrepaymentService{
 		}).collect(Collectors.toList());
 	}
 	
-	
 	public List<PrepaymentSourceDto> getAllPrepaymentSources(){
-		List<PrepaymentSource> prepaymentSources = repository.getAllActivePrepaymentSources();
+		List<PrepaymentSource> prepaymentSources = prepaymentSourceRepository.findAll();
+		
+		return prepaymentSources.stream().map(prepaymentSource -> {
+			return PrepaymentMapper.toPrepaymentSourceDTO(prepaymentSource);
+		}).collect(Collectors.toList());
+	}
+
+	
+	
+	public List<PrepaymentSourceDto> getAllActivePrepaymentSources(){
+		List<PrepaymentSource> prepaymentSources = prepaymentSourceRepository.getAllActivePrepaymentSources();
 		
 		return prepaymentSources.stream().map(prepaymentSource -> {
 			return PrepaymentMapper.toPrepaymentSourceDTO(prepaymentSource);

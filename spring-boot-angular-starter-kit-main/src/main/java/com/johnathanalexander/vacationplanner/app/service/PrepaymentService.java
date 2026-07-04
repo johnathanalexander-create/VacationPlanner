@@ -9,6 +9,7 @@ import com.johnathanalexander.vacationplanner.app.dto.PrepaymentSourceDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 
 public interface PrepaymentService {
+	List<PrepaymentSourceDto> getAllActivePrepaymentSources();
 	List<PrepaymentSourceDto> getAllPrepaymentSources();
 	VacationDto savePrepayment(PrepaymentRequestDto dto);
 	Set<PrepaymentSourceDto> updateOrCreatePrepaymentSource(PrepaymentSourceDto dto);
