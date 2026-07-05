@@ -29,7 +29,7 @@ export class ModalService {
 			if(!resp.dialogConfig.data.prepaymentSource){
 				resp.dialogConfig.data.prepaymentSource = {
 					id:"",
-					active:"",
+					active:true,
 					name:"",
 					cashback_rate:""
 				}
