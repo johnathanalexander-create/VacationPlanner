@@ -61,7 +61,11 @@ export class ManagePrepaymentSourceComponent {
 		}
 		if(prepaymentSource){
 			const result = await this.modal.generateAsyncModal("prepaymentsource", data);
-			this.dataSource.data = result;
+			
+			if(result.length && result.length >= 0){
+				this.dataSource.data = result;
+			}
+			
 		}
 	}
 	async addSource(){

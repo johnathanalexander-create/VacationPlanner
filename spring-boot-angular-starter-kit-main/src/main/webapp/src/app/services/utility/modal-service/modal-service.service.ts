@@ -118,7 +118,7 @@ export class ModalService {
 	    		})*/
 				
 				return new Promise(resolve => {
-				      dialog.afterClosed().subscribe(result => {console.log(result);
+				      dialog.afterClosed().subscribe(result => {
 				        resolve(result); // resolves ONLY when modal closes
 					  });
 				    
