@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import { ViewChild, AfterViewInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import PrepaymentSource from '@models/vacation-planner/prepayment_source.model';
 
@@ -14,13 +15,15 @@ import { ModalService } from '../../../../../../services/utility/modal-service/m
 
 @Component({
   selector: 'app-manage-prepayment-source',
-  imports: [MatTableModule, MatTooltipModule, MatSort, MatToolbar, MatToolbarRow, MatIconModule],
+  imports: [MatTableModule, MatTooltipModule, MatSort, MatToolbar, MatToolbarRow, MatIconModule, FormsModule],
   templateUrl: './manage-prepayment-source.component.html',
   styleUrl: './manage-prepayment-source.component.scss'
 })
 export class ManagePrepaymentSourceComponent {
 	displayedColumns:string[] = ["name", "cashback_rate", "active"];
 	dataSource = new MatTableDataSource<PrepaymentSource>([]);
+	
+	showActiveOnly: boolean = true;
 	
 	@ViewChild(MatSort) sort!: MatSort;
 	
@@ -30,6 +33,8 @@ export class ManagePrepaymentSourceComponent {
 	
 	ngOnInit(){
 		this.load();
+		
+
 	}
 	ngAfterViewInit(){
 		this.dataSource.sort = this.sort;
@@ -43,6 +48,13 @@ export class ManagePrepaymentSourceComponent {
 			}
 		});
 	}
+	
+	applyActiveFilter(){
+		const searchString = this.showActiveOnly.toString().toLowerCase();
+		    
+		    // Assigning the string to .filter triggers the table's built-in filter
+		    this.dataSource.filter = searchString;
+	}
 
 	editPrepaymentSource(prepaymentSource:any){
 		var data = {
@@ -55,4 +67,10 @@ export class ManagePrepaymentSourceComponent {
 	addSource(){
 		this.modal.generateModal("prepaymentsource", {});
 	}
+	
+	/*applyFilter(event: Event) {console.log(event);
+	    const filterValue = (event.target as HTMLInputElement).value;
+		alert(filterValue);
+	    this.dataSource.filter = filterValue.trim().toLowerCase();
+	 }*/
 }

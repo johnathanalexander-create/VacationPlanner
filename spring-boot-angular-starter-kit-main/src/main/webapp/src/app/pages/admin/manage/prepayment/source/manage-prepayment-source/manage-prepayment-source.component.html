@@ -2,7 +2,13 @@
     <mat-toolbar-row>
       <p>Manage Prepayment Sources</p>
       <div>
-        <button type="button" mat-mini-fab color="primary" (click)="addSource()">
+      	
+      	<div id="active-only" class="inline">
+	      	<label>Toggle Active</label>
+	      	<input matInput id="active-only-checkbox" type="checkbox" [(ngModel)]="showActiveOnly" (ngModelChange)="applyActiveFilter()"/>
+      	</div>
+      	
+        <button class="inline" type="button" mat-mini-fab color="primary" (click)="addSource()">
           <mat-icon>add</mat-icon>
         </button>
       </div>
@@ -11,6 +17,8 @@
   </mat-toolbar>
 
 <table style="margin-top: 15px" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="order" matSortDirection="asc">
+
+
 	
 		<ng-container matColumnDef="name">
 	    	<th mat-header-cell *matHeaderCellDef> Name </th>
