@@ -94,18 +94,34 @@ export class ModalService {
     }
   
   generateModal(modalTarget:string, data:any): void{
-    	if(modalTarget){
     		const dialogConfig = new MatDialogConfig();
     		
     		var dialogConfigData = this._getModalComponentDataItems(modalTarget, data);
     		dialogConfig.data = dialogConfigData.dialogConfig;
     		
     		const dialog = this.dialog.open(dialogConfigData.component, dialogConfig);
-    		
-    		
-    		dialog.afterClosed().subscribe(result=>{
-    			
-    		})
-    	}
-     }
+	}
+	
+	generateAsyncModal(modalTarget:string, data:any): Promise<any>{
+	    		const dialogConfig = new MatDialogConfig();
+	    		
+	    		var dialogConfigData = this._getModalComponentDataItems(modalTarget, data);
+	    		dialogConfig.data = dialogConfigData.dialogConfig;
+	    		
+	    		const dialog = this.dialog.open(dialogConfigData.component, dialogConfig);
+	    		
+	    		
+	    		/*dialog.afterClosed().subscribe(result=>{
+					return new Promise(resolve => {
+					      resolve(result);
+					});
+	    		})*/
+				
+				return new Promise(resolve => {
+				      dialog.afterClosed().subscribe(result => {console.log(result);
+				        resolve(result); // resolves ONLY when modal closes
+					  });
+				    
+	    		});
+		}
 }

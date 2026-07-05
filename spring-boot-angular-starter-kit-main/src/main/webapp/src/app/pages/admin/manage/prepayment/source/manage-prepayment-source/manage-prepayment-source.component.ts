@@ -38,39 +38,34 @@ export class ManagePrepaymentSourceComponent {
 	}
 	ngAfterViewInit(){
 		this.dataSource.sort = this.sort;
+		
+		this.applyActiveFilter();
 	}
 	
 	load(){
 		this.vacationService.getAllPrepaymentSources().subscribe({
 			next:(resp) => {
 				this.dataSource.data = resp?.body ?? [];
-				console.log(resp);
 			}
 		});
 	}
 	
 	applyActiveFilter(){
 		const searchString = this.showActiveOnly.toString().toLowerCase();
-		    
-		    // Assigning the string to .filter triggers the table's built-in filter
-		    this.dataSource.filter = searchString;
+		this.dataSource.filter = searchString;
 	}
 
-	editPrepaymentSource(prepaymentSource:any){
+	async editPrepaymentSource(prepaymentSource:any){
 		var data = {
 			prepaymentSource:prepaymentSource
 		}
 		if(prepaymentSource){
-			this.modal.generateModal("prepaymentsource", data);
+			const result = await this.modal.generateAsyncModal("prepaymentsource", data);
+			this.dataSource.data = result;
 		}
 	}
-	addSource(){
-		this.modal.generateModal("prepaymentsource", {});
+	async addSource(){
+		const result = await this.modal.generateAsyncModal("prepaymentsource", {});
+		this.dataSource.data = result;
 	}
-	
-	/*applyFilter(event: Event) {console.log(event);
-	    const filterValue = (event.target as HTMLInputElement).value;
-		alert(filterValue);
-	    this.dataSource.filter = filterValue.trim().toLowerCase();
-	 }*/
 }

@@ -78,8 +78,10 @@ export class VacationControllerService {
 		return this.http.post("/api/v1/prepayment", newPrepayment as Prepayment);
 	}
 	updatePrepaymentSource(item:any):Observable<HttpResponse<Prepayment | null | undefined>>{
-		console.log(item);
 		return this.http.post("/api/v1/admin/prepayments/manage/sources/update", item);
+	}
+	deletePrepaymentSource(id:any):Observable<HttpResponse<PrepaymentSource[]>>{
+		return this.http.delete("/api/v1/admin/prepayments/manage/sources/delete/" + id, id);
 	}
 	
 	/*CONFIG API REQUESTS*/

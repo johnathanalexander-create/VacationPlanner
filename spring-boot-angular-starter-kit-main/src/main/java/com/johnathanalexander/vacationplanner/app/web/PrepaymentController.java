@@ -1,10 +1,13 @@
 package com.johnathanalexander.vacationplanner.app.web;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,4 +50,9 @@ public class PrepaymentController {
 	private ResponseEntity<VacationDto> createPrepayment(@RequestBody PrepaymentRequestDto dto){
 		return ResponseEntity.ok(prepaymentService.savePrepayment(dto));
 	}
+	
+	/*@DeleteMapping("/deletePrepaymentSource/{id}")
+	private ResponseEntity<List<PrepaymentSourceDto>> deletePrepaymentSource(@PathVariable("id") Long id){
+		return ResponseEntity.ok(prepaymentService.deletePrepaymentSource(id));
+	}*/
 }

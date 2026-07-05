@@ -61,7 +61,7 @@ public class PrepaymentServiceImpl implements PrepaymentService{
 		
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public List<PrepaymentSourceDto> deletePrepaymentSource(Long id) {
+	public Set<PrepaymentSourceDto> deletePrepaymentSource(Long id) {
 		PrepaymentSource paymentSource = prepaymentSourceRepository.findById(id)
 				.orElseThrow(() -> VacationNotFoundException.forId(id));
 		
@@ -69,9 +69,7 @@ public class PrepaymentServiceImpl implements PrepaymentService{
 		
 		List<PrepaymentSource> allPrepaymentSources = this.prepaymentSourceRepository.findAll();
 		
-		return allPrepaymentSources.stream().map(prepaymentSource -> {
-			return PrepaymentMapper.toPrepaymentSourceDTO(prepaymentSource);
-		}).collect(Collectors.toList());
+		return PrepaymentMapper.toPrepaymentSourceListDTO(allPrepaymentSources);
 	}
 	
 	public List<PrepaymentSourceDto> getAllPrepaymentSources(){

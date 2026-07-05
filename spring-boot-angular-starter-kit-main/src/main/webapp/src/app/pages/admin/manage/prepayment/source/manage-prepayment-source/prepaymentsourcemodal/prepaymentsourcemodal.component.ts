@@ -39,7 +39,7 @@ export class PrepaymentSourceModalComponent {
 				private controller: VacationControllerService,
 				@Inject(MAT_DIALOG_DATA) public modalInputData: any){}
 				
-	update(){//
+	update(){
 		const payload = {
 			id: this.prepaymentSourceGroup.get("id")!.value,
 			name: this.prepaymentSourceGroup.get("name")!.value,
@@ -48,9 +48,15 @@ export class PrepaymentSourceModalComponent {
 		}
 		this.controller.updatePrepaymentSource(payload).subscribe({
 			next:(resp) => {
-				
+				this.dialogRef.close(resp.body);
 			}
 		});
 	}
-	delete(){}
+	delete(){
+		this.controller.deletePrepaymentSource(this.prepaymentSourceGroup.get("id")!.value).subscribe({
+			next:(resp) => {console.log("resp");console.log(resp);
+				this.dialogRef.close(resp);
+			}
+		})
+	}
 }

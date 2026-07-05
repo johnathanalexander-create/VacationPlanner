@@ -13,5 +13,6 @@ public interface PrepaymentService {
 	List<PrepaymentSourceDto> getAllPrepaymentSources();
 	VacationDto savePrepayment(PrepaymentRequestDto dto);
 	Set<PrepaymentSourceDto> updateOrCreatePrepaymentSource(PrepaymentSourceDto dto);
-	List<PrepaymentSourceDto> deletePrepaymentSource(Long id);
+	Set<PrepaymentSourceDto> deletePrepaymentSource(Long id);
+	
 }
