@@ -26,7 +26,7 @@
 	  	</ng-container>
 	  	<ng-container matColumnDef="cashback_rate">
 	    	<th mat-header-cell *matHeaderCellDef> Cashback Rate </th>
-	    	<td (dblclick)="editPrepaymentSource(element)" mat-cell *matCellDef="let element"> {{element.cashbackRate || "-"}} </td>
+	    	<td (dblclick)="editPrepaymentSource(element)" mat-cell *matCellDef="let element"> {{element.cashbackRate.toFixed(3) || "-"}} </td>
 	  	</ng-container>
 	  	<ng-container matColumnDef="active">
 	    	<th mat-header-cell *matHeaderCellDef> Active </th>
