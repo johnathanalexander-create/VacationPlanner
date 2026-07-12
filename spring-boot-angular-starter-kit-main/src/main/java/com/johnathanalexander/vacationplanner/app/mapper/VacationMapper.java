@@ -16,7 +16,8 @@ public class VacationMapper {
 			vacation.getBudgetItems() != null ? (BudgetItemMapper.toBudgetItemListDTO(vacation.getBudgetItems())) : null,
 			vacation.getSpas() != null ? (SpaMapper.toSpaListDTO(vacation.getSpas())) : null,
 			vacation.getFCC() != null ? (FCCMapper.toFCCDTOList(vacation.getFCC())) : null,
-			vacation.getConfirmations() != null ? (ConfirmationMapper.toConfirmationDTOList(vacation.getConfirmations())) : null
+			vacation.getConfirmations() != null ? (ConfirmationMapper.toConfirmationDTOList(vacation.getConfirmations())) : null,
+			vacation.getLuggageSets() != null ? (LuggageSetMapper.toLuggageSetDTOList(vacation.getLuggageSets())) : null
 		);
 	}
 }

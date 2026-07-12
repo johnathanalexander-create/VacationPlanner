@@ -59,5 +59,7 @@ public class LuggageSet {
 		this.packSets = packSets;
 	}
 	
-	
+	public Set<PackedItem> getPackedItems(){
+		return packedItems;
+	}
 }

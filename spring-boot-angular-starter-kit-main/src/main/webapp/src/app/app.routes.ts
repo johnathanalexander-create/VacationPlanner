@@ -16,7 +16,7 @@ import { CreateNewVacationComponent } from './components/vacation/create-new-vac
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 /*import {NewVacationFormComponent} from "./"*/
 import { ManagePrepaymentSourceComponent } from './pages/admin/manage/prepayment/source/manage-prepayment-source/manage-prepayment-source.component';
-import { ManagePrepaymentTypeComponent } from './pages/admin/manage/prepayment/type/manage-prepayment-type/manage-prepayment-type.component';
+import { ManagePrepaymentTypeComponent } from './pages/admin/manage/prepayment/type/manage-prepayment-type.component';
 
 
 

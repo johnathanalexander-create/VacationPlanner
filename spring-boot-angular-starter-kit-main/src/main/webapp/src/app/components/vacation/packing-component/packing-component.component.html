@@ -1,0 +1,20 @@
+
+
+<table style="margin-top: 15px" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="item" matSortDirection="asc">
+	
+		<ng-container matColumnDef="title">
+	    	<th mat-header-cell *matHeaderCellDef> Packed Item </th>
+	    	<td (dblclick)="doNothing()" mat-cell *matCellDef="let element"><a style="float: left;text-decoration: none" href=''>Buy</a> {{element.title}} </td>
+	  	</ng-container>
+	  	<ng-container matColumnDef="status">
+	    	<th mat-header-cell *matHeaderCellDef> Status </th>
+	    	<td (dblclick)="doNothing()" mat-cell *matCellDef="let element"> {{element.status}} </td>
+	  	</ng-container>
+	  	<ng-container matColumnDef="mandatory">
+	    	<th mat-header-cell *matHeaderCellDef> Mandatory </th>
+	    	<td (dblclick)="doNothing()" mat-cell *matCellDef="let element"> {{element.mandatory}} </td>
+	  	</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	  	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -6,11 +6,13 @@ import java.util.Set;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentRequestDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentSourceDto;
+import com.johnathanalexander.vacationplanner.app.dto.PrepaymentTypeDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 
 public interface PrepaymentService {
 	List<PrepaymentSourceDto> getAllActivePrepaymentSources();
 	List<PrepaymentSourceDto> getAllPrepaymentSources();
+	List<PrepaymentTypeDto> getAllPrepaymentTypes();
 	VacationDto savePrepayment(PrepaymentRequestDto dto);
 	Set<PrepaymentSourceDto> updateOrCreatePrepaymentSource(PrepaymentSourceDto dto);
 	Set<PrepaymentSourceDto> deletePrepaymentSource(Long id);

@@ -96,26 +96,45 @@ values(-1, "Prepayment Cashback", 0, true);
 
 set foreign_key_checks = 1;
 
-insert into prepayment_source(name, cashback_rate)
-values ("Castlight Gift Card", 0.00);
-insert into prepayment_source(name, cashback_rate)
-values ("General Gift Card", 0.00);
-insert into prepayment_source(name, cashback_rate)
-values ("Wells Fargo Credit Card", 0.02);
-insert into prepayment_source(name, cashback_rate)
-values ("Quicksilver Credit Card", 0.015);
-insert into prepayment_source(name, cashback_rate)
-values ("SavorOne Credit Card", 0.01);
-insert into prepayment_source(name, cashback_rate)
-values ("Citibank Credit Card", 0.00);
-insert into prepayment_source(name, cashback_rate)
-values ("Other Credit Card", 0.00);
-insert into prepayment_source(name, cashback_rate)
-values ("BOM Debit Card", 0.00);
-insert into prepayment_source(name, cashback_rate)
-values ("Capital One Debit Card", 0.00);
-insert into prepayment_source(name, cashback_rate)
-values ("SavorOne CC - Dining", 0.03);
-insert into prepayment_source(name, cashback_rate)
-values ("Other", 0.00);
+insert into prepayment_source(name, cashback_rate, active)
+values ("General Gift Card", 0.00, true);
+insert into prepayment_source(name, cashback_rate, active)
+values ("Wells Fargo Credit Card", 0.02, true);
+insert into prepayment_source(name, cashback_rate, active)
+values ("Quicksilver Credit Card", 0.015, true);
+insert into prepayment_source(name, cashback_rate, active)
+values ("SavorOne Credit Card", 0.01, true);
+insert into prepayment_source(name, cashback_rate, active)
+values ("Citibank Credit Card", 0.00, true);
+insert into prepayment_source(name, cashback_rate, active)
+values ("Other Credit Card", 0.00, true);
+insert into prepayment_source(name, cashback_rate, active)
+values ("BOM Debit Card", 0.00, true);
+insert into prepayment_source(name, cashback_rate, active)
+values ("Capital One Debit Card", 0.00, true);
+insert into prepayment_source(name, cashback_rate, active)
+values ("SavorOne CC - Dining", 0.03, true);
+insert into prepayment_source(name, cashback_rate, active)
+values ("Other", 0.00, true);
+
+insert into prepayment_type(active, name)
+values (true, "Flight");
+insert into prepayment_type(active, name)
+values (true, "Hotel");
+insert into prepayment_type(active, name)
+values (true, "Vacation Package");
+insert into prepayment_type(active, name)
+values (true, "Show Ticket");
+insert into prepayment_type(active, name)
+values (true, "General Travel");
+insert into prepayment_type(active, name)
+values (true, "Dining Experience");
+insert into prepayment_type(active, name)
+values (true, "Spa/Salon");
+insert into prepayment_type(active, name)
+values (true, "Other");
+insert into prepayment_type(active, name)
+values (true, "Awaiting Refund");
+insert into prepayment_type(active, name)
+values (true, "Refunded");
 

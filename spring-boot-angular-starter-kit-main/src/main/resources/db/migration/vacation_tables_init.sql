@@ -62,6 +62,12 @@ create table vacation_config_item
 	config_order tinyint
 );*/
 
+create table prepayment_type(
+	id bigint primary key AUTO_INCREMENT,
+    active boolean default true,
+	name varchar(25) not null
+);
+
 create table prepayment_source(
 	id bigint primary key AUTO_INCREMENT,
 	active boolean default true,

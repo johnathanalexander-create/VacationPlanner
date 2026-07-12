@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.johnathanalexander.vacationplanner.app.model.packing.LuggageSet;
 import com.johnathanalexander.vacationplanner.user.model.User;
 
 import jakarta.persistence.*;
@@ -33,6 +34,8 @@ public class Vacation {
 	@OneToMany(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<BudgetItem> budgetItems = new HashSet<>();
 	
+	@OneToMany(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Set<LuggageSet> luggageSets = new HashSet<>();
 	
 	@OneToMany(mappedBy="vacation", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Set<FCC> funding_comps_credits = new HashSet<>();
@@ -137,5 +140,9 @@ public class Vacation {
 	}
 	public void setFCC(Set<FCC> fcc) {
 		this.funding_comps_credits = fcc;
+	}
+	
+	public Set<LuggageSet> getLuggageSets(){
+		return luggageSets;
 	}
 }

@@ -1,0 +1,40 @@
+
+
+<mat-toolbar class="post-list-mat-toolbar">
+    <mat-toolbar-row>
+      <p>Manage Prepayment Types</p>
+      <div>
+      	
+      	<div id="active-only" class="inline">
+	      	<label>Toggle Active</label>
+	      	<input matInput id="active-only-checkbox" type="checkbox" [(ngModel)]="showActiveOnly" (ngModelChange)="applyActiveFilter()"/>
+      	</div>
+      	
+        <button class="inline" type="button" mat-mini-fab color="primary" (click)="addType()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row>/admin/manage/prepayment/type</mat-toolbar-row>
+  </mat-toolbar>
+
+<table style="margin-top: 15px" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="name" matSortDirection="asc">
+
+
+	
+		<ng-container matColumnDef="name">
+	    	<th mat-header-cell *matHeaderCellDef> Name </th>
+	    	<td (dblclick)="editPrepaymentType(element)" mat-cell *matCellDef="let element"> {{element.name}} </td>
+	  	</ng-container>
+	  	<ng-container matColumnDef="cashback_rate">
+	    	<th mat-header-cell *matHeaderCellDef> Cashback Rate </th>
+	    	<td (dblclick)="editPrepaymentType(element)" mat-cell *matCellDef="let element"> {{element.cashbackRate.toFixed(3) || "-"}} </td>
+	  	</ng-container>
+	  	<ng-container matColumnDef="active">
+	    	<th mat-header-cell *matHeaderCellDef> Active </th>
+	    	<td (dblclick)="editPrepaymentType(element)" mat-cell *matCellDef="let element"> {{element.active}} </td>
+	  	</ng-container>
+	  	
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	  	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

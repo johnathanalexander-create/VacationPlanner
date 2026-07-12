@@ -6,6 +6,7 @@ import Spa from './spa.model';
 import BudgetItem from './budget_item.model';
 import LuggageSet from './packing/luggage_set.model';
 import FCC from './fcc.model';
+import PackedItem from './packing/packed_item.model';
 
 export default interface Vacation{
 	id: number;
@@ -17,6 +18,7 @@ export default interface Vacation{
 	prepayments: Prepayment[],
 	budgetItems: BudgetItem[],
 	luggageSets: LuggageSet[],
+	packedItems: PackedItem[],
 	spas: Spa[],
 	funding_comps_credits: FCC[],
 	confirmations: Confirmation[],

@@ -12,15 +12,19 @@ import com.johnathanalexander.vacationplanner.TODO;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentRequestDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentSourceDto;
+import com.johnathanalexander.vacationplanner.app.dto.PrepaymentTypeDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.exception.VacationNotFoundException;
 import com.johnathanalexander.vacationplanner.app.mapper.PrepaymentMapper;
+import com.johnathanalexander.vacationplanner.app.mapper.PrepaymentTypeMapper;
 import com.johnathanalexander.vacationplanner.app.mapper.VacationMapper;
 import com.johnathanalexander.vacationplanner.app.model.Prepayment;
 import com.johnathanalexander.vacationplanner.app.model.PrepaymentSource;
+import com.johnathanalexander.vacationplanner.app.model.PrepaymentType;
 import com.johnathanalexander.vacationplanner.app.model.Vacation;
 import com.johnathanalexander.vacationplanner.app.repository.PrepaymentRepository;
 import com.johnathanalexander.vacationplanner.app.repository.PrepaymentSourceRepository;
+import com.johnathanalexander.vacationplanner.app.repository.PrepaymentTypeRepository;
 import com.johnathanalexander.vacationplanner.app.repository.VacationRepository;
 import com.johnathanalexander.vacationplanner.app.service.PrepaymentService;
 
@@ -29,13 +33,20 @@ import com.johnathanalexander.vacationplanner.app.service.PrepaymentService;
 public class PrepaymentServiceImpl implements PrepaymentService{
 	private PrepaymentRepository repository;
 	private PrepaymentSourceRepository prepaymentSourceRepository;
+	private PrepaymentTypeRepository prepaymentTypeRepository;
 	private VacationRepository vacationRepository;
 	
-	public PrepaymentServiceImpl(PrepaymentRepository repo, VacationRepository vacationRepository, PrepaymentSourceRepository prepaymentSourceRepository) {
+	public PrepaymentServiceImpl(PrepaymentRepository repo,
+								 VacationRepository vacationRepository,
+								 PrepaymentSourceRepository prepaymentSourceRepository,
+								 PrepaymentTypeRepository prepaymentTypeRepository) {
 		this.repository = repo;
 		this.vacationRepository = vacationRepository;
 		this.prepaymentSourceRepository = prepaymentSourceRepository;
+		this.prepaymentTypeRepository = prepaymentTypeRepository;
 	}
+	
+	
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public Set<PrepaymentSourceDto> updateOrCreatePrepaymentSource(PrepaymentSourceDto dto) {
@@ -77,6 +88,14 @@ public class PrepaymentServiceImpl implements PrepaymentService{
 		
 		return prepaymentSources.stream().map(prepaymentSource -> {
 			return PrepaymentMapper.toPrepaymentSourceDTO(prepaymentSource);
+		}).collect(Collectors.toList());
+	}
+	
+	public List<PrepaymentTypeDto> getAllPrepaymentTypes(){
+		List<PrepaymentType> prepaymentTypes = prepaymentTypeRepository.findAll();
+		
+		return prepaymentTypes.stream().map(prepaymentType -> {
+			return PrepaymentTypeMapper.toPrepaymentTypeDTO(prepaymentType);
 		}).collect(Collectors.toList());
 	}
 

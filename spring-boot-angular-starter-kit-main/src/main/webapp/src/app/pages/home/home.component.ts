@@ -9,6 +9,7 @@ import { PrepaymentsComponent } from '../../components/vacation/prepayments/prep
 import { ResearchComponent } from '../../components/vacation/research/research.component';
 import { CalendarComponent } from '../../components/vacation/calendar-component/calendar-component.component';
 import { SpaComponent } from '../../components/vacation/spa/spa.component';
+import { PackingComponent } from '../../components/vacation/packing-component/packing-component.component';
 
 import Vacation from '@models/vacation-planner/vacation.model';
 
@@ -39,7 +40,7 @@ import { AuthService } from '../../services/auth/auth.service';
 @Component({
     selector: 'app-home',
     imports: [	MatToolbarModule, MatSelectModule, MatTableModule, MatButtonModule, MatTabsModule, ConfirmationsComponent,
-				CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, SpaComponent, CalendarComponent, TripConfigComponent, MatButton, BudgetDashboardComponent,
+				CommonModule, FormsModule, TripDashboardComponent, PrepaymentsComponent, PackingComponent, SpaComponent, CalendarComponent, TripConfigComponent, MatButton, BudgetDashboardComponent,
 			 	ResearchComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'

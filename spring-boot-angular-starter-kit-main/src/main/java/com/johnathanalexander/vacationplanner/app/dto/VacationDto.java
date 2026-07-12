@@ -2,6 +2,7 @@ package com.johnathanalexander.vacationplanner.app.dto;
 
 import java.util.Set;
 
+import com.johnathanalexander.vacationplanner.app.dto.packing.LuggageSetDto;
 import com.johnathanalexander.vacationplanner.app.model.Confirmation;
 import com.johnathanalexander.vacationplanner.app.model.VacationConfig;
 import com.johnathanalexander.vacationplanner.user.model.User;
@@ -17,7 +18,8 @@ public record VacationDto(
 							Set<BudgetItemDto> budgetItems,
 							Set<SpaDto> spas,
 							Set<FCCDto> funding_comps_credits,
-							Set<ConfirmationDto> confirmations
+							Set<ConfirmationDto> confirmations,
+							Set<LuggageSetDto> luggageSets
 						 ) {
 	
 }

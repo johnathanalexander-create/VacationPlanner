@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentRequestDto;
 import com.johnathanalexander.vacationplanner.app.dto.PrepaymentSourceDto;
+import com.johnathanalexander.vacationplanner.app.dto.PrepaymentTypeDto;
 import com.johnathanalexander.vacationplanner.app.dto.VacationDto;
 import com.johnathanalexander.vacationplanner.app.service.PrepaymentService;
 
@@ -41,6 +42,15 @@ public class PrepaymentController {
 	private ResponseEntity<List<PrepaymentSourceDto>> getAllPrepaymentSources(){
 		
 		List<PrepaymentSourceDto> dto = prepaymentService.getAllPrepaymentSources();
+		
+		return ResponseEntity.ok(dto);
+		
+	}
+	
+	@GetMapping("/getAllPrepaymentTypes")
+	private ResponseEntity<List<PrepaymentTypeDto>> getAllPrepaymentTypes(){
+		
+		List<PrepaymentTypeDto> dto = prepaymentService.getAllPrepaymentTypes();
 		
 		return ResponseEntity.ok(dto);
 		

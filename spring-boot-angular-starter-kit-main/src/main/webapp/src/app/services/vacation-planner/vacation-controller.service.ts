@@ -11,6 +11,7 @@ import PrepaymentSource from '@models/vacation-planner/prepayment_source.model';
 import Prepayment from '@models/vacation-planner/prepayment.model';
 import VacationConfigItem from '@models/vacation-planner/vacation_config_item.model';
 import FCC from '@models/vacation-planner/fcc.model';
+import PrepaymentType from '@models/vacation-planner/prepayment_type.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -71,8 +72,8 @@ export class VacationControllerService {
 	getAllActivePrepaymentSources(): Observable<HttpResponse<PrepaymentSource[]>>{
 			return this.http.get("/api/v1/prepayment/getActivePrepaymentSources");
 		}
-	getAllPrepaymentTypes(): Observable<HttpResponse<PrepaymentSource[]>>{
-		return this.http.get("/api/v1/prepayment/getPrepaymentTypes");
+	getAllPrepaymentTypes(): Observable<HttpResponse<PrepaymentType[]>>{
+		return this.http.get("/api/v1/prepayment/getAllPrepaymentTypes");
 	}
 	createNewPrepayment(newPrepayment: any):Observable<HttpResponse<Prepayment | null | undefined>>{
 		return this.http.post("/api/v1/prepayment", newPrepayment as Prepayment);
