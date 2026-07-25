@@ -130,4 +130,9 @@ public class Prepayment {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	
+	@Override
+	public String toString() {
+		return "id: " + id + " / description: " + description + " / amount: " + amount;
+	}
 }

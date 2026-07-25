@@ -1,0 +1,22 @@
+.tables-container {
+  display: flex;
+  gap: 20px; /* Adds space between the two tables */
+  width: 100%;
+}
+
+.table-wrapper {
+  flex: auto;
+  overflow-x: auto; /* Ensures tables are scrollable on smaller screens */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#packing-list{
+	flex-grow: 4;
+}
+#purchase-list{
+	flex-grow: 3
+}

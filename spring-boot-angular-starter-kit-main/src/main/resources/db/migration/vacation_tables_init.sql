@@ -182,6 +182,16 @@ create table packed_item(
 	references pack_set(id) on delete cascade
 );
 
+create table purchase_item(
+	id bigint primary key AUTO_INCREMENT,
+	vacation_id bigint not null,
+    title varchar(50) not null,
+    status ENUM('Yes', 'No', 'WIP') default 'No',
+    cost decimal(7,2),
+    foreign key (vacation_id)
+	references vacation(id) on delete cascade
+);
+
 /*End of Packing*/
 
 /*Tasks*/

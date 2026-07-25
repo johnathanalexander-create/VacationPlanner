@@ -138,6 +138,8 @@ public class VacationServiceImpl implements VacationService{
 										.orElseGet(() ->{
 											return new Prepayment();
 										});
+			
+			System.out.println(prepayment.toString());
 			//implement this
 			//PrepaymentSource paymentSource = prepaymentSourceRepository.findById(dto.payment)
 			

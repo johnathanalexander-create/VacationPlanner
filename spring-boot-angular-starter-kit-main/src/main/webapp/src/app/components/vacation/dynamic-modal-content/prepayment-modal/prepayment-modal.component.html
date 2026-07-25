@@ -3,7 +3,7 @@
 <!-- Don't forget the [formGroup] -->
 <!-- <form (submit)="saveNewPrepayment()">-->
 <form (submit)="save()" [formGroup] = "newPrepaymentFormGroup">
-	<h2 mat-dialog-title>Prepayments</h2>
+	<h2 mat-dialog-title>Save Prepayment</h2>
 	
 	<mat-dialog-content>
 		<div class="form-group">
@@ -89,8 +89,16 @@
 				<mat-form-field appearance="outline" class="form-field mt-2">
 	       			<mat-label>Payment Source</mat-label>
 	       			<mat-select formControlName="paymentSource">
+	       			
+	       				<!-- @for (source of activePrepaymentSources; track source){
+	       					<mat-option [value] = "source">{{ source.name }}</mat-option>
+	       				}-->
 	       				
-	       				<mat-option *ngFor="let option of activePrepaymentSources" [value] = "option">
+	       				<!-- <mat-option *ngFor="let option of activePrepaymentSources" [value] = "option">
+	       					{{option.name}}
+	       				</mat-option>-->
+	       				
+	       				<mat-option *ngFor="let option of activePrepaymentSources" [value]="option">
 	       					{{option.name}}
 	       				</mat-option>
 	       				

@@ -41,14 +41,17 @@ export class PrepaymentModalComponent {
 		isRefundRequested: [this.modalInputData.data.prepayment.isRefundRequested || "", []],
 		isRefundReceived: [this.modalInputData.data.prepayment.isRefundReceived || "", []],
 		amount: [this.modalInputData.data.prepayment.amount || "", [Validators.required]],
-		paymentSource: [this.modalInputData.data.prepayment.paymentSource.id || "", [Validators.required]],
+		paymentSource: [this.modalInputData.data.prepayment.paymentSource || "", [Validators.required]],
 		notes: [this.modalInputData.data.prepayment.notes || "", [Validators.maxLength(150)]]
 	});
+	
+	//paymentSource: [this.modalInputData.data.prepayment.paymentSource || "", [Validators.required]],
 	
 	activePrepaymentSources: PrepaymentSource[] | null = [];
 	
 	ngOnInit(){
 		this.retrievePrepaymentSources();
+		console.log(this.newPrepaymentFormGroup);
 	}
 	
 	deletePrepayment(){
@@ -78,21 +81,43 @@ export class PrepaymentModalComponent {
 				private vacationUpdater: VacationUpdaterService ){}
 				
 	save(){
-		/*this.vacationService.createNewPrepayment(this.newPrepaymentFormGroup.value)
-			.subscribe({
-				next: (resp: any) => {
-					this.vacationUpdater.updateVacation(resp.body);
-					
-					this.dialogRef.close();
-				}
-			});*/
 
 		const vacation = this.modalInputData.data.vacation;
-		//vacation.funding_comps_credits = JSON.stringify(vacation.funding_comps_credits);
 		
-		vacation.prepayments.push(this.newPrepaymentFormGroup.value as Prepayment);
+		const id = this.newPrepaymentFormGroup.get("id")?.value;
+		const description = this.newPrepaymentFormGroup.get("description")?.value;
+		const type = this.newPrepaymentFormGroup.get("type")?.value;
+		const vendor = this.newPrepaymentFormGroup.get("vendor")?.value;
+		const isRefundable = this.newPrepaymentFormGroup.get("isRefundable")?.value;
+		const isRefundRequested = this.newPrepaymentFormGroup.get("isRefundRequested")?.value;
+		const isRefundReceived = this.newPrepaymentFormGroup.get("isRefundReceived")?.value;
+		const amount = this.newPrepaymentFormGroup.get("amount")?.value;
+		const paymentSource = this.newPrepaymentFormGroup.get("paymentSource")?.value;
+		const notes = this.newPrepaymentFormGroup.get("notes")?.value;
 		
-		alert("here");
+		if(id == 0){
+			vacation.prepayments.push(this.newPrepaymentFormGroup.value as Prepayment);
+		}else{
+			vacation.prepayments.forEach(function(p:Prepayment){
+				if(id == p.id){
+					
+					
+					
+					p.description = description;
+					p.type = type;
+					p.vendor = vendor;
+					p.isRefundable = isRefundable;
+					p.isRefundRequested = isRefundRequested;
+					p.isRefundReceived = isRefundReceived;
+					p.amount = amount;
+					p.paymentSource = paymentSource;
+					p.notes = notes;
+				}
+			});
+		}
+		
+		console.log("saving this durn");
+		console.log(vacation);
 			
 		this.vacationService.updateVacation(vacation)
 			.subscribe({

@@ -1,0 +1,20 @@
+
+
+<table style="margin-top: 15px" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="item" matSortDirection="asc">
+		
+			<ng-container matColumnDef="title">
+		    	<th mat-header-cell *matHeaderCellDef> Item </th>
+		    	<td (dblclick)="doNothing()" mat-cell *matCellDef="let element"> {{element.item}} </td>
+		  	</ng-container>
+		  	<ng-container matColumnDef="status">
+		    	<th mat-header-cell *matHeaderCellDef> Status </th>
+		    	<td (dblclick)="doNothing()" mat-cell *matCellDef="let element"> {{element.status}} </td>
+		  	</ng-container>
+		  	<ng-container matColumnDef="cost">
+		    	<th mat-header-cell *matHeaderCellDef> Cost </th>
+		    	<td (dblclick)="doNothing()" mat-cell *matCellDef="let element"> {{element.cost}} </td>
+		  	</ng-container>
+	
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		  	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
